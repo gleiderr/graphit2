@@ -112,10 +112,10 @@ const terceiroAnoDoReinadoDeAsa = graphit.inserirNó("3º ano do reinado de Asa"
 
 graphit.inserirAresta(Asa, Judá, reiDe);
 graphit.inserirAresta(Baasa, Aías, filhoDe);
-graphit.inserirAresta(Baasa, Israel, reiDe);
-graphit.inserirAresta(Baasa, Tirza, coroadoEm);
-graphit.inserirAresta(Baasa, anos24, durante);
-graphit.inserirAresta(Baasa, terceiroAnoDoReinadoDeAsa, inicio);
+const reinadoBaasa = graphit.inserirAresta(Baasa, Israel, reiDe);
+graphit.inserirAresta(reinadoBaasa, Tirza, coroadoEm);
+graphit.inserirAresta(reinadoBaasa, anos24, durante);
+graphit.inserirAresta(reinadoBaasa, terceiroAnoDoReinadoDeAsa, inicio);
 
 graphit.salvar();
 
