@@ -1,0 +1,16 @@
+{
+  "name": "graphit-11-2024",
+  "version": "1.0.0",
+  "description": "A proposta deste projeto é construir uma arquitetura emergente para estudo da Bíblia.\r As construções são simples para garantir sua utilidade desde o primeiro dia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "ts-node index.ts"
+  },
+  "author": "gleiderr",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

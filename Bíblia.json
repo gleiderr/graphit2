@@ -1,0 +1,25 @@
+{
+  "0": {
+    "tipo": "nó",
+    "valor": "No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos."
+  },
+  "1": { "tipo": "nó", "valor": "Asa" },
+  "2": { "tipo": "nó", "valor": "Baasa" },
+  "3": { "tipo": "nó", "valor": "Aías" },
+  "4": { "tipo": "nó", "valor": "Judá" },
+  "5": { "tipo": "nó", "valor": "filho de" },
+  "6": { "tipo": "nó", "valor": "rei de" },
+  "7": { "tipo": "aresta", "v1": "1", "label": "6", "v2": "4" },
+  "8": { "tipo": "aresta", "v1": "2", "label": "5", "v2": "3" },
+  "9": { "tipo": "aresta", "v1": "2", "label": "6", "v2": "a" },
+  "a": { "tipo": "nó", "valor": "Israel" },
+  "b": { "tipo": "nó", "valor": "Tirza" },
+  "c": { "tipo": "aresta", "v1": "9", "label": "d", "v2": "b" },
+  "d": { "tipo": "nó", "valor": "coroado em" },
+  "e": { "tipo": "nó", "valor": "durante" },
+  "f": { "tipo": "aresta", "v1": "9", "label": "e", "v2": "g" },
+  "g": { "tipo": "nó", "valor": "24 anos" },
+  "h": { "tipo": "nó", "valor": "início" },
+  "i": { "tipo": "aresta", "v1": "9", "label": "h", "v2": "j" },
+  "j": { "tipo": "nó", "valor": "3º ano do reinado de Asa" }
+}
