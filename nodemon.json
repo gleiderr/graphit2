@@ -1,4 +1,8 @@
 {
   "verbose": false,
-  "ext": "ts"
+  "ext": "ts",
+  "events": {
+    "start": "cls",
+    "restart": "cls"
+  }
 }

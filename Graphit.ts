@@ -2,7 +2,7 @@ type Elemento = {
   id: string;
 };
 
-type Nó = { tipo: "nó"; valor: string; arestas: string[] };
+type Nó = { tipo: "nó"; valor: string; arestas: string[]; visitado?: boolean };
 
 type Aresta = {
   tipo: "aresta";
@@ -10,6 +10,7 @@ type Aresta = {
   label: string;
   v2: string;
   arestas: string[];
+  visitado?: boolean;
 };
 
 //Classe para manipular
@@ -51,34 +52,62 @@ export class Graphit {
   imprimir(elemento: Elemento) {
     if (this.db[elemento.id].tipo == "nó") {
       const nó = this.db[elemento.id] as Nó;
-      console.log(`# ${this.getValor(elemento.id)}`);
+      console.log(`# ${this.getText(elemento.id, true)}`);
 
       for (const id of nó.arestas) {
         const { v1, label, v2, arestas } = this.db[id] as Aresta;
+        this.db[id] = { ...this.db[id], visitado: true };
+
         if (v1 == elemento.id) {
-          const Label = this.getValor(label);
-          const V2 = this.getValor(v2);
+          const Label = this.getText(label, true);
+          const V2 = this.getText(v2, true);
           console.log(`- ${Label}: ${V2}`);
 
           for (const id2 of arestas) {
             const { v1, label, v2 } = this.db[id2] as Aresta;
-            const Label = this.getValor(label);
-            const V2 = this.getValor(v2);
+            this.db[id2] = { ...this.db[id2], visitado: true };
+            const Label = this.getText(label, true);
+            const V2 = this.getText(v2, true);
             console.log(`  ${Label}: ${V2}`);
           }
         }
       }
+      console.log();
     } else {
-      // const aresta = this.db[elemento.id] as Aresta;
-      // this.imprimir({ id: aresta.v1 });
-      // console.log(this.db[aresta.label].valor);
-      // this.imprimir({ id: aresta.v2 });
+      throw new Error("Elemento não é um nó");
     }
   }
 
-  private getValor(id: string) {
-    const nó = this.db[id] as Nó;
-    return nó.valor;
+  marcaNãoVisitados() {
+    for (let key in this.db) {
+      this.db[key] = { ...this.db[key], visitado: false };
+    }
+  }
+
+  imprimirNãoVisitados() {
+    console.log("# Não visitados");
+
+    for (let key in this.db) {
+      if (!this.db[key].visitado) {
+        console.log(`- ${key}: ${this.getText(key)}`);
+      }
+    }
+  }
+
+  private getText(
+    id: string,
+    setVisitado: boolean = false
+  ): string | undefined {
+    const elemento = this.db[id];
+    if (setVisitado) elemento.visitado = true;
+
+    if (elemento.tipo == "nó") return elemento.valor;
+    if (elemento.tipo == "aresta") {
+      const v1 = this.getText(elemento.v1, setVisitado);
+      const label = this.getText(elemento.label, setVisitado);
+      const v2 = this.getText(elemento.v2, setVisitado);
+      return `[${v1}], [${label}] [${v2}]`;
+    }
   }
 
   salvar() {

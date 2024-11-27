@@ -9,7 +9,7 @@ const Asa = graphit.inserirNó("Asa");
 const Baasa = graphit.inserirNó("Baasa");
 const Aías = graphit.inserirNó("Aías");
 const Judá = graphit.inserirNó("Judá");
-const filhoDe = graphit.inserirNó("filho de");
+const filhoDe = graphit.inserirNó("Filho de");
 const reiDe = graphit.inserirNó("Rei de");
 const Israel = graphit.inserirNó("Israel");
 const Tirza = graphit.inserirNó("Tirza");
@@ -33,6 +33,7 @@ graphit.inserirAresta(versículo, Cita, coroadoEm);
 graphit.inserirAresta(versículo, Cita, duraçãoDoReinado);
 graphit.inserirAresta(versículo, Cita, anos24);
 graphit.inserirAresta(versículo, Cita, inicioDoReinado);
+graphit.inserirAresta(versículo, inicioDoReinado, terceiroAnoDoReinadoDeAsa);
 
 graphit.inserirAresta(Asa, reiDe, Judá);
 graphit.inserirAresta(Baasa, filhoDe, Aías);
@@ -41,8 +42,11 @@ graphit.inserirAresta(reinadoBaasa, inicioDoReinado, terceiroAnoDoReinadoDeAsa);
 graphit.inserirAresta(reinadoBaasa, coroadoEm, Tirza);
 graphit.inserirAresta(reinadoBaasa, duraçãoDoReinado, anos24);
 
+console.log("----------------------------------");
+
+graphit.marcaNãoVisitados();
 graphit.imprimir(versículo);
-graphit.imprimir(Asa);
 graphit.imprimir(Baasa);
+graphit.imprimirNãoVisitados();
 
 graphit.salvar();
