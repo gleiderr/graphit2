@@ -2,14 +2,14 @@ type Elemento = {
   id: string;
 };
 
-type Nó = { tipo: "nó"; valor: string; índice: string[] };
+type Nó = { tipo: "nó"; valor: string; arestas: string[] };
 
 type Aresta = {
   tipo: "aresta";
   v1: string;
   label: string;
   v2: string;
-  índice: string[];
+  arestas: string[];
 };
 
 //Classe para manipular
@@ -25,7 +25,7 @@ export class Graphit {
   inserirNó(valor: string): Elemento {
     let id = Object.keys(this.db).length.toString(36);
 
-    this.db[id] = { tipo: "nó", valor: valor, índice: [] };
+    this.db[id] = { tipo: "nó", valor: valor, arestas: [] };
     return { id };
   }
 
@@ -38,12 +38,12 @@ export class Graphit {
       v1: v1.id,
       v2: v2.id,
       label: label.id,
-      índice: [],
+      arestas: [],
     };
 
-    this.db[v1.id].índice.push(id);
-    this.db[v2.id].índice.push(id);
-    this.db[label.id].índice.push(id);
+    this.db[v1.id].arestas.push(id);
+    this.db[v2.id].arestas.push(id);
+    this.db[label.id].arestas.push(id);
 
     return { id };
   }
@@ -51,18 +51,22 @@ export class Graphit {
   imprimir(elemento: Elemento) {
     if (this.db[elemento.id].tipo == "nó") {
       const nó = this.db[elemento.id] as Nó;
-      console.log(this.getValor(elemento.id));
+      console.log(`# ${this.getValor(elemento.id)}`);
 
-      for (const id of nó.índice) {
-        const { v1, label, v2 } = this.db[id] as Aresta;
+      for (const id of nó.arestas) {
+        const { v1, label, v2, arestas } = this.db[id] as Aresta;
         if (v1 == elemento.id) {
           const Label = this.getValor(label);
           const V2 = this.getValor(v2);
           console.log(`- ${Label}: ${V2}`);
+
+          for (const id2 of arestas) {
+            const { v1, label, v2 } = this.db[id2] as Aresta;
+            const Label = this.getValor(label);
+            const V2 = this.getValor(v2);
+            console.log(`  ${Label}: ${V2}`);
+          }
         }
-      }
-      for (let i = 0; i < nó.índice.length; i++) {
-        const id = nó.índice[i];
       }
     } else {
       // const aresta = this.db[elemento.id] as Aresta;
@@ -83,38 +87,5 @@ export class Graphit {
       if (err) throw err;
       console.log("Dados salvos com sucesso!");
     });
-  }
-
-  buscarNó(valor: string) {
-    for (let i in this.db) {
-      if (this.db[i].tipo == "nó" && this.db[i].valor == valor) {
-        return i;
-      }
-    }
-    return null;
-  }
-
-  listarNós() {
-    let nós = [];
-    for (let i in this.db) {
-      if (this.db[i].tipo == "nó") {
-        nós.push(this.db[i].valor);
-      }
-    }
-    return nós;
-  }
-
-  listarArestas() {
-    let arestas = [];
-    for (let i in this.db) {
-      if (this.db[i].tipo == "aresta") {
-        arestas.push({
-          v1: this.db[i].v1,
-          v2: this.db[i].v2,
-          label: this.db[i].label,
-        });
-      }
-    }
-    return arestas;
   }
 }
