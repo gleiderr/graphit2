@@ -4,16 +4,16 @@ import { readFileSync } from "fs";
 export class Markdown {
   constructor(private graphit: Graphit) {}
 
-  imprimir({ id }: Id) {
-    const elemento = this.graphit.getValor({ id });
+  imprimir(id: Id) {
+    const elemento = this.graphit.getValor(id);
 
     if (elemento.tipo == "nó") {
       console.log(`# ${elemento.valor}`);
 
       for (const i of elemento.arestas) {
-        const aresta = this.graphit.getValor({ id: i }) as ElementoAresta;
+        const aresta = this.graphit.getValor(i) as ElementoAresta;
 
-        if (aresta.v1.id == id) {
+        if (aresta.v1 == id) {
           const label = this.graphit.getValor(aresta.label);
           const v2 = this.graphit.getValor(aresta.v2);
 
@@ -75,11 +75,9 @@ export class Markdown {
 
   private imprimirSubarestas(aresta: ElementoAresta) {
     const subArestas = aresta.arestas;
-    for (const j of subArestas) {
-      const subAresta = this.graphit.getValor({
-        id: j,
-      }) as ElementoAresta;
-      if (subAresta.v1.id == aresta.id) {
+    for (const id of subArestas) {
+      const subAresta = this.graphit.getValor(id) as ElementoAresta;
+      if (subAresta.v1 == aresta.id) {
         const label = this.graphit.getValor(subAresta.label);
         const v2 = this.graphit.getValor(subAresta.v2);
 

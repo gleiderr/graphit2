@@ -1,30 +1,24 @@
 import { writeFile } from "fs/promises";
 
-export type Id = { id: string };
+export type Id = string;
 
 export type Nó = {
   tipo: "nó";
   valor: string;
-  arestas: string[];
+  arestas: Id[];
 };
 
 export type Aresta = {
   tipo: "aresta";
-  v1: string;
-  label: string;
-  v2: string;
-  arestas: string[];
-};
-
-export type ElementoAresta = Id & {
-  tipo: "aresta";
   v1: Id;
   label: Id;
   v2: Id;
-  arestas: string[];
+  arestas: Id[];
 };
 
-export type Elemento = (Id & Nó) | ElementoAresta;
+export type ElementoAresta = { id: Id } & Aresta;
+export type ElementoNó = { id: Id } & Nó;
+export type Elemento = ElementoAresta | ElementoNó;
 
 //Classe para manipular
 export class Graphit {
@@ -40,37 +34,31 @@ export class Graphit {
     let id = Object.keys(this.db).length.toString(36);
 
     this.db[id] = { tipo: "nó", valor: valor, arestas: [] };
-    return { id };
+    return id;
   }
 
   // TODO: implementar aresta de volta para toda aresta
   inserirAresta(v1: Id, label: Id, v2: Id): Id {
     let id = Object.keys(this.db).length.toString(36);
 
-    this.db[id] = {
-      tipo: "aresta",
-      v1: v1.id,
-      v2: v2.id,
-      label: label.id,
-      arestas: [],
-    };
+    this.db[id] = { tipo: "aresta", v1, v2, label, arestas: [] };
 
-    this.db[v1.id].arestas.push(id);
-    this.db[v2.id].arestas.push(id);
-    this.db[label.id].arestas.push(id);
+    this.db[v1].arestas.push(id);
+    this.db[v2].arestas.push(id);
+    this.db[label].arestas.push(id);
 
-    return { id };
+    return id;
   }
 
-  getValor({ id }: Id): Elemento {
+  getValor(id: Id): Elemento {
     if (this.db[id].tipo === "nó") {
       const valor = this.db[id].valor;
       const arestas = this.db[id].arestas;
       return { id, tipo: "nó", valor, arestas };
     } else {
-      const v1 = { id: this.db[id].v1 };
-      const label = { id: this.db[id].label };
-      const v2 = { id: this.db[id].v2 };
+      const v1 = this.db[id].v1;
+      const label = this.db[id].label;
+      const v2 = this.db[id].v2;
       const arestas = this.db[id].arestas;
       return { id, tipo: "aresta", v1, label, v2, arestas };
     }
