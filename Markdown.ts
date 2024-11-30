@@ -19,6 +19,13 @@ export class Markdown {
 
           if (label.tipo == "nó" && v2.tipo == "nó") {
             console.log(`- ${label.valor}: ${v2.valor}`);
+            // if (label.arestas.length > 0) {
+            //   console.log("Arestas label:", label.arestas);
+            // }
+
+            if (aresta.arestas.length > 0) {
+              this.imprimirSubarestas(aresta);
+            }
           } else {
             console.log(`Aresta 1:`, {
               ...aresta,
@@ -64,6 +71,27 @@ export class Markdown {
     // } else {
     //   throw new Error("Elemento não é um nó");
     // }
+  }
+
+  private imprimirSubarestas(aresta: ElementoAresta) {
+    const subArestas = aresta.arestas;
+    for (const j of subArestas) {
+      const subAresta = this.graphit.getValor({
+        id: j,
+      }) as ElementoAresta;
+      if (subAresta.v1.id == aresta.id) {
+        const label = this.graphit.getValor(subAresta.label);
+        const v2 = this.graphit.getValor(subAresta.v2);
+
+        if (label.tipo == "nó" && v2.tipo == "nó") {
+          console.log(`  ${label.valor}: ${v2.valor}`);
+        } else {
+          console.log("Subaresta1: ", subAresta);
+        }
+      } else {
+        console.log("Subaresta2: ", subAresta);
+      }
+    }
   }
 
   // private getText(

@@ -16,7 +16,7 @@ export type Aresta = {
   arestas: string[];
 };
 
-export type ElementoAresta = {
+export type ElementoAresta = Id & {
   tipo: "aresta";
   v1: Id;
   label: Id;
@@ -24,7 +24,7 @@ export type ElementoAresta = {
   arestas: string[];
 };
 
-export type Elemento = Id & (Nó | ElementoAresta);
+export type Elemento = (Id & Nó) | ElementoAresta;
 
 //Classe para manipular
 export class Graphit {
@@ -68,17 +68,11 @@ export class Graphit {
       const arestas = this.db[id].arestas;
       return { id, tipo: "nó", valor, arestas };
     } else {
-      const v1 = this.db[id].v1;
-      const label = this.db[id].label;
-      const v2 = this.db[id].v2;
-      return {
-        id,
-        tipo: "aresta",
-        v1: { id: v1 },
-        label: { id: label },
-        v2: { id: v2 },
-        arestas: this.db[id].arestas,
-      };
+      const v1 = { id: this.db[id].v1 };
+      const label = { id: this.db[id].label };
+      const v2 = { id: this.db[id].v2 };
+      const arestas = this.db[id].arestas;
+      return { id, tipo: "aresta", v1, label, v2, arestas };
     }
   }
 
