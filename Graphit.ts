@@ -11,7 +11,8 @@ export type Nó = {
 export type Aresta = {
   tipo: "aresta";
   v1: Id;
-  label: Id;
+  label1: Id;
+  label2: Id;
   v2: Id;
   arestas: Id[];
 };
@@ -37,31 +38,21 @@ export class Graphit {
     return id;
   }
 
-  // TODO: implementar aresta de volta para toda aresta
-  inserirAresta(v1: Id, label: Id, v2: Id): Id {
+  inserirAresta(v1: Id, label1: Id, label2: Id, v2: Id): Id {
     let id = Object.keys(this.db).length.toString(36);
 
-    this.db[id] = { tipo: "aresta", v1, v2, label, arestas: [] };
+    this.db[id] = { tipo: "aresta", v1, v2, label1, label2, arestas: [] };
 
     this.db[v1].arestas.push(id);
     this.db[v2].arestas.push(id);
-    this.db[label].arestas.push(id);
+    this.db[label1].arestas.push(id);
+    this.db[label2].arestas.push(id);
 
     return id;
   }
 
   getValor(id: Id): Elemento {
-    if (this.db[id].tipo === "nó") {
-      const valor = this.db[id].valor;
-      const arestas = this.db[id].arestas;
-      return { id, tipo: "nó", valor, arestas };
-    } else {
-      const v1 = this.db[id].v1;
-      const label = this.db[id].label;
-      const v2 = this.db[id].v2;
-      const arestas = this.db[id].arestas;
-      return { id, tipo: "aresta", v1, label, v2, arestas };
-    }
+    return { id, ...this.db[id] };
   }
 
   async salvar(arquivo: string) {

@@ -14,7 +14,7 @@ export class Markdown {
         const aresta = this.graphit.getValor(i) as ElementoAresta;
 
         if (aresta.v1 == id) {
-          const label = this.graphit.getValor(aresta.label);
+          const label = this.graphit.getValor(aresta.label1);
           const v2 = this.graphit.getValor(aresta.v2);
 
           if (label.tipo == "nó" && v2.tipo == "nó") {
@@ -30,7 +30,7 @@ export class Markdown {
             console.log(`Aresta 1:`, {
               ...aresta,
               v1: this.graphit.getValor(aresta.v1),
-              label: this.graphit.getValor(aresta.label),
+              label: this.graphit.getValor(aresta.label1),
               v2: this.graphit.getValor(aresta.v2),
             });
           }
@@ -38,7 +38,7 @@ export class Markdown {
           console.log(`Aresta 2:`, {
             ...aresta,
             v1: this.graphit.getValor(aresta.v1),
-            label: this.graphit.getValor(aresta.label),
+            label: this.graphit.getValor(aresta.label1),
             v2: this.graphit.getValor(aresta.v2),
           });
         }
@@ -78,11 +78,11 @@ export class Markdown {
     for (const id of subArestas) {
       const subAresta = this.graphit.getValor(id) as ElementoAresta;
       if (subAresta.v1 == aresta.id) {
-        const label = this.graphit.getValor(subAresta.label);
+        const label = this.graphit.getValor(subAresta.label1);
         const v2 = this.graphit.getValor(subAresta.v2);
 
         if (label.tipo == "nó" && v2.tipo == "nó") {
-          console.log(`  ${label.valor}: ${v2.valor}`);
+          console.log(`  - ${label.valor}: ${v2.valor}`);
         } else {
           console.log("Subaresta1: ", subAresta);
         }

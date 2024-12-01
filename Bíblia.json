@@ -1,64 +1,164 @@
 {
   "0": {
     "tipo": "nó",
-    "valor": "1Rs 15.33",
-    "arestas": ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"]
+    "valor": "Referência para",
+    "arestas": ["u", "v", "w", "x", "12", "13", "14"]
   },
-  "1": {
+  "1": { "tipo": "nó", "valor": "Referência", "arestas": [] },
+  "2": { "tipo": "nó", "valor": "Citado em", "arestas": ["r"] },
+  "3": { "tipo": "nó", "valor": "Citado por", "arestas": [] },
+  "4": {
+    "tipo": "nó",
+    "valor": "1Rs 15.33",
+    "arestas": ["q", "u", "v", "w", "x", "12", "13", "14"]
+  },
+  "5": {
     "tipo": "nó",
     "valor": "No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.",
-    "arestas": ["g", "t"]
+    "arestas": ["q"]
   },
-  "2": { "tipo": "nó", "valor": "Asa", "arestas": ["h", "u"] },
-  "3": { "tipo": "nó", "valor": "Baasa", "arestas": ["i", "v", "w"] },
-  "4": { "tipo": "nó", "valor": "Aías", "arestas": ["j", "v"] },
-  "5": { "tipo": "nó", "valor": "Judá", "arestas": ["k", "u"] },
-  "6": { "tipo": "nó", "valor": "Filho de", "arestas": ["l", "v"] },
-  "7": { "tipo": "nó", "valor": "Rei de", "arestas": ["m", "u", "w"] },
-  "8": { "tipo": "nó", "valor": "Israel", "arestas": ["n", "w"] },
-  "9": { "tipo": "nó", "valor": "Tirza", "arestas": ["o", "y"] },
-  "a": { "tipo": "nó", "valor": "Coroado em", "arestas": ["p", "y"] },
-  "b": { "tipo": "nó", "valor": "Reinou durante", "arestas": ["q", "z"] },
-  "c": { "tipo": "nó", "valor": "24 anos", "arestas": ["r", "z"] },
-  "d": {
-    "tipo": "nó",
-    "valor": "Início do reinado",
-    "arestas": ["s", "t", "x"]
-  },
-  "e": {
+  "6": { "tipo": "nó", "valor": "Texto", "arestas": ["q"] },
+  "7": { "tipo": "nó", "valor": "Texto de", "arestas": [] },
+  "8": {
     "tipo": "nó",
     "valor": "3º ano do reinado de Asa",
-    "arestas": ["t", "x"]
+    "arestas": ["r", "11"]
   },
-  "f": {
-    "tipo": "nó",
-    "valor": "Contém",
-    "arestas": ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"]
+  "9": { "tipo": "nó", "valor": "Asa", "arestas": ["r", "s"] },
+  "10": {
+    "tipo": "aresta",
+    "v1": "y",
+    "v2": "n",
+    "label1": "m",
+    "label2": "l",
+    "arestas": ["13"]
   },
-  "g": { "tipo": "aresta", "v1": "0", "v2": "1", "label": "f", "arestas": [] },
-  "h": { "tipo": "aresta", "v1": "0", "v2": "2", "label": "f", "arestas": [] },
-  "i": { "tipo": "aresta", "v1": "0", "v2": "3", "label": "f", "arestas": [] },
-  "j": { "tipo": "aresta", "v1": "0", "v2": "4", "label": "f", "arestas": [] },
-  "k": { "tipo": "aresta", "v1": "0", "v2": "5", "label": "f", "arestas": [] },
-  "l": { "tipo": "aresta", "v1": "0", "v2": "6", "label": "f", "arestas": [] },
-  "m": { "tipo": "aresta", "v1": "0", "v2": "7", "label": "f", "arestas": [] },
-  "n": { "tipo": "aresta", "v1": "0", "v2": "8", "label": "f", "arestas": [] },
-  "o": { "tipo": "aresta", "v1": "0", "v2": "9", "label": "f", "arestas": [] },
-  "p": { "tipo": "aresta", "v1": "0", "v2": "a", "label": "f", "arestas": [] },
-  "q": { "tipo": "aresta", "v1": "0", "v2": "b", "label": "f", "arestas": [] },
-  "r": { "tipo": "aresta", "v1": "0", "v2": "c", "label": "f", "arestas": [] },
-  "s": { "tipo": "aresta", "v1": "0", "v2": "d", "label": "f", "arestas": [] },
-  "t": { "tipo": "aresta", "v1": "1", "v2": "e", "label": "d", "arestas": [] },
-  "u": { "tipo": "aresta", "v1": "2", "v2": "5", "label": "7", "arestas": [] },
-  "v": { "tipo": "aresta", "v1": "3", "v2": "4", "label": "6", "arestas": [] },
+  "11": {
+    "tipo": "aresta",
+    "v1": "y",
+    "v2": "8",
+    "label1": "o",
+    "label2": "p",
+    "arestas": ["14"]
+  },
+  "12": {
+    "tipo": "aresta",
+    "v1": "4",
+    "v2": "z",
+    "label1": "0",
+    "label2": "1",
+    "arestas": []
+  },
+  "13": {
+    "tipo": "aresta",
+    "v1": "4",
+    "v2": "10",
+    "label1": "0",
+    "label2": "1",
+    "arestas": []
+  },
+  "14": {
+    "tipo": "aresta",
+    "v1": "4",
+    "v2": "11",
+    "label1": "0",
+    "label2": "1",
+    "arestas": []
+  },
+  "a": { "tipo": "nó", "valor": "Rei de", "arestas": ["s", "y"] },
+  "b": { "tipo": "nó", "valor": "Reinado por", "arestas": [] },
+  "c": { "tipo": "nó", "valor": "Judá", "arestas": ["s"] },
+  "d": { "tipo": "nó", "valor": "Baasa", "arestas": ["t", "y"] },
+  "e": { "tipo": "nó", "valor": "Filho de", "arestas": ["t"] },
+  "f": { "tipo": "nó", "valor": "Pai de", "arestas": [] },
+  "g": { "tipo": "nó", "valor": "Aías", "arestas": ["t"] },
+  "h": { "tipo": "nó", "valor": "Israel", "arestas": ["y"] },
+  "i": { "tipo": "nó", "valor": "Local do reinado", "arestas": ["z"] },
+  "j": { "tipo": "nó", "valor": "Recebeu", "arestas": [] },
+  "k": { "tipo": "nó", "valor": "Tirza", "arestas": ["z"] },
+  "l": { "tipo": "nó", "valor": "Duração de", "arestas": [] },
+  "m": { "tipo": "nó", "valor": "Duração", "arestas": ["10"] },
+  "n": { "tipo": "nó", "valor": "24 anos", "arestas": ["10"] },
+  "o": { "tipo": "nó", "valor": "Início do reinado", "arestas": ["11"] },
+  "p": { "tipo": "nó", "valor": "Início de", "arestas": [] },
+  "q": {
+    "tipo": "aresta",
+    "v1": "4",
+    "v2": "5",
+    "label1": "6",
+    "label2": "7",
+    "arestas": ["u"]
+  },
+  "r": {
+    "tipo": "aresta",
+    "v1": "9",
+    "v2": "8",
+    "label1": "2",
+    "label2": "3",
+    "arestas": ["v"]
+  },
+  "s": {
+    "tipo": "aresta",
+    "v1": "9",
+    "v2": "c",
+    "label1": "a",
+    "label2": "b",
+    "arestas": ["w"]
+  },
+  "t": {
+    "tipo": "aresta",
+    "v1": "d",
+    "v2": "g",
+    "label1": "e",
+    "label2": "f",
+    "arestas": ["x"]
+  },
+  "u": {
+    "tipo": "aresta",
+    "v1": "4",
+    "v2": "q",
+    "label1": "0",
+    "label2": "1",
+    "arestas": []
+  },
+  "v": {
+    "tipo": "aresta",
+    "v1": "4",
+    "v2": "r",
+    "label1": "0",
+    "label2": "1",
+    "arestas": []
+  },
   "w": {
     "tipo": "aresta",
-    "v1": "3",
-    "v2": "8",
-    "label": "7",
-    "arestas": ["x", "y", "z"]
+    "v1": "4",
+    "v2": "s",
+    "label1": "0",
+    "label2": "1",
+    "arestas": []
   },
-  "x": { "tipo": "aresta", "v1": "w", "v2": "e", "label": "d", "arestas": [] },
-  "y": { "tipo": "aresta", "v1": "w", "v2": "9", "label": "a", "arestas": [] },
-  "z": { "tipo": "aresta", "v1": "w", "v2": "c", "label": "b", "arestas": [] }
+  "x": {
+    "tipo": "aresta",
+    "v1": "4",
+    "v2": "t",
+    "label1": "0",
+    "label2": "1",
+    "arestas": []
+  },
+  "y": {
+    "tipo": "aresta",
+    "v1": "d",
+    "v2": "h",
+    "label1": "a",
+    "label2": "b",
+    "arestas": ["z", "10", "11"]
+  },
+  "z": {
+    "tipo": "aresta",
+    "v1": "y",
+    "v2": "k",
+    "label1": "i",
+    "label2": "j",
+    "arestas": ["12"]
+  }
 }
