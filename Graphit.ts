@@ -44,16 +44,16 @@ export class Graphit {
 
   inserirAresta(
     v1: { id: Id } | string,
+    v2: { id: Id } | string,
     label1: { id: Id } | string,
-    label2: { id: Id } | string,
-    v2: { id: Id } | string
+    label2: { id: Id } | string
   ): [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }] {
     const novoId = this.nextId();
 
     if (typeof v1 == 'string') v1 = { id: this.inserirNó(v1) };
+    if (typeof v2 == 'string') v2 = { id: this.inserirNó(v2) };
     if (typeof label1 == 'string') label1 = { id: this.inserirNó(label1) };
     if (typeof label2 == 'string') label2 = { id: this.inserirNó(label2) };
-    if (typeof v2 == 'string') v2 = { id: this.inserirNó(v2) };
 
     this.db[novoId] = {
       tipo: 'aresta',
@@ -69,7 +69,7 @@ export class Graphit {
     this.db[label1.id].arestas.push(novoId);
     this.db[label2.id].arestas.push(novoId);
 
-    return [{ id: novoId }, v1, label1, label2, v2];
+    return [{ id: novoId }, v1, v2, label1, label2];
   }
 
   getValor(id: Id): Elemento {
