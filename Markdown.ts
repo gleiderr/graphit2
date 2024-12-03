@@ -1,5 +1,5 @@
-import { Aresta, ElementoAresta, Graphit, Id, Nó } from "./Graphit";
-import { readFileSync } from "fs";
+import { Aresta, ElementoAresta, Graphit, Id, Nó } from './Graphit';
+import { readFileSync } from 'fs';
 
 export class Markdown {
   constructor(private graphit: Graphit) {}
@@ -7,7 +7,7 @@ export class Markdown {
   imprimir(id: Id) {
     const elemento = this.graphit.getValor(id);
 
-    if (elemento.tipo == "nó") {
+    if (elemento.tipo == 'nó') {
       console.log(`# ${elemento.valor}`);
 
       for (const i of elemento.arestas) {
@@ -17,7 +17,7 @@ export class Markdown {
           const label = this.graphit.getValor(aresta.label1);
           const v2 = this.graphit.getValor(aresta.v2);
 
-          if (label.tipo == "nó" && v2.tipo == "nó") {
+          if (label.tipo == 'nó' && v2.tipo == 'nó') {
             console.log(`- ${label.valor}: ${v2.valor}`);
             // if (label.arestas.length > 0) {
             //   console.log("Arestas label:", label.arestas);
@@ -43,12 +43,11 @@ export class Markdown {
           });
         }
       }
-    } else if (elemento.tipo == "aresta") {
+    } else if (elemento.tipo == 'aresta') {
       console.log(`Aresta: ${elemento}`);
     }
 
-    // if (this.db[elemento.id].tipo == "nó") {
-
+    // if (this.db[elemento.id].tipo == 'nó') {
     //   for (const id of nó.arestas) {
     //     const { v1, label, v2, arestas } = this.db[id] as Aresta;
     //     this.db[id] = { ...this.db[id] };
@@ -69,7 +68,7 @@ export class Markdown {
     //   }
     //   console.log();
     // } else {
-    //   throw new Error("Elemento não é um nó");
+    //   throw new Error('Elemento não é um nó');
     // }
   }
 
@@ -81,13 +80,13 @@ export class Markdown {
         const label = this.graphit.getValor(subAresta.label1);
         const v2 = this.graphit.getValor(subAresta.v2);
 
-        if (label.tipo == "nó" && v2.tipo == "nó") {
+        if (label.tipo == 'nó' && v2.tipo == 'nó') {
           console.log(`  - ${label.valor}: ${v2.valor}`);
         } else {
-          console.log("Subaresta1: ", subAresta);
+          console.log('Subaresta1: ', subAresta);
         }
       } else {
-        console.log("Subaresta2: ", subAresta);
+        console.log('Subaresta2: ', subAresta);
       }
     }
   }

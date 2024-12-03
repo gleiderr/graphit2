@@ -1,3 +1,5 @@
 {
-    "printWidth": 80
+  "printWidth": 80,
+  "singleQuote": true,
+  "overrides": [{ "files": "1 Rs 15.33.ts", "options": { "printWidth": 140 } }]
 }
