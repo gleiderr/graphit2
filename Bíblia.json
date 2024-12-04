@@ -7,14 +7,22 @@
     "label2": "4",
     "arestas": []
   },
-  "1": { "tipo": "nó", "valor": "1Rs 15.33", "arestas": ["0"] },
+  "1": {
+    "tipo": "nó",
+    "valor": "1 Rs 15.33",
+    "arestas": ["0", "f", "i", "v", "w", "x", "y"]
+  },
   "2": {
     "tipo": "nó",
     "valor": "No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.",
     "arestas": ["0"]
   },
   "3": { "tipo": "nó", "valor": "Texto", "arestas": ["0"] },
-  "4": { "tipo": "nó", "valor": "Referência", "arestas": ["0"] },
+  "4": {
+    "tipo": "nó",
+    "valor": "Referência",
+    "arestas": ["0", "f", "i", "v", "w", "x", "y"]
+  },
   "5": {
     "tipo": "aresta",
     "v1": "6",
@@ -23,11 +31,11 @@
     "label2": "9",
     "arestas": []
   },
-  "6": { "tipo": "nó", "valor": "Asa", "arestas": ["5", "t"] },
+  "6": { "tipo": "nó", "valor": "Asa", "arestas": ["5", "s"] },
   "7": { "tipo": "nó", "valor": "Judá", "arestas": ["5"] },
-  "8": { "tipo": "nó", "valor": "Rei de", "arestas": ["5", "f"] },
-  "9": { "tipo": "nó", "valor": "Rei", "arestas": ["5", "f"] },
-  "b": { "tipo": "nó", "valor": "Baasa", "arestas": ["a", "f"] },
+  "8": { "tipo": "nó", "valor": "Rei de", "arestas": ["5", "g"] },
+  "9": { "tipo": "nó", "valor": "Rei", "arestas": ["5", "g"] },
+  "b": { "tipo": "nó", "valor": "Baasa", "arestas": ["a", "g"] },
   "c": { "tipo": "nó", "valor": "Aías", "arestas": ["a"] },
   "d": { "tipo": "nó", "valor": "Filho de", "arestas": ["a"] },
   "e": { "tipo": "nó", "valor": "Pai de", "arestas": ["a"] },
@@ -37,58 +45,58 @@
     "v2": "c",
     "label1": "d",
     "label2": "e",
-    "arestas": []
+    "arestas": ["f"]
   },
-  "g": { "tipo": "nó", "valor": "Israel", "arestas": ["f"] },
-  "f": {
+  "f": { "tipo": "aresta", "v1": "a", "v2": "1", "label1": "4", "arestas": [] },
+  "h": { "tipo": "nó", "valor": "Israel", "arestas": ["g"] },
+  "g": {
     "tipo": "aresta",
     "v1": "b",
-    "v2": "g",
+    "v2": "h",
     "label1": "8",
     "label2": "9",
-    "arestas": ["h", "l", "p"]
+    "arestas": ["i", "j", "m", "p"]
   },
-  "i": { "tipo": "nó", "valor": "3º ano do reinado de Asa", "arestas": ["h"] },
-  "j": { "tipo": "nó", "valor": "Início", "arestas": ["h"] },
-  "k": { "tipo": "nó", "valor": "?", "arestas": ["h"] },
-  "h": {
+  "i": { "tipo": "aresta", "v1": "g", "v2": "1", "label1": "4", "arestas": [] },
+  "k": { "tipo": "nó", "valor": "3º ano do reinado de Asa", "arestas": ["j"] },
+  "l": { "tipo": "nó", "valor": "Início", "arestas": ["j"] },
+  "j": {
     "tipo": "aresta",
-    "v1": "f",
-    "v2": "i",
-    "label1": "j",
-    "label2": "k",
-    "arestas": ["t"]
+    "v1": "g",
+    "v2": "k",
+    "label1": "l",
+    "arestas": ["s", "v"]
   },
-  "m": { "tipo": "nó", "valor": "Tirza", "arestas": ["l"] },
-  "n": { "tipo": "nó", "valor": "Tornou-se rei em", "arestas": ["l"] },
-  "o": { "tipo": "nó", "valor": "?", "arestas": ["l"] },
-  "l": {
+  "n": { "tipo": "nó", "valor": "Tirza", "arestas": ["m"] },
+  "o": { "tipo": "nó", "valor": "Tornou-se rei em", "arestas": ["m"] },
+  "m": {
     "tipo": "aresta",
-    "v1": "f",
-    "v2": "m",
-    "label1": "n",
-    "label2": "o",
-    "arestas": []
+    "v1": "g",
+    "v2": "n",
+    "label1": "o",
+    "arestas": ["w"]
   },
   "q": { "tipo": "nó", "valor": "24 anos", "arestas": ["p"] },
   "r": { "tipo": "nó", "valor": "Reinou", "arestas": ["p"] },
-  "s": { "tipo": "nó", "valor": "?", "arestas": ["p"] },
   "p": {
     "tipo": "aresta",
-    "v1": "f",
+    "v1": "g",
     "v2": "q",
     "label1": "r",
-    "label2": "s",
-    "arestas": []
+    "arestas": ["x"]
   },
-  "u": { "tipo": "nó", "valor": "Citado em", "arestas": ["t"] },
-  "v": { "tipo": "nó", "valor": "Citado por", "arestas": ["t"] },
-  "t": {
+  "t": { "tipo": "nó", "valor": "Citado em", "arestas": ["s"] },
+  "u": { "tipo": "nó", "valor": "Citado por", "arestas": ["s"] },
+  "s": {
     "tipo": "aresta",
     "v1": "6",
-    "v2": "h",
-    "label1": "u",
-    "label2": "v",
-    "arestas": []
-  }
+    "v2": "j",
+    "label1": "t",
+    "label2": "u",
+    "arestas": ["y"]
+  },
+  "v": { "tipo": "aresta", "v1": "j", "v2": "1", "label1": "4", "arestas": [] },
+  "w": { "tipo": "aresta", "v1": "m", "v2": "1", "label1": "4", "arestas": [] },
+  "x": { "tipo": "aresta", "v1": "p", "v2": "1", "label1": "4", "arestas": [] },
+  "y": { "tipo": "aresta", "v1": "s", "v2": "1", "label1": "4", "arestas": [] }
 }

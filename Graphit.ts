@@ -11,15 +11,18 @@ export type Nó = {
 export type Aresta = {
   tipo: 'aresta';
   v1: Id;
-  label1: Id;
-  label2: Id;
   v2: Id;
+  label1: Id;
+  label2?: Id;
   arestas: Id[];
 };
 
 export type ElementoAresta = { id: Id } & Aresta;
 export type ElementoNó = { id: Id } & Nó;
 export type Elemento = ElementoAresta | ElementoNó;
+
+type CincoIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }];
+type QuatroIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }];
 
 //Classe para manipular
 export class Graphit {
@@ -47,7 +50,18 @@ export class Graphit {
     v2: { id: Id } | string,
     label1: { id: Id } | string,
     label2: { id: Id } | string
-  ): [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }] {
+  ): CincoIds;
+  inserirAresta(
+    v1: { id: Id } | string,
+    v2: { id: Id } | string,
+    label1: { id: Id } | string
+  ): QuatroIds;
+  inserirAresta(
+    v1: { id: Id } | string,
+    v2: { id: Id } | string,
+    label1: { id: Id } | string,
+    label2?: { id: Id } | string
+  ): CincoIds | QuatroIds {
     const novoId = this.nextId();
 
     if (typeof v1 == 'string') v1 = { id: this.inserirNó(v1) };
@@ -60,16 +74,18 @@ export class Graphit {
       v1: v1.id,
       v2: v2.id,
       label1: label1.id,
-      label2: label2.id,
+      label2: label2?.id,
       arestas: [],
     };
 
     this.db[v1.id].arestas.push(novoId);
     this.db[v2.id].arestas.push(novoId);
     this.db[label1.id].arestas.push(novoId);
-    this.db[label2.id].arestas.push(novoId);
+    if (label2) this.db[label2.id].arestas.push(novoId);
 
-    return [{ id: novoId }, v1, v2, label1, label2];
+    return label2
+      ? [{ id: novoId }, v1, v2, label1, label2]
+      : [{ id: novoId }, v1, v2, label1];
   }
 
   getValor(id: Id): Elemento {
