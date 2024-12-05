@@ -4,7 +4,9 @@ As construções são simples para garantir sua utilidade desde o primeiro dia
 
 # Baasa
 - Filho de: Aías
+  - Referência: 1 Rs 15.33
 - Rei de: Israel
+  - Referência: 1 Rs 15.33
   - Início: 3º ano do reinado de Asa
   - Tornou-se rei em: Tirza
   - Reinou: 24 anos
