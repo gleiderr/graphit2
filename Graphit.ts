@@ -21,15 +21,16 @@ export type ElementoAresta = { id: Id } & Aresta;
 export type ElementoNó = { id: Id } & Nó;
 export type Elemento = ElementoAresta | ElementoNó;
 
-type CincoIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }];
 type QuatroIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }];
+type CincoIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }];
 
 //Classe para manipular
 export class Graphit {
   _nextId = 0;
-  private db: {
-    [key: string]: Nó | Aresta;
-  };
+  private db: { [key: string]: Nó | Aresta };
+
+  private memóriaDeArestas: (QuatroIds | CincoIds)[] = [];
+
   constructor() {
     //Recupera de Bíblia.json
     this.db = {}; //require("./Bíblia.json");
@@ -45,6 +46,14 @@ export class Graphit {
     return (this._nextId++).toString(36);
   }
 
+  iniciarMemória() {
+    this.memóriaDeArestas = [];
+  }
+
+  getMemória() {
+    return this.memóriaDeArestas;
+  }
+
   inserirAresta(
     v1: { id: Id } | string,
     v2: { id: Id } | string,
@@ -56,6 +65,7 @@ export class Graphit {
     v2: { id: Id } | string,
     label1: { id: Id } | string
   ): QuatroIds;
+
   inserirAresta(
     v1: { id: Id } | string,
     v2: { id: Id } | string,
@@ -83,9 +93,12 @@ export class Graphit {
     this.db[label1.id].arestas.push(novoId);
     if (label2) this.db[label2.id].arestas.push(novoId);
 
-    return label2
+    const ids: QuatroIds | CincoIds = label2
       ? [{ id: novoId }, v1, v2, label1, label2]
       : [{ id: novoId }, v1, v2, label1];
+
+    this.memóriaDeArestas = [...this.memóriaDeArestas, ids];
+    return ids;
   }
 
   getValor(id: Id): Elemento {
