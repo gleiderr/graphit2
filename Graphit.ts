@@ -36,6 +36,10 @@ export class Graphit {
     this.db = {}; //require("./Bíblia.json");
   }
 
+  get índices() {
+    return Object.keys(this.db);
+  }
+
   inserirNó(valor: string): Id {
     const id = this.nextId();
     this.db[id] = { tipo: 'nó', valor: valor, arestas: [] };
@@ -72,13 +76,12 @@ export class Graphit {
     label1: { id: Id } | string,
     label2?: { id: Id } | string
   ): CincoIds | QuatroIds {
-    const novoId = this.nextId();
-
     if (typeof v1 == 'string') v1 = { id: this.inserirNó(v1) };
     if (typeof v2 == 'string') v2 = { id: this.inserirNó(v2) };
     if (typeof label1 == 'string') label1 = { id: this.inserirNó(label1) };
     if (typeof label2 == 'string') label2 = { id: this.inserirNó(label2) };
 
+    const novoId = this.nextId();
     this.db[novoId] = {
       tipo: 'aresta',
       v1: v1.id,
