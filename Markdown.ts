@@ -13,6 +13,7 @@ import { readFileSync } from 'fs';
 // TODO: Criar estratégia para imprimir referências
 // TODO: Caminhar no grafo também a partir dos nós
 // TODO: Impressão de nós não visitados
+// TODO: Reduzir as chamadas de getValor()
 
 type PrintType = { nível?: number; origem?: Id };
 
@@ -23,7 +24,7 @@ export class Markdown {
   constructor(private graphit: Graphit) {}
 
   imprimir(id: Id, { nível = 0, origem }: PrintType = {}) {
-    if (nível > 10) return;
+    if (nível > 1) return;
 
     const elemento = this.graphit.getValor(id);
     if (elemento.tipo === 'nó') {
@@ -46,7 +47,8 @@ export class Markdown {
     }
 
     for (const arestaId of elemento.arestas) {
-      this.imprimir(arestaId, { nível: nível + 1, origem });
+      const aresta = this.graphit.getValor(arestaId) as ElementoAresta;
+      this.imprimirAresta(aresta, { nível, origem });
     }
   }
 
@@ -56,12 +58,11 @@ export class Markdown {
   ) {
     if (!idOrigem) return this.print('Origem indefinida', aresta);
 
-    const { id, v1, v2, label1, label2, arestas } = aresta;
+    const { id, v1, v2, label1, label2, arestas: arestasDaAresta } = aresta;
 
     //Definição do label
     const utilizaLabel1 = v1 == idOrigem;
     const labelId = utilizaLabel1 || !label2 ? label1 : label2;
-    const inverter = !utilizaLabel1 && !label2;
 
     const label = this.graphit.getValor(labelId);
 
@@ -75,16 +76,10 @@ export class Markdown {
       destino = this.graphit.getValor(v1);
     }
 
-    if (label.tipo === 'nó' && destino.tipo === 'nó') {
-      this.imprimirLinha(nível, aresta, origem, label, destino, inverter);
-      for (const arestaId of arestas) {
-        this.imprimir(arestaId, { nível: nível + 1, origem: id });
-      }
-    } else {
-      return this.print('Label ou destino não é um nó', {
-        label,
-        destino: destino,
-      });
+    const inverter = !utilizaLabel1 && !label2;
+    this.imprimirLinha(nível, aresta, origem, label, destino, inverter);
+    for (const arestaId of arestasDaAresta) {
+      this.imprimir(arestaId, { nível: nível + 1, origem: id });
     }
   }
 
@@ -92,30 +87,38 @@ export class Markdown {
     nível: number,
     aresta: ElementoAresta,
     origem: Elemento,
-    label: ElementoNó,
-    destino: ElementoNó,
-    invertido: boolean
+    label: Elemento,
+    destino: Elemento,
+    inverter: boolean
   ) {
-    const indentação = '  '.repeat(nível - 1);
+    this.setVisitado(aresta);
 
-    this.visitados.add(aresta.id);
-    this.visitados.add(aresta.v1);
-    this.visitados.add(aresta.v2);
-    this.visitados.add(aresta.label1);
-    if (aresta.label2) this.visitados.add(aresta.label2);
+    const indentação = '  '.repeat(nível);
+
+    if (label.tipo != 'nó') {
+      this.print(`${indentação}- Label diferente de nó`, label);
+      return;
+    }
+
+    // Nada para imprimir nesse caso
+    if (destino.tipo != 'nó') return;
 
     if (!this.debug) {
-      if (invertido) {
-        if (origem.tipo != 'nó') {
-          this.print(`${indentação}- Não sei o que fazer com isso`);
-          return;
-        } else {
-          const linha = `${indentação}- ${destino.valor} ${label.valor} ${origem.valor}`;
-          this.print(linha);
-        }
-      } else {
-        const linha = `${indentação}- ${label.valor}: ${destino.valor}`;
-        this.print(linha);
+      let linha: string;
+      if (inverter && origem.tipo != 'nó') linha = 'Não sei o que fazer';
+      else if (inverter && origem.tipo == 'nó')
+        linha = `${destino.valor}: ${label.valor} ${origem.valor}`;
+      else if (origem.tipo == 'nó' && nível > 0 && !inverter)
+        linha = `${origem.valor}: ${label.valor} ${destino.valor}`;
+      else linha = `${label.valor}: ${destino.valor}`;
+
+      this.print(`${indentação}- ${linha}`);
+
+      for (const arestaDestino of destino.arestas) {
+        this.imprimir(arestaDestino, {
+          nível: nível + 1,
+          origem: destino.id,
+        });
       }
     } else {
       const diferenteOrigem = (arestaId: string) => arestaId !== aresta.id;
@@ -129,6 +132,18 @@ export class Markdown {
 
   private print(...args: any[]) {
     console.log(...args);
+  }
+
+  setVisitado(elemento: Elemento) {
+    if (elemento.tipo == 'aresta') {
+      this.visitados.add(elemento.id);
+      this.visitados.add(elemento.v1);
+      this.visitados.add(elemento.v2);
+      this.visitados.add(elemento.label1);
+      if (elemento.label2) this.visitados.add(elemento.label2);
+    } else {
+      this.visitados.add(elemento.id);
+    }
   }
 
   getNãoVisitados() {
