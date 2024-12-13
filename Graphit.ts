@@ -104,7 +104,7 @@ export class Graphit {
     return ids;
   }
 
-  getValor(id: Id): Elemento {
+  getElemento(id: Id): Elemento {
     return { id, ...this.db[id] };
   }
 

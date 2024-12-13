@@ -19,10 +19,7 @@ export class Markdown {
   constructor(private graphit: Graphit) {}
 
   imprimir(id: Id, { nível = 0, origem }: PrintType = {}) {
-    if (this.visitados.has(id)) return;
-    if (nível > 5) return this.print(`--- Chegou ao nível ${nível} ---`);
-
-    const elemento = this.graphit.getValor(id);
+    const elemento = this.graphit.getElemento(id);
     if (elemento.tipo === 'nó') {
       this.imprimirNó(elemento, nível, id);
     } else if (elemento.tipo === 'aresta') {
@@ -40,7 +37,7 @@ export class Markdown {
     }
 
     for (const arestaId of elemento.arestas) {
-      const aresta = this.graphit.getValor(arestaId) as ElementoAresta;
+      const aresta = this.graphit.getElemento(arestaId) as ElementoAresta;
       this.imprimirAresta(aresta, { nível, origem });
     }
   }
@@ -49,6 +46,12 @@ export class Markdown {
     aresta: ElementoAresta,
     { nível, origem: idOrigem }: PrintType & { nível: number }
   ) {
+    if (this.visitados.has(aresta.id)) return;
+    if (nível > 5) {
+      const indentação = this.indentação(nível);
+      return this.print(`${indentação}--- Chegou ao nível ${nível} ---`);
+    }
+
     if (!idOrigem) return this.print('Origem indefinida', aresta);
 
     const { id, v1, v2, label1, label2 } = aresta;
@@ -57,16 +60,16 @@ export class Markdown {
     const utilizaLabel1 = v1 == idOrigem;
     const labelId = utilizaLabel1 || !label2 ? label1 : label2;
 
-    const label = this.graphit.getValor(labelId);
+    const label = this.graphit.getElemento(labelId);
 
     //Definição da origem e do destino
     let destino, origem;
     if (v1 == idOrigem) {
-      origem = this.graphit.getValor(v1);
-      destino = this.graphit.getValor(v2);
+      origem = this.graphit.getElemento(v1);
+      destino = this.graphit.getElemento(v2);
     } else {
-      origem = this.graphit.getValor(v2);
-      destino = this.graphit.getValor(v1);
+      origem = this.graphit.getElemento(v2);
+      destino = this.graphit.getElemento(v1);
     }
 
     if (label.tipo != 'nó') {
@@ -80,8 +83,18 @@ export class Markdown {
 
     const inverter = !utilizaLabel1 && !label2;
     this.imprimirLinha(nível, aresta, origem, label, destino, inverter);
+    this.setVisitado(aresta);
+
+    // Imprime arestas do nó de destino
+    for (const arestaId of destino.arestas) {
+      const novaAresta = this.graphit.getElemento(arestaId) as ElementoAresta;
+      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: destino.id });
+    }
+
+    // Imprime arestas da aresta
     for (const arestaId of aresta.arestas) {
-      this.imprimir(arestaId, { nível: nível + 1, origem: id });
+      const novaAresta = this.graphit.getElemento(arestaId) as ElementoAresta;
+      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: aresta.id });
     }
   }
 
@@ -95,8 +108,6 @@ export class Markdown {
   ) {
     const indentação = this.indentação(nível);
 
-    this.setVisitado(aresta);
-
     let linha: string;
     if (inverter && origem.tipo != 'nó') linha = 'Não sei o que fazer';
     else if (inverter && origem.tipo == 'nó')
@@ -106,14 +117,6 @@ export class Markdown {
     else linha = `${label.valor}: ${destino.valor}`;
 
     this.print(`${indentação}- ${linha}`);
-
-    // Impressão das arestas do nó de destino
-    for (const arestaDestino of destino.arestas) {
-      this.imprimir(arestaDestino, {
-        nível: nível + 1,
-        origem: destino.id,
-      });
-    }
   }
 
   private indentação(nível: number) {

@@ -4,7 +4,9 @@ import { Markdown } from './Markdown';
 graphit.salvar('Bíblia.json');
 
 const markdown = new Markdown(graphit);
-console.log('----------------------------------');
+const agora: string = new Date().toLocaleString();
+
+console.log(`----------------------------------${agora}`);
 markdown.imprimir(Baasa.id);
 console.log();
 
