@@ -8,8 +8,7 @@ console.log('----------------------------------');
 markdown.imprimir(Baasa.id);
 console.log();
 
-markdown.imprimir(Asa.id);
-console.log();
+console.log('Não visitados', markdown.getNãoVisitados());
 
 // while (true) {
 //   const nãoVisitados = Array.from(getNãoVisitados());

@@ -19,12 +19,12 @@ type PrintType = { nível?: number; origem?: Id };
 
 export class Markdown {
   debug = false;
-  visitados: Set<Id> = new Set();
 
   constructor(private graphit: Graphit) {}
 
   imprimir(id: Id, { nível = 0, origem }: PrintType = {}) {
-    if (nível > 1) return;
+    if (this.visitados.has(id)) return;
+    if (nível > 5) return this.print(`--- Chegou ao nível ${nível} ---`);
 
     const elemento = this.graphit.getValor(id);
     if (elemento.tipo === 'nó') {
@@ -37,7 +37,7 @@ export class Markdown {
   private imprimirNó(elemento: ElementoNó, nível: number, origem: string) {
     // Impressão do título
     if (nível === 0) {
-      this.visitados.add(elemento.id);
+      this.setVisitado(elemento);
 
       this.debug
         ? this.print(`# ${elemento.valor}`, elemento)
@@ -58,7 +58,7 @@ export class Markdown {
   ) {
     if (!idOrigem) return this.print('Origem indefinida', aresta);
 
-    const { id, v1, v2, label1, label2, arestas: arestasDaAresta } = aresta;
+    const { id, v1, v2, label1, label2 } = aresta;
 
     //Definição do label
     const utilizaLabel1 = v1 == idOrigem;
@@ -78,7 +78,7 @@ export class Markdown {
 
     const inverter = !utilizaLabel1 && !label2;
     this.imprimirLinha(nível, aresta, origem, label, destino, inverter);
-    for (const arestaId of arestasDaAresta) {
+    for (const arestaId of aresta.arestas) {
       this.imprimir(arestaId, { nível: nível + 1, origem: id });
     }
   }
@@ -91,8 +91,6 @@ export class Markdown {
     destino: Elemento,
     inverter: boolean
   ) {
-    this.setVisitado(aresta);
-
     const indentação = '  '.repeat(nível);
 
     if (label.tipo != 'nó') {
@@ -103,13 +101,15 @@ export class Markdown {
     // Nada para imprimir nesse caso
     if (destino.tipo != 'nó') return;
 
+    this.setVisitado(aresta);
+
     if (!this.debug) {
       let linha: string;
       if (inverter && origem.tipo != 'nó') linha = 'Não sei o que fazer';
       else if (inverter && origem.tipo == 'nó')
         linha = `${destino.valor}: ${label.valor} ${origem.valor}`;
       else if (origem.tipo == 'nó' && nível > 0 && !inverter)
-        linha = `${origem.valor}: ${label.valor} ${destino.valor}`;
+        linha = `(${origem.valor}) ${label.valor}: ${destino.valor}`;
       else linha = `${label.valor}: ${destino.valor}`;
 
       this.print(`${indentação}- ${linha}`);
@@ -132,6 +132,12 @@ export class Markdown {
 
   private print(...args: any[]) {
     console.log(...args);
+  }
+
+  private visitados: Set<Id> = new Set();
+
+  iniciarVisitação() {
+    this.visitados = new Set();
   }
 
   setVisitado(elemento: Elemento) {
