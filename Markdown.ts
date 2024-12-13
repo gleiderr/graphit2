@@ -9,17 +9,13 @@ import {
 } from './Graphit';
 import { readFileSync } from 'fs';
 
-// TODO: Limitar caminho pelo grafo em função das arestas visitadas
 // TODO: Criar estratégia para imprimir referências
-// TODO: Caminhar no grafo também a partir dos nós
 // TODO: Impressão de nós não visitados
 // TODO: Reduzir as chamadas de getValor()
 
 type PrintType = { nível?: number; origem?: Id };
 
 export class Markdown {
-  debug = false;
-
   constructor(private graphit: Graphit) {}
 
   imprimir(id: Id, { nível = 0, origem }: PrintType = {}) {
@@ -38,10 +34,7 @@ export class Markdown {
     // Impressão do título
     if (nível === 0) {
       this.setVisitado(elemento);
-
-      this.debug
-        ? this.print(`# ${elemento.valor}`, elemento)
-        : this.print(`# ${elemento.valor}`);
+      this.print(`# ${elemento.valor}`);
     } else {
       this.print('Nó', elemento);
     }
@@ -76,6 +69,15 @@ export class Markdown {
       destino = this.graphit.getValor(v1);
     }
 
+    if (label.tipo != 'nó') {
+      const indentação = this.indentação(nível);
+      this.print(`${indentação}- Label diferente de nó`, label);
+      return;
+    }
+
+    // Nada para imprimir nesse caso
+    if (destino.tipo != 'nó') return;
+
     const inverter = !utilizaLabel1 && !label2;
     this.imprimirLinha(nível, aresta, origem, label, destino, inverter);
     for (const arestaId of aresta.arestas) {
@@ -87,47 +89,35 @@ export class Markdown {
     nível: number,
     aresta: ElementoAresta,
     origem: Elemento,
-    label: Elemento,
-    destino: Elemento,
+    label: ElementoNó,
+    destino: ElementoNó,
     inverter: boolean
   ) {
-    const indentação = '  '.repeat(nível);
-
-    if (label.tipo != 'nó') {
-      this.print(`${indentação}- Label diferente de nó`, label);
-      return;
-    }
-
-    // Nada para imprimir nesse caso
-    if (destino.tipo != 'nó') return;
+    const indentação = this.indentação(nível);
 
     this.setVisitado(aresta);
 
-    if (!this.debug) {
-      let linha: string;
-      if (inverter && origem.tipo != 'nó') linha = 'Não sei o que fazer';
-      else if (inverter && origem.tipo == 'nó')
-        linha = `${destino.valor}: ${label.valor} ${origem.valor}`;
-      else if (origem.tipo == 'nó' && nível > 0 && !inverter)
-        linha = `(${origem.valor}) ${label.valor}: ${destino.valor}`;
-      else linha = `${label.valor}: ${destino.valor}`;
+    let linha: string;
+    if (inverter && origem.tipo != 'nó') linha = 'Não sei o que fazer';
+    else if (inverter && origem.tipo == 'nó')
+      linha = `${destino.valor}: ${label.valor} ${origem.valor}`;
+    else if (origem.tipo == 'nó' && nível > 0 && !inverter)
+      linha = `(${origem.valor}) ${label.valor}: ${destino.valor}`;
+    else linha = `${label.valor}: ${destino.valor}`;
 
-      this.print(`${indentação}- ${linha}`);
+    this.print(`${indentação}- ${linha}`);
 
-      for (const arestaDestino of destino.arestas) {
-        this.imprimir(arestaDestino, {
-          nível: nível + 1,
-          origem: destino.id,
-        });
-      }
-    } else {
-      const diferenteOrigem = (arestaId: string) => arestaId !== aresta.id;
-      const arestasDestino = destino.arestas.filter(diferenteOrigem);
-
-      const linha = `${indentação}- (${aresta.id}) ${label.valor}: ${destino.valor}`;
-      this.print(linha, arestasDestino);
-      this.print(indentação, '', aresta.arestas);
+    // Impressão das arestas do nó de destino
+    for (const arestaDestino of destino.arestas) {
+      this.imprimir(arestaDestino, {
+        nível: nível + 1,
+        origem: destino.id,
+      });
     }
+  }
+
+  private indentação(nível: number) {
+    return '  '.repeat(nível);
   }
 
   private print(...args: any[]) {
