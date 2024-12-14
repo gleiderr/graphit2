@@ -1,50 +1,34 @@
-import {
-  Aresta,
-  Elemento,
-  ElementoAresta,
-  ElementoNó,
-  Graphit,
-  Id,
-  Nó,
-} from './Graphit';
-import { readFileSync } from 'fs';
+import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 
 // TODO: Criar estratégia para imprimir referências
-// TODO: Impressão de nós não visitados
-// TODO: Reduzir as chamadas de getValor()
-
-type PrintType = { nível?: number; origem?: Id };
 
 export class Markdown {
   constructor(private graphit: Graphit) {}
 
-  imprimir(id: Id, { nível = 0, origem }: PrintType = {}) {
+  imprimir(id: Id, { título = 0 }: { título?: number } = {}) {
     const elemento = this.graphit.getElemento(id);
     if (elemento.tipo === 'nó') {
-      this.imprimirNó(elemento, nível, id);
+      this.imprimirNó(elemento, título);
     } else if (elemento.tipo === 'aresta') {
-      this.imprimirAresta(elemento, { nível, origem });
+      this.print('Elemento inválido: ', elemento);
     }
   }
 
-  private imprimirNó(elemento: ElementoNó, nível: number, origem: string) {
+  private imprimirNó(nó: ElementoNó, nívelTítulo: number) {
     // Impressão do título
-    if (nível === 0) {
-      this.setVisitado(elemento);
-      this.print(`# ${elemento.valor}`);
-    } else {
-      this.print('Nó', elemento);
-    }
+    const hashs = '#'.repeat(nívelTítulo + 1);
+    this.setVisitado(nó);
+    this.print(`${hashs} ${nó.valor}`);
 
-    for (const arestaId of elemento.arestas) {
+    for (const arestaId of nó.arestas) {
       const aresta = this.graphit.getElemento(arestaId) as ElementoAresta;
-      this.imprimirAresta(aresta, { nível, origem });
+      this.imprimirAresta(aresta, { nível: 0, origem: nó });
     }
   }
 
   private imprimirAresta(
     aresta: ElementoAresta,
-    { nível, origem: idOrigem }: PrintType & { nível: number }
+    { nível, origem }: { nível: number; origem: Elemento }
   ) {
     if (this.visitados.has(aresta.id)) return;
     if (nível > 5) {
@@ -52,55 +36,42 @@ export class Markdown {
       return this.print(`${indentação}--- Chegou ao nível ${nível} ---`);
     }
 
-    if (!idOrigem) return this.print('Origem indefinida', aresta);
+    const { v1, v2, label1, label2 } = aresta;
 
-    const { id, v1, v2, label1, label2 } = aresta;
-
-    //Definição do label
-    const utilizaLabel1 = v1 == idOrigem;
+    // Definição do label
+    const utilizaLabel1 = v1 == origem.id;
     const labelId = utilizaLabel1 || !label2 ? label1 : label2;
-
+    const inverter = !utilizaLabel1 && !label2;
     const label = this.graphit.getElemento(labelId);
-
-    //Definição da origem e do destino
-    let destino, origem;
-    if (v1 == idOrigem) {
-      origem = this.graphit.getElemento(v1);
-      destino = this.graphit.getElemento(v2);
-    } else {
-      origem = this.graphit.getElemento(v2);
-      destino = this.graphit.getElemento(v1);
-    }
-
     if (label.tipo != 'nó') {
       const indentação = this.indentação(nível);
       this.print(`${indentação}- Label diferente de nó`, label);
       return;
     }
 
-    // Nada para imprimir nesse caso
-    if (destino.tipo != 'nó') return;
+    // Definição do destino
+    const destinoId = v1 == origem.id ? v2 : v1;
+    const destino = this.graphit.getElemento(destinoId);
+    if (destino.tipo != 'nó') return; // Nada para imprimir nesse caso
 
-    const inverter = !utilizaLabel1 && !label2;
-    this.imprimirLinha(nível, aresta, origem, label, destino, inverter);
+    this.imprimirLinha(nível, origem, label, destino, inverter);
     this.setVisitado(aresta);
 
     // Imprime arestas do nó de destino
     for (const arestaId of destino.arestas) {
       const novaAresta = this.graphit.getElemento(arestaId) as ElementoAresta;
-      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: destino.id });
+      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: destino });
     }
 
     // Imprime arestas da aresta
     for (const arestaId of aresta.arestas) {
       const novaAresta = this.graphit.getElemento(arestaId) as ElementoAresta;
-      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: aresta.id });
+      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: aresta });
     }
   }
 
   private imprimirLinha(
     nível: number,
-    aresta: ElementoAresta,
     origem: Elemento,
     label: ElementoNó,
     destino: ElementoNó,
