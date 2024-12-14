@@ -1,12 +1,14 @@
-import { graphit, Asa, Baasa } from './1 Rs 15.33';
+import { Baasa, graphit, referência } from './1 Rs 15.33';
 import { Markdown } from './Markdown';
 
 graphit.salvar('Bíblia.json');
 
-const markdown = new Markdown(graphit);
-const agora: string = new Date().toLocaleString();
+const markdown = new Markdown(graphit, referência.id);
 
+const agora: string = new Date().toLocaleString();
 console.log(`----------------------------------${agora}`);
+
+markdown.iniciarVisitação();
 markdown.imprimir(Baasa.id);
 console.log();
 

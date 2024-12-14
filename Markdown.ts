@@ -3,7 +3,7 @@ import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 // TODO: Criar estratégia para imprimir referências
 
 export class Markdown {
-  constructor(private graphit: Graphit) {}
+  constructor(private graphit: Graphit, private labelReferência: Id) {}
 
   imprimir(id: Id, { título = 0 }: { título?: number } = {}) {
     const elemento = this.graphit.getElemento(id);
@@ -36,26 +36,21 @@ export class Markdown {
       return this.print(`${indentação}--- Chegou ao nível ${nível} ---`);
     }
 
-    const { v1, v2, label1, label2 } = aresta;
-
-    // Definição do label
-    const utilizaLabel1 = v1 == origem.id;
-    const labelId = utilizaLabel1 || !label2 ? label1 : label2;
-    const inverter = !utilizaLabel1 && !label2;
-    const label = this.graphit.getElemento(labelId);
+    const { label, inverter } = this.getLabel(origem, aresta);
     if (label.tipo != 'nó') {
-      const indentação = this.indentação(nível);
-      this.print(`${indentação}- Label diferente de nó`, label);
-      return;
+      return this.print(`${this.indentação(nível)}- Diferente de nó`, label);
     }
 
     // Definição do destino
-    const destinoId = v1 == origem.id ? v2 : v1;
+    const destinoId = aresta.v1 == origem.id ? aresta.v2 : aresta.v1;
     const destino = this.graphit.getElemento(destinoId);
     if (destino.tipo != 'nó') return; // Nada para imprimir nesse caso
 
-    this.imprimirLinha(nível, origem, label, destino, inverter);
+    const { arestasReferência, nósReferência } = this.getReferências(aresta);
+
+    this.imprimirLinha(nível, origem, label, destino, inverter, nósReferência);
     this.setVisitado(aresta);
+    arestasReferência.forEach(a => this.setVisitado(a));
 
     // Imprime arestas do nó de destino
     for (const arestaId of destino.arestas) {
@@ -70,12 +65,35 @@ export class Markdown {
     }
   }
 
+  private getLabel(origem: Elemento, { v1, label1, label2 }: ElementoAresta) {
+    const utilizaLabel1 = v1 == origem.id;
+    const labelId = utilizaLabel1 || !label2 ? label1 : label2;
+    const inverter = !utilizaLabel1 && !label2;
+    const label = this.graphit.getElemento(labelId);
+
+    return { label, inverter };
+  }
+
+  private getReferências(aresta: ElementoAresta) {
+    const isReferência = (e: ElementoAresta) =>
+      e.label1 == this.labelReferência || e.label2 == this.labelReferência;
+    const arestasReferência = aresta.arestas
+      .map(e => this.graphit.getElemento(e) as ElementoAresta)
+      .filter(isReferência);
+    const nósReferência = arestasReferência
+      .map(e => (e.label1 == this.labelReferência ? e.v2 : e.v1))
+      .map(id => this.graphit.getElemento(id) as ElementoNó);
+
+    return { arestasReferência, nósReferência };
+  }
+
   private imprimirLinha(
     nível: number,
     origem: Elemento,
     label: ElementoNó,
     destino: ElementoNó,
-    inverter: boolean
+    inverter: boolean,
+    referências: ElementoNó[]
   ) {
     const indentação = this.indentação(nível);
 
@@ -86,6 +104,9 @@ export class Markdown {
     else if (origem.tipo == 'nó' && nível > 0 && !inverter)
       linha = `(${origem.valor}) ${label.valor}: ${destino.valor}`;
     else linha = `${label.valor}: ${destino.valor}`;
+
+    const refs = referências.map(n => n.valor).join(', ');
+    if (refs) linha += ` (${refs})`;
 
     this.print(`${indentação}- ${linha}`);
   }

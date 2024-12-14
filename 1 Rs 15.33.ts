@@ -27,4 +27,4 @@ graphit.getMemória().forEach(([aresta]) => {
   graphit.inserirAresta(aresta, _1Rs15_33, referência);
 });
 
-export { Baasa, Asa };
+export { Asa, Baasa, referência };
