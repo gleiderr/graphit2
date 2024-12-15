@@ -1,8 +1,6 @@
-import { Graphit } from './Graphit';
+import { graphit } from './Graphit';
 
-export let graphit = new Graphit();
-
-const [, _1Rs15_33, , , referência] = graphit.inserirAresta(
+const [, _1Rs15_33, , texto, referência] = graphit.inserirAresta(
   '1 Rs 15.33',
   'No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.',
   'Texto',
@@ -27,4 +25,4 @@ graphit.getMemória().forEach(([aresta]) => {
   graphit.inserirAresta(aresta, _1Rs15_33, referência);
 });
 
-export { Asa, Baasa, referência };
+export { Asa, Baasa, referência, texto };

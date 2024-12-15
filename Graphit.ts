@@ -113,3 +113,5 @@ export class Graphit {
     console.log('Dados salvos com sucesso!');
   }
 }
+
+export let graphit = new Graphit();

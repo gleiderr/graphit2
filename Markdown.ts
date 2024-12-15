@@ -1,17 +1,21 @@
+import { appendFile, writeFile } from 'fs/promises';
 import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 
-// TODO: Criar estratégia para imprimir referências
-
 export class Markdown {
-  constructor(private graphit: Graphit, private labelReferência: Id) {}
+  constructor(
+    private graphit: Graphit,
+    private labelRef: Id,
+    private labelTexto: Id
+  ) {}
 
-  imprimir(id: Id, { título = 0 }: { título?: number } = {}) {
+  imprimir(id: Id, { título = 0, output = 'Bíblia.md' } = {}) {
     const elemento = this.graphit.getElemento(id);
-    if (elemento.tipo === 'nó') {
-      this.imprimirNó(elemento, título);
-    } else if (elemento.tipo === 'aresta') {
-      this.print('Elemento inválido: ', elemento);
-    }
+    if (elemento.tipo !== 'nó') return this.print('Inválido: ', elemento);
+
+    writeFile(output, ''); // Inicia arquivo em branco
+    this.imprimirNó(elemento, título);
+
+    this.imprimirVersículos();
   }
 
   private imprimirNó(nó: ElementoNó, nívelTítulo: number) {
@@ -76,13 +80,18 @@ export class Markdown {
 
   private getReferências(aresta: ElementoAresta) {
     const isReferência = (e: ElementoAresta) =>
-      e.label1 == this.labelReferência || e.label2 == this.labelReferência;
+      e.label1 == this.labelRef || e.label2 == this.labelRef;
     const arestasReferência = aresta.arestas
       .map(e => this.graphit.getElemento(e) as ElementoAresta)
       .filter(isReferência);
-    const nósReferência = arestasReferência
-      .map(e => (e.label1 == this.labelReferência ? e.v2 : e.v1))
-      .map(id => this.graphit.getElemento(id) as ElementoNó);
+    const ids = arestasReferência.map(e =>
+      e.label1 == this.labelRef ? e.v2 : e.v1
+    );
+    const nósReferência = ids.map(
+      id => this.graphit.getElemento(id) as ElementoNó
+    );
+
+    ids.forEach(id => this.nósReferência.add(id));
 
     return { arestasReferência, nósReferência };
   }
@@ -111,12 +120,47 @@ export class Markdown {
     this.print(`${indentação}- ${linha}`);
   }
 
+  private nósReferência: Set<Id> = new Set();
+  private imprimirVersículos() {
+    const isVersículo = (e: ElementoAresta) =>
+      e.label1 == this.labelTexto || e.label2 == this.labelTexto;
+
+    const arestas = [...this.nósReferência]
+      .map(id => this.graphit.getElemento(id) as ElementoNó)
+      .map(nó => nó.arestas)
+      .flat()
+      .map(id => this.graphit.getElemento(id) as ElementoAresta)
+      .filter(isVersículo);
+
+    this.print('');
+    for (const aresta of arestas) {
+      let ref = this.graphit.getElemento(aresta.v1) as ElementoNó;
+      let versículo = this.graphit.getElemento(aresta.v2) as ElementoNó;
+      if (aresta.label2 == this.labelTexto) {
+        [ref, versículo] = [versículo, ref];
+      }
+
+      this.print(`> ${ref.valor}: ${versículo.valor}`);
+
+      this.setVisitado(aresta);
+    }
+  }
+
   private indentação(nível: number) {
     return '  '.repeat(nível);
   }
 
-  private print(...args: any[]) {
-    console.log(...args);
+  private print(texto: string, ...args: any[]) {
+    this.printToConsole(texto, ...args);
+    this.printToFile(texto);
+  }
+
+  private printToConsole(texto: string, ...args: any[]) {
+    console.log(texto, ...args);
+  }
+
+  private printToFile(texto: string) {
+    appendFile('Bíblia.md', texto + '\n');
   }
 
   private visitados: Set<Id> = new Set();
