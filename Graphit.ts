@@ -21,8 +21,23 @@ export type ElementoAresta = { id: Id } & Aresta;
 export type ElementoNó = { id: Id } & Nó;
 export type Elemento = ElementoAresta | ElementoNó;
 
+type TrêsNós = [{ id: Id } | string, { id: Id } | string, { id: Id } | string];
+type QuatroNós = [
+  { id: Id } | string,
+  { id: Id } | string,
+  { id: Id } | string,
+  { id: Id } | string
+];
+
 type QuatroIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }];
 type CincoIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }];
+
+type Reuse = {
+  reuseV1?: boolean;
+  reuseV2?: boolean;
+  reuseL1?: boolean;
+  reuseL2?: boolean;
+};
 
 //Classe para manipular
 export class Graphit {
@@ -58,28 +73,18 @@ export class Graphit {
     return this.memóriaDeArestas;
   }
 
+  inserirAresta(elementos: TrêsNós, reuse?: Reuse): QuatroIds;
+  inserirAresta(elementos: QuatroNós, reuse?: Reuse): CincoIds;
   inserirAresta(
-    v1: { id: Id } | string,
-    v2: { id: Id } | string,
-    label1: { id: Id } | string,
-    label2: { id: Id } | string
-  ): CincoIds;
-  inserirAresta(
-    v1: { id: Id } | string,
-    v2: { id: Id } | string,
-    label1: { id: Id } | string
-  ): QuatroIds;
+    elementos: TrêsNós | QuatroNós,
+    { reuseV1, reuseV2, reuseL1, reuseL2 }: Reuse = {}
+  ): QuatroIds | CincoIds {
+    let [v1, v2, label1, label2] = elementos;
 
-  inserirAresta(
-    v1: { id: Id } | string,
-    v2: { id: Id } | string,
-    label1: { id: Id } | string,
-    label2?: { id: Id } | string
-  ): CincoIds | QuatroIds {
-    if (typeof v1 == 'string') v1 = { id: this.inserirNó(v1) };
-    if (typeof v2 == 'string') v2 = { id: this.inserirNó(v2) };
-    if (typeof label1 == 'string') label1 = { id: this.inserirNó(label1) };
-    if (typeof label2 == 'string') label2 = { id: this.inserirNó(label2) };
+    if (typeof v1 == 'string') v1 = this.defineNó(v1, reuseV1);
+    if (typeof v2 == 'string') v2 = this.defineNó(v2, reuseV2);
+    if (typeof label1 == 'string') label1 = this.defineNó(label1, reuseL1);
+    if (typeof label2 == 'string') label2 = this.defineNó(label2, reuseL2);
 
     const novoId = this.nextId();
     this.db[novoId] = {
@@ -102,6 +107,28 @@ export class Graphit {
 
     this.memóriaDeArestas = [...this.memóriaDeArestas, ids];
     return ids;
+  }
+
+  private defineNó(valor: string, reuse?: boolean): { id: Id } {
+    const nós = this.buscarNó(valor);
+    if (nós.length == 1) {
+      if (reuse === undefined) console.warn('Outro nó encontrado', nós[0]);
+      if (reuse) return { id: nós[0].id };
+    } else if (nós.length > 1) console.warn('Outros nós encontrados', nós);
+
+    return { id: this.inserirNó(valor) };
+  }
+
+  buscarNó(valor: string): ElementoNó[] {
+    let nós: ElementoNó[] = [];
+    for (const id of this.índices) {
+      const elemento = this.getElemento(id);
+      if (elemento.tipo == 'nó' && elemento.valor == valor) {
+        nós = [...nós, elemento];
+      }
+    }
+
+    return nós;
   }
 
   getElemento(id: Id): Elemento {

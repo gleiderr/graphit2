@@ -1,1 +1,262 @@
-{"0":{"tipo":"nó","valor":"1 Rs 15.33","arestas":["4","s","t","u","v","w","x","y"]},"1":{"tipo":"nó","valor":"No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.","arestas":["4"]},"2":{"tipo":"nó","valor":"Texto","arestas":["4","11"]},"3":{"tipo":"nó","valor":"Referência","arestas":["4","s","t","u","v","w","x","y","11","1m","1n","1o","1p","1q","1r","1s"]},"4":{"tipo":"aresta","v1":"0","v2":"1","label1":"2","label2":"3","arestas":[]},"5":{"tipo":"nó","valor":"Asa","arestas":["9","l"]},"6":{"tipo":"nó","valor":"Judá","arestas":["9"]},"7":{"tipo":"nó","valor":"Rei de","arestas":["9","g"]},"8":{"tipo":"nó","valor":"Rei","arestas":["9","g"]},"9":{"tipo":"aresta","v1":"5","v2":"6","label1":"7","label2":"8","arestas":["s"]},"10":{"tipo":"nó","valor":"Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.","arestas":["11"]},"11":{"tipo":"aresta","v1":"z","v2":"10","label1":"2","label2":"3","arestas":[]},"12":{"tipo":"nó","valor":"o que o Senhor reprova","arestas":["14","17"]},"13":{"tipo":"nó","valor":"Fez","arestas":["14"]},"14":{"tipo":"aresta","v1":"a","v2":"12","label1":"13","arestas":["1m"]},"15":{"tipo":"nó","valor":"Senhor","arestas":["17"]},"16":{"tipo":"nó","valor":"Cita","arestas":["17"]},"17":{"tipo":"aresta","v1":"12","v2":"15","label1":"16","arestas":["1n"]},"18":{"tipo":"nó","valor":"nos caminhos de Jeroboão","arestas":["1a","1d"]},"19":{"tipo":"nó","valor":"Andou","arestas":["1a","1f"]},"a":{"tipo":"nó","valor":"Baasa","arestas":["e","g","14","1a","1f"]},"b":{"tipo":"nó","valor":"Aías","arestas":["e"]},"c":{"tipo":"nó","valor":"Filho de","arestas":["e"]},"d":{"tipo":"nó","valor":"Pai de","arestas":["e"]},"e":{"tipo":"aresta","v1":"a","v2":"b","label1":"c","label2":"d","arestas":["t"]},"f":{"tipo":"nó","valor":"Israel","arestas":["g"]},"g":{"tipo":"aresta","v1":"a","v2":"f","label1":"7","label2":"8","arestas":["j","o","r","u"]},"h":{"tipo":"nó","valor":"3º ano do reinado de Asa","arestas":["j","l"]},"i":{"tipo":"nó","valor":"Início","arestas":["j"]},"j":{"tipo":"aresta","v1":"g","v2":"h","label1":"i","arestas":["v"]},"k":{"tipo":"nó","valor":"Cita","arestas":["l"]},"l":{"tipo":"aresta","v1":"h","v2":"5","label1":"k","arestas":["w"]},"m":{"tipo":"nó","valor":"Tirza","arestas":["o"]},"n":{"tipo":"nó","valor":"Tornou-se rei em","arestas":["o"]},"o":{"tipo":"aresta","v1":"g","v2":"m","label1":"n","arestas":["x"]},"p":{"tipo":"nó","valor":"24 anos","arestas":["r"]},"q":{"tipo":"nó","valor":"Reinou","arestas":["r"]},"r":{"tipo":"aresta","v1":"g","v2":"p","label1":"q","arestas":["y"]},"s":{"tipo":"aresta","v1":"9","v2":"0","label1":"3","arestas":[]},"t":{"tipo":"aresta","v1":"e","v2":"0","label1":"3","arestas":[]},"u":{"tipo":"aresta","v1":"g","v2":"0","label1":"3","arestas":[]},"v":{"tipo":"aresta","v1":"j","v2":"0","label1":"3","arestas":[]},"w":{"tipo":"aresta","v1":"l","v2":"0","label1":"3","arestas":[]},"x":{"tipo":"aresta","v1":"o","v2":"0","label1":"3","arestas":[]},"y":{"tipo":"aresta","v1":"r","v2":"0","label1":"3","arestas":[]},"z":{"tipo":"nó","valor":"1 Rs 15.34","arestas":["11","1m","1n","1o","1p","1q","1r","1s"]},"1a":{"tipo":"aresta","v1":"a","v2":"18","label1":"19","arestas":["1o"]},"1b":{"tipo":"nó","valor":"Jeroboão","arestas":["1d"]},"1c":{"tipo":"nó","valor":"Cita","arestas":["1d"]},"1d":{"tipo":"aresta","v1":"18","v2":"1b","label1":"1c","arestas":["1p"]},"1e":{"tipo":"nó","valor":"nos pecados que ele tinha levado Israel a cometer","arestas":["1f","1i","1l"]},"1f":{"tipo":"aresta","v1":"a","v2":"1e","label1":"19","arestas":["1q"]},"1g":{"tipo":"nó","valor":"Jeroboão","arestas":["1i"]},"1h":{"tipo":"nó","valor":"ele","arestas":["1i"]},"1i":{"tipo":"aresta","v1":"1e","v2":"1g","label1":"1h","arestas":["1r"]},"1j":{"tipo":"nó","valor":"Israel","arestas":["1l"]},"1k":{"tipo":"nó","valor":"Cita","arestas":["1l"]},"1l":{"tipo":"aresta","v1":"1e","v2":"1j","label1":"1k","arestas":["1s"]},"1m":{"tipo":"aresta","v1":"14","v2":"z","label1":"3","arestas":[]},"1n":{"tipo":"aresta","v1":"17","v2":"z","label1":"3","arestas":[]},"1o":{"tipo":"aresta","v1":"1a","v2":"z","label1":"3","arestas":[]},"1p":{"tipo":"aresta","v1":"1d","v2":"z","label1":"3","arestas":[]},"1q":{"tipo":"aresta","v1":"1f","v2":"z","label1":"3","arestas":[]},"1r":{"tipo":"aresta","v1":"1i","v2":"z","label1":"3","arestas":[]},"1s":{"tipo":"aresta","v1":"1l","v2":"z","label1":"3","arestas":[]}}
+{
+  "0": {
+    "tipo": "nó",
+    "valor": "1 Rs 15.33",
+    "arestas": ["4", "s", "t", "u", "v", "w", "x", "y"]
+  },
+  "1": {
+    "tipo": "nó",
+    "valor": "No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.",
+    "arestas": ["4"]
+  },
+  "2": { "tipo": "nó", "valor": "Texto", "arestas": ["4", "11"] },
+  "3": {
+    "tipo": "nó",
+    "valor": "Referência",
+    "arestas": [
+      "4",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "11",
+      "1h",
+      "1i",
+      "1j",
+      "1k",
+      "1l",
+      "1m",
+      "1n"
+    ]
+  },
+  "4": {
+    "tipo": "aresta",
+    "v1": "0",
+    "v2": "1",
+    "label1": "2",
+    "label2": "3",
+    "arestas": []
+  },
+  "5": { "tipo": "nó", "valor": "Asa", "arestas": ["9", "l"] },
+  "6": { "tipo": "nó", "valor": "Judá", "arestas": ["9"] },
+  "7": { "tipo": "nó", "valor": "Rei de", "arestas": ["9", "g"] },
+  "8": { "tipo": "nó", "valor": "Rei", "arestas": ["9", "g"] },
+  "9": {
+    "tipo": "aresta",
+    "v1": "5",
+    "v2": "6",
+    "label1": "7",
+    "label2": "8",
+    "arestas": ["s"]
+  },
+  "10": {
+    "tipo": "nó",
+    "valor": "Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.",
+    "arestas": ["11"]
+  },
+  "11": {
+    "tipo": "aresta",
+    "v1": "z",
+    "v2": "10",
+    "label1": "2",
+    "label2": "3",
+    "arestas": []
+  },
+  "12": {
+    "tipo": "nó",
+    "valor": "o que o Senhor reprova",
+    "arestas": ["14", "16"]
+  },
+  "13": { "tipo": "nó", "valor": "Fez", "arestas": ["14"] },
+  "14": {
+    "tipo": "aresta",
+    "v1": "a",
+    "v2": "12",
+    "label1": "13",
+    "arestas": ["1h"]
+  },
+  "15": { "tipo": "nó", "valor": "Senhor", "arestas": ["16"] },
+  "16": {
+    "tipo": "aresta",
+    "v1": "12",
+    "v2": "15",
+    "label1": "k",
+    "arestas": ["1i"]
+  },
+  "17": {
+    "tipo": "nó",
+    "valor": "nos caminhos de Jeroboão",
+    "arestas": ["19", "1b"]
+  },
+  "18": { "tipo": "nó", "valor": "Andou", "arestas": ["19", "1d"] },
+  "19": {
+    "tipo": "aresta",
+    "v1": "a",
+    "v2": "17",
+    "label1": "18",
+    "arestas": ["1j"]
+  },
+  "a": {
+    "tipo": "nó",
+    "valor": "Baasa",
+    "arestas": ["e", "g", "14", "19", "1d"]
+  },
+  "b": { "tipo": "nó", "valor": "Aías", "arestas": ["e"] },
+  "c": { "tipo": "nó", "valor": "Filho de", "arestas": ["e"] },
+  "d": { "tipo": "nó", "valor": "Pai de", "arestas": ["e"] },
+  "e": {
+    "tipo": "aresta",
+    "v1": "a",
+    "v2": "b",
+    "label1": "c",
+    "label2": "d",
+    "arestas": ["t"]
+  },
+  "f": { "tipo": "nó", "valor": "Israel", "arestas": ["g", "1g"] },
+  "g": {
+    "tipo": "aresta",
+    "v1": "a",
+    "v2": "f",
+    "label1": "7",
+    "label2": "8",
+    "arestas": ["j", "o", "r", "u"]
+  },
+  "h": {
+    "tipo": "nó",
+    "valor": "3º ano do reinado de Asa",
+    "arestas": ["j", "l"]
+  },
+  "i": { "tipo": "nó", "valor": "Início", "arestas": ["j"] },
+  "j": {
+    "tipo": "aresta",
+    "v1": "g",
+    "v2": "h",
+    "label1": "i",
+    "arestas": ["v"]
+  },
+  "k": { "tipo": "nó", "valor": "Cita", "arestas": ["l", "16", "1b", "1g"] },
+  "l": {
+    "tipo": "aresta",
+    "v1": "h",
+    "v2": "5",
+    "label1": "k",
+    "arestas": ["w"]
+  },
+  "m": { "tipo": "nó", "valor": "Tirza", "arestas": ["o"] },
+  "n": { "tipo": "nó", "valor": "Tornou-se rei em", "arestas": ["o"] },
+  "o": {
+    "tipo": "aresta",
+    "v1": "g",
+    "v2": "m",
+    "label1": "n",
+    "arestas": ["x"]
+  },
+  "p": { "tipo": "nó", "valor": "24 anos", "arestas": ["r"] },
+  "q": { "tipo": "nó", "valor": "Reinou", "arestas": ["r"] },
+  "r": {
+    "tipo": "aresta",
+    "v1": "g",
+    "v2": "p",
+    "label1": "q",
+    "arestas": ["y"]
+  },
+  "s": { "tipo": "aresta", "v1": "9", "v2": "0", "label1": "3", "arestas": [] },
+  "t": { "tipo": "aresta", "v1": "e", "v2": "0", "label1": "3", "arestas": [] },
+  "u": { "tipo": "aresta", "v1": "g", "v2": "0", "label1": "3", "arestas": [] },
+  "v": { "tipo": "aresta", "v1": "j", "v2": "0", "label1": "3", "arestas": [] },
+  "w": { "tipo": "aresta", "v1": "l", "v2": "0", "label1": "3", "arestas": [] },
+  "x": { "tipo": "aresta", "v1": "o", "v2": "0", "label1": "3", "arestas": [] },
+  "y": { "tipo": "aresta", "v1": "r", "v2": "0", "label1": "3", "arestas": [] },
+  "z": {
+    "tipo": "nó",
+    "valor": "1 Rs 15.34",
+    "arestas": ["11", "1h", "1i", "1j", "1k", "1l", "1m", "1n"]
+  },
+  "1a": { "tipo": "nó", "valor": "Jeroboão", "arestas": ["1b", "1f"] },
+  "1b": {
+    "tipo": "aresta",
+    "v1": "17",
+    "v2": "1a",
+    "label1": "k",
+    "arestas": ["1k"]
+  },
+  "1c": {
+    "tipo": "nó",
+    "valor": "nos pecados que ele tinha levado Israel a cometer",
+    "arestas": ["1d", "1f", "1g"]
+  },
+  "1d": {
+    "tipo": "aresta",
+    "v1": "a",
+    "v2": "1c",
+    "label1": "18",
+    "arestas": ["1l"]
+  },
+  "1e": { "tipo": "nó", "valor": "ele", "arestas": ["1f"] },
+  "1f": {
+    "tipo": "aresta",
+    "v1": "1c",
+    "v2": "1a",
+    "label1": "1e",
+    "arestas": ["1m"]
+  },
+  "1g": {
+    "tipo": "aresta",
+    "v1": "1c",
+    "v2": "f",
+    "label1": "k",
+    "arestas": ["1n"]
+  },
+  "1h": {
+    "tipo": "aresta",
+    "v1": "14",
+    "v2": "z",
+    "label1": "3",
+    "arestas": []
+  },
+  "1i": {
+    "tipo": "aresta",
+    "v1": "16",
+    "v2": "z",
+    "label1": "3",
+    "arestas": []
+  },
+  "1j": {
+    "tipo": "aresta",
+    "v1": "19",
+    "v2": "z",
+    "label1": "3",
+    "arestas": []
+  },
+  "1k": {
+    "tipo": "aresta",
+    "v1": "1b",
+    "v2": "z",
+    "label1": "3",
+    "arestas": []
+  },
+  "1l": {
+    "tipo": "aresta",
+    "v1": "1d",
+    "v2": "z",
+    "label1": "3",
+    "arestas": []
+  },
+  "1m": {
+    "tipo": "aresta",
+    "v1": "1f",
+    "v2": "z",
+    "label1": "3",
+    "arestas": []
+  },
+  "1n": {
+    "tipo": "aresta",
+    "v1": "1g",
+    "v2": "z",
+    "label1": "3",
+    "arestas": []
+  }
+}

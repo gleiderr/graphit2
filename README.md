@@ -18,6 +18,7 @@ As construções são simples para garantir sua utilidade desde o primeiro dia
 - Renomear labels para 'l1' e 'l2'
 - Instalar Prettier
 - Instalar ESLint
+- Corrigir writeFile em Markdown.ts para incluir await
 
 ## Referências
 São impressas à frete de cada impressão de aresta e seus respectivos versículos são impressas no final de cada título impresso

@@ -2,6 +2,8 @@ import { appendFile, writeFile } from 'fs/promises';
 import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 
 export class Markdown {
+  onConsole = false;
+
   constructor(
     private graphit: Graphit,
     private labelRef: Id,
@@ -151,7 +153,7 @@ export class Markdown {
   }
 
   private print(texto: string, ...args: any[]) {
-    this.printToConsole(texto, ...args);
+    if (this.onConsole) this.printToConsole(texto, ...args);
     this.printToFile(texto);
   }
 
