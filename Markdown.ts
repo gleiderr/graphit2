@@ -1,4 +1,4 @@
-import { appendFile, writeFile } from 'fs/promises';
+import { appendFileSync, writeFileSync } from 'fs';
 import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 
 export class Markdown {
@@ -14,16 +14,17 @@ export class Markdown {
     const elemento = this.graphit.getElemento(id);
     if (elemento.tipo !== 'nó') return this.print('Inválido: ', elemento);
 
-    writeFile(output, ''); // Inicia arquivo em branco
+    writeFileSync(output, ''); // Inicia arquivo em branco
     this.imprimirNó(elemento, título);
 
     this.imprimirVersículos();
   }
 
   private imprimirNó(nó: ElementoNó, nívelTítulo: number) {
+    this.setVisitado(nó);
+
     // Impressão do título
     const hashs = '#'.repeat(nívelTítulo + 1);
-    this.setVisitado(nó);
     this.print(`${hashs} ${nó.valor}`);
 
     for (const arestaId of nó.arestas) {
@@ -162,7 +163,7 @@ export class Markdown {
   }
 
   private printToFile(texto: string) {
-    appendFile('Bíblia.md', texto + '\n');
+    appendFileSync('Bíblia.md', texto + '\n');
   }
 
   private visitados: Set<Id> = new Set();
