@@ -1,6 +1,21 @@
 import { appendFileSync, writeFileSync } from 'fs';
 import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 
+// Descrição de cada linha a ser impressa
+type Descrição = {
+  origem: Elemento;
+  label: ElementoNó;
+  destino: ElementoNó;
+  inverter: boolean;
+  referências: ElementoNó[];
+};
+
+type Linha = {
+  aresta: ElementoAresta;
+  descrição: Descrição;
+  linhas?: Linha[];
+};
+
 export class Markdown {
   onConsole = false;
 
@@ -10,66 +25,86 @@ export class Markdown {
     private labelTexto: Id
   ) {}
 
-  imprimir(id: Id, { título = 0, output = 'Bíblia.md' } = {}) {
+  imprimir(id: Id, { nívelTítulo = 0, output = 'Bíblia.md' } = {}) {
     const elemento = this.graphit.getElemento(id);
     if (elemento.tipo !== 'nó') return this.print('Inválido: ', elemento);
 
     writeFileSync(output, ''); // Inicia arquivo em branco
-    this.imprimirNó(elemento, título);
+
+    this.imprimirTítulo(elemento, nívelTítulo);
 
     this.imprimirVersículos();
   }
 
-  private imprimirNó(nó: ElementoNó, nívelTítulo: number) {
-    this.setVisitado(nó);
-
+  private imprimirTítulo(nó: ElementoNó, nívelTítulo: number) {
     // Impressão do título
     const hashs = '#'.repeat(nívelTítulo + 1);
     this.print(`${hashs} ${nó.valor}`);
 
-    for (const arestaId of nó.arestas) {
-      const aresta = this.graphit.getElemento(arestaId) as ElementoAresta;
-      this.imprimirAresta(aresta, { nível: 0, origem: nó });
+    const linhas = this.montarEstrutura(nó, { limite: 3 });
+    this.imprimirLinhas(0, linhas);
+  }
+
+  private imprimirLinhas(nível: number, linhas: Linha[]) {
+    for (const linha of linhas) {
+      this.imprimirLinha(nível, linha.descrição);
+      if (linha.linhas) this.imprimirLinhas(nível + 1, linha.linhas);
     }
   }
 
-  private imprimirAresta(
-    aresta: ElementoAresta,
-    { nível, origem }: { nível: number; origem: Elemento }
+  private montarEstrutura(
+    origem: Elemento,
+    { limite = 0 }: { limite?: number } = {}
   ) {
-    if (this.visitados.has(aresta.id)) return;
-    if (nível > 5) {
-      const indentação = this.indentação(nível);
-      return this.print(`${indentação}--- Chegou ao nível ${nível} ---`);
+    const primeiroNível: Linha[] = this.getLinhas(origem);
+    let nívelCorrente = primeiroNível;
+
+    for (let n = 0; n < limite && nívelCorrente.length > 0; n++) {
+      let próximoNível: Linha[] = [];
+      for (const linha of nívelCorrente) {
+        const linhasDestino = this.getLinhas(linha.descrição.destino);
+        const linhasAresta = this.getLinhas(linha.aresta);
+        linha.linhas = [...linhasDestino, ...linhasAresta];
+        próximoNível = [...próximoNível, ...linha.linhas];
+      }
+      nívelCorrente = próximoNível;
     }
 
-    const { label, inverter } = this.getLabel(origem, aresta);
-    if (label.tipo != 'nó') {
-      return this.print(`${this.indentação(nível)}- Diferente de nó`, label);
+    return primeiroNível;
+  }
+
+  private getLinhas(origem: Elemento) {
+    let linhas: Linha[] = [];
+    for (const arestaId of origem.arestas) {
+      const aresta = this.graphit.getElemento(arestaId) as ElementoAresta;
+      if (this.visitados.has(aresta.id)) continue;
+      this.setVisitado(aresta);
+
+      const descrição: Descrição = this.getDescrição(aresta, { origem });
+      const linha = { aresta, descrição, linhas: [] };
+
+      linhas = [...linhas, linha];
     }
+    return linhas;
+  }
+
+  private getDescrição(
+    aresta: ElementoAresta,
+    { origem }: { origem: Elemento }
+  ): Descrição {
+    const { label, inverter } = this.getLabel(origem, aresta);
+    if (label.tipo != 'nó') throw new Error(`Label inválido ${label}`);
 
     // Definição do destino
     const destinoId = aresta.v1 == origem.id ? aresta.v2 : aresta.v1;
     const destino = this.graphit.getElemento(destinoId);
-    if (destino.tipo != 'nó') return; // Nada para imprimir nesse caso
+    if (destino.tipo != 'nó') throw new Error(`Destino inválido ${destino}`);
 
-    const { arestasReferência, nósReferência } = this.getReferências(aresta);
-
-    this.imprimirLinha(nível, origem, label, destino, inverter, nósReferência);
-    this.setVisitado(aresta);
+    const { nósReferência: referências, arestasReferência } =
+      this.getReferências(aresta);
     arestasReferência.forEach(a => this.setVisitado(a));
 
-    // Imprime arestas do nó de destino
-    for (const arestaId of destino.arestas) {
-      const novaAresta = this.graphit.getElemento(arestaId) as ElementoAresta;
-      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: destino });
-    }
-
-    // Imprime arestas da aresta
-    for (const arestaId of aresta.arestas) {
-      const novaAresta = this.graphit.getElemento(arestaId) as ElementoAresta;
-      this.imprimirAresta(novaAresta, { nível: nível + 1, origem: aresta });
-    }
+    return { origem, label, destino, inverter, referências };
   }
 
   private getLabel(origem: Elemento, { v1, label1, label2 }: ElementoAresta) {
@@ -101,26 +136,24 @@ export class Markdown {
 
   private imprimirLinha(
     nível: number,
-    origem: Elemento,
-    label: ElementoNó,
-    destino: ElementoNó,
-    inverter: boolean,
-    referências: ElementoNó[]
+    { origem, label, destino, inverter, referências }: Descrição
   ) {
-    const indentação = this.indentação(nível);
-
     let linha: string;
-    if (inverter && origem.tipo != 'nó') linha = 'Não sei o que fazer';
-    else if (inverter && origem.tipo == 'nó')
-      linha = `${destino.valor}: ${label.valor} ${origem.valor}`;
-    else if (origem.tipo == 'nó' && nível > 0 && !inverter)
-      linha = `(${origem.valor}) ${label.valor}: ${destino.valor}`;
-    else linha = `${label.valor}: ${destino.valor}`;
+    if (origem.tipo == 'nó' && inverter) {
+      linha = `- ${destino.valor}: ${label.valor} ${origem.valor}`;
+    } else if (origem.tipo == 'nó' && nível > 0 && !inverter) {
+      linha = `- (${origem.valor}) ${label.valor}: ${destino.valor}`;
+    } else if (origem.tipo == 'aresta' || nível == 0) {
+      linha = `- ${label.valor}: ${destino.valor}`;
+    } else {
+      linha = '- Não sei o que fazer';
+    }
 
     const refs = referências.map(n => n.valor).join(', ');
     if (refs) linha += ` (${refs})`;
 
-    this.print(`${indentação}- ${linha}`);
+    const indentação = this.indentação(nível);
+    this.print(`${indentação}${linha}`);
   }
 
   private nósReferência: Set<Id> = new Set();
