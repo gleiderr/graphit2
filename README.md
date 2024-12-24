@@ -13,7 +13,6 @@ As construções são simples para garantir sua utilidade desde o primeiro dia
 
 ## Fazer
 - Definir critério de parada por elemento
-- Definir reordenação de arestas
 - Definir arestas sem label
 - Renomear labels para 'l1' e 'l2'
 - Instalar Prettier

@@ -7,6 +7,8 @@ import './Bíblia/1 Rs 16.8';
 import { graphit } from './Graphit';
 import { Markdown } from './Markdown';
 
+graphit.reordenar(Baasa.id, 5, 1);
+
 graphit.salvar('Bíblia.json');
 
 const markdown = new Markdown(graphit, referência.id, texto.id);

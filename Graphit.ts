@@ -168,6 +168,14 @@ export class Graphit {
     return arestas;
   }
 
+  reordenar(elemento: Id, origem: number, destino: number) {
+    const { arestas } = this.db[elemento];
+
+    // Remove aresta da origem e insere no destino
+    const aresta = arestas.splice(origem, 1)[0];
+    arestas.splice(destino, 0, aresta);
+  }
+
   getElemento(id: Id): Elemento {
     return { id, ...this.db[id] };
   }
