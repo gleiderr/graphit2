@@ -12,8 +12,8 @@ export type Aresta = {
   tipo: 'aresta';
   v1: Id;
   v2: Id;
-  label1: Id;
-  label2?: Id;
+  l1: Id;
+  l2?: Id;
   arestas: Id[];
 };
 
@@ -80,42 +80,30 @@ export class Graphit {
     elementos: TrêsNós | QuatroNós,
     { reuseV1, reuseV2, reuseL1, reuseL2, reuseAresta }: Reuse = {}
   ): QuatroIds | CincoIds {
-    let [v1, v2, label1, label2] = elementos;
+    let [v1, v2, l1, l2] = elementos;
 
     if (typeof v1 == 'string') v1 = this.defineNó(v1, reuseV1);
     if (typeof v2 == 'string') v2 = this.defineNó(v2, reuseV2);
-    if (typeof label1 == 'string') label1 = this.defineNó(label1, reuseL1);
-    if (typeof label2 == 'string') label2 = this.defineNó(label2, reuseL2);
+    if (typeof l1 == 'string') l1 = this.defineNó(l1, reuseL1);
+    if (typeof l2 == 'string') l2 = this.defineNó(l2, reuseL2);
 
-    const novoId = this.defineAresta(
-      v1.id,
-      v2.id,
-      label1.id,
-      label2?.id,
-      reuseAresta
-    );
+    const novoId = this.defineAresta(v1.id, v2.id, l1.id, l2?.id, reuseAresta);
 
     this.db[v1.id].arestas.push(novoId);
     this.db[v2.id].arestas.push(novoId);
-    this.db[label1.id].arestas.push(novoId);
-    if (label2) this.db[label2.id].arestas.push(novoId);
+    this.db[l1.id].arestas.push(novoId);
+    if (l2) this.db[l2.id].arestas.push(novoId);
 
-    const ids: QuatroIds | CincoIds = label2
-      ? [{ id: novoId }, v1, v2, label1, label2]
-      : [{ id: novoId }, v1, v2, label1];
+    const ids: QuatroIds | CincoIds = l2
+      ? [{ id: novoId }, v1, v2, l1, l2]
+      : [{ id: novoId }, v1, v2, l1];
 
     this.memóriaDeArestas = [...this.memóriaDeArestas, ids];
     return ids;
   }
 
-  private defineAresta(
-    v1: Id,
-    v2: Id,
-    label1: Id,
-    label2?: Id,
-    reuse?: boolean
-  ): Id {
-    const arestas = this.buscarAresta(v1, v2, label1, label2);
+  private defineAresta(v1: Id, v2: Id, l1: Id, l2?: Id, reuse?: boolean): Id {
+    const arestas = this.buscarAresta(v1, v2, l1, l2);
     if (arestas.length == 1) {
       if (reuse === undefined) console.warn('Aresta igual', arestas[0]);
       if (reuse) return arestas[0].id;
@@ -124,7 +112,7 @@ export class Graphit {
     }
 
     const id = this.nextId();
-    this.db[id] = { tipo: 'aresta', v1, v2, label1, label2, arestas: [] };
+    this.db[id] = { tipo: 'aresta', v1, v2, l1, l2, arestas: [] };
     return id;
   }
 
@@ -150,7 +138,7 @@ export class Graphit {
     return nós;
   }
 
-  buscarAresta(v1: Id, v2: Id, label1: Id, label2?: Id): ElementoAresta[] {
+  buscarAresta(v1: Id, v2: Id, l1: Id, l2?: Id): ElementoAresta[] {
     let arestas: ElementoAresta[] = [];
     for (const id of this.índices) {
       const elemento = this.getElemento(id);
@@ -158,8 +146,8 @@ export class Graphit {
         elemento.tipo == 'aresta' &&
         elemento.v1 == v1 &&
         elemento.v2 == v2 &&
-        elemento.label1 == label1 &&
-        (elemento.label2 == label2 || !label2)
+        elemento.l1 == l1 &&
+        (elemento.l2 == l2 || !l2)
       ) {
         arestas = [...arestas, elemento];
       }

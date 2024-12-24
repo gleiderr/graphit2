@@ -107,10 +107,10 @@ export class Markdown {
     return { origem, label, destino, inverter, referências };
   }
 
-  private getLabel(origem: Elemento, { v1, label1, label2 }: ElementoAresta) {
+  private getLabel(origem: Elemento, { v1, l1, l2 }: ElementoAresta) {
     const utilizaLabel1 = v1 == origem.id;
-    const labelId = utilizaLabel1 || !label2 ? label1 : label2;
-    const inverter = !utilizaLabel1 && !label2;
+    const labelId = utilizaLabel1 || !l2 ? l1 : l2;
+    const inverter = !utilizaLabel1 && !l2;
     const label = this.graphit.getElemento(labelId);
 
     return { label, inverter };
@@ -118,12 +118,12 @@ export class Markdown {
 
   private getReferências(aresta: ElementoAresta) {
     const isReferência = (e: ElementoAresta) =>
-      e.label1 == this.labelRef || e.label2 == this.labelRef;
+      e.l1 == this.labelRef || e.l2 == this.labelRef;
     const arestasReferência = aresta.arestas
       .map(e => this.graphit.getElemento(e) as ElementoAresta)
       .filter(isReferência);
     const ids = arestasReferência.map(e =>
-      e.label1 == this.labelRef ? e.v2 : e.v1
+      e.l1 == this.labelRef ? e.v2 : e.v1
     );
     const nósReferência = ids.map(
       id => this.graphit.getElemento(id) as ElementoNó
@@ -159,7 +159,7 @@ export class Markdown {
   private nósReferência: Set<Id> = new Set();
   private imprimirVersículos() {
     const isVersículo = (e: ElementoAresta) =>
-      e.label1 == this.labelTexto || e.label2 == this.labelTexto;
+      e.l1 == this.labelTexto || e.l2 == this.labelTexto;
 
     const arestas = [...this.nósReferência]
       .map(id => this.graphit.getElemento(id) as ElementoNó)
@@ -172,7 +172,7 @@ export class Markdown {
     for (const aresta of arestas) {
       let ref = this.graphit.getElemento(aresta.v1) as ElementoNó;
       let versículo = this.graphit.getElemento(aresta.v2) as ElementoNó;
-      if (aresta.label2 == this.labelTexto) {
+      if (aresta.l2 == this.labelTexto) {
         [ref, versículo] = [versículo, ref];
       }
 
@@ -210,8 +210,8 @@ export class Markdown {
       this.visitados.add(elemento.id);
       this.visitados.add(elemento.v1);
       this.visitados.add(elemento.v2);
-      this.visitados.add(elemento.label1);
-      if (elemento.label2) this.visitados.add(elemento.label2);
+      this.visitados.add(elemento.l1);
+      if (elemento.l2) this.visitados.add(elemento.l2);
     } else {
       this.visitados.add(elemento.id);
     }
