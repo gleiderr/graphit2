@@ -2,9 +2,12 @@
 - Filho de: Aías (1 Rs 15.33)
 - Rei de: Israel (1 Rs 15.33)
   - nos pecados que ele tinha levado Israel a cometer: Cita Israel (1 Rs 15.34)
+  - Elá: Rei de Israel (1 Rs 16.8)
+    - no: 26º ano do reinado de Asa (1 Rs 16.8)
+    - Cita: Asa (1 Rs 16.8)
+      - (Asa) Rei de: Judá (1 Rs 15.33, 1 Rs 16.8)
   - Início: 3º ano do reinado de Asa (1 Rs 15.33)
     - (3º ano do reinado de Asa) Cita: Asa (1 Rs 15.33)
-      - (Asa) Rei de: Judá (1 Rs 15.33)
   - Tornou-se rei em: Tirza (1 Rs 15.33)
   - Reinou: 24 anos (1 Rs 15.33)
 - Fez: o que o Senhor reprova (1 Rs 15.34)
@@ -13,6 +16,10 @@
   - (nos caminhos de Jeroboão) Cita: Jeroboão (1 Rs 15.34)
 - Andou: nos pecados que ele tinha levado Israel a cometer (1 Rs 15.34)
   - (nos pecados que ele tinha levado Israel a cometer) ele: Jeroboão (1 Rs 15.34)
+- Pai de: Elá (1 Rs 16.8)
+  - (Elá) reinou em: Tirza (1 Rs 16.8)
+    - Reinou: 2 anos (1 Rs 16.8)
 
 > 1 Rs 15.33: No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
 > 1 Rs 15.34: Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.
+> 1 Rs 16.8: No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.

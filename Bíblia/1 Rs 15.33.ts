@@ -1,12 +1,8 @@
-// 1 Rs 15.33.ts
-import { graphit } from './Graphit';
+import { graphit } from '../Graphit';
 
-const [, _1Rs15_33, , texto, referência] = graphit.inserirAresta([
-  '1 Rs 15.33',
-  'No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.',
-  'Texto',
-  'Referência',
-]);
+const versículo =
+  'No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.';
+const [, _1Rs15_33, , texto, referência] = graphit.inserirAresta(['1 Rs 15.33', versículo, 'Texto', 'Referência']);
 
 graphit.iniciarMemória();
 

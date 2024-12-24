@@ -9,7 +9,7 @@
     "valor": "No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.",
     "arestas": ["4"]
   },
-  "2": { "tipo": "nó", "valor": "Texto", "arestas": ["4", "11"] },
+  "2": { "tipo": "nó", "valor": "Texto", "arestas": ["4", "11", "1q"] },
   "3": {
     "tipo": "nó",
     "valor": "Referência",
@@ -29,7 +29,15 @@
       "1k",
       "1l",
       "1m",
-      "1n"
+      "1n",
+      "1q",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29"
     ]
   },
   "4": {
@@ -40,9 +48,9 @@
     "label2": "3",
     "arestas": []
   },
-  "5": { "tipo": "nó", "valor": "Asa", "arestas": ["9", "l"] },
-  "6": { "tipo": "nó", "valor": "Judá", "arestas": ["9"] },
-  "7": { "tipo": "nó", "valor": "Rei de", "arestas": ["9", "g"] },
+  "5": { "tipo": "nó", "valor": "Asa", "arestas": ["9", "l", "9", "1x"] },
+  "6": { "tipo": "nó", "valor": "Judá", "arestas": ["9", "9"] },
+  "7": { "tipo": "nó", "valor": "Rei de", "arestas": ["9", "g", "9", "1t"] },
   "8": { "tipo": "nó", "valor": "Rei", "arestas": ["9", "g"] },
   "9": {
     "tipo": "aresta",
@@ -50,7 +58,7 @@
     "v2": "6",
     "label1": "7",
     "label2": "8",
-    "arestas": ["s"]
+    "arestas": ["s", "23"]
   },
   "10": {
     "tipo": "nó",
@@ -99,14 +107,73 @@
     "label1": "18",
     "arestas": ["1j"]
   },
+  "20": { "tipo": "nó", "valor": "2 anos", "arestas": ["22"] },
+  "21": { "tipo": "nó", "valor": "Duração do reinado", "arestas": ["22"] },
+  "22": {
+    "tipo": "aresta",
+    "v1": "1z",
+    "v2": "20",
+    "label1": "q",
+    "label2": "21",
+    "arestas": ["29"]
+  },
+  "23": {
+    "tipo": "aresta",
+    "v1": "9",
+    "v2": "1o",
+    "label1": "3",
+    "arestas": []
+  },
+  "24": {
+    "tipo": "aresta",
+    "v1": "1s",
+    "v2": "1o",
+    "label1": "3",
+    "arestas": []
+  },
+  "25": {
+    "tipo": "aresta",
+    "v1": "1t",
+    "v2": "1o",
+    "label1": "3",
+    "arestas": []
+  },
+  "26": {
+    "tipo": "aresta",
+    "v1": "1w",
+    "v2": "1o",
+    "label1": "3",
+    "arestas": []
+  },
+  "27": {
+    "tipo": "aresta",
+    "v1": "1x",
+    "v2": "1o",
+    "label1": "3",
+    "arestas": []
+  },
+  "28": {
+    "tipo": "aresta",
+    "v1": "1z",
+    "v2": "1o",
+    "label1": "3",
+    "arestas": []
+  },
+  "29": {
+    "tipo": "aresta",
+    "v1": "22",
+    "v2": "1o",
+    "label1": "3",
+    "arestas": []
+  },
   "a": {
     "tipo": "nó",
     "valor": "Baasa",
-    "arestas": ["e", "g", "14", "19", "1d"]
+    "arestas": ["e", "g", "14", "19", "1d", "1s"]
   },
   "b": { "tipo": "nó", "valor": "Aías", "arestas": ["e"] },
-  "c": { "tipo": "nó", "valor": "Filho de", "arestas": ["e"] },
-  "d": { "tipo": "nó", "valor": "Pai de", "arestas": ["e"] },
+  "c": { "tipo": "nó", "valor": "Filho de", "arestas": ["e", "1s"] },
+  "d": { "tipo": "nó", "valor": "Pai de", "arestas": ["e", "1s"] },
   "e": {
     "tipo": "aresta",
     "v1": "a",
@@ -115,7 +182,7 @@
     "label2": "d",
     "arestas": ["t"]
   },
-  "f": { "tipo": "nó", "valor": "Israel", "arestas": ["g", "1g"] },
+  "f": { "tipo": "nó", "valor": "Israel", "arestas": ["g", "1g", "1t"] },
   "g": {
     "tipo": "aresta",
     "v1": "a",
@@ -137,7 +204,11 @@
     "label1": "i",
     "arestas": ["v"]
   },
-  "k": { "tipo": "nó", "valor": "Cita", "arestas": ["l", "16", "1b", "1g"] },
+  "k": {
+    "tipo": "nó",
+    "valor": "Cita",
+    "arestas": ["l", "16", "1b", "1g", "1x"]
+  },
   "l": {
     "tipo": "aresta",
     "v1": "h",
@@ -145,7 +216,7 @@
     "label1": "k",
     "arestas": ["w"]
   },
-  "m": { "tipo": "nó", "valor": "Tirza", "arestas": ["o"] },
+  "m": { "tipo": "nó", "valor": "Tirza", "arestas": ["o", "1z"] },
   "n": { "tipo": "nó", "valor": "Tornou-se rei em", "arestas": ["o"] },
   "o": {
     "tipo": "aresta",
@@ -155,7 +226,7 @@
     "arestas": ["x"]
   },
   "p": { "tipo": "nó", "valor": "24 anos", "arestas": ["r"] },
-  "q": { "tipo": "nó", "valor": "Reinou", "arestas": ["r"] },
+  "q": { "tipo": "nó", "valor": "Reinou", "arestas": ["r", "22"] },
   "r": {
     "tipo": "aresta",
     "v1": "g",
@@ -258,5 +329,67 @@
     "v2": "z",
     "label1": "3",
     "arestas": []
+  },
+  "1o": {
+    "tipo": "nó",
+    "valor": "1 Rs 16.8",
+    "arestas": ["1q", "23", "24", "25", "26", "27", "28", "29"]
+  },
+  "1p": {
+    "tipo": "nó",
+    "valor": "No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.",
+    "arestas": ["1q"]
+  },
+  "1q": {
+    "tipo": "aresta",
+    "v1": "1o",
+    "v2": "1p",
+    "label1": "2",
+    "label2": "3",
+    "arestas": []
+  },
+  "1r": { "tipo": "nó", "valor": "Elá", "arestas": ["1s", "1t", "1z"] },
+  "1s": {
+    "tipo": "aresta",
+    "v1": "1r",
+    "v2": "a",
+    "label1": "c",
+    "label2": "d",
+    "arestas": ["24"]
+  },
+  "1t": {
+    "tipo": "aresta",
+    "v1": "1r",
+    "v2": "f",
+    "label1": "7",
+    "arestas": ["1w", "1x", "25"]
+  },
+  "1u": {
+    "tipo": "nó",
+    "valor": "26º ano do reinado de Asa",
+    "arestas": ["1w"]
+  },
+  "1v": { "tipo": "nó", "valor": "no", "arestas": ["1w"] },
+  "1w": {
+    "tipo": "aresta",
+    "v1": "1t",
+    "v2": "1u",
+    "label1": "1v",
+    "arestas": ["26"]
+  },
+  "1x": {
+    "tipo": "aresta",
+    "v1": "1t",
+    "v2": "5",
+    "label1": "k",
+    "arestas": ["27"]
+  },
+  "1y": { "tipo": "nó", "valor": "reinou em", "arestas": ["1z"] },
+  "1z": {
+    "tipo": "aresta",
+    "v1": "1r",
+    "v2": "m",
+    "label1": "1y",
+    "arestas": ["22", "28"]
   }
 }

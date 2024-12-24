@@ -37,6 +37,7 @@ type Reuse = {
   reuseV2?: boolean;
   reuseL1?: boolean;
   reuseL2?: boolean;
+  reuseAresta?: boolean;
 };
 
 //Classe para manipular
@@ -77,7 +78,7 @@ export class Graphit {
   inserirAresta(elementos: QuatroNós, reuse?: Reuse): CincoIds;
   inserirAresta(
     elementos: TrêsNós | QuatroNós,
-    { reuseV1, reuseV2, reuseL1, reuseL2 }: Reuse = {}
+    { reuseV1, reuseV2, reuseL1, reuseL2, reuseAresta }: Reuse = {}
   ): QuatroIds | CincoIds {
     let [v1, v2, label1, label2] = elementos;
 
@@ -86,15 +87,13 @@ export class Graphit {
     if (typeof label1 == 'string') label1 = this.defineNó(label1, reuseL1);
     if (typeof label2 == 'string') label2 = this.defineNó(label2, reuseL2);
 
-    const novoId = this.nextId();
-    this.db[novoId] = {
-      tipo: 'aresta',
-      v1: v1.id,
-      v2: v2.id,
-      label1: label1.id,
-      label2: label2?.id,
-      arestas: [],
-    };
+    const novoId = this.defineAresta(
+      v1.id,
+      v2.id,
+      label1.id,
+      label2?.id,
+      reuseAresta
+    );
 
     this.db[v1.id].arestas.push(novoId);
     this.db[v2.id].arestas.push(novoId);
@@ -109,12 +108,32 @@ export class Graphit {
     return ids;
   }
 
+  private defineAresta(
+    v1: Id,
+    v2: Id,
+    label1: Id,
+    label2?: Id,
+    reuse?: boolean
+  ): Id {
+    const arestas = this.buscarAresta(v1, v2, label1, label2);
+    if (arestas.length == 1) {
+      if (reuse === undefined) console.warn('Aresta igual', arestas[0]);
+      if (reuse) return arestas[0].id;
+    } else if (arestas.length > 1) {
+      console.warn('Mais de uma aresta igual', arestas);
+    }
+
+    const id = this.nextId();
+    this.db[id] = { tipo: 'aresta', v1, v2, label1, label2, arestas: [] };
+    return id;
+  }
+
   private defineNó(valor: string, reuse?: boolean): { id: Id } {
     const nós = this.buscarNó(valor);
     if (nós.length == 1) {
-      if (reuse === undefined) console.warn('Outro nó encontrado', nós[0]);
+      if (reuse === undefined) console.warn('Nó igual', nós[0]);
       if (reuse) return { id: nós[0].id };
-    } else if (nós.length > 1) console.warn('Outros nós encontrados', nós);
+    } else if (nós.length > 1) console.warn('Mais de um nó igual', nós);
 
     return { id: this.inserirNó(valor) };
   }
@@ -129,6 +148,24 @@ export class Graphit {
     }
 
     return nós;
+  }
+
+  buscarAresta(v1: Id, v2: Id, label1: Id, label2?: Id): ElementoAresta[] {
+    let arestas: ElementoAresta[] = [];
+    for (const id of this.índices) {
+      const elemento = this.getElemento(id);
+      if (
+        elemento.tipo == 'aresta' &&
+        elemento.v1 == v1 &&
+        elemento.v2 == v2 &&
+        elemento.label1 == label1 &&
+        (elemento.label2 == label2 || !label2)
+      ) {
+        arestas = [...arestas, elemento];
+      }
+    }
+
+    return arestas;
   }
 
   getElemento(id: Id): Elemento {

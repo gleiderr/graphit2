@@ -2,5 +2,5 @@
   "printWidth": 80,
   "singleQuote": true,
   "arrowParens": "avoid",
-  "overrides": [{ "files": "1 Rs 15*.ts", "options": { "printWidth": 130 } }]
+  "overrides": [{ "files": "**/Bíblia/*.ts", "options": { "printWidth": 130 } }]
 }

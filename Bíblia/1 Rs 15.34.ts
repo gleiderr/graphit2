@@ -1,12 +1,10 @@
+import { graphit } from '../Graphit';
 import { referência, texto } from './1 Rs 15.33';
-import { graphit } from './Graphit';
 
-const [, _1Rs15_33, , ,] = graphit.inserirAresta([
-  '1 Rs 15.34',
-  'Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.',
-  texto,
-  referência,
-]);
+const versículo =
+  'Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.';
+
+const [, _1Rs15_33, , ,] = graphit.inserirAresta(['1 Rs 15.34', versículo, texto, referência]);
 
 graphit.iniciarMemória();
 
