@@ -12,7 +12,7 @@ const [, Baasa] = graphit.inserirAresta(['Baasa', 'Aías', 'Filho de', 'Pai de']
 const [reinadoBaasa] = graphit.inserirAresta([Baasa, 'Israel', reiDe, rei]);
 {
   const [, , terceiroAnoAsa] = graphit.inserirAresta([reinadoBaasa, '3º ano do reinado de Asa', 'Início']);
-  graphit.inserirAresta([terceiroAnoAsa, Asa, 'Cita']);
+  graphit.inserirAresta([terceiroAnoAsa, Asa]);
 
   graphit.inserirAresta([reinadoBaasa, 'Tirza', 'Reinou em'], { reuseL1: true });
   graphit.inserirAresta([reinadoBaasa, '24 anos', 'Reinou durante']);

@@ -1,14 +1,22 @@
 import { appendFileSync, writeFileSync } from 'fs';
 import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 
-// Descrição de cada linha a ser impressa
-type Descrição = {
+type DescriçãoComLabel = {
   origem: Elemento;
   label: ElementoNó;
   destino: ElementoNó;
   inverter: boolean;
   referências: ElementoNó[];
 };
+
+type DescriçãoSemLabel = {
+  origem: Elemento;
+  destino: ElementoNó;
+  referências: ElementoNó[];
+};
+
+// Descrição de cada linha a ser impressa
+type Descrição = DescriçãoComLabel | DescriçãoSemLabel;
 
 type Linha = {
   aresta: ElementoAresta;
@@ -22,7 +30,7 @@ export class Markdown {
   constructor(
     private graphit: Graphit,
     private labelRef: Id,
-    private labelTexto: Id
+    private labelTexto: Id,
   ) {}
 
   imprimir(id: Id, { nívelTítulo = 0, output = 'Bíblia.md' } = {}) {
@@ -47,14 +55,17 @@ export class Markdown {
 
   private imprimirLinhas(nível: number, linhas: Linha[]) {
     for (const linha of linhas) {
-      this.imprimirLinha(nível, linha.descrição);
-      if (linha.linhas) this.imprimirLinhas(nível + 1, linha.linhas);
+      const { descrição } = linha;
+      if ('label' in descrição) this.imprimirLinha(nível, descrição);
+
+      const proxNível = 'label' in descrição ? nível + 1 : nível;
+      if (linha.linhas) this.imprimirLinhas(proxNível, linha.linhas);
     }
   }
 
   private montarEstrutura(
     origem: Elemento,
-    { limite = 0 }: { limite?: number } = {}
+    { limite = 0 }: { limite?: number } = {},
   ) {
     const primeiroNível: Linha[] = this.getLinhas(origem);
     let nívelCorrente = primeiroNível;
@@ -90,10 +101,10 @@ export class Markdown {
 
   private getDescrição(
     aresta: ElementoAresta,
-    { origem }: { origem: Elemento }
+    { origem }: { origem: Elemento },
   ): Descrição {
     const { label, inverter } = this.getLabel(origem, aresta);
-    if (label.tipo != 'nó') throw new Error(`Label inválido ${label}`);
+    if (label && label.tipo != 'nó') throw new Error(`Label inválido ${label}`);
 
     // Definição do destino
     const destinoId = aresta.v1 == origem.id ? aresta.v2 : aresta.v1;
@@ -104,10 +115,14 @@ export class Markdown {
       this.getReferências(aresta);
     arestasReferência.forEach(a => this.setVisitado(a));
 
-    return { origem, label, destino, inverter, referências };
+    return label ?
+        { origem, label, destino, inverter, referências }
+      : { origem, destino, referências };
   }
 
   private getLabel(origem: Elemento, { v1, l1, l2 }: ElementoAresta) {
+    if (!l1) return {};
+
     const utilizaLabel1 = v1 == origem.id;
     const labelId = utilizaLabel1 || !l2 ? l1 : l2;
     const inverter = !utilizaLabel1 && !l2;
@@ -123,10 +138,10 @@ export class Markdown {
       .map(e => this.graphit.getElemento(e) as ElementoAresta)
       .filter(isReferência);
     const ids = arestasReferência.map(e =>
-      e.l1 == this.labelRef ? e.v2 : e.v1
+      e.l1 == this.labelRef ? e.v2 : e.v1,
     );
     const nósReferência = ids.map(
-      id => this.graphit.getElemento(id) as ElementoNó
+      id => this.graphit.getElemento(id) as ElementoNó,
     );
 
     ids.forEach(id => this.nósReferência.add(id));
@@ -136,7 +151,7 @@ export class Markdown {
 
   private imprimirLinha(
     nível: number,
-    { origem, label, destino, inverter, referências }: Descrição
+    { origem, label, destino, inverter, referências }: DescriçãoComLabel,
   ) {
     let linha: string;
     if (origem.tipo == 'nó' && inverter) {
@@ -210,7 +225,7 @@ export class Markdown {
       this.visitados.add(elemento.id);
       this.visitados.add(elemento.v1);
       this.visitados.add(elemento.v2);
-      this.visitados.add(elemento.l1);
+      if (elemento.l1) this.visitados.add(elemento.l1);
       if (elemento.l2) this.visitados.add(elemento.l2);
     } else {
       this.visitados.add(elemento.id);
@@ -220,7 +235,7 @@ export class Markdown {
   getNãoVisitados() {
     const índices = new Set(this.graphit.índices);
     const nãoVisitados = new Set(
-      [...índices].filter(x => !this.visitados.has(x))
+      [...índices].filter(x => !this.visitados.has(x)),
     );
 
     return nãoVisitados;

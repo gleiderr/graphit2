@@ -1,5 +1,6 @@
 {
   "printWidth": 80,
+  "experimentalTernaries": true,
   "singleQuote": true,
   "arrowParens": "avoid",
   "overrides": [

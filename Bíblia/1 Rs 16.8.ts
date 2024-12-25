@@ -21,7 +21,7 @@ const [, , _26anoAsa] = graphit.inserirAresta([reinoElá, '26º ano do reinado d
 graphit.inserirAresta([reinoElá, 'Tirza', 'Reinou em'], { reuseL1: true, reuseV2: true });
 graphit.inserirAresta([reinoElá, '2 anos', 'Reinou durante'], { reuseV1: true, reuseL1: true });
 
-graphit.inserirAresta([_26anoAsa, 'Asa', 'Cita'], { reuseV2: true, reuseL1: true });
+graphit.inserirAresta([_26anoAsa, 'Asa'], { reuseV2: true });
 
 graphit.getMemória().forEach(([aresta]) => {
   graphit.inserirAresta([aresta, _1Rs16_8, referência]);

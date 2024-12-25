@@ -12,6 +12,7 @@ export default [
   {
     rules: {
       'prefer-const': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
 ];

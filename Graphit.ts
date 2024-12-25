@@ -1,4 +1,5 @@
 import { writeFile } from 'fs/promises';
+import * as prettier from 'prettier';
 
 export type Id = string;
 
@@ -12,7 +13,7 @@ export type Aresta = {
   tipo: 'aresta';
   v1: Id;
   v2: Id;
-  l1: Id;
+  l1?: Id;
   l2?: Id;
   arestas: Id[];
 };
@@ -21,14 +22,16 @@ export type ElementoAresta = { id: Id } & Aresta;
 export type ElementoNó = { id: Id } & Nó;
 export type Elemento = ElementoAresta | ElementoNó;
 
+type DoisNós = [{ id: Id } | string, { id: Id } | string];
 type TrêsNós = [{ id: Id } | string, { id: Id } | string, { id: Id } | string];
 type QuatroNós = [
   { id: Id } | string,
   { id: Id } | string,
   { id: Id } | string,
-  { id: Id } | string
+  { id: Id } | string,
 ];
 
+type TrêsIds = [{ id: Id }, { id: Id }, { id: Id }];
 type QuatroIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }];
 type CincoIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }];
 
@@ -45,7 +48,7 @@ export class Graphit {
   _nextId = 0;
   private db: { [key: string]: Nó | Aresta };
 
-  private memóriaDeArestas: (QuatroIds | CincoIds)[] = [];
+  private memóriaDeArestas: (TrêsIds | QuatroIds | CincoIds)[] = [];
 
   constructor() {
     //Recupera de Bíblia.json
@@ -74,12 +77,13 @@ export class Graphit {
     return this.memóriaDeArestas;
   }
 
+  inserirAresta(elementos: DoisNós, reuse?: Reuse): TrêsIds;
   inserirAresta(elementos: TrêsNós, reuse?: Reuse): QuatroIds;
   inserirAresta(elementos: QuatroNós, reuse?: Reuse): CincoIds;
   inserirAresta(
-    elementos: TrêsNós | QuatroNós,
-    { reuseV1, reuseV2, reuseL1, reuseL2, reuseAresta }: Reuse = {}
-  ): QuatroIds | CincoIds {
+    elementos: DoisNós | TrêsNós | QuatroNós,
+    { reuseV1, reuseV2, reuseL1, reuseL2, reuseAresta }: Reuse = {},
+  ): TrêsIds | QuatroIds | CincoIds {
     let [v1, v2, l1, l2] = elementos;
 
     if (typeof v1 == 'string') v1 = this.defineNó(v1, reuseV1);
@@ -87,22 +91,23 @@ export class Graphit {
     if (typeof l1 == 'string') l1 = this.defineNó(l1, reuseL1);
     if (typeof l2 == 'string') l2 = this.defineNó(l2, reuseL2);
 
-    const novoId = this.defineAresta(v1.id, v2.id, l1.id, l2?.id, reuseAresta);
+    const novoId = this.defineAresta(v1.id, v2.id, l1?.id, l2?.id, reuseAresta);
 
     this.db[v1.id].arestas.push(novoId);
     this.db[v2.id].arestas.push(novoId);
-    this.db[l1.id].arestas.push(novoId);
+    if (l1) this.db[l1.id].arestas.push(novoId);
     if (l2) this.db[l2.id].arestas.push(novoId);
 
-    const ids: QuatroIds | CincoIds = l2
-      ? [{ id: novoId }, v1, v2, l1, l2]
-      : [{ id: novoId }, v1, v2, l1];
+    const ids: TrêsIds | QuatroIds | CincoIds =
+      l1 && l2 ? [{ id: novoId }, v1, v2, l1, l2]
+      : l1 ? [{ id: novoId }, v1, v2, l1]
+      : [{ id: novoId }, v1, v2];
 
     this.memóriaDeArestas = [...this.memóriaDeArestas, ids];
     return ids;
   }
 
-  private defineAresta(v1: Id, v2: Id, l1: Id, l2?: Id, reuse?: boolean): Id {
+  private defineAresta(v1: Id, v2: Id, l1?: Id, l2?: Id, reuse?: boolean): Id {
     const arestas = this.buscarAresta(v1, v2, l1, l2);
     if (arestas.length == 1) {
       if (reuse === undefined) console.warn('Aresta igual', arestas[0]);
@@ -138,7 +143,7 @@ export class Graphit {
     return nós;
   }
 
-  buscarAresta(v1: Id, v2: Id, l1: Id, l2?: Id): ElementoAresta[] {
+  buscarAresta(v1: Id, v2: Id, l1?: Id, l2?: Id): ElementoAresta[] {
     let arestas: ElementoAresta[] = [];
     for (const id of this.índices) {
       const elemento = this.getElemento(id);
@@ -146,7 +151,7 @@ export class Graphit {
         elemento.tipo == 'aresta' &&
         elemento.v1 == v1 &&
         elemento.v2 == v2 &&
-        elemento.l1 == l1 &&
+        (elemento.l1 == l1 || !l1) &&
         (elemento.l2 == l2 || !l2)
       ) {
         arestas = [...arestas, elemento];
@@ -169,7 +174,10 @@ export class Graphit {
   }
 
   async salvar(arquivo: string) {
-    await writeFile(arquivo, JSON.stringify(this.db));
+    const dados = await prettier.format(JSON.stringify(this.db), {
+      parser: 'json',
+    });
+    await writeFile(arquivo, dados);
     console.log('Dados salvos com sucesso!');
   }
 }
