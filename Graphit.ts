@@ -174,4 +174,4 @@ export class Graphit {
   }
 }
 
-export let graphit = new Graphit();
+export const graphit = new Graphit();

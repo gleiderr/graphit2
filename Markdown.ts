@@ -186,12 +186,12 @@ export class Markdown {
     return '  '.repeat(nível);
   }
 
-  private print(texto: string, ...args: any[]) {
+  private print(texto: string, ...args: unknown[]) {
     if (this.onConsole) this.printToConsole(texto, ...args);
     this.printToFile(texto);
   }
 
-  private printToConsole(texto: string, ...args: any[]) {
+  private printToConsole(texto: string, ...args: unknown[]) {
     console.log(texto, ...args);
   }
 
