@@ -12,8 +12,7 @@
   - Reinou durante: 24 anos (1 Rs 15.33)
 - Fez: o que o Senhor reprova (1 Rs 15.34)
 - Andou: nos caminhos de Jeroboão (1 Rs 15.34)
-- Andou: nos pecados que ele tinha levado Israel a cometer (1 Rs 15.34)
-  - (nos pecados que ele tinha levado Israel a cometer) ele: Jeroboão (1 Rs 15.34)
+- Andou: nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
 
 > 1 Rs 15.33: No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
 > 1 Rs 16.8: No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.

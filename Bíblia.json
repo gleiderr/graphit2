@@ -23,14 +23,13 @@
       "w",
       "x",
       "10",
+      "1f",
       "1g",
       "1h",
       "1i",
       "1j",
       "1k",
       "1l",
-      "1m",
-      "1p",
       "1z",
       "20",
       "21",
@@ -79,10 +78,10 @@
     "v1": "a",
     "v2": "11",
     "l1": "12",
-    "arestas": ["1g"]
+    "arestas": ["1f"]
   },
   "14": { "tipo": "nó", "valor": "Senhor", "arestas": ["15"] },
-  "15": { "tipo": "aresta", "v1": "11", "v2": "14", "arestas": ["1h"] },
+  "15": { "tipo": "aresta", "v1": "11", "v2": "14", "arestas": ["1g"] },
   "16": {
     "tipo": "nó",
     "valor": "nos caminhos de Jeroboão",
@@ -94,15 +93,15 @@
     "v1": "a",
     "v2": "16",
     "l1": "17",
-    "arestas": ["1i"]
+    "arestas": ["1h"]
   },
-  "19": { "tipo": "nó", "valor": "Jeroboão", "arestas": ["1a", "1e"] },
-  "20": { "tipo": "aresta", "v1": "1r", "v2": "1n", "l1": "3", "arestas": [] },
-  "21": { "tipo": "aresta", "v1": "1s", "v2": "1n", "l1": "3", "arestas": [] },
-  "22": { "tipo": "aresta", "v1": "1u", "v2": "1n", "l1": "3", "arestas": [] },
-  "23": { "tipo": "aresta", "v1": "1v", "v2": "1n", "l1": "3", "arestas": [] },
-  "24": { "tipo": "aresta", "v1": "1x", "v2": "1n", "l1": "3", "arestas": [] },
-  "25": { "tipo": "aresta", "v1": "1y", "v2": "1n", "l1": "3", "arestas": [] },
+  "19": { "tipo": "nó", "valor": "Jeroboão", "arestas": ["1a", "1d"] },
+  "20": { "tipo": "aresta", "v1": "1r", "v2": "1m", "l1": "3", "arestas": [] },
+  "21": { "tipo": "aresta", "v1": "1s", "v2": "1m", "l1": "3", "arestas": [] },
+  "22": { "tipo": "aresta", "v1": "1u", "v2": "1m", "l1": "3", "arestas": [] },
+  "23": { "tipo": "aresta", "v1": "1v", "v2": "1m", "l1": "3", "arestas": [] },
+  "24": { "tipo": "aresta", "v1": "1x", "v2": "1m", "l1": "3", "arestas": [] },
+  "25": { "tipo": "aresta", "v1": "1y", "v2": "1m", "l1": "3", "arestas": [] },
   "a": {
     "tipo": "nó",
     "valor": "Baasa",
@@ -119,7 +118,7 @@
     "l2": "d",
     "arestas": ["s"]
   },
-  "f": { "tipo": "nó", "valor": "Israel", "arestas": ["g", "1f", "1s"] },
+  "f": { "tipo": "nó", "valor": "Israel", "arestas": ["g", "1e", "1s"] },
   "g": {
     "tipo": "aresta",
     "v1": "a",
@@ -152,58 +151,52 @@
   "y": {
     "tipo": "nó",
     "valor": "1 Rs 15.34",
-    "arestas": ["10", "1g", "1h", "1i", "1j", "1k", "1l", "1m"]
+    "arestas": ["10", "1f", "1g", "1h", "1i", "1j", "1k", "1l"]
   },
   "z": {
     "tipo": "nó",
     "valor": "Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.",
     "arestas": ["10"]
   },
-  "1a": { "tipo": "aresta", "v1": "16", "v2": "19", "arestas": ["1j"] },
+  "1a": { "tipo": "aresta", "v1": "16", "v2": "19", "arestas": ["1i"] },
   "1b": {
     "tipo": "nó",
-    "valor": "nos pecados que ele tinha levado Israel a cometer",
-    "arestas": ["1c", "1e", "1f"]
+    "valor": "nos pecados que Jeroboão tinha levado Israel a cometer",
+    "arestas": ["1c", "1d", "1e"]
   },
   "1c": {
     "tipo": "aresta",
     "v1": "a",
     "v2": "1b",
     "l1": "17",
-    "arestas": ["1k"]
+    "arestas": ["1j"]
   },
-  "1d": { "tipo": "nó", "valor": "ele", "arestas": ["1e"] },
-  "1e": {
-    "tipo": "aresta",
-    "v1": "1b",
-    "v2": "19",
-    "l1": "1d",
-    "arestas": ["1l"]
-  },
-  "1f": { "tipo": "aresta", "v1": "1b", "v2": "f", "arestas": ["1m"] },
-  "1g": { "tipo": "aresta", "v1": "13", "v2": "y", "l1": "3", "arestas": [] },
-  "1h": { "tipo": "aresta", "v1": "15", "v2": "y", "l1": "3", "arestas": [] },
-  "1i": { "tipo": "aresta", "v1": "18", "v2": "y", "l1": "3", "arestas": [] },
-  "1j": { "tipo": "aresta", "v1": "1a", "v2": "y", "l1": "3", "arestas": [] },
-  "1k": { "tipo": "aresta", "v1": "1c", "v2": "y", "l1": "3", "arestas": [] },
+  "1d": { "tipo": "aresta", "v1": "1b", "v2": "19", "arestas": ["1k"] },
+  "1e": { "tipo": "aresta", "v1": "1b", "v2": "f", "arestas": ["1l"] },
+  "1f": { "tipo": "aresta", "v1": "13", "v2": "y", "l1": "3", "arestas": [] },
+  "1g": { "tipo": "aresta", "v1": "15", "v2": "y", "l1": "3", "arestas": [] },
+  "1h": { "tipo": "aresta", "v1": "18", "v2": "y", "l1": "3", "arestas": [] },
+  "1i": { "tipo": "aresta", "v1": "1a", "v2": "y", "l1": "3", "arestas": [] },
+  "1j": { "tipo": "aresta", "v1": "1c", "v2": "y", "l1": "3", "arestas": [] },
+  "1k": { "tipo": "aresta", "v1": "1d", "v2": "y", "l1": "3", "arestas": [] },
   "1l": { "tipo": "aresta", "v1": "1e", "v2": "y", "l1": "3", "arestas": [] },
-  "1m": { "tipo": "aresta", "v1": "1f", "v2": "y", "l1": "3", "arestas": [] },
-  "1n": {
+  "1m": {
     "tipo": "nó",
     "valor": "1 Rs 16.8",
     "arestas": ["1p", "1z", "20", "21", "22", "23", "24", "25"]
   },
-  "1o": {
+  "1n": {
     "tipo": "nó",
     "valor": "No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.",
     "arestas": ["1p"]
   },
+  "1o": { "tipo": "nó", "valor": "referência", "arestas": ["1p"] },
   "1p": {
     "tipo": "aresta",
-    "v1": "1n",
-    "v2": "1o",
+    "v1": "1m",
+    "v2": "1n",
     "l1": "2",
-    "l2": "3",
+    "l2": "1o",
     "arestas": []
   },
   "1q": { "tipo": "nó", "valor": "Elá", "arestas": ["1r", "1s"] },
@@ -250,5 +243,5 @@
     "arestas": ["24"]
   },
   "1y": { "tipo": "aresta", "v1": "1t", "v2": "5", "arestas": ["25"] },
-  "1z": { "tipo": "aresta", "v1": "9", "v2": "1n", "l1": "3", "arestas": [] }
+  "1z": { "tipo": "aresta", "v1": "9", "v2": "1m", "l1": "3", "arestas": [] }
 }

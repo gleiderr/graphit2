@@ -109,7 +109,10 @@ export class Markdown {
     // Definição do destino
     const destinoId = aresta.v1 == origem.id ? aresta.v2 : aresta.v1;
     const destino = this.graphit.getElemento(destinoId);
-    if (destino.tipo != 'nó') throw new Error(`Destino inválido ${destino}`);
+    if (destino.tipo != 'nó') {
+      console.error('Destino inválido', destino);
+      throw new Error(`Destino inválido ${destino}`);
+    }
 
     const { nósReferência: referências, arestasReferência } =
       this.getReferências(aresta);

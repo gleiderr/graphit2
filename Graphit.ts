@@ -36,11 +36,11 @@ type QuatroIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }];
 type CincoIds = [{ id: Id }, { id: Id }, { id: Id }, { id: Id }, { id: Id }];
 
 type Reuse = {
-  reuseV1?: boolean;
-  reuseV2?: boolean;
-  reuseL1?: boolean;
-  reuseL2?: boolean;
-  reuseAresta?: boolean;
+  reuseV1: boolean;
+  reuseV2: boolean;
+  reuseL1: boolean;
+  reuseL2: boolean;
+  reuseAresta: boolean;
 };
 
 //Classe para manipular
@@ -82,7 +82,13 @@ export class Graphit {
   inserirAresta(elementos: QuatroNós, reuse?: Reuse): CincoIds;
   inserirAresta(
     elementos: DoisNós | TrêsNós | QuatroNós,
-    { reuseV1, reuseV2, reuseL1, reuseL2, reuseAresta }: Reuse = {},
+    { reuseV1, reuseV2, reuseL1, reuseL2, reuseAresta }: Reuse = {
+      reuseL1: true,
+      reuseL2: true,
+      reuseV1: true,
+      reuseV2: true,
+      reuseAresta: true,
+    },
   ): TrêsIds | QuatroIds | CincoIds {
     let [v1, v2, l1, l2] = elementos;
 
@@ -121,12 +127,14 @@ export class Graphit {
     return id;
   }
 
-  private defineNó(valor: string, reuse?: boolean): { id: Id } {
+  private defineNó(valor: string, reuse: boolean): { id: Id } {
     const nós = this.buscarNó(valor);
     if (nós.length == 1) {
-      if (reuse === undefined) console.warn('Nó igual', nós[0]);
+      if (reuse === undefined)
+        throw new Error('Nó igual' + JSON.stringify(nós[0]));
       if (reuse) return { id: nós[0].id };
-    } else if (nós.length > 1) console.warn('Mais de um nó igual', nós);
+    } else if (nós.length > 1)
+      throw new Error('Mais de um nó igual' + JSON.stringify(nós));
 
     return { id: this.inserirNó(valor) };
   }
