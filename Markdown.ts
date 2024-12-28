@@ -4,14 +4,14 @@ import { Elemento, ElementoAresta, ElementoNó, Graphit, Id } from './Graphit';
 type DescriçãoComLabel = {
   origem: Elemento;
   label: ElementoNó;
-  destino: ElementoNó;
+  destino: Elemento;
   inverter: boolean;
   referências: ElementoNó[];
 };
 
 type DescriçãoSemLabel = {
   origem: Elemento;
-  destino: ElementoNó;
+  destino: Elemento;
   referências: ElementoNó[];
 };
 
@@ -88,12 +88,16 @@ export class Markdown {
     let linhas: Linha[] = [];
     for (const arestaId of origem.arestas) {
       const aresta = this.graphit.getElemento(arestaId) as ElementoAresta;
+
+      // Verifica visita
       if (this.visitados.has(aresta.id)) continue;
+
+      const descrição = this.getDescrição(aresta, { origem });
+      if (!descrição) continue;
+
       this.setVisitado(aresta);
 
-      const descrição: Descrição = this.getDescrição(aresta, { origem });
       const linha = { aresta, descrição, linhas: [] };
-
       linhas = [...linhas, linha];
     }
     return linhas;
@@ -102,18 +106,19 @@ export class Markdown {
   private getDescrição(
     aresta: ElementoAresta,
     { origem }: { origem: Elemento },
-  ): Descrição {
+  ): Descrição | null {
+    // TODO: Remover getLabel() daqui
     const { label, inverter } = this.getLabel(origem, aresta);
-    if (label && label.tipo != 'nó') throw new Error(`Label inválido ${label}`);
 
     // Definição do destino
     const destinoId = aresta.v1 == origem.id ? aresta.v2 : aresta.v1;
     const destino = this.graphit.getElemento(destinoId);
-    if (destino.tipo != 'nó') {
-      console.error('Destino inválido', destino);
-      throw new Error(`Destino inválido ${destino}`);
-    }
 
+    // TODO: passar essa validação para fora deste método
+    // O destino de uma aresta não pode ser outra aresta
+    if (destino.tipo == 'aresta') return null;
+
+    // TODO: passar identificação de referências para fora deste método
     const { nósReferência: referências, arestasReferência } =
       this.getReferências(aresta);
     arestasReferência.forEach(a => this.setVisitado(a));
@@ -130,6 +135,8 @@ export class Markdown {
     const labelId = utilizaLabel1 || !l2 ? l1 : l2;
     const inverter = !utilizaLabel1 && !l2;
     const label = this.graphit.getElemento(labelId);
+
+    if (label.tipo != 'nó') throw new Error(`Label inválido ${label}`);
 
     return { label, inverter };
   }
@@ -152,19 +159,22 @@ export class Markdown {
     return { arestasReferência, nósReferência };
   }
 
-  private imprimirLinha(
-    nível: number,
-    { origem, label, destino, inverter, referências }: DescriçãoComLabel,
-  ) {
+  private imprimirLinha(nível: number, descrição: DescriçãoComLabel) {
+    const { origem, label, destino, inverter, referências } = descrição;
+
     let linha: string;
-    if (origem.tipo == 'nó' && inverter) {
+    const ambosNós = origem.tipo == 'nó' && destino.tipo == 'nó';
+    if (ambosNós && inverter) {
       linha = `- ${destino.valor}: ${label.valor} ${origem.valor}`;
-    } else if (origem.tipo == 'nó' && nível > 0 && !inverter) {
+    } else if (ambosNós && nível > 0 && !inverter) {
       linha = `- (${origem.valor}) ${label.valor}: ${destino.valor}`;
-    } else if (origem.tipo == 'aresta' || nível == 0) {
+    } else if (origem.tipo == 'aresta' && destino.tipo == 'nó') {
+      linha = `- ${label.valor}: ${destino.valor}`;
+    } else if (nível == 0 && destino.tipo == 'nó') {
       linha = `- ${label.valor}: ${destino.valor}`;
     } else {
       linha = '- Não sei o que fazer';
+      console.log(linha, descrição);
     }
 
     const refs = referências.map(n => n.valor).join(', ');

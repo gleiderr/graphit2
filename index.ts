@@ -12,8 +12,6 @@ const Baasa = graphit.buscarNó('Baasa')[0];
 const referência = graphit.buscarNó('Referência')[0];
 const texto = graphit.buscarNó('Texto')[0];
 
-graphit.reordenar(Baasa.id, 5, 1);
-
 graphit.salvar('Bíblia.json');
 
 const markdown = new Markdown(graphit, referência.id, texto.id);
