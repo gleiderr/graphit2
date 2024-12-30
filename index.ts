@@ -2,6 +2,7 @@ const agora: string = new Date().toLocaleString(); //
 console.log(`----------------------------------${agora}`);
 
 import './Bíblia/1 Rs 15.16';
+import './Bíblia/1 Rs 15.17';
 import './Bíblia/1 Rs 15.33';
 import './Bíblia/1 Rs 15.34';
 import './Bíblia/1 Rs 16.8';

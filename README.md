@@ -1,7 +1,8 @@
 # Graphit
 
 A proposta deste projeto é construir uma arquitetura emergente para estudo da Bíblia.
-As construções são simples para garantir sua utilidade desde o primeiro dia
+As construções são simples para garantir sua utilidade desde o primeiro dia.
+Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a utilidade imediata da implementação, mas sempre pensando-se nas consequências futuras.
 - Qualquer elemento possui arestas em seu índice;
 
 ## Príncípios
@@ -13,10 +14,7 @@ As construções são simples para garantir sua utilidade desde o primeiro dia
 
 ## Fazer
 - Definir critério de parada por elemento
-- Definir arestas sem label
-- Renomear labels para 'l1' e 'l2'
-- Instalar Prettier
-- Instalar ESLint
+- Implementar testes unitários
 - Remover '-' do nível zero?
 
 ## Referências

@@ -97,20 +97,34 @@ export class Graphit {
     if (typeof l1 == 'string') l1 = this.defineNó(l1, reuseL1);
     if (typeof l2 == 'string') l2 = this.defineNó(l2, reuseL2);
 
-    const novoId = this.defineAresta(v1.id, v2.id, l1?.id, l2?.id, reuseAresta);
+    const idArestaExistente = this.existeAresta(v1.id, v2.id, l1?.id, l2?.id);
+    if (idArestaExistente && reuseAresta === undefined) {
+      console.warn('Aresta igual', this.db[idArestaExistente]);
+    }
+
+    const retorno = (aresta: Id) => {
+      const rtn: TrêsIds | QuatroIds | CincoIds =
+        l1 && l2 ? [{ id: aresta }, v1, v2, l1, l2]
+        : l1 ? [{ id: aresta }, v1, v2, l1]
+        : [{ id: aresta }, v1, v2];
+
+      this.memóriaDeArestas = [...this.memóriaDeArestas, rtn];
+
+      return rtn;
+    };
+
+    if (idArestaExistente && reuseAresta) {
+      return retorno(idArestaExistente);
+    }
+
+    const novoId = this.novaAresta(v1.id, v2.id, l1?.id, l2?.id);
 
     this.db[v1.id].arestas.push(novoId);
     this.db[v2.id].arestas.push(novoId);
     if (l1) this.db[l1.id].arestas.push(novoId);
     if (l2) this.db[l2.id].arestas.push(novoId);
 
-    const ids: TrêsIds | QuatroIds | CincoIds =
-      l1 && l2 ? [{ id: novoId }, v1, v2, l1, l2]
-      : l1 ? [{ id: novoId }, v1, v2, l1]
-      : [{ id: novoId }, v1, v2];
-
-    this.memóriaDeArestas = [...this.memóriaDeArestas, ids];
-    return ids;
+    return retorno(novoId);
   }
 
   private defineAresta(v1: Id, v2: Id, l1?: Id, l2?: Id, reuse?: boolean): Id {
@@ -122,6 +136,21 @@ export class Graphit {
       console.warn('Mais de uma aresta igual', arestas);
     }
 
+    return this.novaAresta(v1, v2, l1, l2);
+  }
+
+  private existeAresta(v1: Id, v2: Id, l1?: Id, l2?: Id) {
+    const arestas = this.buscarAresta(v1, v2, l1, l2);
+    if (arestas.length == 1) {
+      return arestas[0].id;
+    } else if (arestas.length > 1) {
+      console.warn('Mais de uma aresta igual', arestas);
+      return null;
+    }
+    return null;
+  }
+
+  private novaAresta(v1: Id, v2: Id, l1?: Id, l2?: Id) {
     const id = this.nextId();
     this.db[id] = { tipo: 'aresta', v1, v2, l1, l2, arestas: [] };
     return id;
@@ -162,7 +191,13 @@ export class Graphit {
         (elemento.l1 == l1 || !l1) &&
         (elemento.l2 == l2 || !l2)
       ) {
-        arestas = [...arestas, elemento];
+        const labelCompatível = (l?: Id) =>
+          l === undefined || l == elemento.l1 || l == elemento.l2;
+        const l1Compatível = labelCompatível(l1);
+        const l2Compatível = labelCompatível(l2);
+        if (l1Compatível && l2Compatível) arestas = [...arestas, elemento];
+
+        //arestas = [...arestas, elemento];
       }
     }
 
