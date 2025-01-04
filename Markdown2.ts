@@ -15,26 +15,53 @@ class Markdown2 {
     return `# ${título}\n${linhas}`;
   }
 
-  montarLinhas(descrição: Descrição): string {
-    const linhas = descrição.arestas.map(aresta => this.montarLinha(0, aresta));
+  private montarLinhas(descrição: Descrição): string {
+    const linhas = descrição.arestas.map(aresta =>
+      this.montarLinha(0, aresta, descrição),
+    );
     return linhas.join('\n');
   }
 
-  montarLinha(profundidade: number, aresta: DescriçãoAresta): string {
-    const linha = this.getLinha(profundidade, aresta);
-    const linhas = aresta.arestas.map(aresta =>
-      this.montarLinha(profundidade + 1, aresta),
+  private montarLinha(
+    profundidade: number,
+    aresta: DescriçãoAresta,
+    origem: Descrição,
+  ): string {
+    const linha = this.getLinha(profundidade, aresta, origem);
+    const linhas = aresta.arestas.map(subAresta =>
+      this.montarLinha(profundidade + 1, subAresta, aresta),
     );
 
     return [linha, ...linhas].join('\n');
   }
 
-  getLinha(profundidade: number, aresta: DescriçãoAresta) {
+  private getLinha(
+    profundidade: number,
+    aresta: DescriçãoAresta,
+    origem: Descrição,
+  ): string {
     const indentação = '  '.repeat(profundidade);
-    const getValor = (nó: Descrição): string =>
-      'valor' in nó ? nó.valor : 'aresta';
-    const nós = aresta.nós.map(getValor);
-    return `${indentação}- ${nós.join(' ')}`;
+
+    const getValor = (nó: Descrição, i: number): string => {
+      // Se o nó for a aresta de origem, avalia a posição do valor
+      if (nó.id === origem.id) {
+        if (i === 0) return ''; // Se for o primeiro nó, não imprime-o
+        return 'nó de origem';
+      }
+
+      if ('valor' in nó) return nó.valor;
+
+      return `aresta`;
+    };
+
+    const valores = aresta.nós.map(getValor);
+
+    const linha = valores
+      .join(' ') // Concatena valores com espaço
+      .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
+      .replace(/^\w/, c => c.toUpperCase()); // Torna maíuscula primeira letra da linha
+
+    return `${indentação}- ${linha}`;
   }
 
   private getTítulo(descrição: Descrição): string {
