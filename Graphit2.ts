@@ -8,10 +8,13 @@ type Id = string;
 type Nó = { valor: string; arestas: Id[] };
 type Aresta = { nós: Id[]; arestas: Id[]; props?: ArestaProps };
 
-type Descrição = ({ valor: string } | { nós: Descrição[] }) & {
+export type DescriçãoAresta = {
   id: Id;
-  arestas: Descrição[];
+  nós: Descrição[];
+  arestas: DescriçãoAresta[];
 };
+export type DescriçãoNó = { id: Id; valor: string; arestas: DescriçãoAresta[] };
+export type Descrição = DescriçãoNó | DescriçãoAresta;
 
 /**
  * Implementa hipergrafo híbrido para manipulação de textos.
@@ -20,7 +23,11 @@ type Descrição = ({ valor: string } | { nós: Descrição[] }) & {
  */
 class Graphit2 {
   private db: { [key: string]: Nó | Aresta } = {};
+  private listeners: { [key in 'afterAresta']: ((id: Id) => void)[] } = {
+    afterAresta: [],
+  };
   private _nextId = 0;
+  private listening: boolean = false;
 
   private nextId() {
     return (this._nextId++).toString(36);
@@ -63,6 +70,14 @@ class Graphit2 {
     );
   }
 
+  addListener(on: 'afterAresta', callback: (id: Id) => void) {
+    return this.listeners[on].push(callback) - 1;
+  }
+
+  removeListener(on: 'afterAresta', index: number) {
+    this.listeners[on].splice(index, 1);
+  }
+
   /**
    * Retorna o id da aresta cujos nós coincidem com os valores informados.
    * Se não encontrar cria uma nova aresta reaproveitando os nós existentes
@@ -73,6 +88,13 @@ class Graphit2 {
       typeof nó === 'object' ? nó.id : this.buscarNó(nó) || this.novoNó(nó),
     );
     const id = this.buscarArestaByIds(ids) || this.novaAresta(ids, props);
+
+    if (!this.listening) {
+      this.listening = true;
+      this.listeners.afterAresta.forEach(listener => listener(id));
+      this.listening = false;
+    }
+
     return { id };
   }
 
