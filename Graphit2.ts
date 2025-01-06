@@ -110,8 +110,8 @@ class Graphit2 {
       if ('valor' in vértice) {
         return { id, valor: vértice.valor, arestas: [] };
       } else {
-        // TODO: definir como descrever nós arestas
-        return { id, nós: [], arestas: [] };
+        const nós = vértice.nós.map(descreverNó);
+        return { id, nós, arestas: [] };
       }
     };
 
@@ -163,3 +163,4 @@ class Graphit2 {
 }
 
 export const graphit2 = new Graphit2();
+export const aresta = graphit2.aresta.bind(graphit2);

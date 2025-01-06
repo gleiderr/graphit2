@@ -43,15 +43,13 @@ class Markdown2 {
     const indentação = '  '.repeat(profundidade);
 
     const getValor = (nó: Descrição, i: number): string => {
-      // Se o nó for a aresta de origem, avalia a posição do valor
-      if (nó.id === origem.id) {
-        if (i === 0) return ''; // Se for o primeiro nó, não imprime-o
-        return 'nó de origem';
-      }
-
+      // Se o primeiro nó for a aresta de origem, não imprime-o
+      if (i === 0 && nó.id === origem.id) return '';
       if ('valor' in nó) return nó.valor;
 
-      return `aresta`;
+      const aresta = nó;
+      const nós = aresta.nós.map(getValor);
+      return nós.join(' ');
     };
 
     const valores = aresta.nós.map(getValor);
