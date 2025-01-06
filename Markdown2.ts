@@ -40,27 +40,34 @@ class Markdown2 {
     aresta: DescriçãoAresta,
     origem: Descrição,
   ): string {
+    const valores = aresta.nós.map((nó, i) => this.getValor(origem, nó, i));
+
+    const linha =
+      valores
+        .join(' ') // Concatena valores com espaço
+        .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
+        .replace(/^\w/, c => c.toUpperCase()) +
+      this.appendLinha(profundidade, aresta, origem); // Torna maíuscula primeira letra da linha
+
     const indentação = '  '.repeat(profundidade);
-
-    const getValor = (nó: Descrição, i: number): string => {
-      // Se o primeiro nó for a aresta de origem, não imprime-o
-      if (i === 0 && nó.id === origem.id) return '';
-      if ('valor' in nó) return nó.valor;
-
-      const aresta = nó;
-      const nós = aresta.nós.map(getValor);
-      return nós.join(' ');
-    };
-
-    const valores = aresta.nós.map(getValor);
-
-    const linha = valores
-      .join(' ') // Concatena valores com espaço
-      .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
-      .replace(/^\w/, c => c.toUpperCase()); // Torna maíuscula primeira letra da linha
-
     return `${indentação}- ${linha}`;
   }
+
+  appendLinha: (
+    profundidade: number,
+    aresta: DescriçãoAresta,
+    origem: Descrição,
+  ) => string = () => '';
+
+  private getValor = (origem: Descrição, nó: Descrição, i: number): string => {
+    // Se o primeiro nó for a aresta de origem, não imprime-o
+    if (i === 0 && nó.id === origem.id) return '';
+    if ('valor' in nó) return nó.valor;
+
+    const aresta = nó;
+    const nós = aresta.nós.map((nó, i) => this.getValor(origem, nó, i));
+    return nós.join(' ');
+  };
 
   private getTítulo(descrição: Descrição): string {
     if ('valor' in descrição) return descrição.valor;
