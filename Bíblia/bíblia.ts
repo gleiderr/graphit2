@@ -25,10 +25,10 @@ class Bíblia {
     writeFileSync('Bíblia2.md', ''); // Inicia arquivo em branco
 
     // Define impressão de referências no fim de cada linha
-    markdown.appendLinha = (_, aresta: DescriçãoAresta) => {
-      const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
-      const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
+    const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
+    const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
 
+    markdown.appendLinha = (_, aresta: DescriçãoAresta) => {
       const referências = aresta.arestas
         .filter(contémNóReferência)
         .map(subAresta => subAresta.nós[2])
@@ -37,6 +37,8 @@ class Bíblia {
 
       return referências ? ` (${referências})` : '';
     };
+
+    markdown.filterOut = contémNóReferência;
 
     const Baasa = graphit2.buscarNó('Baasa');
     if (Baasa) {

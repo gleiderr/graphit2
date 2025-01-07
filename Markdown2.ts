@@ -1,6 +1,14 @@
 import { Descrição, DescriçãoAresta } from './Graphit2';
 
 class Markdown2 {
+  appendLinha: (
+    profundidade: number,
+    aresta: DescriçãoAresta,
+    origem: Descrição,
+  ) => string = () => '';
+
+  filterOut: (descrição: DescriçãoAresta) => boolean = () => false;
+
   constructor() {}
 
   /**
@@ -28,9 +36,9 @@ class Markdown2 {
     origem: Descrição,
   ): string {
     const linha = this.getLinha(profundidade, aresta, origem);
-    const linhas = aresta.arestas.map(subAresta =>
-      this.montarLinha(profundidade + 1, subAresta, aresta),
-    );
+    const linhas = aresta.arestas
+      .filter(aresta => !this.filterOut(aresta))
+      .map(subAresta => this.montarLinha(profundidade + 1, subAresta, aresta));
 
     return [linha, ...linhas].join('\n');
   }
@@ -52,12 +60,6 @@ class Markdown2 {
     const indentação = '  '.repeat(profundidade);
     return `${indentação}- ${linha}`;
   }
-
-  appendLinha: (
-    profundidade: number,
-    aresta: DescriçãoAresta,
-    origem: Descrição,
-  ) => string = () => '';
 
   private getValor = (origem: Descrição, nó: Descrição, i: number): string => {
     // Se o primeiro nó for a aresta de origem, não imprime-o
