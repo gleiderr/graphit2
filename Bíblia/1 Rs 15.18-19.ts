@@ -28,7 +28,13 @@ bíblia.inserirVersículo(
     const a = aresta([envio, 'com', 'uma', 'mensagem', 'que dizia']);
 
     aresta([a, 'façamos', 'um', 'tratado']);
-    aresta([a, 'o', 'pai de', 'Asa', 'e', 'Ben-Hadade', 'fizeram um', 'tratado']);
-    aresta([a, 'que', 'Baasa', 'e', 'Ben-Hadade', 'tinham um', 'tratado']);
+    aresta([
+      a,
+      ...['.', '"', 'Agora', ',', 'rompe', 'o', 'tratado', 'que', 'tens', 'com', 'Baasa'],
+      ...['para', 'que', 'ele', 'saia', 'de', 'Judá', '.', '"'],
+    ]);
+    aresta([a, 'o', 'pai de', 'Asa', 'e', 'o', 'pai de', 'Ben-Hadade', 'fizeram um', 'tratado']);
+
+    graphit2.aresta(['Baasa', ', rei de', 'Israel']);
   },
 );
