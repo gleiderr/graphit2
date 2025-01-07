@@ -1,3 +1,4 @@
+import { appendFileSync, writeFileSync } from 'fs';
 import { graphit } from '../Graphit';
 import { Descrição, DescriçãoAresta, graphit2 } from '../Graphit2';
 import { markdown } from '../Markdown2';
@@ -20,39 +21,28 @@ class Bíblia {
   }
 
   finalizar() {
-    console.log('Graphit 2 - Início >>>>>>>>>>>>>>>>>>>>>>>');
-
     graphit2.salvar('Bíblia2.json');
+    writeFileSync('Bíblia2.md', ''); // Inicia arquivo em branco
 
-    const Baasa2 = graphit2.buscarNó('Baasa');
-    if (Baasa2) {
-      //console.log('descrição', graphit2.descrever(Baasa2).arestas[0].arestas[0]);
+    // Define impressão de referências no fim de cada linha
+    markdown.appendLinha = (_, aresta: DescriçãoAresta) => {
+      const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
+      const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
 
-      // Define impressão de referências no fim de cada linha
-      markdown.appendLinha = (_, aresta: DescriçãoAresta) => {
-        const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
-        const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
+      const referências = aresta.arestas
+        .filter(contémNóReferência)
+        .map(subAresta => subAresta.nós[2])
+        .map((nó: Descrição) => ('valor' in nó ? nó.valor : 'Falha da referência'))
+        .join(', ');
 
-        const referências = aresta.arestas
-          .filter(contémNóReferência)
-          .map(subAresta => subAresta.nós[2])
-          .map((nó: Descrição) => ('valor' in nó ? nó.valor : 'Falha da referência'))
-          .join(', ');
+      return referências ? ` (${referências})` : '';
+    };
 
-        return referências ? ` (${referências})` : '';
-      };
-
-      const texto = markdown.toMarkdown(graphit2.descrever(Baasa2));
-      console.log(texto);
+    const Baasa = graphit2.buscarNó('Baasa');
+    if (Baasa) {
+      const texto = markdown.toMarkdown(graphit2.descrever(Baasa));
+      appendFileSync('Bíblia2.md', `${texto}\n`);
     }
-
-    // const Asa = graphit2.buscarNó('Asa');
-    // if (Asa) {
-    //   const texto = markdown2.toMarkdown(graphit2.descrever(Asa));
-    //   console.log(texto);
-    // }
-
-    console.log('Graphit 2 - Fim >>>>>>>>>>>>>>>>>>>>>>>');
   }
 }
 
