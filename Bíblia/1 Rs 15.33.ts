@@ -1,5 +1,6 @@
 import { graphit } from '../Graphit';
 import { graphit2 } from '../Graphit2';
+import { bíblia } from './bíblia';
 
 const versículo =
   'No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.';
@@ -23,18 +24,13 @@ graphit.getMemória().forEach(([aresta]) => {
   graphit.inserirAresta([aresta, _1Rs15_33, 'Referência']);
 });
 
-graphit2.aresta(['1 Rs 15.33', versículo]);
-const setReferência = graphit2.addListener('afterAresta', id => {
-  graphit2.aresta([{ id }, 'Referência', '1 Rs 15.33']);
+bíblia.inserirVersículo('1 Rs 15.33', versículo, () => {
+  graphit2.aresta(['Asa', ', rei de', 'Judá']);
+  graphit2.aresta(['Baasa', ', filho de', 'Aías']);
+  graphit2.aresta(['Baasa', ', rei de', 'Israel']);
+  graphit2.aresta(['Baasa', 'reinou', '24 anos']);
+
+  const a = graphit2.aresta(['Baasa', 'tornou-se', 'rei', 'de todo o', 'Israel']);
+  graphit2.aresta([a, 'no', 'terceiro', 'ano', 'do', 'reinado', 'de', 'Asa']);
+  graphit2.aresta([a, 'em', 'Tirza']);
 });
-
-graphit2.aresta(['Asa', ', rei de', 'Judá']);
-graphit2.aresta(['Baasa', ', filho de', 'Aías']);
-graphit2.aresta(['Baasa', ', rei de', 'Israel']);
-graphit2.aresta(['Baasa', 'reinou', '24 anos']);
-
-const a = graphit2.aresta(['Baasa', 'tornou-se', 'rei', 'de todo o', 'Israel']);
-graphit2.aresta([a, 'no terceiro ano do', 'reinado de', 'Asa']);
-graphit2.aresta([a, 'em', 'Tirza']);
-
-graphit2.removeListener('afterAresta', setReferência);

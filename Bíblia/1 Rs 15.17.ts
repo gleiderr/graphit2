@@ -1,4 +1,5 @@
 import { graphit } from '../Graphit';
+import { aresta } from '../Graphit2';
 import { bíblia } from './bíblia';
 
 bíblia.inserirVersículo(
@@ -14,5 +15,10 @@ bíblia.inserirVersículo(
 
     // TODO: Corrigir Graphit para que não seja obrigatório informar a segunda aresta
     graphit.inserirAresta(['Asa', 'Judá', 'Rei de', 'Rei']);
+
+    aresta(['Baasa', ', rei de', 'Israel']);
+    aresta(['Baasa', 'atacou', 'Judá']);
+    const f = aresta(['Baasa', 'fortificou', 'Ramá']);
+    aresta([f, 'para que', 'ninguém', 'pudesse', 'entrar', 'no', 'território', 'de', 'Asa', 'ou', 'sair', 'de', 'lá']);
   },
 );
