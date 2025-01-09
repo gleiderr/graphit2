@@ -1,11 +1,16 @@
 import { Descrição, DescriçãoAresta } from './Graphit2';
 
 class Markdown2 {
-  appendLinha: (
+  prefixo?: (
+    profundidade: number,
+    elemento: DescriçãoAresta,
+    origem?: Descrição,
+  ) => string;
+  sufixo?: (
     profundidade: number,
     aresta: DescriçãoAresta,
-    origem: Descrição,
-  ) => string = () => '';
+    origem?: Descrição,
+  ) => string;
 
   filterOut: (descrição: DescriçãoAresta) => boolean = () => false;
 
@@ -18,9 +23,12 @@ class Markdown2 {
    * As linhas são montadas a partir das arestas da descrição inicial.
    */
   toMarkdown(descrição: Descrição): string {
-    const título = this.getTítulo(descrição);
+    const primeiraLinha = this.getLinha(0, descrição);
     const linhas = this.montarLinhas(descrição);
-    return `# ${título}\n${linhas}`;
+
+    if ('valor' in descrição) return `# ${primeiraLinha}\n${linhas}`;
+
+    return `${primeiraLinha}\n${linhas}`;
   }
 
   private montarLinhas(descrição: Descrição): string {
@@ -45,36 +53,38 @@ class Markdown2 {
 
   private getLinha(
     profundidade: number,
-    aresta: DescriçãoAresta,
-    origem: Descrição,
+    elemento: Descrição,
+    origem?: Descrição,
   ): string {
-    const valores = aresta.nós.map((nó, i) => this.getValor(origem, nó, i));
+    if ('valor' in elemento) return elemento.valor;
 
-    const linha =
-      valores
-        .join(' ') // Concatena valores com espaço
-        .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
-        .replace(/^\w/, c => c.toUpperCase()) +
-      this.appendLinha(profundidade, aresta, origem); // Torna maíuscula primeira letra da linha
+    const valores = elemento.nós.map((nó, i) => this.getValor(nó, i, origem));
 
     const indentação = '  '.repeat(profundidade);
-    return `${indentação}- ${linha}`;
+    const prefixo =
+      !this.prefixo ?
+        `${indentação}- `
+      : this.prefixo(profundidade, elemento, origem);
+    const sufixo =
+      !this.sufixo ? '' : this.sufixo(profundidade, elemento, origem);
+
+    const linha = valores
+      .join(' ') // Concatena valores com espaço
+      .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
+      .replace(/^\w/, c => c.toUpperCase()); // Torna maíuscula primeira letra da linha
+
+    return `${prefixo}${linha}${sufixo}`;
   }
 
-  private getValor = (origem: Descrição, nó: Descrição, i: number): string => {
+  private getValor = (nó: Descrição, i: number, origem?: Descrição): string => {
     // Se o primeiro nó for a aresta de origem, não imprime-o
-    if (i === 0 && nó.id === origem.id) return '';
+    if (i === 0 && origem && nó.id === origem.id) return '';
     if ('valor' in nó) return nó.valor;
 
     const aresta = nó;
-    const nós = aresta.nós.map((nó, i) => this.getValor(origem, nó, i));
+    const nós = aresta.nós.map((nó, i) => this.getValor(nó, i, origem));
     return nós.join(' ');
   };
-
-  private getTítulo(descrição: Descrição): string {
-    if ('valor' in descrição) return descrição.valor;
-    return 'Título de aresta';
-  }
 }
 
 export const markdown = new Markdown2();

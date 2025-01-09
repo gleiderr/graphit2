@@ -25,16 +25,17 @@ bíblia.inserirVersículo(
   '1 Rs 15.19',
   'com uma mensagem que dizia: "Façamos um tratado, como fizeram meu pai e o teu. Estou te enviando como presente prata e ouro. Agora, rompe o tratado que tens com Baasa, rei de Israel, para que ele saia do meu país".',
   () => {
+    aresta(['Baasa', ', rei de', 'Israel']);
+
     const a = aresta([envio, 'com', 'uma', 'mensagem', 'que dizia']);
 
-    aresta([a, 'façamos', 'um', 'tratado']);
     aresta([
-      a,
+      ...[a, '"', 'Façamos', 'um', 'tratado'],
       ...['.', '"', 'Agora', ',', 'rompe', 'o', 'tratado', 'que', 'tens', 'com', 'Baasa'],
       ...['para', 'que', 'ele', 'saia', 'de', 'Judá', '.', '"'],
     ]);
-    aresta([a, 'o', 'pai de', 'Asa', 'e', 'o', 'pai de', 'Ben-Hadade', 'fizeram um', 'tratado']);
 
-    graphit2.aresta(['Baasa', ', rei de', 'Israel']);
+    // TODO: Qualificar o pai de Asa
+    aresta([a, 'o', 'pai', 'de', 'Asa', 'e', 'o', 'pai', 'de', 'Ben-Hadade', 'fizeram', 'um', 'tratado']);
   },
 );

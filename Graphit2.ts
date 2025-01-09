@@ -64,6 +64,22 @@ class Graphit2 {
     );
   }
 
+  /**
+   * Busca arestas que contenham todos ids passados por parâmetro em qualquer ordem.
+   * @param nós
+   */
+  filtrarArestas({ contém }: { contém: Id[] }): Id[] {
+    const arestas: Id[] = [];
+    for (const id of Object.keys(this.db)) {
+      const elemento = this.db[id];
+      if ('nós' in elemento) {
+        const temTodosIds = contém.every(id => elemento.nós.includes(id));
+        if (temTodosIds) arestas.push(id);
+      }
+    }
+    return arestas;
+  }
+
   buscarArestaByLabel(label: string): Id | undefined {
     return Object.keys(this.db).find(id =>
       'props' in this.db[id] ? this.db[id].props?.label === label : false,
@@ -116,14 +132,15 @@ class Graphit2 {
     };
 
     // Monta a descrição do primeiro vértice
-    const vértice = this.get(id);
-    if (!vértice) throw new Error(`Nó não encontrado ${id}`);
+    const elemento = this.get(id);
+    if (!elemento) throw new Error(`Nó não encontrado ${id}`);
 
     let desc1ºVértice: Descrição;
-    if ('valor' in vértice) {
-      desc1ºVértice = { id, valor: vértice.valor, arestas: [] };
+    if ('valor' in elemento) {
+      desc1ºVértice = { id, valor: elemento.valor, arestas: [] };
     } else {
-      desc1ºVértice = { id, nós: [], arestas: [] };
+      const nós = elemento.nós.map(descreverNó);
+      desc1ºVértice = { id, nós, arestas: [] };
     }
 
     const fila: Descrição[] = [desc1ºVértice];
