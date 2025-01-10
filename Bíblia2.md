@@ -15,6 +15,7 @@
   - Andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
 - Elá , filho de Baasa (1 Rs 16.8)
 
+> ## Versículos
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 1 Rs 15.17 : Baasa, rei de Israel, atacou Judá e fortificou Ramá para que ninguém pudesse entrar no território de Asa, rei de Judá, nem sair de lá.

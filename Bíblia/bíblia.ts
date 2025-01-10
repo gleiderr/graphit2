@@ -24,23 +24,7 @@ class Bíblia {
     graphit2.salvar('Bíblia2.json');
     writeFileSync('Bíblia2.md', ''); // Inicia arquivo em branco
 
-    const idReferências = new Set<string>();
-
-    // Define impressão de referências no fim de cada linha
-    const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
-    const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
-    markdown.sufixo = (_, aresta: DescriçãoAresta) => {
-      const arestasReferência = aresta.arestas.filter(contémNóReferência);
-      const nósReferência = arestasReferência.map(subAresta => subAresta.nós[2]);
-      const referências = nósReferência.map((nó: Descrição) => ('valor' in nó ? nó.valor : 'Falha da referência')).join(', ');
-
-      //Armazena referências identificadas
-      nósReferência.forEach(nó => idReferências.add(nó.id));
-
-      return referências ? ` (${referências})` : '';
-    };
-
-    markdown.filterOut = contémNóReferência;
+    const idReferências = this.setupReferências();
 
     const Baasa = graphit2.buscarNó('Baasa');
     if (Baasa) {
@@ -50,6 +34,12 @@ class Bíblia {
     appendFileSync('Bíblia2.md', '\n');
 
     // Montagem dos versículos
+    this.imprimeVersículos(idReferências);
+  }
+
+  private imprimeVersículos(idReferências: Set<string>) {
+    appendFileSync('Bíblia2.md', '> ## Versículos\n');
+
     markdown.prefixo = () => '> ';
 
     const doisPontos = graphit2.buscarNó(':');
@@ -69,6 +59,30 @@ class Bíblia {
 
       appendFileSync('Bíblia2.md', `${versículos.join('>\n')}`);
     }
+  }
+
+  private setupReferências() {
+    const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
+    const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
+
+    // Define impressão de referências no fim de cada linha
+    markdown.sufixo = (_, aresta: DescriçãoAresta) => {
+      const nósReferência = aresta.arestas.filter(contémNóReferência).map(subAresta => subAresta.nós[2]);
+      const referências = nósReferência.map((nó: Descrição) => ('valor' in nó ? nó.valor : 'Falha da referência')).join(', ');
+      return referências ? ` (${referências})` : '';
+    };
+
+    // Armazena referências identificadas
+    const idReferências = new Set<string>();
+    markdown.onGetLinha = (_, elemento: Descrição) => {
+      if ('valor' in elemento) return;
+      const nósReferência = elemento.arestas.filter(contémNóReferência).map(subAresta => subAresta.nós[2]);
+      nósReferência.forEach(nó => idReferências.add(nó.id));
+    };
+
+    // Não imprime arestas contendo apenas a referência
+    markdown.filterOut = contémNóReferência;
+    return idReferências;
   }
 }
 

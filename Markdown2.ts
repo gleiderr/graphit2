@@ -2,15 +2,18 @@ import { Descrição, DescriçãoAresta } from './Graphit2';
 
 class Markdown2 {
   prefixo?: (
-    profundidade: number,
+    nível: number,
     elemento: DescriçãoAresta,
     origem?: Descrição,
   ) => string;
+
   sufixo?: (
-    profundidade: number,
+    nível: number,
     aresta: DescriçãoAresta,
     origem?: Descrição,
   ) => string;
+
+  onGetLinha?: (nível: number, elemento: Descrição, origem?: Descrição) => void;
 
   filterOut: (descrição: DescriçãoAresta) => boolean = () => false;
 
@@ -39,34 +42,32 @@ class Markdown2 {
   }
 
   private montarLinha(
-    profundidade: number,
+    nível: number,
     aresta: DescriçãoAresta,
     origem: Descrição,
   ): string {
-    const linha = this.getLinha(profundidade, aresta, origem);
+    const linha = this.getLinha(nível, aresta, origem);
     const linhas = aresta.arestas
       .filter(aresta => !this.filterOut(aresta))
-      .map(subAresta => this.montarLinha(profundidade + 1, subAresta, aresta));
+      .map(subAresta => this.montarLinha(nível + 1, subAresta, aresta));
 
     return [linha, ...linhas].join('\n');
   }
 
   private getLinha(
-    profundidade: number,
+    nível: number,
     elemento: Descrição,
     origem?: Descrição,
   ): string {
+    this.onGetLinha?.(nível, elemento, origem);
+
     if ('valor' in elemento) return elemento.valor;
 
     const valores = elemento.nós.map((nó, i) => this.getValor(nó, i, origem));
 
-    const indentação = '  '.repeat(profundidade);
-    const prefixo =
-      !this.prefixo ?
-        `${indentação}- `
-      : this.prefixo(profundidade, elemento, origem);
-    const sufixo =
-      !this.sufixo ? '' : this.sufixo(profundidade, elemento, origem);
+    const indent = '  '.repeat(nível);
+    const prefixo = this.prefixo?.(nível, elemento, origem) ?? `${indent}- `;
+    const sufixo = !this.sufixo ? '' : this.sufixo(nível, elemento, origem);
 
     const linha = valores
       .join(' ') // Concatena valores com espaço
