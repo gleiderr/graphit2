@@ -8,6 +8,7 @@ type Id = string;
 type Nó = { valor: string; arestas: Id[] };
 type Aresta = { nós: Id[]; arestas: Id[]; props?: ArestaProps };
 
+// TODO: remover obrigatoriedade de `arestas` em `Descrição`?
 export type DescriçãoAresta = {
   id: Id;
   nós: Descrição[];
@@ -29,6 +30,12 @@ class Graphit2 {
   private _nextId = 0;
   private listening: boolean = false;
 
+  visitados: Set<Id> = new Set();
+
+  get índices() {
+    return Object.keys(this.db);
+  }
+
   private nextId() {
     return (this._nextId++).toString(36);
   }
@@ -46,7 +53,8 @@ class Graphit2 {
     return id;
   }
 
-  get(id: Id): Nó | Aresta | undefined {
+  get(id: Id): Nó | Aresta {
+    if (!this.db[id]) throw new Error(`Nó não encontrado ${id}`);
     return this.db[id];
   }
 
@@ -117,43 +125,22 @@ class Graphit2 {
   /**
    * Descreve vértice do grafo criando uma estrutura de árvore, percorrendo as arestas em largura. O limite da profundidade das buscas é definido pelo parâmetro `profundidade`. Há também um critério de parada por nós específicos definido por `pararEm`.
    */
-  descrever(id: Id, profundidade = 2, pararEm?: string[]): Descrição {
-    // TODO: remover obrigatoriedade de `arestas` em `Descrição`?
-    const visitados = new Set<Id>();
+  descrever(id: Id): Descrição {
+    this.visitados = new Set<Id>(id);
 
-    const descreverNó = (id: Id): Descrição => {
-      const vértice = this.db[id];
-      if ('valor' in vértice) {
-        return { id, valor: vértice.valor, arestas: [] };
-      } else {
-        const nós = vértice.nós.map(descreverNó);
-        return { id, nós, arestas: [] };
-      }
-    };
+    const _1ºelemento = this.descreverElemento(id);
 
-    // Monta a descrição do primeiro vértice
-    const elemento = this.get(id);
-    if (!elemento) throw new Error(`Nó não encontrado ${id}`);
-
-    let desc1ºVértice: Descrição;
-    if ('valor' in elemento) {
-      desc1ºVértice = { id, valor: elemento.valor, arestas: [] };
-    } else {
-      const nós = elemento.nós.map(descreverNó);
-      desc1ºVértice = { id, nós, arestas: [] };
-    }
-
-    const fila: Descrição[] = [desc1ºVértice];
+    const fila: Descrição[] = [_1ºelemento];
     while (fila.length) {
       const descriçãoCorrente = fila.shift()!;
       const vértice = this.db[descriçãoCorrente.id];
 
       const incluiArestaNaFila = (id: Id) => {
-        if (visitados.has(id)) return;
-        visitados.add(id);
+        if (this.visitados.has(id)) return;
+        this.visitados.add(id);
 
-        const aresta = this.db[id] as Aresta;
-        const nós = aresta.nós.map(descreverNó);
+        const aresta = this.get(id) as Aresta;
+        const nós = aresta.nós.map(this.descreverElemento.bind(this));
 
         const descriçãoAresta: Descrição = { id, nós, arestas: [] };
         descriçãoCorrente.arestas.push(descriçãoAresta);
@@ -164,7 +151,19 @@ class Graphit2 {
       vértice.arestas.forEach(incluiArestaNaFila);
     }
 
-    return desc1ºVértice;
+    return _1ºelemento;
+  }
+
+  private descreverElemento(id: Id): Descrição {
+    const elemento = this.get(id);
+    this.visitados.add(id);
+
+    if ('valor' in elemento) {
+      return { id, valor: elemento.valor, arestas: [] };
+    } else {
+      const nós = elemento.nós.map(this.descreverElemento.bind(this));
+      return { id, nós, arestas: [] };
+    }
   }
 
   /**

@@ -15,7 +15,7 @@ class Markdown2 {
 
   onGetLinha?: (nível: number, elemento: Descrição, origem?: Descrição) => void;
 
-  filterOut: (descrição: DescriçãoAresta) => boolean = () => false;
+  filterOut?: (descrição: DescriçãoAresta) => boolean = () => false;
 
   constructor() {}
 
@@ -48,7 +48,7 @@ class Markdown2 {
   ): string {
     const linha = this.getLinha(nível, aresta, origem);
     const linhas = aresta.arestas
-      .filter(aresta => !this.filterOut(aresta))
+      .filter(aresta => this.filterOut && !this.filterOut(aresta))
       .map(subAresta => this.montarLinha(nível + 1, subAresta, aresta));
 
     return [linha, ...linhas].join('\n');

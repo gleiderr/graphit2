@@ -4,6 +4,8 @@ import { Descrição, DescriçãoAresta, graphit2 } from '../Graphit2';
 import { markdown } from '../Markdown2';
 
 class Bíblia {
+  visitados: Set<string> = new Set();
+
   inserirVersículo(referência: string, versículo: string, definirArestas: () => void) {
     graphit2.aresta([referência, ':', versículo]);
     const setReferência = graphit2.addListener('afterAresta', id => {
@@ -26,15 +28,47 @@ class Bíblia {
 
     const idReferências = this.setupReferências();
 
+    this.visitados = new Set();
     const Baasa = graphit2.buscarNó('Baasa');
     if (Baasa) {
-      const texto = markdown.toMarkdown(graphit2.descrever(Baasa));
+      const descriçãoBaasa = graphit2.descrever(Baasa);
+      this.visitados = this.visitados.union(graphit2.visitados);
+
+      const texto = markdown.toMarkdown(descriçãoBaasa);
       appendFileSync('Bíblia2.md', `${texto}\n`);
     }
     appendFileSync('Bíblia2.md', '\n');
 
     // Montagem dos versículos
     this.imprimeVersículos(idReferências);
+
+    this.imprimeNãoVisitados();
+  }
+
+  private imprimeNãoVisitados() {
+    const arquivo = 'Não visitados.md';
+    writeFileSync(arquivo, ''); // Inicia arquivo em branco
+
+    delete markdown.prefixo;
+
+    const todosÍndices = new Set(graphit2.índices);
+    while (this.visitados.size < todosÍndices.size) {
+      const nãoVisitados = todosÍndices.difference(this.visitados);
+      console.log({
+        todosÍndices: todosÍndices.size,
+        visitados: this.visitados.size,
+        nãoVisitados: nãoVisitados.size,
+      });
+
+      const elementoId = nãoVisitados.values().next().value;
+      if (!elementoId) break;
+
+      const descrição = graphit2.descrever(elementoId);
+      this.visitados = this.visitados.union(graphit2.visitados);
+
+      const texto = markdown.toMarkdown(descrição);
+      appendFileSync(arquivo, `${texto}\n`);
+    }
   }
 
   private imprimeVersículos(idReferências: Set<string>) {
@@ -50,9 +84,9 @@ class Bíblia {
 
           return arestas.map(aresta => {
             const descrição = graphit2.descrever(aresta);
-            const print = markdown.toMarkdown(descrição);
+            this.visitados = this.visitados.union(graphit2.visitados);
 
-            return print;
+            return markdown.toMarkdown(descrição);
           });
         })
         .flat();
