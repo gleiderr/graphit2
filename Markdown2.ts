@@ -29,29 +29,32 @@ class Markdown2 {
     const primeiraLinha = this.getLinha(0, descrição);
     const linhas = this.montarLinhas(descrição);
 
-    if ('valor' in descrição) return `# ${primeiraLinha}\n${linhas}`;
+    const retorno = [primeiraLinha, ...linhas].join('\n');
+    if ('valor' in descrição) return `# ${retorno}`;
 
-    return `${primeiraLinha}\n${linhas}`;
+    return retorno;
   }
 
-  private montarLinhas(descrição: Descrição): string {
-    const linhas = descrição.arestas.map(aresta =>
-      this.montarLinha(0, aresta, descrição),
-    );
-    return linhas.join('\n');
+  private montarLinhas(descrição: Descrição): string[] {
+    const linhas = descrição.arestas
+      .filter(aresta => this.filterOut && !this.filterOut(aresta))
+      .map(aresta => this.montarLinha(0, aresta, descrição))
+      .flat();
+    return linhas;
   }
 
   private montarLinha(
     nível: number,
     aresta: DescriçãoAresta,
     origem: Descrição,
-  ): string {
+  ): string[] {
     const linha = this.getLinha(nível, aresta, origem);
     const linhas = aresta.arestas
       .filter(aresta => this.filterOut && !this.filterOut(aresta))
-      .map(subAresta => this.montarLinha(nível + 1, subAresta, aresta));
+      .map(subAresta => this.montarLinha(nível + 1, subAresta, aresta))
+      .flat();
 
-    return [linha, ...linhas].join('\n');
+    return [linha, ...linhas];
   }
 
   private getLinha(

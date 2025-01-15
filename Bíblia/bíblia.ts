@@ -67,7 +67,7 @@ class Bíblia {
       this.visitados = this.visitados.union(graphit2.visitados);
 
       const texto = markdown.toMarkdown(descrição);
-      appendFileSync(arquivo, `${texto}\n`);
+      appendFileSync(arquivo, `${texto}\n\n`);
     }
   }
 
@@ -91,7 +91,7 @@ class Bíblia {
         })
         .flat();
 
-      appendFileSync('Bíblia2.md', `${versículos.join('>\n')}`);
+      appendFileSync('Bíblia2.md', `${versículos.join('\n>\n')}`);
     }
   }
 

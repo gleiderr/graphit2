@@ -18,6 +18,6 @@ graphit.getMemória().forEach(([aresta]) => {
 });
 
 bíblia.inserirVersículo('1 Rs 15.16', versículo, () => {
-  aresta(['Baasa', ', rei de', 'Israel']);
+  aresta(['Baasa', ',', 'rei', 'de', 'Israel']);
   aresta(['Houve', 'guerra', 'entre', 'Asa', 'e', 'Baasa', 'durante', 'todo', 'o', 'reinado', 'deles']);
 });

@@ -25,7 +25,7 @@ graphit.getMemória().forEach(([aresta]) => {
 
 bíblia.inserirVersículo('1 Rs 16.8', versículo, () => {
   aresta(['Asa', ', rei de', 'Judá']);
-  aresta(['Elá', ', filho de', 'Baasa']);
+  aresta(['Elá', ', filho', 'de', 'Baasa']);
   aresta(['Elá', ', rei de', 'Israel']);
 
   const b = aresta(['Elá', 'reinou', '2 anos']);
