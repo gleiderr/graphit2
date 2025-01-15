@@ -107,7 +107,17 @@ class Graphit2 {
    * Se não encontrar cria uma nova aresta reaproveitando os nós existentes
    * e cria novos nós sempre que necessário.
    */
-  aresta(nós: (string | { id: Id })[], props?: ArestaProps): { id: Id } {
+  aresta(
+    nós: string | (string | { id: Id })[],
+    props?: ArestaProps,
+  ): { id: Id } {
+    if (typeof nós === 'string') {
+      // Transforma 's' em um conjunto de termos que podem ser uma palavra ou uma pontuação
+      nós = nós
+        .split(/(\s+|[,.;:-])/)
+        .map(s => s.trim())
+        .filter(Boolean);
+    }
     const ids = nós.map(nó =>
       typeof nó === 'object' ? nó.id : this.buscarNó(nó) || this.novoNó(nó),
     );

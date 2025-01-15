@@ -4,6 +4,7 @@ console.log(`----------------------------------${agora}`);
 import './Bíblia/1 Rs 15.16';
 import './Bíblia/1 Rs 15.17';
 import './Bíblia/1 Rs 15.18-19';
+import './Bíblia/1 Rs 15.20-21';
 import './Bíblia/1 Rs 15.33';
 import './Bíblia/1 Rs 15.34';
 import './Bíblia/1 Rs 16.8';
