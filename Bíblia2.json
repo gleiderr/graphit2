@@ -27,7 +27,7 @@
     ]
   },
   "5": { "valor": ",", "arestas": ["9", "3e", "5c"] },
-  "6": { "valor": "rei", "arestas": ["9", "2m", "5l", "6s"] },
+  "6": { "valor": "rei", "arestas": ["9", "2m", "5l", "6t"] },
   "7": {
     "valor": "de",
     "arestas": [
@@ -47,20 +47,21 @@
       "4x",
       "53",
       "5c",
+      "5l",
       "5p",
       "65",
       "6j",
-      "6s",
-      "6v"
+      "6t",
+      "6w"
     ]
   },
-  "8": { "valor": "Israel", "arestas": ["9", "43", "5l", "6b", "6l", "6s"] },
+  "8": { "valor": "Israel", "arestas": ["9", "43", "5l", "6b", "6l", "6t"] },
   "9": { "nós": ["4", "5", "6", "7", "8"], "arestas": ["b", "r", "2w", "5e"] },
   "10": { "valor": "para que", "arestas": ["19"] },
   "11": { "valor": "ninguém", "arestas": ["19"] },
   "12": { "valor": "pudesse", "arestas": ["19"] },
   "13": { "valor": "entrar", "arestas": ["19"] },
-  "14": { "valor": "no", "arestas": ["19", "5p", "6v"] },
+  "14": { "valor": "no", "arestas": ["19", "5p", "6w"] },
   "15": { "valor": "território", "arestas": ["19"] },
   "16": { "valor": "ou", "arestas": ["19"] },
   "17": { "valor": "sair", "arestas": ["19"] },
@@ -216,8 +217,8 @@
       "6m",
       "6p",
       "6r",
-      "6t",
-      "6w"
+      "6u",
+      "6x"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "arestas": [] },
@@ -226,13 +227,13 @@
   "e": { "valor": "entre", "arestas": ["m"] },
   "f": {
     "valor": "Asa",
-    "arestas": ["m", "19", "1h", "1u", "3i", "3p", "59", "5p", "6v"]
+    "arestas": ["m", "19", "1h", "1u", "3i", "3p", "59", "5p", "6w"]
   },
   "g": { "valor": "e", "arestas": ["m", "1h", "27", "3i"] },
   "h": { "valor": "durante", "arestas": ["m"] },
-  "i": { "valor": "todo", "arestas": ["m", "4i"] },
-  "j": { "valor": "o", "arestas": ["m", "3e", "3i", "3i", "4i", "5z"] },
-  "k": { "valor": "reinado", "arestas": ["m", "5p", "6v"] },
+  "i": { "valor": "todo", "arestas": ["m", "4i", "5l"] },
+  "j": { "valor": "o", "arestas": ["m", "3e", "3i", "3i", "4i", "5l", "5z"] },
+  "k": { "valor": "reinado", "arestas": ["m", "5p", "6w"] },
   "l": { "valor": "deles", "arestas": ["m"] },
   "m": {
     "nós": ["c", "d", "e", "f", "g", "4", "h", "i", "j", "k", "l"],
@@ -287,7 +288,7 @@
   "1j": { "valor": "que", "arestas": ["1q", "3e", "3e", "43", "6b"] },
   "1k": { "valor": "haviam", "arestas": ["1q"] },
   "1l": { "valor": "sobrado", "arestas": ["1q"] },
-  "1m": { "valor": "do", "arestas": ["1q", "1q", "1q", "1u", "5p", "6v"] },
+  "1m": { "valor": "do", "arestas": ["1q", "1q", "1q", "1u", "5p", "6w"] },
   "1n": { "valor": "tesouro", "arestas": ["1q"] },
   "1o": { "valor": "templo", "arestas": ["1q"] },
   "1p": { "valor": "Senhor", "arestas": ["1q", "5z"] },
@@ -404,7 +405,7 @@
   "3r": { "valor": "Ben", "arestas": ["43", "47", "4a", "4f", "4i", "4l"] },
   "3s": {
     "valor": "-",
-    "arestas": ["43", "47", "4a", "4f", "4f", "4f", "4i", "4l"]
+    "arestas": ["43", "47", "4a", "4f", "4f", "4f", "4i", "4l", "5l"]
   },
   "3t": { "valor": "Hadade", "arestas": ["43", "47", "4a", "4f", "4i", "4l"] },
   "3u": { "valor": "ordenou", "arestas": ["43"] },
@@ -457,12 +458,15 @@
   "5g": { "valor": "24 anos", "arestas": ["5h"] },
   "5h": { "nós": ["4", "5f", "5g"], "arestas": ["5i"] },
   "5i": { "nós": ["5h", "a", "55"], "arestas": [] },
-  "5j": { "valor": "tornou-se", "arestas": ["5l", "6s"] },
-  "5k": { "valor": "de todo o", "arestas": ["5l"] },
-  "5l": { "nós": ["4", "5j", "6", "5k", "8"], "arestas": ["5m", "5p", "5r"] },
+  "5j": { "valor": "tornou", "arestas": ["5l"] },
+  "5k": { "valor": "se", "arestas": ["5l"] },
+  "5l": {
+    "nós": ["4", "5j", "3s", "5k", "6", "7", "i", "j", "8"],
+    "arestas": ["5m", "5p", "5r"]
+  },
   "5m": { "nós": ["5l", "a", "55"], "arestas": [] },
   "5n": { "valor": "terceiro", "arestas": ["5p"] },
-  "5o": { "valor": "ano", "arestas": ["5p", "6v"] },
+  "5o": { "valor": "ano", "arestas": ["5p", "6w"] },
   "5p": {
     "nós": ["5l", "14", "5n", "5o", "1m", "k", "7", "f"],
     "arestas": ["5q"]
@@ -491,7 +495,7 @@
   "6c": { "nós": ["6b", "a", "5t"], "arestas": [] },
   "6d": {
     "valor": "1 Rs 16.8",
-    "arestas": ["6f", "6g", "6k", "6m", "6p", "6r", "6t", "6w"]
+    "arestas": ["6f", "6g", "6k", "6m", "6p", "6r", "6u", "6x"]
   },
   "6e": {
     "valor": "No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.",
@@ -499,7 +503,7 @@
   },
   "6f": { "nós": ["6d", "1", "6e"], "arestas": [] },
   "6g": { "nós": ["59", "a", "6d"], "arestas": [] },
-  "6h": { "valor": "Elá", "arestas": ["6j", "6l", "6o", "6s"] },
+  "6h": { "valor": "Elá", "arestas": ["6j", "6l", "6o", "6t"] },
   "6i": { "valor": ", filho", "arestas": ["6j"] },
   "6j": { "nós": ["6h", "6i", "7", "4"], "arestas": ["6k"] },
   "6k": { "nós": ["6j", "a", "6d"], "arestas": [] },
@@ -510,12 +514,13 @@
   "6p": { "nós": ["6o", "a", "6d"], "arestas": [] },
   "6q": { "nós": ["6o", "2p", "50"], "arestas": ["6r"] },
   "6r": { "nós": ["6q", "a", "6d"], "arestas": [] },
-  "6s": { "nós": ["6h", "5j", "6", "7", "8"], "arestas": ["6t", "6v"] },
-  "6t": { "nós": ["6s", "a", "6d"], "arestas": [] },
-  "6u": { "valor": "26º", "arestas": ["6v"] },
-  "6v": {
-    "nós": ["6s", "14", "6u", "5o", "1m", "k", "7", "f"],
-    "arestas": ["6w"]
+  "6s": { "valor": "tornou-se", "arestas": ["6t"] },
+  "6t": { "nós": ["6h", "6s", "6", "7", "8"], "arestas": ["6u", "6w"] },
+  "6u": { "nós": ["6t", "a", "6d"], "arestas": [] },
+  "6v": { "valor": "26º", "arestas": ["6w"] },
+  "6w": {
+    "nós": ["6t", "14", "6v", "5o", "1m", "k", "7", "f"],
+    "arestas": ["6x"]
   },
-  "6w": { "nós": ["6v", "a", "6d"], "arestas": [] }
+  "6x": { "nós": ["6w", "a", "6d"], "arestas": [] }
 }

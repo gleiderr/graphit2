@@ -30,7 +30,7 @@ bíblia.inserirVersículo('1 Rs 15.33', versículo, () => {
   graphit2.aresta(['Baasa', ',', 'rei', 'de', 'Israel']);
   graphit2.aresta(['Baasa', 'reinou', '24 anos']);
 
-  const a = graphit2.aresta(['Baasa', 'tornou-se', 'rei', 'de todo o', 'Israel']);
+  const a = graphit2.aresta('Baasa tornou-se rei de todo o Israel');
   graphit2.aresta([a, 'no', 'terceiro', 'ano', 'do', 'reinado', 'de', 'Asa']);
   graphit2.aresta([a, 'em', 'Tirza']);
 });

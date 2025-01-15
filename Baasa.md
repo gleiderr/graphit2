@@ -11,7 +11,7 @@
   - Quando ele soube de 1 Rs 15.20 (1 Rs 15.21)
 - Filho de Aías (1 Rs 15.33)
 - Reinou 24 anos (1 Rs 15.33)
-- Tornou-se rei de todo o Israel (1 Rs 15.33)
+- Tornou - se rei de todo o Israel (1 Rs 15.33)
   - No terceiro ano do reinado de Asa (1 Rs 15.33)
   - Em Tirza (1 Rs 15.33)
 - Fez o que o Senhor reprova (1 Rs 15.34)

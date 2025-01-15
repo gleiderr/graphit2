@@ -3,7 +3,7 @@ import * as prettier from 'prettier';
 
 type ArestaProps = { label: string };
 
-type Id = string;
+export type Id = string;
 
 type Nó = { valor: string; arestas: Id[] };
 type Aresta = { nós: Id[]; arestas: Id[]; props?: ArestaProps };
@@ -145,7 +145,7 @@ class Graphit2 {
       const descriçãoCorrente = fila.shift()!;
       const vértice = this.db[descriçãoCorrente.id];
 
-      const incluiArestaNaFila = (id: Id) => {
+      vértice.arestas.forEach((id: Id) => {
         if (this.visitados.has(id)) return;
         this.visitados.add(id);
 
@@ -156,9 +156,7 @@ class Graphit2 {
         descriçãoCorrente.arestas.push(descriçãoAresta);
 
         fila.push(descriçãoAresta);
-      };
-
-      vértice.arestas.forEach(incluiArestaNaFila);
+      });
     }
 
     return _1ºelemento;

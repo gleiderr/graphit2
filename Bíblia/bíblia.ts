@@ -1,6 +1,6 @@
 import { appendFileSync, writeFileSync } from 'fs';
 import { graphit } from '../Graphit';
-import { Descrição, DescriçãoAresta, graphit2 } from '../Graphit2';
+import { Descrição, DescriçãoAresta, graphit2, Id } from '../Graphit2';
 import { markdown } from '../Markdown2';
 
 class Bíblia {
@@ -22,34 +22,23 @@ class Bíblia {
     graphit2.removeListener('afterAresta', setReferência);
   }
 
-  finalizar() {
-    graphit2.salvar('Bíblia2.json');
-    writeFileSync('Bíblia2.md', ''); // Inicia arquivo em branco
+  imprimeEstudo(nó: Id, arquivo: string) {
+    writeFileSync(arquivo, ''); // Inicia arquivo em branco
 
     const idReferências = this.setupReferências();
 
-    this.visitados = new Set();
-    const Baasa = graphit2.buscarNó('Baasa');
-    if (Baasa) {
-      const descriçãoBaasa = graphit2.descrever(Baasa);
-      this.visitados = this.visitados.union(graphit2.visitados);
+    const descriçãoBaasa = graphit2.descrever(nó);
+    this.visitados = this.visitados.union(graphit2.visitados);
 
-      const texto = markdown.toMarkdown(descriçãoBaasa);
-      appendFileSync('Bíblia2.md', `${texto}\n`);
-    }
-    appendFileSync('Bíblia2.md', '\n');
+    const texto = markdown.toMarkdown(descriçãoBaasa);
+    appendFileSync(arquivo, `${texto}\n\n`);
 
-    // Montagem dos versículos
-    this.imprimeVersículos(idReferências);
-
-    this.imprimeNãoVisitados();
+    this.imprimeVersículos(idReferências, arquivo);
   }
 
-  private imprimeNãoVisitados() {
+  public imprimeNãoVisitados() {
     const arquivo = 'Não visitados.md';
     writeFileSync(arquivo, ''); // Inicia arquivo em branco
-
-    delete markdown.prefixo;
 
     const todosÍndices = new Set(graphit2.índices);
     while (this.visitados.size < todosÍndices.size) {
@@ -66,13 +55,17 @@ class Bíblia {
       const descrição = graphit2.descrever(elementoId);
       this.visitados = this.visitados.union(graphit2.visitados);
 
+      const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
+      const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
+      if (!('valor' in descrição) && contémNóReferência(descrição)) continue;
+
       const texto = markdown.toMarkdown(descrição);
       appendFileSync(arquivo, `${texto}\n\n`);
     }
   }
 
-  private imprimeVersículos(idReferências: Set<string>) {
-    appendFileSync('Bíblia2.md', '> ## Versículos\n');
+  private imprimeVersículos(idReferências: Set<string>, arquivo: string) {
+    appendFileSync(arquivo, '> ## Versículos\n');
 
     markdown.prefixo = () => '> ';
 
@@ -91,8 +84,10 @@ class Bíblia {
         })
         .flat();
 
-      appendFileSync('Bíblia2.md', `${versículos.join('\n>\n')}`);
+      appendFileSync(arquivo, `${versículos.join('\n>\n')}`);
     }
+
+    delete markdown.prefixo;
   }
 
   private setupReferências() {
