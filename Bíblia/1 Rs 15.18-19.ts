@@ -14,7 +14,7 @@ bíblia.inserirVersículo(
     envio = graphit2.aresta([a, 'e', 'os', 'enviou', 'a', 'Ben-Hadade']);
 
     graphit2.aresta(['Ben-Hadade', 'filho', 'de', 'Tabriom']);
-    graphit2.aresta(['Tabriom', 'filho', 'de', 'Heziom', '?']);
+    graphit2.aresta('Tabriom, filho de Heziom?');
     graphit2.aresta(['Ben-Hadade', 'neto', 'de', 'Heziom']);
     graphit2.aresta(['Ben-Hadade', 'rei', 'da', 'Síria']);
     graphit2.aresta(['Ben-Hadade', 'governava', 'em', 'Damasco']);

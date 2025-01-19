@@ -13,9 +13,9 @@ Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a uti
 - S
 
 ## Fazer
-- Imprimir análise dos versículos por termos
+- Imprimir análise dos versículos por expressões
 - Instalar tufte.css
-- Tokenizar
+- Destokenizar
 - Definir critério de parada por elemento
 - Implementar testes unitários
 - Remover '-' do nível zero?

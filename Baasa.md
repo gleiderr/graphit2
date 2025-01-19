@@ -11,7 +11,7 @@
   - Quando ele soube de 1 Rs 15.20 (1 Rs 15.21)
 - Filho de Aías (1 Rs 15.33)
 - Reinou 24 anos (1 Rs 15.33)
-- Tornou - se rei de todo o Israel (1 Rs 15.33)
+- Tornou-se rei de todo o Israel (1 Rs 15.33)
   - No terceiro ano do reinado de Asa (1 Rs 15.33)
   - Em Tirza (1 Rs 15.33)
 - Fez o que o Senhor reprova (1 Rs 15.34)
@@ -19,7 +19,7 @@
   - Andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
 - Elá , filho de Baasa (1 Rs 16.8)
 
-> ## Versículos
+> ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 1 Rs 15.17 : Baasa, rei de Israel, atacou Judá e fortificou Ramá para que ninguém pudesse entrar no território de Asa, rei de Judá, nem sair de lá.

@@ -33,7 +33,7 @@ class Bíblia {
     const texto = markdown.toMarkdown(descriçãoBaasa);
     appendFileSync(arquivo, `${texto}\n\n`);
 
-    this.imprimeVersículos(idReferências, arquivo);
+    this.imprimeReferências(idReferências, arquivo);
   }
 
   public imprimeNãoVisitados() {
@@ -64,8 +64,8 @@ class Bíblia {
     }
   }
 
-  private imprimeVersículos(idReferências: Set<string>, arquivo: string) {
-    appendFileSync(arquivo, '> ## Versículos\n');
+  private imprimeReferências(idReferências: Set<string>, arquivo: string) {
+    appendFileSync(arquivo, '> ## Referências\n');
 
     markdown.prefixo = () => '> ';
 
@@ -95,8 +95,8 @@ class Bíblia {
     const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
 
     // Define impressão de referências no fim de cada linha
-    markdown.sufixo = (_, aresta: DescriçãoAresta) => {
-      const nósReferência = aresta.arestas.filter(contémNóReferência).map(subAresta => subAresta.nós[2]);
+    markdown.sufixo = (_, elemento: Descrição) => {
+      const nósReferência = elemento.arestas.filter(contémNóReferência).map(subAresta => subAresta.nós[2]);
       const referências = nósReferência.map((nó: Descrição) => ('valor' in nó ? nó.valor : 'Falha da referência')).join(', ');
       return referências ? ` (${referências})` : '';
     };

@@ -113,10 +113,7 @@ class Graphit2 {
   ): { id: Id } {
     if (typeof nós === 'string') {
       // Transforma 's' em um conjunto de termos que podem ser uma palavra ou uma pontuação
-      nós = nós
-        .split(/(\s+|[,.;:-])/)
-        .map(s => s.trim())
-        .filter(Boolean);
+      nós = this.tokenize(nós);
     }
     const ids = nós.map(nó =>
       typeof nó === 'object' ? nó.id : this.buscarNó(nó) || this.novoNó(nó),
@@ -132,6 +129,12 @@ class Graphit2 {
     return { id };
   }
 
+  private tokenize(s: string) {
+    return s
+      .split(/(\s+|[,.;:]|\?)/)
+      .map(s => s.trim())
+      .filter(Boolean);
+  }
   /**
    * Descreve vértice do grafo criando uma estrutura de árvore, percorrendo as arestas em largura. O limite da profundidade das buscas é definido pelo parâmetro `profundidade`. Há também um critério de parada por nós específicos definido por `pararEm`.
    */

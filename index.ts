@@ -41,4 +41,7 @@ if (BenHadade) bíblia.imprimeEstudo(BenHadade, 'Ben-Hadade.md');
 const Elá = graphit2.buscarNó('Elá');
 if (Elá) bíblia.imprimeEstudo(Elá, 'Elá.md');
 
+const Tabriom = graphit2.buscarNó('Tabriom');
+if (Tabriom) bíblia.imprimeEstudo(Tabriom, 'Tabriom.md');
+
 bíblia.imprimeNãoVisitados();

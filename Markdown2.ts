@@ -1,17 +1,9 @@
 import { Descrição, DescriçãoAresta } from './Graphit2';
 
 class Markdown2 {
-  prefixo?: (
-    nível: number,
-    elemento: DescriçãoAresta,
-    origem?: Descrição,
-  ) => string;
+  prefixo?: (nível: number, elemento: Descrição, origem?: Descrição) => string;
 
-  sufixo?: (
-    nível: number,
-    aresta: DescriçãoAresta,
-    origem?: Descrição,
-  ) => string;
+  sufixo?: (nível: number, elemento: Descrição, origem?: Descrição) => string;
 
   onGetLinha?: (nível: number, elemento: Descrição, origem?: Descrição) => void;
 
@@ -29,10 +21,7 @@ class Markdown2 {
     const primeiraLinha = this.getLinha(0, descrição);
     const linhas = this.montarLinhas(descrição);
 
-    const retorno = [primeiraLinha, ...linhas].join('\n');
-    if ('valor' in descrição) return `# ${retorno}`;
-
-    return retorno;
+    return [primeiraLinha, ...linhas].join('\n');
   }
 
   private montarLinhas(descrição: Descrição): string[] {
@@ -64,18 +53,24 @@ class Markdown2 {
   ): string {
     this.onGetLinha?.(nível, elemento, origem);
 
-    if ('valor' in elemento) return elemento.valor;
+    let linha;
+    if ('valor' in elemento) {
+      linha = elemento.valor;
+    } else {
+      const valores = elemento.nós.map((nó, i) => this.getValor(nó, i, origem));
 
-    const valores = elemento.nós.map((nó, i) => this.getValor(nó, i, origem));
+      linha = valores
+        .join(' ') // Concatena valores com espaço
+        .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
+        .replace(/^\w/, c => c.toUpperCase()); // Torna maíuscula primeira letra da linha
+    }
 
     const indent = '  '.repeat(nível);
-    const prefixo = this.prefixo?.(nível, elemento, origem) ?? `${indent}- `;
-    const sufixo = !this.sufixo ? '' : this.sufixo(nível, elemento, origem);
+    // Se existir uma origem então pressupõe-se uma lista, senão um título
+    const prefixoPadrão = () => (origem ? `${indent}- ` : '# ');
 
-    const linha = valores
-      .join(' ') // Concatena valores com espaço
-      .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
-      .replace(/^\w/, c => c.toUpperCase()); // Torna maíuscula primeira letra da linha
+    const prefixo = this.prefixo?.(nível, elemento, origem) ?? prefixoPadrão();
+    const sufixo = !this.sufixo ? '' : this.sufixo(nível, elemento, origem);
 
     return `${prefixo}${linha}${sufixo}`;
   }

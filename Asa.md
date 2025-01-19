@@ -8,10 +8,10 @@
 - Ajuntou prata e ouro e os enviou a Ben-Hadade com uma mensagem que dizia o pai de Asa e o pai de Ben-Hadade fizeram um tratado (1 Rs 15.19)
 - Ben-Hadade aceitou a proposta de Asa (1 Rs 15.20)
 - Rei de Judá (1 Rs 15.33, 1 Rs 16.8)
-- Baasa tornou - se rei de todo o Israel no terceiro ano do reinado de Asa (1 Rs 15.33)
+- Baasa tornou-se rei de todo o Israel no terceiro ano do reinado de Asa (1 Rs 15.33)
 - Elá tornou-se rei de Israel no 26º ano do reinado de Asa (1 Rs 16.8)
 
-> ## Versículos
+> ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 1 Rs 15.17 : Baasa, rei de Israel, atacou Judá e fortificou Ramá para que ninguém pudesse entrar no território de Asa, rei de Judá, nem sair de lá.
