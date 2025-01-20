@@ -135,6 +135,18 @@ class Graphit2 {
       .map(s => s.trim())
       .filter(Boolean);
   }
+
+  /**
+   * Executa a operação inversa de tokenize().
+   * Ou seja, recebe um arranjo de strings e retorna uma string.
+   */
+  undotokenize(nós: string[]) {
+    return nós
+      .join(' ')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([,.;:-])/g, '$1');
+  }
+
   /**
    * Descreve vértice do grafo criando uma estrutura de árvore, percorrendo as arestas em largura. O limite da profundidade das buscas é definido pelo parâmetro `profundidade`. Há também um critério de parada por nós específicos definido por `pararEm`.
    */

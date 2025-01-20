@@ -1,5 +1,4 @@
-import { Id } from '../Graphit';
-import { aresta, graphit2 } from '../Graphit2';
+import { aresta, graphit2, Id } from '../Graphit2';
 import { bíblia } from './bíblia';
 
 let envio: { id: Id };

@@ -1,5 +1,4 @@
 import { appendFileSync, writeFileSync } from 'fs';
-import { graphit } from '../Graphit';
 import { Descrição, DescriçãoAresta, graphit2, Id } from '../Graphit2';
 import { markdown } from '../Markdown2';
 
@@ -7,17 +6,14 @@ class Bíblia {
   visitados: Set<string> = new Set();
 
   inserirVersículo(referência: string, versículo: string, definirArestas: () => void) {
+    //Define aresta de referência
     graphit2.aresta([referência, ':', versículo]);
+
     const setReferência = graphit2.addListener('afterAresta', id => {
       graphit2.aresta([{ id }, 'Referência', referência]);
     });
 
-    graphit.inserirAresta([referência, versículo, 'Texto']);
-    graphit.iniciarMemória();
     definirArestas();
-    graphit.getMemória().forEach(([aresta]) => {
-      graphit.inserirAresta([aresta, referência, 'Referência']);
-    });
 
     graphit2.removeListener('afterAresta', setReferência);
   }
@@ -57,7 +53,10 @@ class Bíblia {
 
       const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
       const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
-      if (!('valor' in descrição) && contémNóReferência(descrição)) continue;
+      if (!('valor' in descrição) && contémNóReferência(descrição)) {
+        console.log('Ignora  referência');
+        continue;
+      }
 
       const texto = markdown.toMarkdown(descrição);
       appendFileSync(arquivo, `${texto}\n\n`);
