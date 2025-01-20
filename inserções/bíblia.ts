@@ -1,21 +1,25 @@
 import { appendFileSync, writeFileSync } from 'fs';
-import { Descrição, DescriçãoAresta, graphit2, Id } from '../Graphit2';
-import { markdown } from '../Markdown2';
+import { Descrição, DescriçãoAresta, graphit, Id } from '../Graphit';
+import { markdown } from '../Markdown';
 
 class Bíblia {
   visitados: Set<string> = new Set();
 
-  inserirVersículo(referência: string, versículo: string, definirArestas: () => void) {
+  inserirVersículo(
+    referência: string,
+    versículo: string,
+    definirArestas: () => void,
+  ) {
     //Define aresta de referência
-    graphit2.aresta([referência, ':', versículo]);
+    graphit.aresta([referência, ':', versículo]);
 
-    const setReferência = graphit2.addListener('afterAresta', id => {
-      graphit2.aresta([{ id }, 'Referência', referência]);
+    const setReferência = graphit.addListener('afterAresta', id => {
+      graphit.aresta([{ id }, 'Referência', referência]);
     });
 
     definirArestas();
 
-    graphit2.removeListener('afterAresta', setReferência);
+    graphit.removeListener('afterAresta', setReferência);
   }
 
   imprimeEstudo(nó: Id, arquivo: string) {
@@ -23,8 +27,8 @@ class Bíblia {
 
     const idReferências = this.setupReferências();
 
-    const descriçãoBaasa = graphit2.descrever(nó);
-    this.visitados = this.visitados.union(graphit2.visitados);
+    const descriçãoBaasa = graphit.descrever(nó);
+    this.visitados = this.visitados.union(graphit.visitados);
 
     const texto = markdown.toMarkdown(descriçãoBaasa);
     appendFileSync(arquivo, `${texto}\n\n`);
@@ -36,7 +40,7 @@ class Bíblia {
     const arquivo = 'Não visitados.md';
     writeFileSync(arquivo, ''); // Inicia arquivo em branco
 
-    const todosÍndices = new Set(graphit2.índices);
+    const todosÍndices = new Set(graphit.índices);
     while (this.visitados.size < todosÍndices.size) {
       const nãoVisitados = todosÍndices.difference(this.visitados);
       console.log({
@@ -48,11 +52,13 @@ class Bíblia {
       const elementoId = nãoVisitados.values().next().value;
       if (!elementoId) break;
 
-      const descrição = graphit2.descrever(elementoId);
-      this.visitados = this.visitados.union(graphit2.visitados);
+      const descrição = graphit.descrever(elementoId);
+      this.visitados = this.visitados.union(graphit.visitados);
 
-      const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
-      const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
+      const isNóReferência = (nó: Descrição) =>
+        'valor' in nó && nó.valor === 'Referência';
+      const contémNóReferência = (aresta: DescriçãoAresta) =>
+        aresta.nós.some(isNóReferência);
       if (!('valor' in descrição) && contémNóReferência(descrição)) {
         console.log('Ignora  referência');
         continue;
@@ -68,15 +74,17 @@ class Bíblia {
 
     markdown.prefixo = () => '> ';
 
-    const doisPontos = graphit2.buscarNó(':');
+    const doisPontos = graphit.buscarNó(':');
     if (doisPontos) {
       const versículos = [...idReferências]
         .map(referência => {
-          const arestas = graphit2.filtrarArestas({ contém: [referência, doisPontos] });
+          const arestas = graphit.filtrarArestas({
+            contém: [referência, doisPontos],
+          });
 
           return arestas.map(aresta => {
-            const descrição = graphit2.descrever(aresta);
-            this.visitados = this.visitados.union(graphit2.visitados);
+            const descrição = graphit.descrever(aresta);
+            this.visitados = this.visitados.union(graphit.visitados);
 
             return markdown.toMarkdown(descrição);
           });
@@ -90,13 +98,21 @@ class Bíblia {
   }
 
   private setupReferências() {
-    const isNóReferência = (nó: Descrição) => 'valor' in nó && nó.valor === 'Referência';
-    const contémNóReferência = (aresta: DescriçãoAresta) => aresta.nós.some(isNóReferência);
+    const isNóReferência = (nó: Descrição) =>
+      'valor' in nó && nó.valor === 'Referência';
+    const contémNóReferência = (aresta: DescriçãoAresta) =>
+      aresta.nós.some(isNóReferência);
 
     // Define impressão de referências no fim de cada linha
     markdown.sufixo = (_, elemento: Descrição) => {
-      const nósReferência = elemento.arestas.filter(contémNóReferência).map(subAresta => subAresta.nós[2]);
-      const referências = nósReferência.map((nó: Descrição) => ('valor' in nó ? nó.valor : 'Falha da referência')).join(', ');
+      const nósReferência = elemento.arestas
+        .filter(contémNóReferência)
+        .map(subAresta => subAresta.nós[2]);
+      const referências = nósReferência
+        .map((nó: Descrição) =>
+          'valor' in nó ? nó.valor : 'Falha da referência',
+        )
+        .join(', ');
       return referências ? ` (${referências})` : '';
     };
 
@@ -104,7 +120,9 @@ class Bíblia {
     const idReferências = new Set<string>();
     markdown.onGetLinha = (_, elemento: Descrição) => {
       if ('valor' in elemento) return;
-      const nósReferência = elemento.arestas.filter(contémNóReferência).map(subAresta => subAresta.nós[2]);
+      const nósReferência = elemento.arestas
+        .filter(contémNóReferência)
+        .map(subAresta => subAresta.nós[2]);
       nósReferência.forEach(nó => idReferências.add(nó.id));
     };
 
@@ -114,4 +132,5 @@ class Bíblia {
   }
 }
 
-export const bíblia = new Bíblia();
+export const bíblia = new Bíblia(); //
+export const inserirVersículo = bíblia.inserirVersículo.bind(bíblia);

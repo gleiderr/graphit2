@@ -1,13 +1,27 @@
-import { aresta } from '../Graphit2';
-import { bíblia } from './bíblia';
+import { aresta } from '../Graphit';
+import { inserirVersículo } from './bíblia';
 
-bíblia.inserirVersículo(
+inserirVersículo(
   '1 Rs 15.17',
   'Baasa, rei de Israel, atacou Judá e fortificou Ramá para que ninguém pudesse entrar no território de Asa, rei de Judá, nem sair de lá.',
   () => {
     aresta(['Baasa', ',', 'rei', 'de', 'Israel']);
     aresta(['Baasa', 'atacou', 'Judá']);
     const f = aresta(['Baasa', 'fortificou', 'Ramá']);
-    aresta([f, 'para que', 'ninguém', 'pudesse', 'entrar', 'no', 'território', 'de', 'Asa', 'ou', 'sair', 'de', 'lá']);
+    aresta([
+      f,
+      'para que',
+      'ninguém',
+      'pudesse',
+      'entrar',
+      'no',
+      'território',
+      'de',
+      'Asa',
+      'ou',
+      'sair',
+      'de',
+      'lá',
+    ]);
   },
 );

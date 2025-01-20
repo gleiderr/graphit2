@@ -1,7 +1,7 @@
-import { aresta } from '../Graphit2';
-import { bíblia } from './bíblia';
+import { aresta } from '../Graphit';
+import { inserirVersículo } from './bíblia';
 
-bíblia.inserirVersículo(
+inserirVersículo(
   '1 Rs 16.8',
   'No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.',
   () => {

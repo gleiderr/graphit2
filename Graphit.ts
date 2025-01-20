@@ -22,7 +22,7 @@ export type Descrição = DescriçãoNó | DescriçãoAresta;
  * Tanto arestas como nós são vértices do grafo que podem ser conectados por arestas.
  * Arestas são na verdade hiperarestas que conectam dois ou mais nós.
  */
-class Graphit2 {
+class Graphit {
   private db: { [key: string]: Nó | Aresta } = {};
   private listeners: { [key in 'afterAresta']: ((id: Id) => void)[] } = {
     afterAresta: [],
@@ -201,5 +201,5 @@ class Graphit2 {
   }
 }
 
-export const graphit2 = new Graphit2();
-export const aresta = graphit2.aresta.bind(graphit2);
+export const graphit = new Graphit();
+export const aresta = graphit.aresta.bind(graphit);

@@ -1,6 +1,6 @@
-import { Descrição, DescriçãoAresta } from './Graphit2';
+import { Descrição, DescriçãoAresta } from './Graphit';
 
-class Markdown2 {
+class Markdown {
   prefixo?: (nível: number, elemento: Descrição, origem?: Descrição) => string;
 
   sufixo?: (nível: number, elemento: Descrição, origem?: Descrição) => string;
@@ -86,4 +86,4 @@ class Markdown2 {
   };
 }
 
-export const markdown = new Markdown2();
+export const markdown = new Markdown();
