@@ -1,4 +1,4 @@
-import { writeFile } from 'fs/promises';
+import { readFileSync, writeFileSync } from 'fs';
 import * as prettier from 'prettier';
 
 type ArestaProps = { label: string };
@@ -129,6 +129,16 @@ class Graphit {
     return { id };
   }
 
+  /**
+   * Move aresta de uma posição para outra.
+   * @param s
+   * @returns
+   */
+  moveAresta(nó: Id, origem: number, destino: number) {
+    const elemento = this.get(nó);
+    elemento.arestas.splice(destino, 0, elemento.arestas.splice(origem, 1)[0]);
+  }
+
   tokens(s: string) {
     return s
       .split(/(\s+|[,.;:]|\?)/) // TODO: incluir hífen como token
@@ -197,7 +207,13 @@ class Graphit {
     const dados = await prettier.format(JSON.stringify(this.db), {
       parser: 'json',
     });
-    await writeFile(arquivo, dados);
+    writeFileSync(arquivo, dados);
+  }
+
+  carregar(arquivo: string) {
+    const dados = readFileSync(arquivo, 'utf-8');
+    this.db = JSON.parse(dados);
+    this._nextId = Object.keys(this.db).length;
   }
 }
 

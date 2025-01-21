@@ -2,7 +2,7 @@
   "0": { "valor": "1 Rs 15.16", "arestas": ["3", "b", "n"] },
   "1": {
     "valor": ":",
-    "arestas": ["3", "q", "1d", "2v", "3m", "4k", "52", "5p", "69"]
+    "arestas": ["3", "q", "1d", "2v", "3m", "4k", "52", "5p", "69", "6t"]
   },
   "2": {
     "valor": "Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.",
@@ -11,9 +11,23 @@
   "3": { "nós": ["0", "1", "2"], "arestas": [] },
   "4": {
     "valor": "Baasa",
-    "arestas": ["9", "m", "u", "y", "3e", "4o", "4w", "57", "5b", "5t", "6d"]
+    "arestas": [
+      "57",
+      "9",
+      "m",
+      "u",
+      "y",
+      "3e",
+      "4o",
+      "4w",
+      "77",
+      "7d",
+      "5b",
+      "5t",
+      "6d"
+    ]
   },
-  "5": { "valor": ",", "arestas": ["9", "2f", "3e", "57"] },
+  "5": { "valor": ",", "arestas": ["9", "2f", "3e", "57", "7g"] },
   "6": { "valor": "rei", "arestas": ["9", "2m", "5b", "6m"] },
   "7": {
     "valor": "de",
@@ -39,13 +53,15 @@
       "5z",
       "6d",
       "6m",
-      "6p"
+      "6p",
+      "6z",
+      "77"
     ]
   },
   "8": { "valor": "Israel", "arestas": ["9", "40", "5b", "65", "6f", "6m"] },
   "9": { "nós": ["4", "5", "6", "7", "8"], "arestas": ["b", "r", "2w", "59"] },
   "10": { "valor": "para que", "arestas": ["19"] },
-  "11": { "valor": "ninguém", "arestas": ["19"] },
+  "11": { "valor": "ninguém", "arestas": ["19", "6z"] },
   "12": { "valor": "pudesse", "arestas": ["19"] },
   "13": { "valor": "entrar", "arestas": ["19"] },
   "14": { "valor": "no", "arestas": ["19", "5f", "6p"] },
@@ -176,6 +192,35 @@
     "arestas": ["69"]
   },
   "69": { "nós": ["67", "1", "68"], "arestas": [] },
+  "70": { "nós": ["6z", "a", "6r"], "arestas": [] },
+  "71": { "valor": "eles", "arestas": ["77"] },
+  "72": { "valor": "retiraram", "arestas": ["77"] },
+  "73": { "valor": "pedras", "arestas": ["77", "7d"] },
+  "74": { "valor": "madeira", "arestas": ["77", "7d"] },
+  "75": { "valor": "estivera", "arestas": ["77", "7d"] },
+  "76": { "valor": "usando", "arestas": ["77", "7d"] },
+  "77": {
+    "nós": [
+      "6z",
+      "g",
+      "71",
+      "72",
+      "7",
+      "x",
+      "3y",
+      "73",
+      "g",
+      "1y",
+      "74",
+      "1j",
+      "4",
+      "75",
+      "76"
+    ],
+    "arestas": ["78"]
+  },
+  "78": { "nós": ["77", "a", "6r"], "arestas": [] },
+  "79": { "valor": "Geba", "arestas": ["7g", "7b"] },
   "a": {
     "valor": "Referência",
     "arestas": [
@@ -226,7 +271,12 @@
       "6j",
       "6l",
       "6n",
-      "6q"
+      "6q",
+      "70",
+      "78",
+      "7c",
+      "7e",
+      "7h"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "arestas": [] },
@@ -235,9 +285,12 @@
   "e": { "valor": "entre", "arestas": ["m"] },
   "f": {
     "valor": "Asa",
-    "arestas": ["m", "19", "1h", "1u", "3i", "3p", "54", "5f", "6p"]
+    "arestas": ["54", "m", "19", "1h", "1u", "3i", "3p", "6z", "7b", "5f", "6p"]
   },
-  "g": { "valor": "e", "arestas": ["m", "1h", "27", "3i"] },
+  "g": {
+    "valor": "e",
+    "arestas": ["m", "1h", "27", "3i", "77", "77", "7b", "7d"]
+  },
   "h": { "valor": "durante", "arestas": ["m"] },
   "i": { "valor": "todo", "arestas": ["m", "4d", "5b"] },
   "j": { "valor": "o", "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t"] },
@@ -256,11 +309,11 @@
   "q": { "nós": ["o", "1", "p"], "arestas": [] },
   "r": { "nós": ["9", "a", "o"], "arestas": [] },
   "s": { "valor": "atacou", "arestas": ["u"] },
-  "t": { "valor": "Judá", "arestas": ["u", "3e", "54"] },
+  "t": { "valor": "Judá", "arestas": ["u", "3e", "54", "6z"] },
   "u": { "nós": ["4", "s", "t"], "arestas": ["v"] },
   "v": { "nós": ["u", "a", "o"], "arestas": [] },
-  "w": { "valor": "fortificou", "arestas": ["y"] },
-  "x": { "valor": "Ramá", "arestas": ["y", "4o"] },
+  "w": { "valor": "fortificou", "arestas": ["y", "7b"] },
+  "x": { "valor": "Ramá", "arestas": ["y", "4o", "77"] },
   "y": { "nós": ["4", "w", "x"], "arestas": ["z", "19"] },
   "z": { "nós": ["y", "a", "o"], "arestas": [] },
   "1a": { "nós": ["19", "a", "o"], "arestas": [] },
@@ -293,7 +346,10 @@
     "arestas": ["1i", "1q", "1u", "23", "27"]
   },
   "1i": { "nós": ["1h", "a", "1b"], "arestas": [] },
-  "1j": { "valor": "que", "arestas": ["1q", "31", "3e", "3e", "40", "65"] },
+  "1j": {
+    "valor": "que",
+    "arestas": ["1q", "31", "3e", "3e", "40", "65", "77", "7d"]
+  },
   "1k": { "valor": "haviam", "arestas": ["1q"] },
   "1l": { "valor": "sobrado", "arestas": ["1q"] },
   "1m": { "valor": "do", "arestas": ["1q", "1q", "1q", "1u", "5f", "6p"] },
@@ -311,7 +367,7 @@
   "1v": { "nós": ["1u", "a", "1b"], "arestas": [] },
   "1w": { "valor": "os", "arestas": ["23", "27"] },
   "1x": { "valor": "confiou", "arestas": ["23"] },
-  "1y": { "valor": "a", "arestas": ["23", "27", "3p", "4o", "65"] },
+  "1y": { "valor": "a", "arestas": ["23", "27", "3p", "4o", "65", "77", "7d"] },
   "1z": { "valor": "alguns", "arestas": ["23"] },
   "2a": { "valor": "Tabriom", "arestas": ["2b", "2f"] },
   "2b": { "nós": ["26", "29", "7", "2a"], "arestas": ["2c"] },
@@ -328,7 +384,7 @@
   "2m": { "nós": ["26", "6", "2k", "2l"], "arestas": ["2n"] },
   "2n": { "nós": ["2m", "a", "1b"], "arestas": [] },
   "2o": { "valor": "governava", "arestas": ["2r"] },
-  "2p": { "valor": "em", "arestas": ["2r", "5h", "6k"] },
+  "2p": { "valor": "em", "arestas": ["2r", "5h", "6k", "7g"] },
   "2q": { "valor": "Damasco", "arestas": ["2r"] },
   "2r": { "nós": ["26", "2o", "2p", "2q"], "arestas": ["2s"] },
   "2s": { "nós": ["2r", "a", "1b"], "arestas": [] },
@@ -339,7 +395,7 @@
   },
   "2v": { "nós": ["2t", "1", "2u"], "arestas": [] },
   "2w": { "nós": ["9", "a", "2t"], "arestas": [] },
-  "2x": { "valor": "com", "arestas": ["31", "3e"] },
+  "2x": { "valor": "com", "arestas": ["31", "3e", "7d"] },
   "2y": { "valor": "uma", "arestas": ["31"] },
   "2z": { "valor": "mensagem", "arestas": ["31"] },
   "3a": { "valor": "tens", "arestas": ["3e"] },
@@ -417,7 +473,7 @@
   "3v": { "valor": "suas", "arestas": ["40"] },
   "3w": { "valor": "forças", "arestas": ["40"] },
   "3x": { "valor": "atacassem", "arestas": ["40"] },
-  "3y": { "valor": "as", "arestas": ["40"] },
+  "3y": { "valor": "as", "arestas": ["40", "77", "7d"] },
   "3z": { "valor": "cidades", "arestas": ["40"] },
   "4a": { "nós": ["26", "42", "49"], "arestas": ["4b"] },
   "4b": { "nós": ["4a", "a", "3k"], "arestas": [] },
@@ -445,7 +501,7 @@
   "4r": { "valor": "soube", "arestas": ["4s", "4y"] },
   "4s": { "nós": ["4o", "4q", "3c", "4r", "7", "3k"], "arestas": ["4t"] },
   "4t": { "nós": ["4s", "a", "4i"], "arestas": [] },
-  "4u": { "valor": "foi", "arestas": ["4w"] },
+  "4u": { "valor": "foi", "arestas": ["4w", "6z"] },
   "4v": { "valor": "Tirza", "arestas": ["4w", "5h", "6k"] },
   "4w": { "nós": ["4", "4u", "3b", "4v"], "arestas": ["4x", "4y"] },
   "4x": { "nós": ["4w", "a", "4i"], "arestas": [] },
@@ -508,5 +564,34 @@
     "nós": ["6m", "14", "6o", "5e", "1m", "k", "7", "f"],
     "arestas": ["6q"]
   },
-  "6q": { "nós": ["6p", "a", "67"], "arestas": [] }
+  "6q": { "nós": ["6p", "a", "67"], "arestas": [] },
+  "6r": {
+    "valor": "1 Rs 15.22",
+    "arestas": ["6t", "70", "78", "7c", "7e", "7h"]
+  },
+  "6s": {
+    "valor": "Então o rei Asa reuniu todos homens de Judá — ninguém foi isentado — e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando. Com esse material Asa fortificou Geba, em Benjamim, e também Mispá.",
+    "arestas": ["6t"]
+  },
+  "6t": { "nós": ["6r", "1", "6s"], "arestas": [] },
+  "6u": { "valor": "reuniu", "arestas": ["6z"] },
+  "6v": { "valor": "todos", "arestas": ["6z"] },
+  "6w": { "valor": "homens", "arestas": ["6z"] },
+  "6x": { "valor": "-", "arestas": ["6z"] },
+  "6y": { "valor": "isentado", "arestas": ["6z"] },
+  "6z": {
+    "nós": ["f", "6u", "6v", "6w", "7", "t", "6x", "11", "4u", "6y"],
+    "arestas": ["70", "77"]
+  },
+  "7a": { "valor": "Mispá", "arestas": ["7b"] },
+  "7b": { "nós": ["f", "w", "79", "g", "7a"], "arestas": ["7c", "7d"] },
+  "7c": { "nós": ["7b", "a", "6r"], "arestas": [] },
+  "7d": {
+    "nós": ["7b", "2x", "3y", "73", "g", "1y", "74", "1j", "4", "75", "76"],
+    "arestas": ["7e"]
+  },
+  "7e": { "nós": ["7d", "a", "6r"], "arestas": [] },
+  "7f": { "valor": "Benjamim", "arestas": ["7g"] },
+  "7g": { "nós": ["79", "5", "2p", "7f"], "arestas": ["7h"] },
+  "7h": { "nós": ["7g", "a", "6r"], "arestas": [] }
 }

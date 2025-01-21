@@ -1,4 +1,5 @@
 # Baasa
+- Filho de Aías (1 Rs 15.33)
 - Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33)
 - Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16)
 - Atacou Judá (1 Rs 15.17)
@@ -9,7 +10,8 @@
   - Quando ele soube de 1 Rs 15.20 (1 Rs 15.21)
 - Foi para Tirza (1 Rs 15.21)
   - Quando ele soube de 1 Rs 15.20 (1 Rs 15.21)
-- Filho de Aías (1 Rs 15.33)
+- Asa reuniu todos homens de Judá - ninguém foi isentado e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando (1 Rs 15.22)
+- Asa fortificou Geba e Mispá com as pedras e a madeira que Baasa estivera usando (1 Rs 15.22)
 - Tornou-se rei de todo o Israel (1 Rs 15.33)
   - No terceiro ano do reinado de Asa (1 Rs 15.33)
   - Em Tirza (1 Rs 15.33)
@@ -20,15 +22,17 @@
 - Elá , filho de Baasa (1 Rs 16.8)
 
 > ## Referências
+> 1 Rs 15.33 : No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
+>
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 1 Rs 15.17 : Baasa, rei de Israel, atacou Judá e fortificou Ramá para que ninguém pudesse entrar no território de Asa, rei de Judá, nem sair de lá.
 >
 > 1 Rs 15.19 : com uma mensagem que dizia: "Façamos um tratado, como fizeram meu pai e o teu. Estou te enviando como presente prata e ouro. Agora, rompe o tratado que tens com Baasa, rei de Israel, para que ele saia do meu país".
 >
-> 1 Rs 15.33 : No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
->
 > 1 Rs 15.21 : Quando Baasa soube disso, abandonou a construção dos muros de Ramá e foi para Tirza.
+>
+> 1 Rs 15.22 : Então o rei Asa reuniu todos homens de Judá — ninguém foi isentado — e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando. Com esse material Asa fortificou Geba, em Benjamim, e também Mispá.
 >
 > 1 Rs 15.34 : Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.
 >
