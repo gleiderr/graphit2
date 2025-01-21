@@ -13,9 +13,7 @@ Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a uti
 - S
 
 ## Fazer
-- Remover primeira versão de Graphit
-  - Arquivos *.md
-  - Arquivos *.json
+- Organizar arquivos e pastas
 - Carregar Bíblia2.json
 - Imprimir análise dos versículos por expressões
 - Instalar tufte.css

@@ -22,8 +22,18 @@ class Bíblia {
     graphit.removeListener('afterAresta', setReferência);
   }
 
-  imprimeEstudo(nó: Id, arquivo: string) {
-    writeFileSync(arquivo, ''); // Inicia arquivo em branco
+  imprimeEstudo(
+    nó: Id,
+    arquivo: string,
+    destino: 'foco' | 'outros' | 'pronto',
+  ) {
+    const paths = {
+      foco: './estudos/foco/',
+      outros: './estudos/outros/',
+      pronto: './estudos/',
+    };
+    const path = paths[destino] + arquivo;
+    writeFileSync(path, ''); // Inicia arquivo em branco
 
     const idReferências = this.setupReferências();
 
@@ -31,14 +41,15 @@ class Bíblia {
     this.visitados = this.visitados.union(graphit.visitados);
 
     const texto = markdown.toMarkdown(descriçãoBaasa);
-    appendFileSync(arquivo, `${texto}\n\n`);
+    appendFileSync(path, `${texto}\n\n`);
 
-    this.imprimeReferências(idReferências, arquivo);
+    this.imprimeReferências(idReferências, path);
   }
 
   public imprimeNãoVisitados() {
     const arquivo = 'Não visitados.md';
-    writeFileSync(arquivo, ''); // Inicia arquivo em branco
+    const path = './estudos/' + arquivo;
+    writeFileSync(path, ''); // Inicia arquivo em branco
 
     const todosÍndices = new Set(graphit.índices);
     while (this.visitados.size < todosÍndices.size) {
@@ -65,7 +76,7 @@ class Bíblia {
       }
 
       const texto = markdown.toMarkdown(descrição);
-      appendFileSync(arquivo, `${texto}\n\n`);
+      appendFileSync(path, `${texto}\n\n`);
     }
   }
 

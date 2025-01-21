@@ -11,23 +11,10 @@
   "3": { "nós": ["0", "1", "2"], "arestas": [] },
   "4": {
     "valor": "Baasa",
-    "arestas": [
-      "9",
-      "m",
-      "u",
-      "y",
-      "3e",
-      "4o",
-      "4w",
-      "57",
-      "5c",
-      "5f",
-      "5t",
-      "6d"
-    ]
+    "arestas": ["9", "m", "u", "y", "3e", "4o", "4w", "57", "5b", "5t", "6d"]
   },
   "5": { "valor": ",", "arestas": ["9", "2f", "3e", "57"] },
-  "6": { "valor": "rei", "arestas": ["9", "2m", "5f", "6m"] },
+  "6": { "valor": "rei", "arestas": ["9", "2m", "5b", "6m"] },
   "7": {
     "valor": "de",
     "arestas": [
@@ -47,21 +34,21 @@
       "4s",
       "4y",
       "57",
+      "5b",
       "5f",
-      "5j",
       "5z",
       "6d",
       "6m",
       "6p"
     ]
   },
-  "8": { "valor": "Israel", "arestas": ["9", "40", "5f", "65", "6f", "6m"] },
+  "8": { "valor": "Israel", "arestas": ["9", "40", "5b", "65", "6f", "6m"] },
   "9": { "nós": ["4", "5", "6", "7", "8"], "arestas": ["b", "r", "2w", "59"] },
   "10": { "valor": "para que", "arestas": ["19"] },
   "11": { "valor": "ninguém", "arestas": ["19"] },
   "12": { "valor": "pudesse", "arestas": ["19"] },
   "13": { "valor": "entrar", "arestas": ["19"] },
-  "14": { "valor": "no", "arestas": ["19", "5j", "6p"] },
+  "14": { "valor": "no", "arestas": ["19", "5f", "6p"] },
   "15": { "valor": "território", "arestas": ["19"] },
   "16": { "valor": "ou", "arestas": ["19"] },
   "17": { "valor": "sair", "arestas": ["19"] },
@@ -156,7 +143,7 @@
   "49": { "valor": "Abel-Bete-Maaca", "arestas": ["4a"] },
   "50": {
     "valor": "1 Rs 15.33",
-    "arestas": ["52", "55", "58", "59", "5d", "5g", "5k", "5m"]
+    "arestas": ["52", "55", "58", "59", "5c", "5g", "5i", "5m"]
   },
   "51": {
     "valor": "No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.",
@@ -226,9 +213,9 @@
       "55",
       "58",
       "59",
-      "5d",
+      "5c",
       "5g",
-      "5k",
+      "5i",
       "5m",
       "5u",
       "60",
@@ -248,13 +235,13 @@
   "e": { "valor": "entre", "arestas": ["m"] },
   "f": {
     "valor": "Asa",
-    "arestas": ["m", "19", "1h", "1u", "3i", "3p", "54", "5j", "6p"]
+    "arestas": ["m", "19", "1h", "1u", "3i", "3p", "54", "5f", "6p"]
   },
   "g": { "valor": "e", "arestas": ["m", "1h", "27", "3i"] },
   "h": { "valor": "durante", "arestas": ["m"] },
-  "i": { "valor": "todo", "arestas": ["m", "4d", "5f"] },
-  "j": { "valor": "o", "arestas": ["m", "3e", "3i", "3i", "4d", "5f", "5t"] },
-  "k": { "valor": "reinado", "arestas": ["m", "5j", "6p"] },
+  "i": { "valor": "todo", "arestas": ["m", "4d", "5b"] },
+  "j": { "valor": "o", "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t"] },
+  "k": { "valor": "reinado", "arestas": ["m", "5f", "6p"] },
   "l": { "valor": "deles", "arestas": ["m"] },
   "m": {
     "nós": ["c", "d", "e", "f", "g", "4", "h", "i", "j", "k", "l"],
@@ -309,7 +296,7 @@
   "1j": { "valor": "que", "arestas": ["1q", "31", "3e", "3e", "40", "65"] },
   "1k": { "valor": "haviam", "arestas": ["1q"] },
   "1l": { "valor": "sobrado", "arestas": ["1q"] },
-  "1m": { "valor": "do", "arestas": ["1q", "1q", "1q", "1u", "5j", "6p"] },
+  "1m": { "valor": "do", "arestas": ["1q", "1q", "1q", "1u", "5f", "6p"] },
   "1n": { "valor": "tesouro", "arestas": ["1q"] },
   "1o": { "valor": "templo", "arestas": ["1q"] },
   "1p": { "valor": "Senhor", "arestas": ["1q", "5t"] },
@@ -341,7 +328,7 @@
   "2m": { "nós": ["26", "6", "2k", "2l"], "arestas": ["2n"] },
   "2n": { "nós": ["2m", "a", "1b"], "arestas": [] },
   "2o": { "valor": "governava", "arestas": ["2r"] },
-  "2p": { "valor": "em", "arestas": ["2r", "5l", "6k"] },
+  "2p": { "valor": "em", "arestas": ["2r", "5h", "6k"] },
   "2q": { "valor": "Damasco", "arestas": ["2r"] },
   "2r": { "nós": ["26", "2o", "2p", "2q"], "arestas": ["2s"] },
   "2s": { "nós": ["2r", "a", "1b"], "arestas": [] },
@@ -459,29 +446,29 @@
   "4s": { "nós": ["4o", "4q", "3c", "4r", "7", "3k"], "arestas": ["4t"] },
   "4t": { "nós": ["4s", "a", "4i"], "arestas": [] },
   "4u": { "valor": "foi", "arestas": ["4w"] },
-  "4v": { "valor": "Tirza", "arestas": ["4w", "5l", "6k"] },
+  "4v": { "valor": "Tirza", "arestas": ["4w", "5h", "6k"] },
   "4w": { "nós": ["4", "4u", "3b", "4v"], "arestas": ["4x", "4y"] },
   "4x": { "nós": ["4w", "a", "4i"], "arestas": [] },
   "4y": { "nós": ["4w", "4q", "3c", "4r", "7", "3k"], "arestas": ["4z"] },
   "4z": { "nós": ["4y", "a", "4i"], "arestas": [] },
-  "5a": { "valor": "reinou", "arestas": ["5c", "6i"] },
-  "5b": { "valor": "24 anos", "arestas": ["5c"] },
-  "5c": { "nós": ["4", "5a", "5b"], "arestas": ["5d"] },
-  "5d": { "nós": ["5c", "a", "50"], "arestas": [] },
-  "5e": { "valor": "tornou-se", "arestas": ["5f", "6m"] },
+  "5a": { "valor": "tornou-se", "arestas": ["5b", "6m"] },
+  "5b": {
+    "nós": ["4", "5a", "6", "7", "i", "j", "8"],
+    "arestas": ["5c", "5f", "5h", "5l"]
+  },
+  "5c": { "nós": ["5b", "a", "50"], "arestas": [] },
+  "5d": { "valor": "terceiro", "arestas": ["5f"] },
+  "5e": { "valor": "ano", "arestas": ["5f", "6p"] },
   "5f": {
-    "nós": ["4", "5e", "6", "7", "i", "j", "8"],
-    "arestas": ["5g", "5j", "5l"]
+    "nós": ["5b", "14", "5d", "5e", "1m", "k", "7", "f"],
+    "arestas": ["5g"]
   },
   "5g": { "nós": ["5f", "a", "50"], "arestas": [] },
-  "5h": { "valor": "terceiro", "arestas": ["5j"] },
-  "5i": { "valor": "ano", "arestas": ["5j", "6p"] },
-  "5j": {
-    "nós": ["5f", "14", "5h", "5i", "1m", "k", "7", "f"],
-    "arestas": ["5k"]
-  },
-  "5k": { "nós": ["5j", "a", "50"], "arestas": [] },
-  "5l": { "nós": ["5f", "2p", "4v"], "arestas": ["5m"] },
+  "5h": { "nós": ["5b", "2p", "4v"], "arestas": ["5i"] },
+  "5i": { "nós": ["5h", "a", "50"], "arestas": [] },
+  "5j": { "valor": "reinou", "arestas": ["5l", "6i"] },
+  "5k": { "valor": "24 anos", "arestas": ["5l"] },
+  "5l": { "nós": ["5b", "5j", "5k"], "arestas": ["5m"] },
   "5m": { "nós": ["5l", "a", "50"], "arestas": [] },
   "5n": { "valor": "1 Rs 15.34", "arestas": ["5p", "5u", "60", "66"] },
   "5o": {
@@ -510,15 +497,15 @@
   "6f": { "nós": ["6b", "53", "8"], "arestas": ["6g"] },
   "6g": { "nós": ["6f", "a", "67"], "arestas": [] },
   "6h": { "valor": "2 anos", "arestas": ["6i"] },
-  "6i": { "nós": ["6b", "5a", "6h"], "arestas": ["6j", "6k"] },
+  "6i": { "nós": ["6b", "5j", "6h"], "arestas": ["6j", "6k"] },
   "6j": { "nós": ["6i", "a", "67"], "arestas": [] },
   "6k": { "nós": ["6i", "2p", "4v"], "arestas": ["6l"] },
   "6l": { "nós": ["6k", "a", "67"], "arestas": [] },
-  "6m": { "nós": ["6b", "5e", "6", "7", "8"], "arestas": ["6n", "6p"] },
+  "6m": { "nós": ["6b", "5a", "6", "7", "8"], "arestas": ["6n", "6p"] },
   "6n": { "nós": ["6m", "a", "67"], "arestas": [] },
   "6o": { "valor": "26º", "arestas": ["6p"] },
   "6p": {
-    "nós": ["6m", "14", "6o", "5i", "1m", "k", "7", "f"],
+    "nós": ["6m", "14", "6o", "5e", "1m", "k", "7", "f"],
     "arestas": ["6q"]
   },
   "6q": { "nós": ["6p", "a", "67"], "arestas": [] }

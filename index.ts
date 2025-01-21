@@ -14,18 +14,18 @@ import './inserções/1 Rs 16.8';
 graphit.salvar('Bíblia.json');
 
 const Baasa2 = graphit.buscarNó('Baasa');
-if (Baasa2) bíblia.imprimeEstudo(Baasa2, 'Baasa.md');
+if (Baasa2) bíblia.imprimeEstudo(Baasa2, 'Baasa.md', 'foco');
 
 const Asa = graphit.buscarNó('Asa');
-if (Asa) bíblia.imprimeEstudo(Asa, 'Asa.md');
+if (Asa) bíblia.imprimeEstudo(Asa, 'Asa.md', 'outros');
 
 const BenHadade = graphit.buscarNó('Ben-Hadade');
-if (BenHadade) bíblia.imprimeEstudo(BenHadade, 'Ben-Hadade.md');
+if (BenHadade) bíblia.imprimeEstudo(BenHadade, 'Ben-Hadade.md', 'outros');
 
 const Elá = graphit.buscarNó('Elá');
-if (Elá) bíblia.imprimeEstudo(Elá, 'Elá.md');
+if (Elá) bíblia.imprimeEstudo(Elá, 'Elá.md', 'outros');
 
 const Tabriom = graphit.buscarNó('Tabriom');
-if (Tabriom) bíblia.imprimeEstudo(Tabriom, 'Tabriom.md');
+if (Tabriom) bíblia.imprimeEstudo(Tabriom, 'Tabriom.md', 'outros');
 
 bíblia.imprimeNãoVisitados();
