@@ -114,9 +114,9 @@
   "27": { "nós": ["1h", "g", "1w", "25", "1y", "26"], "arestas": ["28", "31"] },
   "28": { "nós": ["27", "a", "1b"], "arestas": [] },
   "29": { "valor": "filho", "arestas": ["2b", "2f", "57"] },
-  "30": { "valor": "que dizia", "arestas": ["31"] },
+  "30": { "valor": "dizia", "arestas": ["31"] },
   "31": {
-    "nós": ["27", "2x", "2y", "2z", "30"],
+    "nós": ["27", "2x", "2y", "2z", "1j", "30"],
     "arestas": ["32", "3e", "3i"]
   },
   "32": { "nós": ["31", "a", "2t"], "arestas": [] },
@@ -306,7 +306,7 @@
     "arestas": ["1i", "1q", "1u", "23", "27"]
   },
   "1i": { "nós": ["1h", "a", "1b"], "arestas": [] },
-  "1j": { "valor": "que", "arestas": ["1q", "3e", "3e", "40", "65"] },
+  "1j": { "valor": "que", "arestas": ["1q", "31", "3e", "3e", "40", "65"] },
   "1k": { "valor": "haviam", "arestas": ["1q"] },
   "1l": { "valor": "sobrado", "arestas": ["1q"] },
   "1m": { "valor": "do", "arestas": ["1q", "1q", "1q", "1u", "5j", "6p"] },

@@ -113,7 +113,7 @@ class Graphit {
   ): { id: Id } {
     if (typeof nós === 'string') {
       // Transforma 's' em um conjunto de termos que podem ser uma palavra ou uma pontuação
-      nós = this.tokenize(nós);
+      nós = this.tokens(nós);
     }
     const ids = nós.map(nó =>
       typeof nó === 'object' ? nó.id : this.buscarNó(nó) || this.novoNó(nó),
@@ -129,9 +129,9 @@ class Graphit {
     return { id };
   }
 
-  private tokenize(s: string) {
+  tokens(s: string) {
     return s
-      .split(/(\s+|[,.;:]|\?)/)
+      .split(/(\s+|[,.;:]|\?)/) // TODO: incluir hífen como token
       .map(s => s.trim())
       .filter(Boolean);
   }
@@ -203,3 +203,4 @@ class Graphit {
 
 export const graphit = new Graphit();
 export const aresta = graphit.aresta.bind(graphit);
+export const tokens = graphit.tokens.bind(graphit);

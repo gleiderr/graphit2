@@ -1,24 +1,13 @@
-import { aresta, graphit, Id } from '../Graphit';
-import { inserirVersículo } from './bíblia';
+import { inserirVersículo } from '../Biblia';
+import { aresta, graphit, Id, tokens } from '../Graphit';
 
 let envio: { id: Id };
 inserirVersículo(
   '1 Rs 15.18',
   'Então Asa ajuntou a prata e o ouro que haviam sobrado no tesouro do templo do Senhor e do seu próprio palácio. Confiou tudo isso a alguns dos seus oficiais e os enviou a Ben-Hadade, filho de Tabriom e neto de Heziom, rei da Síria, que governava em Damasco,',
   () => {
-    const a = graphit.aresta(['Asa', 'ajuntou', 'prata', 'e', 'ouro']);
-    graphit.aresta([
-      a,
-      'que',
-      'haviam',
-      'sobrado',
-      'do',
-      'tesouro',
-      'do',
-      'templo',
-      'do',
-      'Senhor',
-    ]);
+    const a = aresta('Asa ajuntou prata e ouro');
+    aresta([a, ...tokens('que haviam sobrado do tesouro do templo do Senhor')]);
     graphit.aresta([a, 'do', 'próprio', 'palácio', 'de', 'Asa']);
     graphit.aresta([
       a,
@@ -46,7 +35,7 @@ inserirVersículo(
   () => {
     aresta(['Baasa', ',', 'rei', 'de', 'Israel']);
 
-    const a = aresta([envio, 'com', 'uma', 'mensagem', 'que dizia']);
+    const a = aresta([envio, ...tokens('com uma mensagem que dizia')]);
 
     aresta([
       ...[a, '"', 'Façamos', 'um', 'tratado'],
@@ -69,18 +58,7 @@ inserirVersículo(
     // TODO: Qualificar o pai de Asa
     aresta([
       a,
-      'o',
-      'pai',
-      'de',
-      'Asa',
-      'e',
-      'o',
-      'pai',
-      'de',
-      'Ben-Hadade',
-      'fizeram',
-      'um',
-      'tratado',
+      ...tokens('o pai de Asa e o pai de Ben-Hadade fizeram um tratado'),
     ]);
   },
 );

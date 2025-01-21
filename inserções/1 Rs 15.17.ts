@@ -1,5 +1,5 @@
+import { inserirVersículo } from '../Biblia';
 import { aresta } from '../Graphit';
-import { inserirVersículo } from './bíblia';
 
 inserirVersículo(
   '1 Rs 15.17',

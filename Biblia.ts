@@ -1,6 +1,6 @@
 import { appendFileSync, writeFileSync } from 'fs';
-import { Descrição, DescriçãoAresta, graphit, Id } from '../Graphit';
-import { markdown } from '../Markdown';
+import { Descrição, DescriçãoAresta, graphit, Id } from './Graphit';
+import { markdown } from './Markdown';
 
 class Bíblia {
   visitados: Set<string> = new Set();

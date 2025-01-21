@@ -1,6 +1,7 @@
 const agora: string = new Date().toLocaleString(); //
 console.log(`----------------------------------${agora}`);
 
+import { bíblia } from './Biblia';
 import { graphit } from './Graphit';
 import './inserções/1 Rs 15.16';
 import './inserções/1 Rs 15.17';
@@ -9,7 +10,6 @@ import './inserções/1 Rs 15.20-21';
 import './inserções/1 Rs 15.33';
 import './inserções/1 Rs 15.34';
 import './inserções/1 Rs 16.8';
-import { bíblia } from './inserções/bíblia';
 
 graphit.salvar('Bíblia.json');
 
