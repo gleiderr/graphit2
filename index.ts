@@ -9,23 +9,19 @@ import './inserções/1 Rs 15.17';
 import './inserções/1 Rs 15.18-19';
 import './inserções/1 Rs 15.20-21';
 import './inserções/1 Rs 15.22';
+import './inserções/1 Rs 15.27';
 import './inserções/1 Rs 15.33';
 import './inserções/1 Rs 15.34';
 import './inserções/1 Rs 16.8';
 
 const Baasa = graphit.buscarNó('Baasa');
 if (Baasa) {
-  graphit.moveAresta(Baasa, 7, 0);
-  graphit.moveAresta(Baasa, 11, 8);
-  graphit.moveAresta(Baasa, 12, 9);
+  graphit.moveAresta(Baasa, -2, 1);
   bíblia.imprimeEstudo(Baasa, 'Baasa.md', 'foco');
 }
 
 const Asa = graphit.buscarNó('Asa');
 if (Asa) {
-  graphit.moveAresta(Asa, 6, 0);
-  graphit.moveAresta(Asa, 9, 7);
-  graphit.moveAresta(Asa, 10, 8);
   bíblia.imprimeEstudo(Asa, 'Asa.md', 'outros');
 }
 
@@ -40,9 +36,11 @@ if (Tabriom) bíblia.imprimeEstudo(Tabriom, 'Tabriom.md', 'outros');
 
 const Geba = graphit.buscarNó('Geba');
 if (Geba) {
-  graphit.moveAresta(Geba, 1, 0);
   bíblia.imprimeEstudo(Geba, 'Geba.md', 'outros');
 }
+
+const Gibetom = graphit.buscarNó('Gibetom');
+if (Gibetom) bíblia.imprimeEstudo(Gibetom, 'Gibetom.md', 'outros');
 
 bíblia.imprimeNãoVisitados();
 

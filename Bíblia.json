@@ -2,7 +2,7 @@
   "0": { "valor": "1 Rs 15.16", "arestas": ["3", "b", "n"] },
   "1": {
     "valor": ":",
-    "arestas": ["3", "q", "1d", "2v", "3m", "4k", "52", "5p", "69", "6t"]
+    "arestas": ["3", "q", "1d", "2v", "3m", "4k", "52", "5p", "69", "6t", "7k"]
   },
   "2": {
     "valor": "Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.",
@@ -13,6 +13,7 @@
     "valor": "Baasa",
     "arestas": [
       "57",
+      "7o",
       "9",
       "m",
       "u",
@@ -24,10 +25,11 @@
       "7d",
       "5b",
       "5t",
-      "6d"
+      "6d",
+      "7v"
     ]
   },
-  "5": { "valor": ",", "arestas": ["9", "2f", "3e", "57", "7g"] },
+  "5": { "valor": ",", "arestas": ["9", "2f", "3e", "57", "7g", "7o", "84"] },
   "6": { "valor": "rei", "arestas": ["9", "2m", "5b", "6m"] },
   "7": {
     "valor": "de",
@@ -55,10 +57,15 @@
       "6m",
       "6p",
       "6z",
-      "77"
+      "77",
+      "7o",
+      "80"
     ]
   },
-  "8": { "valor": "Israel", "arestas": ["9", "40", "5b", "65", "6f", "6m"] },
+  "8": {
+    "valor": "Israel",
+    "arestas": ["9", "40", "5b", "65", "6f", "6m", "80"]
+  },
   "9": { "nós": ["4", "5", "6", "7", "8"], "arestas": ["b", "r", "2w", "59"] },
   "10": { "valor": "para que", "arestas": ["19"] },
   "11": { "valor": "ninguém", "arestas": ["19", "6z"] },
@@ -170,7 +177,7 @@
   "54": { "nós": ["f", "53", "t"], "arestas": ["55", "6a"] },
   "55": { "nós": ["54", "a", "50"], "arestas": [] },
   "56": { "valor": "Aías", "arestas": ["57"] },
-  "57": { "nós": ["4", "5", "29", "7", "56"], "arestas": ["58"] },
+  "57": { "nós": ["4", "5", "29", "7", "56"], "arestas": ["58", "7l"] },
   "58": { "nós": ["57", "a", "50"], "arestas": [] },
   "59": { "nós": ["9", "a", "50"], "arestas": [] },
   "60": { "nós": ["5z", "a", "5n"], "arestas": [] },
@@ -221,6 +228,15 @@
   },
   "78": { "nós": ["77", "a", "6r"], "arestas": [] },
   "79": { "valor": "Geba", "arestas": ["7g", "7b"] },
+  "80": {
+    "nós": ["7v", "7x", "7s", "g", "i", "j", "7y", "7", "8", "1y", "7z"],
+    "arestas": ["81"]
+  },
+  "81": { "nós": ["80", "a", "7i"], "arestas": [] },
+  "82": { "valor": "cidade", "arestas": ["84"] },
+  "83": { "valor": "filistéia", "arestas": ["84"] },
+  "84": { "nós": ["7u", "5", "2y", "82", "83"], "arestas": ["85"] },
+  "85": { "nós": ["84", "a", "7i"], "arestas": [] },
   "a": {
     "valor": "Referência",
     "arestas": [
@@ -276,7 +292,12 @@
       "78",
       "7c",
       "7e",
-      "7h"
+      "7h",
+      "7l",
+      "7p",
+      "7w",
+      "81",
+      "85"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "arestas": [] },
@@ -289,11 +310,14 @@
   },
   "g": {
     "valor": "e",
-    "arestas": ["m", "1h", "27", "3i", "77", "77", "7b", "7d"]
+    "arestas": ["m", "1h", "27", "3i", "77", "77", "7b", "7d", "7v", "80"]
   },
   "h": { "valor": "durante", "arestas": ["m"] },
-  "i": { "valor": "todo", "arestas": ["m", "4d", "5b"] },
-  "j": { "valor": "o", "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t"] },
+  "i": { "valor": "todo", "arestas": ["m", "4d", "5b", "80"] },
+  "j": {
+    "valor": "o",
+    "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t", "7v", "80"]
+  },
   "k": { "valor": "reinado", "arestas": ["m", "5f", "6p"] },
   "l": { "valor": "deles", "arestas": ["m"] },
   "m": {
@@ -367,7 +391,10 @@
   "1v": { "nós": ["1u", "a", "1b"], "arestas": [] },
   "1w": { "valor": "os", "arestas": ["23", "27"] },
   "1x": { "valor": "confiou", "arestas": ["23"] },
-  "1y": { "valor": "a", "arestas": ["23", "27", "3p", "4o", "65", "77", "7d"] },
+  "1y": {
+    "valor": "a",
+    "arestas": ["23", "27", "3p", "4o", "65", "77", "7d", "80"]
+  },
   "1z": { "valor": "alguns", "arestas": ["23"] },
   "2a": { "valor": "Tabriom", "arestas": ["2b", "2f"] },
   "2b": { "nós": ["26", "29", "7", "2a"], "arestas": ["2c"] },
@@ -379,12 +406,12 @@
   "2h": { "valor": "neto", "arestas": ["2i"] },
   "2i": { "nós": ["26", "2h", "7", "2d"], "arestas": ["2j"] },
   "2j": { "nós": ["2i", "a", "1b"], "arestas": [] },
-  "2k": { "valor": "da", "arestas": ["2m"] },
+  "2k": { "valor": "da", "arestas": ["2m", "7o"] },
   "2l": { "valor": "Síria", "arestas": ["2m"] },
   "2m": { "nós": ["26", "6", "2k", "2l"], "arestas": ["2n"] },
   "2n": { "nós": ["2m", "a", "1b"], "arestas": [] },
   "2o": { "valor": "governava", "arestas": ["2r"] },
-  "2p": { "valor": "em", "arestas": ["2r", "5h", "6k", "7g"] },
+  "2p": { "valor": "em", "arestas": ["2r", "5h", "6k", "7g", "7v"] },
   "2q": { "valor": "Damasco", "arestas": ["2r"] },
   "2r": { "nós": ["26", "2o", "2p", "2q"], "arestas": ["2s"] },
   "2s": { "nós": ["2r", "a", "1b"], "arestas": [] },
@@ -396,7 +423,7 @@
   "2v": { "nós": ["2t", "1", "2u"], "arestas": [] },
   "2w": { "nós": ["9", "a", "2t"], "arestas": [] },
   "2x": { "valor": "com", "arestas": ["31", "3e", "7d"] },
-  "2y": { "valor": "uma", "arestas": ["31"] },
+  "2y": { "valor": "uma", "arestas": ["31", "84"] },
   "2z": { "valor": "mensagem", "arestas": ["31"] },
   "3a": { "valor": "tens", "arestas": ["3e"] },
   "3b": { "valor": "para", "arestas": ["3e", "4w"] },
@@ -593,5 +620,32 @@
   "7e": { "nós": ["7d", "a", "6r"], "arestas": [] },
   "7f": { "valor": "Benjamim", "arestas": ["7g"] },
   "7g": { "nós": ["79", "5", "2p", "7f"], "arestas": ["7h"] },
-  "7h": { "nós": ["7g", "a", "6r"], "arestas": [] }
+  "7h": { "nós": ["7g", "a", "6r"], "arestas": [] },
+  "7i": {
+    "valor": "1 Rs 15.27",
+    "arestas": ["7k", "7l", "7p", "7w", "81", "85"]
+  },
+  "7j": {
+    "valor": "Baasa, filho de Aías, da tribo de Issacar, conspirou contra ele, e o matou na cidade filistéia de Gibetom, enquanto Nadabe e todo o exército de Israel a sitiavam.",
+    "arestas": ["7k"]
+  },
+  "7k": { "nós": ["7i", "1", "7j"], "arestas": [] },
+  "7l": { "nós": ["57", "a", "7i"], "arestas": [] },
+  "7m": { "valor": "tribo", "arestas": ["7o"] },
+  "7n": { "valor": "Issacar", "arestas": ["7o"] },
+  "7o": { "nós": ["4", "5", "2k", "7m", "7", "7n"], "arestas": ["7p"] },
+  "7p": { "nós": ["7o", "a", "7i"], "arestas": [] },
+  "7q": { "valor": "conspirou", "arestas": ["7v"] },
+  "7r": { "valor": "contra", "arestas": ["7v"] },
+  "7s": { "valor": "Nadabe", "arestas": ["7v", "80"] },
+  "7t": { "valor": "matou", "arestas": ["7v"] },
+  "7u": { "valor": "Gibetom", "arestas": ["7v", "84"] },
+  "7v": {
+    "nós": ["4", "7q", "7r", "7s", "g", "j", "7t", "2p", "7u"],
+    "arestas": ["7w", "80"]
+  },
+  "7w": { "nós": ["7v", "a", "7i"], "arestas": [] },
+  "7x": { "valor": "enquanto", "arestas": ["80"] },
+  "7y": { "valor": "exécito", "arestas": ["80"] },
+  "7z": { "valor": "sitiavam", "arestas": ["80"] }
 }

@@ -1,5 +1,6 @@
 # Baasa
-- Filho de Aías (1 Rs 15.33)
+- Filho de Aías (1 Rs 15.33, 1 Rs 15.27)
+- Da tribo de Issacar (1 Rs 15.27)
 - Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33)
 - Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16)
 - Atacou Judá (1 Rs 15.17)
@@ -20,9 +21,13 @@
   - Andando nos caminhos de Jeroboão (1 Rs 15.34)
   - Andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
 - Elá , filho de Baasa (1 Rs 16.8)
+- Conspirou contra Nadabe e o matou em Gibetom (1 Rs 15.27)
+  - Enquanto Nadabe e todo o exécito de Israel a sitiavam (1 Rs 15.27)
 
 > ## Referências
 > 1 Rs 15.33 : No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
+>
+> 1 Rs 15.27 : Baasa, filho de Aías, da tribo de Issacar, conspirou contra ele, e o matou na cidade filistéia de Gibetom, enquanto Nadabe e todo o exército de Israel a sitiavam.
 >
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
