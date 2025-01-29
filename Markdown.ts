@@ -17,17 +17,20 @@ class Markdown {
    * Se a descrição for realizada a partir de uma aresta, o título será o valor do nó de origem.
    * As linhas são montadas a partir das arestas da descrição inicial.
    */
-  toMarkdown(descrição: Descrição): string {
-    const primeiraLinha = this.getLinha(0, descrição);
-    const linhas = this.montarLinhas(descrição);
+  toMarkdown(descrição: Descrição, { debug = false } = {}): string {
+    const primeiraLinha = this.getLinha(0, descrição, undefined, { debug });
+    const linhas = this.montarLinhas(descrição, { debug });
 
     return [primeiraLinha, ...linhas].join('\n');
   }
 
-  private montarLinhas(descrição: Descrição): string[] {
+  private montarLinhas(
+    descrição: Descrição,
+    { debug }: { debug: boolean },
+  ): string[] {
     const linhas = descrição.arestas
       .filter(aresta => this.filterOut && !this.filterOut(aresta))
-      .map(aresta => this.montarLinha(0, aresta, descrição))
+      .map(aresta => this.montarLinha(0, aresta, descrição, { debug }))
       .flat();
     return linhas;
   }
@@ -36,11 +39,14 @@ class Markdown {
     nível: number,
     aresta: DescriçãoAresta,
     origem: Descrição,
+    { debug }: { debug: boolean },
   ): string[] {
-    const linha = this.getLinha(nível, aresta, origem);
+    const linha = this.getLinha(nível, aresta, origem, { debug });
     const linhas = aresta.arestas
       .filter(aresta => this.filterOut && !this.filterOut(aresta))
-      .map(subAresta => this.montarLinha(nível + 1, subAresta, aresta))
+      .map(subAresta =>
+        this.montarLinha(nível + 1, subAresta, aresta, { debug }),
+      )
       .flat();
 
     return [linha, ...linhas];
@@ -50,6 +56,7 @@ class Markdown {
     nível: number,
     elemento: Descrição,
     origem?: Descrição,
+    { debug = false } = {},
   ): string {
     this.onGetLinha?.(nível, elemento, origem);
 
@@ -72,7 +79,9 @@ class Markdown {
     const prefixo = this.prefixo?.(nível, elemento, origem) ?? prefixoPadrão();
     const sufixo = !this.sufixo ? '' : this.sufixo(nível, elemento, origem);
 
-    return `${prefixo}${linha}${sufixo}`;
+    const id = debug ? ` {${elemento.id}}` : '';
+
+    return `${prefixo}${linha}${sufixo}${id}`;
   }
 
   private getValor = (nó: Descrição, i: number, origem?: Descrição): string => {

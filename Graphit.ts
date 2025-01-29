@@ -64,12 +64,23 @@ class Graphit {
     );
   }
 
-  buscarArestaByIds(nós: Id[]): Id | undefined {
-    return Object.keys(this.db).find(id =>
-      'nós' in this.db[id] ?
-        this.db[id].nós.every((nó, i) => nó === nós[i])
-      : false,
-    );
+  /**
+   * Busca por arestas que contenham exatamente os mesmos nós passados por parâmetro e na mesma ordem.
+   * @param nós
+   */
+  private buscarArestasExatas(nós: Id[]): Id[] {
+    const arestas: Id[] = [];
+    for (const id of Object.keys(this.db)) {
+      const elemento = this.db[id];
+      if ('nós' in elemento) {
+        if (elemento.nós.length === nós.length) {
+          const temMesmosIds = elemento.nós.every((nó, i) => nó === nós[i]);
+          if (temMesmosIds) arestas.push(id);
+        }
+      }
+    }
+
+    return arestas;
   }
 
   /**
@@ -118,7 +129,11 @@ class Graphit {
     const ids = nós.map(nó =>
       typeof nó === 'object' ? nó.id : this.buscarNó(nó) || this.novoNó(nó),
     );
-    const id = this.buscarArestaByIds(ids) || this.novaAresta(ids, props);
+
+    const arestas = this.buscarArestasExatas(ids);
+    if (arestas.length > 1) throw new Error('Mais de uma aresta encontrada');
+
+    const id = arestas[0] || this.novaAresta(ids, props);
 
     if (!this.listening) {
       this.listening = true;
@@ -134,9 +149,49 @@ class Graphit {
    * @param s
    * @returns
    */
-  moveAresta(nó: Id, origem: number, destino: number) {
+  moverAresta(nó: Id, origem: number, destino: number) {
     const elemento = this.get(nó);
     elemento.arestas.splice(destino, 0, elemento.arestas.splice(origem, 1)[0]);
+  }
+
+  /**
+   * Exclui aresta.
+   * Lança excessão se o id não pertencer a uma aresta.
+   * Lança excessão se a aresta pertencer a outras arestas.
+   * @param id Identificador da aresta a ser removida.
+   */
+  excluirAresta(id: Id) {
+    const elemento = this.get(id);
+    if (!('nós' in elemento))
+      throw new Error(`O elemento ${id} não é uma aresta`);
+
+    if (elemento.arestas.length > 0)
+      throw new Error(`A aresta ${id} pertence a outras arestas`);
+
+    elemento.nós.forEach(nó => this.desvincularAresta(nó, id));
+
+    delete this.db[id];
+  }
+
+  /**
+   * Remove aresta de um nó.
+   * @param nó
+   * @param aresta
+   */
+  private desvincularAresta(nó: Id, aresta: Id) {
+    const elemento = this.get(nó);
+
+    const index = elemento.arestas.indexOf(aresta);
+    if (index == -1) {
+      throw new Error(`Aresta "${aresta}" não pertence ao nó "${nó}"`);
+    }
+
+    elemento.arestas.splice(index, 1);
+
+    // Se não houver mais arestas relacionadas ao nó, remove-o
+    if ('valor' in elemento && elemento.arestas.length === 0) {
+      delete this.db[nó];
+    }
   }
 
   tokens(s: string) {
@@ -213,7 +268,9 @@ class Graphit {
   carregar(arquivo: string) {
     const dados = readFileSync(arquivo, 'utf-8');
     this.db = JSON.parse(dados);
-    this._nextId = Object.keys(this.db).length;
+
+    const keys = Object.keys(this.db);
+    this._nextId = Math.max(...keys.map(key => parseInt(key, 36))) + 1;
   }
 }
 

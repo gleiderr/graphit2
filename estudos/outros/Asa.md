@@ -1,5 +1,5 @@
 # Asa
-- Rei de Judá (1 Rs 15.33, 1 Rs 16.8)
+- Rei de Judá (1 Rs 15.28, 1 Rs 15.33, 1 Rs 16.8)
 - Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16)
 - Baasa fortificou Ramá para que ninguém pudesse entrar no território de Asa ou sair de lá (1 Rs 15.17)
 - Ajuntou prata e ouro (1 Rs 15.18)
@@ -14,8 +14,11 @@
   - Com as pedras e a madeira que Baasa estivera usando (1 Rs 15.22)
 - Baasa tornou-se rei de todo o Israel no terceiro ano do reinado de Asa (1 Rs 15.33)
 - Elá tornou-se rei de Israel no 26º ano do reinado de Asa (1 Rs 16.8)
+- Baasa matou Nadabe no terceiro ano do reinado de Asa (1 Rs 15.28)
 
 > ## Referências
+> 1 Rs 15.28 : Baasa matou Nadabe no terceiro ano do reinado de Asa, rei de Judá, e foi o seu sucessor.
+>
 > 1 Rs 15.33 : No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
 >
 > 1 Rs 16.8 : No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.

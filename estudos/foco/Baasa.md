@@ -21,8 +21,11 @@
   - Andando nos caminhos de Jeroboão (1 Rs 15.34)
   - Andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
 - Elá , filho de Baasa (1 Rs 16.8)
-- Conspirou contra Nadabe e o matou em Gibetom (1 Rs 15.27)
-  - Enquanto Nadabe e todo o exécito de Israel a sitiavam (1 Rs 15.27)
+- Conspirou contra Nadabe (1 Rs 15.27)
+- Matou Nadabe (1 Rs 15.27, 1 Rs 15.28)
+  - Em Gibetom , enquanto Nadabe e todo o exécito de Israel a sitiavam (1 Rs 15.27)
+  - No terceiro ano do reinado de Asa (1 Rs 15.28)
+- Foi sucessor de Nadabe (1 Rs 15.28)
 
 > ## Referências
 > 1 Rs 15.33 : No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
@@ -42,3 +45,5 @@
 > 1 Rs 15.34 : Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.
 >
 > 1 Rs 16.8 : No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.
+>
+> 1 Rs 15.28 : Baasa matou Nadabe no terceiro ano do reinado de Asa, rei de Judá, e foi o seu sucessor.

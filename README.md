@@ -14,11 +14,7 @@ Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a uti
 
 # Versão Baasa
 ## Fazer
-- Imprimir análise dos versículos por expressões
 - Instalar tufte.css
-- Destokenizar
-- Implementar testes unitários
-- Remover '-' do nível zero?
 - Publicar no Github
 - Tag "Baasa" em git
 
@@ -26,6 +22,13 @@ Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a uti
 - Organizar arquivos e pastas
 - Carregar Bíblia.json
 - Movimentar arestas
+
+# Versão Obede-Edom
+## Fazer
+- Imprimir análise dos versículos por expressões
+- Destokenizar
+- Implementar testes unitários
+- Remover '-' do nível zero?
 
 ## Referências
 São impressas à frete de cada impressão de aresta e seus respectivos versículos são impressas no final de cada título impresso

@@ -5,7 +5,7 @@ inserirVersículo(
   '1 Rs 16.8',
   'No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.',
   () => {
-    aresta(['Asa', ', rei de', 'Judá']);
+    aresta('Asa, rei de Judá');
     aresta(['Elá', ', filho', 'de', 'Baasa']);
     aresta(['Elá', ', rei de', 'Israel']);
 

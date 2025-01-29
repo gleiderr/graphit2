@@ -26,6 +26,7 @@ class Bíblia {
     nó: Id,
     arquivo: string,
     destino: 'foco' | 'outros' | 'pronto',
+    { debug = false } = {},
   ) {
     const paths = {
       foco: './estudos/foco/',
@@ -35,18 +36,19 @@ class Bíblia {
     const path = paths[destino] + arquivo;
     writeFileSync(path, ''); // Inicia arquivo em branco
 
-    const idReferências = this.setupReferências();
+    const idReferências = this.setupReferências(debug);
 
-    const descriçãoBaasa = graphit.descrever(nó);
+    const descrição = graphit.descrever(nó);
+
     this.visitados = this.visitados.union(graphit.visitados);
 
-    const texto = markdown.toMarkdown(descriçãoBaasa);
+    const texto = markdown.toMarkdown(descrição, { debug });
     appendFileSync(path, `${texto}\n\n`);
 
-    this.imprimeReferências(idReferências, path);
+    if (idReferências) this.imprimeReferências(idReferências, path);
   }
 
-  public imprimeNãoVisitados() {
+  imprimeNãoVisitados() {
     const arquivo = 'Não visitados.md';
     const path = './estudos/' + arquivo;
     writeFileSync(path, ''); // Inicia arquivo em branco
@@ -108,7 +110,13 @@ class Bíblia {
     delete markdown.prefixo;
   }
 
-  private setupReferências() {
+  private setupReferências(debug: boolean) {
+    delete markdown.sufixo;
+    delete markdown.prefixo;
+    delete markdown.onGetLinha;
+    markdown.filterOut = () => false;
+    if (debug) return;
+
     const isNóReferência = (nó: Descrição) =>
       'valor' in nó && nó.valor === 'Referência';
     const contémNóReferência = (aresta: DescriçãoAresta) =>
@@ -140,6 +148,18 @@ class Bíblia {
     // Não imprime arestas contendo apenas a referência
     markdown.filterOut = contémNóReferência;
     return idReferências;
+  }
+
+  excluir(id: Id) {
+    try {
+      graphit.excluirAresta(id);
+    } catch (error) {
+      bíblia.imprimeEstudo(id, 'Erro exclusão.md', 'outros', { debug: true });
+
+      if (error instanceof Error)
+        throw new Error(`Erro ao tentar excluir:\n  ${error.message}\n`);
+      else throw error;
+    }
   }
 }
 
