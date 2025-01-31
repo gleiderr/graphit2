@@ -1,4 +1,4 @@
-import { bíblia, inserirVersículo } from '../Biblia';
+import { inserirVersículo } from '../Biblia';
 import { aresta, tokens } from '../Graphit';
 
 inserirVersículo(
@@ -20,7 +20,16 @@ inserirVersículo('1 Rs 15.28', 'Baasa matou Nadabe no terceiro ano do reinado d
   aresta('Baasa foi sucessor de Nadabe');
 });
 
-bíblia.excluir('7w');
-bíblia.excluir('81');
-bíblia.excluir('80');
-bíblia.excluir(aresta('Baasa conspirou contra Nadabe e o matou em Gibetom').id);
+inserirVersículo(
+  '1 Rs 15.29',
+  'Assim que começou a reinar, matou toda a família de Jeroboão. Dos pertencentes a Jeroboão não deixou ninguém vivo, mas destruiu a todos, de acordo com a palavra do Senhor anunciada por seu servo, o silonita Aías.',
+  () => {
+    aresta([aresta('Baasa matou toda a família de Jeroboão'), ...tokens('assim que começou a reinar')]);
+    aresta([
+      aresta('Baasa não deixou ninguém vivo dos pertencentes a Jeroboão, mas destruiu a todos'),
+      ...tokens('de acordo com a palavra do Senhor anunciada por Aías'),
+    ]);
+
+    aresta('Aías, o silonita');
+  },
+);

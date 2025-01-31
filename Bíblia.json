@@ -14,7 +14,8 @@
       "69",
       "6t",
       "7k",
-      "8e"
+      "8e",
+      "8r"
     ]
   },
   "2": {
@@ -25,9 +26,9 @@
   "4": {
     "valor": "Baasa",
     "arestas": [
+      "9",
       "57",
       "7o",
-      "9",
       "m",
       "u",
       "y",
@@ -36,17 +37,19 @@
       "4w",
       "77",
       "7d",
-      "5b",
-      "5t",
-      "6d",
       "86",
       "88",
-      "8l"
+      "8l",
+      "8u",
+      "97",
+      "5b",
+      "5t",
+      "6d"
     ]
   },
   "5": {
     "valor": ",",
-    "arestas": ["9", "2f", "3e", "57", "7g", "7o", "84", "8a", "8i"]
+    "arestas": ["9", "2f", "3e", "57", "7g", "7o", "84", "8a", "8i", "97", "9g"]
   },
   "6": { "valor": "rei", "arestas": ["9", "2m", "5b", "6m", "8i"] },
   "7": {
@@ -80,7 +83,9 @@
       "8a",
       "8g",
       "8i",
-      "8l"
+      "8l",
+      "8u",
+      "9d"
     ]
   },
   "8": {
@@ -89,7 +94,7 @@
   },
   "9": { "nós": ["4", "5", "6", "7", "8"], "arestas": ["b", "r", "2w", "59"] },
   "10": { "valor": "para que", "arestas": ["19"] },
-  "11": { "valor": "ninguém", "arestas": ["19", "6z"] },
+  "11": { "valor": "ninguém", "arestas": ["19", "6z", "97"] },
   "12": { "valor": "pudesse", "arestas": ["19"] },
   "13": { "valor": "entrar", "arestas": ["19"] },
   "14": { "valor": "no", "arestas": ["19", "5f", "6p", "8g"] },
@@ -115,7 +120,7 @@
     ],
     "arestas": ["1a"]
   },
-  "20": { "valor": "dos", "arestas": ["23", "4o"] },
+  "20": { "valor": "dos", "arestas": ["23", "4o", "97"] },
   "21": { "valor": "seus", "arestas": ["23"] },
   "22": { "valor": "oficiais", "arestas": ["23"] },
   "23": {
@@ -195,8 +200,8 @@
   },
   "52": { "nós": ["50", "1", "51"], "arestas": [] },
   "53": { "valor": ", rei de", "arestas": ["6f"] },
-  "56": { "valor": "Aías", "arestas": ["57"] },
-  "57": { "nós": ["4", "5", "29", "7", "56"], "arestas": ["58", "7l"] },
+  "56": { "valor": "Aías", "arestas": ["57", "9d", "9g"] },
+  "57": { "nós": ["4", "5", "29", "7", "56"], "arestas": ["7l", "58"] },
   "58": { "nós": ["57", "a", "50"], "arestas": [] },
   "59": { "nós": ["9", "a", "50"], "arestas": [] },
   "60": { "nós": ["5z", "a", "5n"], "arestas": [] },
@@ -255,6 +260,34 @@
   "87": { "nós": ["86", "a", "7i"], "arestas": [] },
   "88": { "nós": ["4", "7t", "7s"], "arestas": ["89", "8a", "8f", "8g"] },
   "89": { "nós": ["88", "a", "7i"], "arestas": [] },
+  "90": { "nós": ["8z", "a", "8p"], "arestas": [] },
+  "91": { "valor": "não", "arestas": ["97"] },
+  "92": { "valor": "deixou", "arestas": ["97"] },
+  "93": { "valor": "vivo", "arestas": ["97"] },
+  "94": { "valor": "pertencentes", "arestas": ["97"] },
+  "95": { "valor": "mas", "arestas": ["97"] },
+  "96": { "valor": "destruiu", "arestas": ["97"] },
+  "97": {
+    "nós": [
+      "4",
+      "91",
+      "92",
+      "11",
+      "93",
+      "20",
+      "94",
+      "1y",
+      "5y",
+      "5",
+      "95",
+      "96",
+      "1y",
+      "6v"
+    ],
+    "arestas": ["98", "9d"]
+  },
+  "98": { "nós": ["97", "a", "8p"], "arestas": [] },
+  "99": { "valor": "acordo", "arestas": ["9d"] },
   "a": {
     "valor": "Referência",
     "arestas": [
@@ -320,7 +353,12 @@
       "8j",
       "8m",
       "8n",
-      "8o"
+      "8o",
+      "8v",
+      "90",
+      "98",
+      "9e",
+      "9h"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "arestas": [] },
@@ -352,7 +390,7 @@
   "i": { "valor": "todo", "arestas": ["m", "4d", "5b", "8a"] },
   "j": {
     "valor": "o",
-    "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t", "8a"]
+    "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t", "8a", "9g"]
   },
   "k": { "valor": "reinado", "arestas": ["m", "5f", "6p", "8g"] },
   "l": { "valor": "deles", "arestas": ["m"] },
@@ -408,17 +446,17 @@
   "1i": { "nós": ["1h", "a", "1b"], "arestas": [] },
   "1j": {
     "valor": "que",
-    "arestas": ["1q", "31", "3e", "3e", "40", "65", "77", "7d"]
+    "arestas": ["1q", "31", "3e", "3e", "40", "65", "77", "7d", "8z"]
   },
   "1k": { "valor": "haviam", "arestas": ["1q"] },
   "1l": { "valor": "sobrado", "arestas": ["1q"] },
   "1m": {
     "valor": "do",
-    "arestas": ["1q", "1q", "1q", "1u", "5f", "6p", "8g"]
+    "arestas": ["1q", "1q", "1q", "1u", "5f", "6p", "8g", "9d"]
   },
   "1n": { "valor": "tesouro", "arestas": ["1q"] },
   "1o": { "valor": "templo", "arestas": ["1q"] },
-  "1p": { "valor": "Senhor", "arestas": ["1q", "5t"] },
+  "1p": { "valor": "Senhor", "arestas": ["1q", "5t", "9d"] },
   "1q": {
     "nós": ["1h", "1j", "1k", "1l", "1m", "1n", "1m", "1o", "1m", "1p"],
     "arestas": ["1r"]
@@ -432,7 +470,21 @@
   "1x": { "valor": "confiou", "arestas": ["23"] },
   "1y": {
     "valor": "a",
-    "arestas": ["23", "27", "3p", "4o", "65", "77", "7d", "8a"]
+    "arestas": [
+      "23",
+      "27",
+      "3p",
+      "4o",
+      "65",
+      "77",
+      "7d",
+      "8a",
+      "8u",
+      "8z",
+      "97",
+      "97",
+      "9d"
+    ]
   },
   "1z": { "valor": "alguns", "arestas": ["23"] },
   "2a": { "valor": "Tabriom", "arestas": ["2b", "2f"] },
@@ -461,7 +513,7 @@
   },
   "2v": { "nós": ["2t", "1", "2u"], "arestas": [] },
   "2w": { "nós": ["9", "a", "2t"], "arestas": [] },
-  "2x": { "valor": "com", "arestas": ["31", "3e", "7d"] },
+  "2x": { "valor": "com", "arestas": ["31", "3e", "7d", "9d"] },
   "2y": { "valor": "uma", "arestas": ["31", "84"] },
   "2z": { "valor": "mensagem", "arestas": ["31"] },
   "3a": { "valor": "tens", "arestas": ["3e"] },
@@ -609,7 +661,7 @@
   "5v": { "valor": "andando", "arestas": ["5z", "65"] },
   "5w": { "valor": "nos", "arestas": ["5z", "65"] },
   "5x": { "valor": "caminhos", "arestas": ["5z"] },
-  "5y": { "valor": "Jeroboão", "arestas": ["5z", "65"] },
+  "5y": { "valor": "Jeroboão", "arestas": ["5z", "65", "8u", "97"] },
   "5z": { "nós": ["5t", "5v", "5w", "5x", "7", "5y"], "arestas": ["60"] },
   "6b": { "valor": "Elá", "arestas": ["6d", "6f", "6i", "6m"] },
   "6c": { "valor": ", filho", "arestas": ["6d"] },
@@ -640,7 +692,7 @@
   },
   "6t": { "nós": ["6r", "1", "6s"], "arestas": [] },
   "6u": { "valor": "reuniu", "arestas": ["6z"] },
-  "6v": { "valor": "todos", "arestas": ["6z"] },
+  "6v": { "valor": "todos", "arestas": ["6z", "97"] },
   "6w": { "valor": "homens", "arestas": ["6z"] },
   "6x": { "valor": "-", "arestas": ["6z"] },
   "6y": { "valor": "isentado", "arestas": ["6z"] },
@@ -676,7 +728,7 @@
   "7q": { "valor": "conspirou", "arestas": ["86"] },
   "7r": { "valor": "contra", "arestas": ["86"] },
   "7s": { "valor": "Nadabe", "arestas": ["86", "88", "8a", "8l"] },
-  "7t": { "valor": "matou", "arestas": ["88"] },
+  "7t": { "valor": "matou", "arestas": ["88", "8u"] },
   "7u": { "valor": "Gibetom", "arestas": ["84", "8a"] },
   "7x": { "valor": "enquanto", "arestas": ["8a"] },
   "7y": { "valor": "exécito", "arestas": ["8a"] },
@@ -719,5 +771,36 @@
   "8l": { "nós": ["4", "4u", "8k", "7", "7s"], "arestas": ["8m"] },
   "8m": { "nós": ["8l", "a", "8c"], "arestas": [] },
   "8n": { "nós": ["8i", "a", "50"], "arestas": [] },
-  "8o": { "nós": ["8i", "a", "67"], "arestas": [] }
+  "8o": { "nós": ["8i", "a", "67"], "arestas": [] },
+  "8p": {
+    "valor": "1 Rs 15.29",
+    "arestas": ["8r", "8v", "90", "98", "9e", "9h"]
+  },
+  "8q": {
+    "valor": "Assim que começou a reinar, matou toda a família de Jeroboão. Dos pertencentes a Jeroboão não deixou ninguém vivo, mas destruiu a todos, de acordo com a palavra do Senhor anunciada por seu servo, o silonita Aías.",
+    "arestas": ["8r"]
+  },
+  "8r": { "nós": ["8p", "1", "8q"], "arestas": [] },
+  "8s": { "valor": "toda", "arestas": ["8u"] },
+  "8t": { "valor": "família", "arestas": ["8u"] },
+  "8u": {
+    "nós": ["4", "7t", "8s", "1y", "8t", "7", "5y"],
+    "arestas": ["8v", "8z"]
+  },
+  "8v": { "nós": ["8u", "a", "8p"], "arestas": [] },
+  "8w": { "valor": "assim", "arestas": ["8z"] },
+  "8x": { "valor": "começou", "arestas": ["8z"] },
+  "8y": { "valor": "reinar", "arestas": ["8z"] },
+  "8z": { "nós": ["8u", "8w", "1j", "8x", "1y", "8y"], "arestas": ["90"] },
+  "9a": { "valor": "palavra", "arestas": ["9d"] },
+  "9b": { "valor": "anunciada", "arestas": ["9d"] },
+  "9c": { "valor": "por", "arestas": ["9d"] },
+  "9d": {
+    "nós": ["97", "7", "99", "2x", "1y", "9a", "1m", "1p", "9b", "9c", "56"],
+    "arestas": ["9e"]
+  },
+  "9e": { "nós": ["9d", "a", "8p"], "arestas": [] },
+  "9f": { "valor": "silonita", "arestas": ["9g"] },
+  "9g": { "nós": ["56", "5", "j", "9f"], "arestas": ["9h"] },
+  "9h": { "nós": ["9g", "a", "8p"], "arestas": [] }
 }
