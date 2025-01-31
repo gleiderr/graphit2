@@ -2,6 +2,12 @@ import { appendFileSync, writeFileSync } from 'fs';
 import { Descrição, DescriçãoAresta, graphit, Id } from './Graphit';
 import { markdown } from './Markdown';
 
+type EstudosDestino = {
+  foco: string[];
+  outros: string[];
+  pronto: string[];
+};
+
 class Bíblia {
   visitados: Set<string> = new Set();
 
@@ -20,6 +26,17 @@ class Bíblia {
     definirArestas();
 
     graphit.removeListener('afterAresta', setReferência);
+  }
+
+  imprimirEstudos(estudos: EstudosDestino) {
+    for (const key in estudos) {
+      const destino = key as keyof EstudosDestino;
+      const estudo = estudos[destino];
+      estudo.forEach(arquivo => {
+        const nó = graphit.buscarNó(arquivo);
+        if (nó) this.imprimeEstudo(nó, arquivo + '.md', destino);
+      });
+    }
   }
 
   imprimeEstudo(
