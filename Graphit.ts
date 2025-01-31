@@ -146,11 +146,29 @@ class Graphit {
 
   /**
    * Move aresta de uma posição para outra.
-   * @param s
-   * @returns
+   * @param nó
+   * @param origem
+   * @param destino
    */
-  moverAresta(nó: Id, origem: number, destino: number) {
+  moverAresta(nó: Id, origem: number | Id, destino: number | Id) {
     const elemento = this.get(nó);
+
+    const getIndex = (id: Id) => {
+      const index = elemento.arestas.indexOf(id);
+      if (index >= 0) return index;
+      else throw new Error(`Aresta "${id}" não pertence ao nó "${nó}"`);
+    };
+
+    origem = typeof origem === 'number' ? origem : getIndex(origem);
+    destino = typeof destino === 'number' ? destino : getIndex(destino);
+
+    if (origem >= elemento.arestas.length) {
+      throw new Error(`Índice de origem "${origem}" é inválido`);
+    }
+    if (destino >= elemento.arestas.length) {
+      throw new Error(`Índice de destino "${destino}" é inválido`);
+    }
+
     elemento.arestas.splice(destino, 0, elemento.arestas.splice(origem, 1)[0]);
   }
 
