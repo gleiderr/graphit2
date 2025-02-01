@@ -7,10 +7,7 @@ inserirVersículo(
   () => {
     aresta('Baasa, filho de Aías');
     aresta('Baasa, da tribo de Issacar');
-    aresta('Baasa conspirou contra Nadabe');
     aresta('Gibetom, uma cidade filistéia');
-
-    aresta([aresta('Baasa matou Nadabe'), ...tokens('em Gibetom, enquanto Nadabe e todo o exécito de Israel a sitiavam')]);
   },
 );
 
