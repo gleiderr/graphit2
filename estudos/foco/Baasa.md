@@ -1,8 +1,8 @@
 # Baasa
-- Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33)
+- Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33, 1 Rs 15.32)
 - Filho de Aías (1 Rs 15.27, 1 Rs 15.33)
 - Da tribo de Issacar (1 Rs 15.27)
-- Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16)
+- Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16, 1 Rs 15.32)
 - Atacou Judá (1 Rs 15.17)
 - Fortificou Ramá (1 Rs 15.17)
   - Para que ninguém pudesse entrar no território de Asa ou sair de lá (1 Rs 15.17)
@@ -30,6 +30,13 @@
   - Andando nos caminhos de Jeroboão (1 Rs 15.34)
   - Andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
 - Elá , filho de Baasa (1 Rs 16.8)
+- Quando Aías ouviu o som dos passos da mulher de Jeroboão junto da porta , ele disse : " O Senhor levantará para si um rei sobre Israel ( Baasa ) que eliminará a família de Jeroboão . " (1 Rs 14.14)
+- Andou nos caminhos de Jeroboão (1 Rs 15.34)
+- Então a palavra do Senhor contra Baasa veio a Jeú : (1 Rs 16.1)
+- Então a palavra do Senhor contra Baasa veio a Jeú : " O Senhor levantou Baasa do pó e o tornou líder de Israel " (1 Rs 16.2)
+- Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa andou nos caminhos de Jeroboão " (1 Rs 16.2)
+- Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel pecar " (1 Rs 16.2)
+- Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles " (1 Rs 16.2)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
@@ -39,6 +46,8 @@
 > 1 Rs 15.19 : com uma mensagem que dizia: "Façamos um tratado, como fizeram meu pai e o teu. Estou te enviando como presente prata e ouro. Agora, rompe o tratado que tens com Baasa, rei de Israel, para que ele saia do meu país".
 >
 > 1 Rs 15.33 : No terceiro ano do reinado de Asa, rei de Judá, Baasa, filho de Aías, tornou-se rei de todo o Israel, em Tirza, e reinou vinte e quatro anos.
+>
+> 1 Rs 15.32 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 1 Rs 15.27 : Baasa, filho de Aías, da tribo de Issacar, conspirou contra ele, e o matou na cidade filistéia de Gibetom, enquanto Nadabe e todo o exército de Israel a sitiavam.
 >
@@ -53,3 +62,9 @@
 > 1 Rs 15.34 : Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.
 >
 > 1 Rs 16.8 : No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.
+>
+> 1 Rs 14.14 : "O Senhor levantará para si um rei sobre Israel que eliminará a família de Jeroboão. Este é o dia! Como? Sim, agora mesmo.
+>
+> 1 Rs 16.1 : Então a palavra do Senhor contra Baasa veio a Jeú, filho de Hanani:
+>
+> 1 Rs 16.2 : "Eu o levantei do pó e o tornei líder de Israel, meu povo, mas você andou nos caminhos de Jeroboão e fez o meu povo pecar e provocar a minha ira por causa dos pecados deles.

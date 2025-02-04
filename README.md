@@ -12,19 +12,31 @@ Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a uti
 - T
 - S
 
-# Versão Baasa
-## Fazer
+# Bíblia
+Ao compilar os versículos da Bíblia são executadas as seguintes operações:
+- São identificados os fatos, os apostos, locuções adverbiais e pronomes
+- Cada aposto é transformado em uma expressão independente
+- Locuções adverbiais são transformadas em expressões dependentes da expressão individual
+- Pronomes são substituídos por seus respectivos substantivos
+
+## Versão Baasa
+### Fazer
+- Remover ato de ignorar o primeiro termo no markdown
+- Converter arquivos markdown em html
 - Instalar tufte.css
 - Publicar no Github
 - Tag "Baasa" em git
 
-## Feito
+### Feito
 - Organizar arquivos e pastas
 - Carregar Bíblia.json
 - Movimentar arestas
 
-# Versão Obede-Edom
-## Fazer
+## Versão Obede-Edom
+### Fazer
+- Incluir exclusão, movimentação e ordenação "automática" via linha de comando
+- Incluir identificação automática de sub expressões
+- Criar relação de equivalência entre expressões para evitar repetição de informações
 - Imprimir análise dos versículos por expressões
 - Destokenizar
 - Implementar testes unitários

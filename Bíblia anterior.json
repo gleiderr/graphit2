@@ -2,32 +2,11 @@
   "0": { "valor": "1 Rs 15.16", "arestas": ["3", "b", "n"] },
   "1": {
     "valor": ":",
-    "arestas": [
-      "3",
-      "q",
-      "1d",
-      "2v",
-      "3m",
-      "4k",
-      "52",
-      "5p",
-      "69",
-      "6t",
-      "7k",
-      "8e",
-      "8r",
-      "9k",
-      "9t",
-      "ad",
-      "ax",
-      "b5",
-      "b9",
-      "bg"
-    ]
+    "arestas": ["3", "q", "1d", "2v", "3m", "4k", "52", "5p", "69", "6t", "7k", "8e", "8r"]
   },
   "2": {
     "valor": "Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.",
-    "arestas": ["3", "ax"]
+    "arestas": ["3"]
   },
   "3": { "nós": ["0", "1", "2"], "arestas": [] },
   "4": {
@@ -51,21 +30,14 @@
       "97",
       "5b",
       "5t",
-      "6d",
-      "al",
-      "b1",
-      "b9",
-      "bl",
-      "bq",
-      "bt",
-      "by"
+      "6d"
     ]
   },
   "5": {
     "valor": ",",
-    "arestas": ["9", "2f", "3e", "57", "7g", "7o", "84", "8a", "8i", "97", "9g", "9t", "9w", "au", "bc", "bo"]
+    "arestas": ["9", "2f", "3e", "57", "7g", "7o", "84", "8a", "8i", "97", "9g"]
   },
-  "6": { "valor": "rei", "arestas": ["9", "2m", "5b", "6m", "8i", "al"] },
+  "6": { "valor": "rei", "arestas": ["9", "2m", "5b", "6m", "8i"] },
   "7": {
     "valor": "de",
     "arestas": [
@@ -99,25 +71,14 @@
       "8i",
       "8l",
       "8u",
-      "9d",
-      "9t",
-      "9w",
-      "a9",
-      "al",
-      "b1",
-      "bc",
-      "bl",
-      "bq"
+      "9d"
     ]
   },
   "8": {
     "valor": "Israel",
-    "arestas": ["9", "40", "5b", "65", "6f", "6m", "8a", "al", "bl", "bo", "bt", "by"]
+    "arestas": ["9", "40", "5b", "65", "6f", "6m", "8a"]
   },
-  "9": {
-    "nós": ["4", "5", "6", "7", "8"],
-    "arestas": ["b", "r", "2w", "59", "az"]
-  },
+  "9": { "nós": ["4", "5", "6", "7", "8"], "arestas": ["b", "r", "2w", "59"] },
   "10": { "valor": "para que", "arestas": ["19"] },
   "11": { "valor": "ninguém", "arestas": ["19", "6z", "97"] },
   "12": { "valor": "pudesse", "arestas": ["19"] },
@@ -131,7 +92,7 @@
     "nós": ["y", "10", "11", "12", "13", "14", "15", "7", "f", "16", "17", "7", "18"],
     "arestas": ["1a"]
   },
-  "20": { "valor": "dos", "arestas": ["23", "4o", "97", "9t", "by"] },
+  "20": { "valor": "dos", "arestas": ["23", "4o", "97"] },
   "21": { "valor": "seus", "arestas": ["23"] },
   "22": { "valor": "oficiais", "arestas": ["23"] },
   "23": {
@@ -146,43 +107,18 @@
   },
   "27": { "nós": ["1h", "g", "1w", "25", "1y", "26"], "arestas": ["28", "31"] },
   "28": { "nós": ["27", "a", "1b"], "arestas": [] },
-  "29": { "valor": "filho", "arestas": ["2b", "2f", "57", "bc"] },
+  "29": { "valor": "filho", "arestas": ["2b", "2f", "57"] },
   "30": { "valor": "dizia", "arestas": ["31"] },
   "31": {
     "nós": ["27", "2x", "2y", "2z", "1j", "30"],
     "arestas": ["32", "3e", "3i"]
   },
   "32": { "nós": ["31", "a", "2t"], "arestas": [] },
-  "33": {
-    "valor": "\"",
-    "arestas": [
-      "3e",
-      "3e",
-      "3e",
-      "9w",
-      "9w",
-      "a1",
-      "a1",
-      "a9",
-      "a9",
-      "al",
-      "al",
-      "au",
-      "au",
-      "bl",
-      "bl",
-      "bq",
-      "bq",
-      "bt",
-      "bt",
-      "by",
-      "by"
-    ]
-  },
+  "33": { "valor": "\"", "arestas": ["3e", "3e", "3e"] },
   "34": { "valor": "Façamos", "arestas": ["3e"] },
-  "35": { "valor": "um", "arestas": ["3e", "3i", "al"] },
+  "35": { "valor": "um", "arestas": ["3e", "3i"] },
   "36": { "valor": "tratado", "arestas": ["3e", "3e", "3i"] },
-  "37": { "valor": ".", "arestas": ["3e", "3e", "9w", "a9", "al", "au"] },
+  "37": { "valor": ".", "arestas": ["3e", "3e"] },
   "38": { "valor": "Agora", "arestas": ["3e"] },
   "39": { "valor": "rompe", "arestas": ["3e"] },
   "40": {
@@ -208,12 +144,12 @@
   },
   "52": { "nós": ["50", "1", "51"], "arestas": [] },
   "53": { "valor": ", rei de", "arestas": ["6f"] },
-  "56": { "valor": "Aías", "arestas": ["57", "9d", "9g", "9t"] },
+  "56": { "valor": "Aías", "arestas": ["57", "9d", "9g"] },
   "57": { "nós": ["4", "5", "29", "7", "56"], "arestas": ["7l", "58"] },
   "58": { "nós": ["57", "a", "50"], "arestas": [] },
   "59": { "nós": ["9", "a", "50"], "arestas": [] },
   "60": { "nós": ["5z", "a", "5n"], "arestas": [] },
-  "61": { "valor": "pecados", "arestas": ["65", "by"] },
+  "61": { "valor": "pecados", "arestas": ["65"] },
   "62": { "valor": "tinha", "arestas": ["65"] },
   "63": { "valor": "levado", "arestas": ["65"] },
   "64": { "valor": "cometer", "arestas": ["65"] },
@@ -335,23 +271,7 @@
       "90",
       "98",
       "9e",
-      "9h",
-      "9u",
-      "9x",
-      "a2",
-      "aa",
-      "am",
-      "av",
-      "ay",
-      "az",
-      "b2",
-      "ba",
-      "bd",
-      "bm",
-      "bp",
-      "br",
-      "bu",
-      "bz"
+      "9h"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "arestas": [] },
@@ -364,19 +284,19 @@
   },
   "g": {
     "valor": "e",
-    "arestas": ["m", "1h", "27", "3i", "77", "77", "7b", "7d", "8a", "bl"]
+    "arestas": ["m", "1h", "27", "3i", "77", "77", "7b", "7d", "8a"]
   },
   "h": { "valor": "durante", "arestas": ["m"] },
   "i": { "valor": "todo", "arestas": ["m", "4d", "5b", "8a"] },
   "j": {
     "valor": "o",
-    "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t", "8a", "9g", "9t", "au", "bl"]
+    "arestas": ["m", "3e", "3i", "3i", "4d", "5b", "5t", "8a", "9g"]
   },
   "k": { "valor": "reinado", "arestas": ["m", "5f", "6p", "8g"] },
-  "l": { "valor": "deles", "arestas": ["m", "by"] },
+  "l": { "valor": "deles", "arestas": ["m"] },
   "m": {
     "nós": ["c", "d", "e", "f", "g", "4", "h", "i", "j", "k", "l"],
-    "arestas": ["n", "ay"]
+    "arestas": ["n"]
   },
   "n": { "nós": ["m", "a", "0"], "arestas": [] },
   "o": { "valor": "1 Rs 15.17", "arestas": ["q", "r", "v", "z", "1a"] },
@@ -414,20 +334,17 @@
   "1i": { "nós": ["1h", "a", "1b"], "arestas": [] },
   "1j": {
     "valor": "que",
-    "arestas": ["1q", "31", "3e", "3e", "40", "65", "77", "7d", "8z", "a1", "al"]
+    "arestas": ["1q", "31", "3e", "3e", "40", "65", "77", "7d", "8z"]
   },
   "1k": { "valor": "haviam", "arestas": ["1q"] },
   "1l": { "valor": "sobrado", "arestas": ["1q"] },
   "1m": {
     "valor": "do",
-    "arestas": ["1q", "1q", "1q", "1u", "5f", "6p", "8g", "9d", "b9", "bl", "bo", "by"]
+    "arestas": ["1q", "1q", "1q", "1u", "5f", "6p", "8g", "9d"]
   },
   "1n": { "valor": "tesouro", "arestas": ["1q"] },
   "1o": { "valor": "templo", "arestas": ["1q"] },
-  "1p": {
-    "valor": "Senhor",
-    "arestas": ["1q", "5t", "9d", "al", "b9", "bl", "bo", "by"]
-  },
+  "1p": { "valor": "Senhor", "arestas": ["1q", "5t", "9d"] },
   "1q": {
     "nós": ["1h", "1j", "1k", "1l", "1m", "1n", "1m", "1o", "1m", "1p"],
     "arestas": ["1r"]
@@ -441,20 +358,20 @@
   "1x": { "valor": "confiou", "arestas": ["23"] },
   "1y": {
     "valor": "a",
-    "arestas": ["23", "27", "3p", "4o", "65", "77", "7d", "8a", "8u", "8z", "97", "97", "9d", "al", "b9", "b9", "by"]
+    "arestas": ["23", "27", "3p", "4o", "65", "77", "7d", "8a", "8u", "8z", "97", "97", "9d"]
   },
   "1z": { "valor": "alguns", "arestas": ["23"] },
   "2a": { "valor": "Tabriom", "arestas": ["2b", "2f"] },
   "2b": { "nós": ["26", "29", "7", "2a"], "arestas": ["2c"] },
   "2c": { "nós": ["2b", "a", "1b"], "arestas": [] },
   "2d": { "valor": "Heziom", "arestas": ["2f", "2i"] },
-  "2e": { "valor": "?", "arestas": ["2f", "a1", "au"] },
+  "2e": { "valor": "?", "arestas": ["2f"] },
   "2f": { "nós": ["2a", "5", "29", "7", "2d", "2e"], "arestas": ["2g"] },
   "2g": { "nós": ["2f", "a", "1b"], "arestas": [] },
   "2h": { "valor": "neto", "arestas": ["2i"] },
   "2i": { "nós": ["26", "2h", "7", "2d"], "arestas": ["2j"] },
   "2j": { "nós": ["2i", "a", "1b"], "arestas": [] },
-  "2k": { "valor": "da", "arestas": ["2m", "7o", "9t", "9t"] },
+  "2k": { "valor": "da", "arestas": ["2m", "7o"] },
   "2l": { "valor": "Síria", "arestas": ["2m"] },
   "2m": { "nós": ["26", "6", "2k", "2l"], "arestas": ["2n"] },
   "2n": { "nós": ["2m", "a", "1b"], "arestas": [] },
@@ -474,8 +391,8 @@
   "2y": { "valor": "uma", "arestas": ["31", "84"] },
   "2z": { "valor": "mensagem", "arestas": ["31"] },
   "3a": { "valor": "tens", "arestas": ["3e"] },
-  "3b": { "valor": "para", "arestas": ["3e", "4w", "al"] },
-  "3c": { "valor": "ele", "arestas": ["3e", "4s", "4y", "9t"] },
+  "3b": { "valor": "para", "arestas": ["3e", "4w"] },
+  "3c": { "valor": "ele", "arestas": ["3e", "4s", "4y"] },
   "3d": { "valor": "saia", "arestas": ["3e"] },
   "3e": {
     "nós": [
@@ -587,13 +504,13 @@
   "5k": { "valor": "24 anos", "arestas": ["5l"] },
   "5l": { "nós": ["5b", "5j", "5k"], "arestas": ["5m"] },
   "5m": { "nós": ["5l", "a", "50"], "arestas": [] },
-  "5n": { "valor": "1 Rs 15.34", "arestas": ["5p", "5u", "60", "66", "b2"] },
+  "5n": { "valor": "1 Rs 15.34", "arestas": ["5p", "5u", "60", "66"] },
   "5o": {
     "valor": "Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.",
     "arestas": ["5p"]
   },
   "5p": { "nós": ["5n", "1", "5o"], "arestas": [] },
-  "5q": { "valor": "fez", "arestas": ["5t", "bt", "by"] },
+  "5q": { "valor": "fez", "arestas": ["5t"] },
   "5r": { "valor": "o que", "arestas": ["5t"] },
   "5s": { "valor": "reprova", "arestas": ["5t"] },
   "5t": {
@@ -602,12 +519,9 @@
   },
   "5u": { "nós": ["5t", "a", "5n"], "arestas": [] },
   "5v": { "valor": "andando", "arestas": ["5z", "65"] },
-  "5w": { "valor": "nos", "arestas": ["5z", "65", "b1", "bq"] },
-  "5x": { "valor": "caminhos", "arestas": ["5z", "b1", "bq"] },
-  "5y": {
-    "valor": "Jeroboão",
-    "arestas": ["5z", "65", "8u", "97", "9t", "9w", "al", "b1", "bq"]
-  },
+  "5w": { "valor": "nos", "arestas": ["5z", "65"] },
+  "5x": { "valor": "caminhos", "arestas": ["5z"] },
+  "5y": { "valor": "Jeroboão", "arestas": ["5z", "65", "8u", "97"] },
   "5z": { "nós": ["5t", "5v", "5w", "5x", "7", "5y"], "arestas": ["60"] },
   "6b": { "valor": "Elá", "arestas": ["6d", "6f", "6i", "6m"] },
   "6c": { "valor": ", filho", "arestas": ["6d"] },
@@ -672,7 +586,7 @@
   "7o": { "nós": ["4", "5", "2k", "7m", "7", "7n"], "arestas": ["7p"] },
   "7p": { "nós": ["7o", "a", "7i"], "arestas": [] },
   "7q": { "valor": "conspirou", "arestas": ["86"] },
-  "7r": { "valor": "contra", "arestas": ["86", "b9"] },
+  "7r": { "valor": "contra", "arestas": ["86"] },
   "7s": { "valor": "Nadabe", "arestas": ["86", "88", "8a", "8l"] },
   "7t": { "valor": "matou", "arestas": ["88", "8u"] },
   "7u": { "valor": "Gibetom", "arestas": ["84", "8a"] },
@@ -713,7 +627,7 @@
   },
   "8r": { "nós": ["8p", "1", "8q"], "arestas": [] },
   "8s": { "valor": "toda", "arestas": ["8u"] },
-  "8t": { "valor": "família", "arestas": ["8u", "al"] },
+  "8t": { "valor": "família", "arestas": ["8u"] },
   "8u": {
     "nós": ["4", "7t", "8s", "1y", "8t", "7", "5y"],
     "arestas": ["8v", "8z"]
@@ -723,9 +637,9 @@
   "8x": { "valor": "começou", "arestas": ["8z"] },
   "8y": { "valor": "reinar", "arestas": ["8z"] },
   "8z": { "nós": ["8u", "8w", "1j", "8x", "1y", "8y"], "arestas": ["90"] },
-  "9a": { "valor": "palavra", "arestas": ["9d", "b9"] },
+  "9a": { "valor": "palavra", "arestas": ["9d"] },
   "9b": { "valor": "anunciada", "arestas": ["9d"] },
-  "9c": { "valor": "por", "arestas": ["9d", "by"] },
+  "9c": { "valor": "por", "arestas": ["9d"] },
   "9d": {
     "nós": ["97", "7", "99", "2x", "1y", "9a", "1m", "1p", "9b", "9c", "56"],
     "arestas": ["9e"]
@@ -733,163 +647,5 @@
   "9e": { "nós": ["9d", "a", "8p"], "arestas": [] },
   "9f": { "valor": "silonita", "arestas": ["9g"] },
   "9g": { "nós": ["56", "5", "j", "9f"], "arestas": ["9h"] },
-  "9h": { "nós": ["9g", "a", "8p"], "arestas": [] },
-  "9i": { "valor": "1 Rs 14.6", "arestas": ["9k", "9u", "9x", "a2", "aa"] },
-  "9j": {
-    "valor": "Quando Aías ouviu o som dos passos junto da porta, disse: \"Entre, mulher de Jeroboão. Por que esse fingimento? Fui encarregado de lhe dar más notícias.",
-    "arestas": ["9k"]
-  },
-  "9k": { "nós": ["9i", "1", "9j"], "arestas": [] },
-  "9l": { "valor": "Quando", "arestas": ["9t"] },
-  "9m": { "valor": "ouviu", "arestas": ["9t"] },
-  "9n": { "valor": "som", "arestas": ["9t"] },
-  "9o": { "valor": "passos", "arestas": ["9t"] },
-  "9p": { "valor": "mulher", "arestas": ["9t", "9w"] },
-  "9q": { "valor": "junto", "arestas": ["9t"] },
-  "9r": { "valor": "porta", "arestas": ["9t"] },
-  "9s": { "valor": "disse", "arestas": ["9t"] },
-  "9t": {
-    "nós": ["9l", "56", "9m", "j", "9n", "20", "9o", "2k", "9p", "7", "5y", "9q", "2k", "9r", "5", "3c", "9s", "1"],
-    "arestas": ["9u", "9w", "a1", "a9", "al", "au"]
-  },
-  "9u": { "nós": ["9t", "a", "9i"], "arestas": [] },
-  "9v": { "valor": "Entre", "arestas": ["9w"] },
-  "9w": {
-    "nós": ["9t", "33", "9v", "5", "9p", "7", "5y", "37", "33"],
-    "arestas": ["9x"]
-  },
-  "9x": { "nós": ["9w", "a", "9i"], "arestas": [] },
-  "9y": { "valor": "Por", "arestas": ["a1"] },
-  "9z": { "valor": "esse", "arestas": ["a1"] },
-  "a0": { "valor": "fingimento", "arestas": ["a1"] },
-  "a1": {
-    "nós": ["9t", "33", "9y", "1j", "9z", "a0", "2e", "33"],
-    "arestas": ["a2"]
-  },
-  "a2": { "nós": ["a1", "a", "9i"], "arestas": [] },
-  "a3": { "valor": "Fui", "arestas": ["a9"] },
-  "a4": { "valor": "encarregado", "arestas": ["a9"] },
-  "a5": { "valor": "lhe", "arestas": ["a9"] },
-  "a6": { "valor": "dar", "arestas": ["a9"] },
-  "a7": { "valor": "más", "arestas": ["a9"] },
-  "a8": { "valor": "notícias", "arestas": ["a9"] },
-  "a9": {
-    "nós": ["9t", "33", "a3", "a4", "7", "a5", "a6", "a7", "a8", "37", "33"],
-    "arestas": ["aa"]
-  },
-  "aa": { "nós": ["a9", "a", "9i"], "arestas": [] },
-  "ab": { "valor": "1 Rs 14.14", "arestas": ["ad", "am", "av"] },
-  "ac": {
-    "valor": "\"O Senhor levantará para si um rei sobre Israel que eliminará a família de Jeroboão. Este é o dia! Como? Sim, agora mesmo.",
-    "arestas": ["ad"]
-  },
-  "ad": { "nós": ["ab", "1", "ac"], "arestas": [] },
-  "ae": { "valor": "O", "arestas": ["al", "bl"] },
-  "af": { "valor": "levantará", "arestas": ["al"] },
-  "ag": { "valor": "si", "arestas": ["al"] },
-  "ah": { "valor": "sobre", "arestas": ["al"] },
-  "ai": { "valor": "(", "arestas": ["al"] },
-  "aj": { "valor": ")", "arestas": ["al"] },
-  "ak": { "valor": "eliminará", "arestas": ["al"] },
-  "al": {
-    "nós": [
-      "9t",
-      "33",
-      "ae",
-      "1p",
-      "af",
-      "3b",
-      "ag",
-      "35",
-      "6",
-      "ah",
-      "8",
-      "ai",
-      "4",
-      "aj",
-      "1j",
-      "ak",
-      "1y",
-      "8t",
-      "7",
-      "5y",
-      "37",
-      "33"
-    ],
-    "arestas": ["am"]
-  },
-  "am": { "nós": ["al", "a", "ab"], "arestas": [] },
-  "an": { "valor": "Este", "arestas": ["au"] },
-  "ao": { "valor": "é", "arestas": ["au"] },
-  "ap": { "valor": "dia!", "arestas": ["au"] },
-  "aq": { "valor": "Como", "arestas": ["au"] },
-  "ar": { "valor": "Sim", "arestas": ["au"] },
-  "as": { "valor": "agora", "arestas": ["au"] },
-  "at": { "valor": "mesmo", "arestas": ["au"] },
-  "au": {
-    "nós": ["9t", "33", "an", "ao", "j", "ap", "aq", "2e", "ar", "5", "as", "at", "37", "33"],
-    "arestas": ["av"]
-  },
-  "av": { "nós": ["au", "a", "ab"], "arestas": [] },
-  "aw": { "valor": "1 Rs 15.32", "arestas": ["ax", "ay", "az"] },
-  "ax": { "nós": ["aw", "1", "2"], "arestas": [] },
-  "ay": { "nós": ["m", "a", "aw"], "arestas": [] },
-  "az": { "nós": ["9", "a", "aw"], "arestas": [] },
-  "b0": { "valor": "andou", "arestas": ["b1", "bq"] },
-  "b1": { "nós": ["4", "b0", "5w", "5x", "7", "5y"], "arestas": ["b2"] },
-  "b2": { "nós": ["b1", "a", "5n"], "arestas": [] },
-  "b3": { "valor": "1 Rs 16.1", "arestas": ["b5", "ba", "bd"] },
-  "b4": {
-    "valor": "Então a palavra do Senhor contra Baasa veio a Jeú, filho de Hanani:",
-    "arestas": ["b5"]
-  },
-  "b5": { "nós": ["b3", "1", "b4"], "arestas": [] },
-  "b6": { "valor": "Então", "arestas": ["b9"] },
-  "b7": { "valor": "veio", "arestas": ["b9"] },
-  "b8": { "valor": "Jeú", "arestas": ["b9", "bc"] },
-  "b9": {
-    "nós": ["b6", "1y", "9a", "1m", "1p", "7r", "4", "b7", "1y", "b8", "1"],
-    "arestas": ["ba", "bl", "bq", "bt", "by"]
-  },
-  "ba": { "nós": ["b9", "a", "b3"], "arestas": [] },
-  "bb": { "valor": "Hanani", "arestas": ["bc"] },
-  "bc": { "nós": ["b8", "5", "29", "7", "bb"], "arestas": ["bd"] },
-  "bd": { "nós": ["bc", "a", "b3"], "arestas": [] },
-  "be": {
-    "valor": "1 Rs 16.2",
-    "arestas": ["bg", "bm", "bp", "br", "bu", "bz"]
-  },
-  "bf": {
-    "valor": "\"Eu o levantei do pó e o tornei líder de Israel, meu povo, mas você andou nos caminhos de Jeroboão e fez o meu povo pecar e provocar a minha ira por causa dos pecados deles.",
-    "arestas": ["bg"]
-  },
-  "bg": { "nós": ["be", "1", "bf"], "arestas": [] },
-  "bh": { "valor": "levantou", "arestas": ["bl"] },
-  "bi": { "valor": "pó", "arestas": ["bl"] },
-  "bj": { "valor": "tornou", "arestas": ["bl"] },
-  "bk": { "valor": "líder", "arestas": ["bl"] },
-  "bl": {
-    "nós": ["b9", "33", "ae", "1p", "bh", "4", "1m", "bi", "g", "j", "bj", "bk", "7", "8", "33"],
-    "arestas": ["bm"]
-  },
-  "bm": { "nós": ["bl", "a", "be"], "arestas": [] },
-  "bn": { "valor": "povo", "arestas": ["bo"] },
-  "bo": { "nós": ["8", "5", "bn", "1m", "1p"], "arestas": ["bp"] },
-  "bp": { "nós": ["bo", "a", "be"], "arestas": [] },
-  "bq": {
-    "nós": ["b9", "33", "4", "b0", "5w", "5x", "7", "5y", "33"],
-    "arestas": ["br"]
-  },
-  "br": { "nós": ["bq", "a", "be"], "arestas": [] },
-  "bs": { "valor": "pecar", "arestas": ["bt"] },
-  "bt": { "nós": ["b9", "33", "4", "5q", "8", "bs", "33"], "arestas": ["bu"] },
-  "bu": { "nós": ["bt", "a", "be"], "arestas": [] },
-  "bv": { "valor": "provocar", "arestas": ["by"] },
-  "bw": { "valor": "ira", "arestas": ["by"] },
-  "bx": { "valor": "causa", "arestas": ["by"] },
-  "by": {
-    "nós": ["b9", "33", "4", "5q", "8", "bv", "1y", "bw", "1m", "1p", "9c", "bx", "20", "61", "l", "33"],
-    "arestas": ["bz"]
-  },
-  "bz": { "nós": ["by", "a", "be"], "arestas": [] }
+  "9h": { "nós": ["9g", "a", "8p"], "arestas": [] }
 }

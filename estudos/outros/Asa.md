@@ -1,6 +1,6 @@
 # Asa
 - Rei de Judá (1 Rs 15.28, 1 Rs 15.33, 1 Rs 16.8)
-- Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16)
+- Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16, 1 Rs 15.32)
 - Baasa fortificou Ramá para que ninguém pudesse entrar no território de Asa ou sair de lá (1 Rs 15.17)
 - Ajuntou prata e ouro (1 Rs 15.18)
   - Que haviam sobrado do tesouro do templo do Senhor (1 Rs 15.18)
@@ -24,6 +24,8 @@
 > 1 Rs 16.8 : No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.
 >
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
+>
+> 1 Rs 15.32 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 1 Rs 15.17 : Baasa, rei de Israel, atacou Judá e fortificou Ramá para que ninguém pudesse entrar no território de Asa, rei de Judá, nem sair de lá.
 >
