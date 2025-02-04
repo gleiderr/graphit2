@@ -214,7 +214,7 @@ class Graphit {
 
   tokens(s: string) {
     return s
-      .split(/(\s+|[,.;:]|\?)/) // TODO: incluir hífen como token
+      .split(/(\s+|[,.;:()"]|\?)/) // TODO: incluir hífen como token
       .map(s => s.trim())
       .filter(Boolean);
   }
