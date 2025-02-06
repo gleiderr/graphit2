@@ -42,16 +42,31 @@ class Graphit {
     return Object.keys(this.db);
   }
 
-  private nextId() {
+  /**
+   * Retorna o próximo Id disponível.
+   * @returns {string} O próximo Id.
+   */
+  private nextId(): Id {
     return (this._nextId++).toString(36);
   }
 
+  /**
+   * Cria um novo nó com o valor fornecido.
+   * @param {string} valor - O valor do novo nó.
+   * @returns {Id} O Id do novo nó.
+   */
   private novoNó(valor: string): Id {
     const id = this.nextId();
     this.db[id] = { valor, expressões: [] };
     return id;
   }
 
+  /**
+   * Cria uma nova expressão com os nós fornecidos.
+   * @param {Id[]} nós - Os Ids dos nós que compõem a expressão.
+   * @param {ExpressãoProps} [props] - Propriedades adicionais da expressão.
+   * @returns {Id} O Id da nova expressão.
+   */
   private novaExpressão(nós: Id[], props?: ExpressãoProps): Id {
     const id = this.nextId();
     this.db[id] = { nós, expressões: [], props };
@@ -59,11 +74,22 @@ class Graphit {
     return id;
   }
 
+  /**
+   * Obtém um nó ou expressão pelo Id.
+   * @param {Id} id - O Id do nó ou expressão.
+   * @returns {Termo | Expressão} O nó ou expressão correspondente.
+   * @throws {Error} Se o nó ou expressão não for encontrado.
+   */
   get(id: Id): Termo | Expressão {
     if (!this.db[id]) throw new Error(`Nó não encontrado ${id}`);
     return this.db[id];
   }
 
+  /**
+   * Busca um nó pelo valor fornecido.
+   * @param {string} valor - O valor do nó a ser buscado.
+   * @returns {Id | undefined} O Id do nó encontrado ou undefined se não encontrado.
+   */
   buscarNó(valor: string): Id | undefined {
     return Object.keys(this.db).find(id =>
       'valor' in this.db[id] ? this.db[id].valor === valor : false,
@@ -72,7 +98,8 @@ class Graphit {
 
   /**
    * Busca por expressões que contenham exatamente os mesmos nós passados por parâmetro e na mesma ordem.
-   * @param nós
+   * @param {Id[]} nós - Os Ids dos nós a serem buscados.
+   * @returns {Id[]} Os Ids das expressões encontradas.
    */
   private buscarExpressõesExatas(nós: Id[]): Id[] {
     const expressões: Id[] = [];
@@ -90,8 +117,10 @@ class Graphit {
   }
 
   /**
-   * Busca expressões que contenham todos ids passados por parâmetro em qualquer ordem.
-   * @param nós
+   * Busca expressões que contenham todos os Ids passados por parâmetro em qualquer ordem.
+   * @param {Object} params - Parâmetros de busca.
+   * @param {Id[]} params.contém - Os Ids dos nós a serem buscados.
+   * @returns {Id[]} Os Ids das expressões encontradas.
    */
   filtrarExpressões({ contém }: { contém: Id[] }): Id[] {
     const expressões: Id[] = [];
@@ -105,18 +134,33 @@ class Graphit {
     return expressões;
   }
 
-  addListener(on: 'afterExpressão', callback: (id: Id) => void) {
+  /**
+   * Adiciona um listener para um evento específico.
+   * @param {'afterExpressão'} on - O evento para o qual adicionar o listener.
+   * @param {function(Id): void} callback - A função de callback a ser chamada quando o evento ocorrer.
+   * @returns {number} O índice do listener adicionado.
+   */
+  addListener(on: 'afterExpressão', callback: (id: Id) => void): number {
     return this.listeners[on].push(callback) - 1;
   }
 
+  /**
+   * Remove um listener de um evento específico.
+   * @param {'afterExpressão'} on - O evento do qual remover o listener.
+   * @param {number} index - O índice do listener a ser removido.
+   */
   removeListener(on: 'afterExpressão', index: number) {
     this.listeners[on].splice(index, 1);
   }
 
   /**
-   * Retorna o id da expressão cujos nós coincidem com os valores informados.
-   * Se não encontrar cria uma nova expressão reaproveitando os nós existentes
+   * Retorna o Id da expressão cujos nós coincidem com os valores informados.
+   * Se não encontrar, cria uma nova expressão reaproveitando os nós existentes
    * e cria novos nós sempre que necessário.
+   * @param {string | (string | { id: Id })[]} nós - Uma string a ser tokenizada, ou um arranjo de termos ou um arranjo de ids.
+   * @param {ExpressãoProps} [props] - Propriedades adicionais da expressão.
+   * @returns {{ id: Id }} O Id da expressão.
+   * @throws {Error} Se mais de uma expressão for encontrada.
    */
   expressão(
     nós: string | (string | { id: Id })[],
@@ -146,10 +190,11 @@ class Graphit {
   }
 
   /**
-   * Move expressão de uma posição para outra.
-   * @param nó
-   * @param origem
-   * @param destino
+   * Move uma expressão de uma posição para outra.
+   * @param {Id} nó - O Id do nó.
+   * @param {number | Id} origem - A posição ou Id de origem.
+   * @param {number | Id} destino - A posição ou Id de destino.
+   * @throws {Error} Se a origem ou destino forem inválidos.
    */
   moverExpressão(nó: Id, origem: number | Id, destino: number | Id) {
     const elemento = this.get(nó);
@@ -178,47 +223,61 @@ class Graphit {
   }
 
   /**
-   * Exclui expressão.
-   * Lança excessão se o id não pertencer a uma expressão.
-   * Lança excessão se a expressão pertencer a outras expressões.
-   * @param id Identificador da expressão a ser removida.
+   * Exclui uma expressão.
+   * Lança exceção se o Id não pertencer a uma expressão.
+   * Lança exceção se a expressão pertencer a outras expressões.
+   * @param {Id} expressãoId - O Id da expressão a ser removida.
+   * @throws {Error} Se o elemento não for uma expressão ou se a expressão pertencer a outras expressões.
    */
-  excluirExpressão(id: Id) {
-    const elemento = this.get(id);
-    if (!('nós' in elemento))
-      throw new Error(`O elemento ${id} não é uma expressão`);
+  excluirExpressão(expressãoId: Id) {
+    const expressão = this.get(expressãoId);
+    if (!('nós' in expressão))
+      throw new Error(`O elemento ${expressãoId} não é uma expressão`);
 
-    if (elemento.expressões.length > 0)
-      throw new Error(`A expressão ${id} pertence a outras expressões`);
+    if (expressão.expressões.length > 0)
+      throw new Error(
+        `A expressão ${expressãoId} pertence a outras expressões`,
+      );
 
-    elemento.nós.forEach(nó => this.desvincularExpressão(nó, id));
+    expressão.nós.forEach(nó => this.removerNó(nó, expressãoId));
 
-    delete this.db[id];
+    delete this.db[expressãoId];
   }
 
   /**
-   * Remove expressão de um nó.
-   * // TODO: Corrigir esse comentário
-   * @param nó
-   * @param expressão
+   * Remove uma expressão de um nó.
+   * @param {Id} nó - O Id do nó.
+   * @param {Id} expressão - O Id da expressão a ser removida.
+   * @throws {Error} Se a expressão não pertencer ao nó.
    */
-  private desvincularExpressão(nó: Id, expressão: Id) {
-    const elemento = this.get(nó);
+  private removerNó(nó: Id, expressão: Id) {
+    const Nó = this.get(nó);
+    const expr = this.get(expressão) as Expressão;
 
-    const index = elemento.expressões.indexOf(expressão);
-    if (index == -1) {
-      throw new Error(`Expressão "${expressão}" não pertence ao nó "${nó}"`);
+    if (!expr.nós.includes(nó)) {
+      throw new Error(`Expressão "${expressão}" não contém o nó "${nó}"`);
     }
 
-    elemento.expressões.splice(index, 1);
+    const index = Nó.expressões.indexOf(expressão);
+    if (index == -1) {
+      throw new Error(`Nó "${nó}" não contém a expressão "${expressão}"`);
+    }
+
+    expr.nós = expr.nós.filter(id => id !== nó); // Remove o nó da expressão
+    Nó.expressões.splice(index, 1); // Remove a expressão do nó
 
     // Se não houver mais expressões relacionadas ao nó, remove-o
-    if ('valor' in elemento && elemento.expressões.length === 0) {
+    if ('valor' in Nó && Nó.expressões.length === 0) {
       delete this.db[nó];
     }
   }
 
-  tokens(s: string) {
+  /**
+   * Transforma uma string em um conjunto de tokens.
+   * @param {string} s - A string a ser tokenizada.
+   * @returns {string[]} Os tokens resultantes.
+   */
+  tokens(s: string): string[] {
     return s
       .split(/(\s+|[,.;:()"]|\?)/) // TODO: incluir hífen como token
       .map(s => s.trim())
@@ -228,8 +287,10 @@ class Graphit {
   /**
    * Executa a operação inversa de tokenize().
    * Ou seja, recebe um arranjo de strings e retorna uma string.
+   * @param {string[]} nós - Os tokens a serem unidos.
+   * @returns {string} A string resultante.
    */
-  undotokenize(nós: string[]) {
+  undotokenize(nós: string[]): string {
     return nós
       .join(' ')
       .replace(/\s+/g, ' ')
@@ -237,8 +298,10 @@ class Graphit {
   }
 
   /**
-   * Descreve vértice do grafo criando uma estrutura de árvore, percorrendo
+   * Descreve um vértice do grafo criando uma estrutura de árvore, percorrendo
    * as expressões em largura.
+   * @param {Id} id - O Id do vértice a ser descrito.
+   * @returns {Descrição} A descrição do vértice.
    */
   descrever(id: Id): Descrição {
     this.visitados = new Set<Id>(id);
@@ -267,6 +330,11 @@ class Graphit {
     return _1ºelemento;
   }
 
+  /**
+   * Descreve um elemento do grafo.
+   * @param {Id} id - O Id do elemento a ser descrito.
+   * @returns {Descrição} A descrição do elemento.
+   */
   private descreverElemento(id: Id): Descrição {
     const elemento = this.get(id);
     this.visitados.add(id);
@@ -280,8 +348,8 @@ class Graphit {
   }
 
   /**
-   *
-   * @param arquivo
+   * Salva o banco de dados em um arquivo.
+   * @param {string} arquivo - O caminho do arquivo onde os dados serão salvos.
    */
   async salvar(arquivo: string) {
     const dados = await prettier.format(JSON.stringify(this.db), {
@@ -290,6 +358,10 @@ class Graphit {
     writeFileSync(arquivo, dados);
   }
 
+  /**
+   * Carrega o banco de dados de um arquivo.
+   * @param {string} arquivo - O caminho do arquivo de onde os dados serão carregados.
+   */
   carregar(arquivo: string) {
     const dados = readFileSync(arquivo, 'utf-8');
     this.db = JSON.parse(dados);
