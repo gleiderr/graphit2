@@ -1,5 +1,5 @@
 import { appendFileSync, writeFileSync } from 'fs';
-import { Descrição, DescriçãoAresta, graphit, Id } from './Graphit';
+import { Descrição, DescriçãoExpressão, graphit, Id } from './Graphit';
 import { markdown } from './Markdown';
 
 type EstudosDestino = {
@@ -14,18 +14,18 @@ class Bíblia {
   inserirVersículo(
     referência: string,
     versículo: string,
-    definirArestas: () => void,
+    definirExpressões: () => void,
   ) {
-    //Define aresta de referência
-    graphit.aresta([referência, ':', versículo]);
+    //Define expressão de referência
+    graphit.expressão([referência, ':', versículo]);
 
-    const setReferência = graphit.addListener('afterAresta', id => {
-      graphit.aresta([{ id }, 'Referência', referência]);
+    const setReferência = graphit.addListener('afterExpressão', id => {
+      graphit.expressão([{ id }, 'Referência', referência]);
     });
 
-    definirArestas();
+    definirExpressões();
 
-    graphit.removeListener('afterAresta', setReferência);
+    graphit.removeListener('afterExpressão', setReferência);
   }
 
   imprimirEstudos(estudos: EstudosDestino) {
@@ -87,8 +87,8 @@ class Bíblia {
 
       const isNóReferência = (nó: Descrição) =>
         'valor' in nó && nó.valor === 'Referência';
-      const contémNóReferência = (aresta: DescriçãoAresta) =>
-        aresta.nós.some(isNóReferência);
+      const contémNóReferência = (expressão: DescriçãoExpressão) =>
+        expressão.nós.some(isNóReferência);
       if (!('valor' in descrição) && contémNóReferência(descrição)) {
         console.log('Ignora  referência');
         continue;
@@ -108,12 +108,12 @@ class Bíblia {
     if (doisPontos) {
       const versículos = [...idReferências]
         .map(referência => {
-          const arestas = graphit.filtrarArestas({
+          const expressões = graphit.filtrarExpressões({
             contém: [referência, doisPontos],
           });
 
-          return arestas.map(aresta => {
-            const descrição = graphit.descrever(aresta);
+          return expressões.map(expressão => {
+            const descrição = graphit.descrever(expressão);
             this.visitados = this.visitados.union(graphit.visitados);
 
             return markdown.toMarkdown(descrição);
@@ -136,14 +136,14 @@ class Bíblia {
 
     const isNóReferência = (nó: Descrição) =>
       'valor' in nó && nó.valor === 'Referência';
-    const contémNóReferência = (aresta: DescriçãoAresta) =>
-      aresta.nós.some(isNóReferência);
+    const contémNóReferência = (expressão: DescriçãoExpressão) =>
+      expressão.nós.some(isNóReferência);
 
     // Define impressão de referências no fim de cada linha
     markdown.sufixo = (_, elemento: Descrição) => {
-      const nósReferência = elemento.arestas
+      const nósReferência = elemento.expressões
         .filter(contémNóReferência)
-        .map(subAresta => subAresta.nós[2]);
+        .map(subExpressão => subExpressão.nós[2]);
       const referências = nósReferência
         .map((nó: Descrição) =>
           'valor' in nó ? nó.valor : 'Falha da referência',
@@ -156,20 +156,20 @@ class Bíblia {
     const idReferências = new Set<string>();
     markdown.onGetLinha = (_, elemento: Descrição) => {
       if ('valor' in elemento) return;
-      const nósReferência = elemento.arestas
+      const nósReferência = elemento.expressões
         .filter(contémNóReferência)
-        .map(subAresta => subAresta.nós[2]);
+        .map(subExpressão => subExpressão.nós[2]);
       nósReferência.forEach(nó => idReferências.add(nó.id));
     };
 
-    // Não imprime arestas contendo apenas a referência
+    // Não imprime expressões contendo apenas a referência
     markdown.filterOut = contémNóReferência;
     return idReferências;
   }
 
   excluir(id: Id) {
     try {
-      graphit.excluirAresta(id);
+      graphit.excluirExpressão(id);
     } catch (error) {
       bíblia.imprimeEstudo(id, 'Erro exclusão.md', 'outros', { debug: true });
 

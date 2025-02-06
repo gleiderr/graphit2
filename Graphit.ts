@@ -1,31 +1,37 @@
 import { readFileSync, writeFileSync } from 'fs';
 import * as prettier from 'prettier';
 
-type ArestaProps = { label: string };
+type ExpressãoProps = { label: string };
 
 export type Id = string;
 
-type Nó = { valor: string; arestas: Id[] };
-type Aresta = { nós: Id[]; arestas: Id[]; props?: ArestaProps };
+type Termo = { valor: string; expressões: Id[] };
+type Expressão = { nós: Id[]; expressões: Id[]; props?: ExpressãoProps };
 
-// TODO: remover obrigatoriedade de `arestas` em `Descrição`?
-export type DescriçãoAresta = {
+// TODO: remover obrigatoriedade de `expressões` em `Descrição`?
+export type DescriçãoExpressão = {
   id: Id;
   nós: Descrição[];
-  arestas: DescriçãoAresta[];
+  expressões: DescriçãoExpressão[];
 };
-export type DescriçãoNó = { id: Id; valor: string; arestas: DescriçãoAresta[] };
-export type Descrição = DescriçãoNó | DescriçãoAresta;
+export type DescriçãoTermo = {
+  id: Id;
+  valor: string;
+  expressões: DescriçãoExpressão[];
+};
+export type Descrição = DescriçãoTermo | DescriçãoExpressão;
 
 /**
- * Implementa hipergrafo híbrido para manipulação de textos.
- * Tanto arestas como nós são vértices do grafo que podem ser conectados por arestas.
- * Arestas são na verdade hiperarestas que conectam dois ou mais nós.
+ * Implementação para manipulação de textos.
+ *
+ * Talvez seja uma representação de um hipergrafo híbrido. Tanto expressões
+ * como termos são vértices do grafo que podem ser conectados por expressões.
+ * Nesse caso expressões são na verdade hiperarestas que conectam dois ou mais nós.
  */
 class Graphit {
-  private db: { [key: string]: Nó | Aresta } = {};
-  private listeners: { [key in 'afterAresta']: ((id: Id) => void)[] } = {
-    afterAresta: [],
+  private db: { [key: string]: Termo | Expressão } = {};
+  private listeners: { [key in 'afterExpressão']: ((id: Id) => void)[] } = {
+    afterExpressão: [],
   };
   private _nextId = 0;
   private listening: boolean = false;
@@ -42,18 +48,18 @@ class Graphit {
 
   private novoNó(valor: string): Id {
     const id = this.nextId();
-    this.db[id] = { valor, arestas: [] };
+    this.db[id] = { valor, expressões: [] };
     return id;
   }
 
-  private novaAresta(nós: Id[], props?: ArestaProps): Id {
+  private novaExpressão(nós: Id[], props?: ExpressãoProps): Id {
     const id = this.nextId();
-    this.db[id] = { nós, arestas: [], props };
-    nós.forEach(nó => this.db[nó].arestas.push(id));
+    this.db[id] = { nós, expressões: [], props };
+    nós.forEach(nó => this.db[nó].expressões.push(id));
     return id;
   }
 
-  get(id: Id): Nó | Aresta {
+  get(id: Id): Termo | Expressão {
     if (!this.db[id]) throw new Error(`Nó não encontrado ${id}`);
     return this.db[id];
   }
@@ -65,62 +71,56 @@ class Graphit {
   }
 
   /**
-   * Busca por arestas que contenham exatamente os mesmos nós passados por parâmetro e na mesma ordem.
+   * Busca por expressões que contenham exatamente os mesmos nós passados por parâmetro e na mesma ordem.
    * @param nós
    */
-  private buscarArestasExatas(nós: Id[]): Id[] {
-    const arestas: Id[] = [];
+  private buscarExpressõesExatas(nós: Id[]): Id[] {
+    const expressões: Id[] = [];
     for (const id of Object.keys(this.db)) {
       const elemento = this.db[id];
       if ('nós' in elemento) {
         if (elemento.nós.length === nós.length) {
           const temMesmosIds = elemento.nós.every((nó, i) => nó === nós[i]);
-          if (temMesmosIds) arestas.push(id);
+          if (temMesmosIds) expressões.push(id);
         }
       }
     }
 
-    return arestas;
+    return expressões;
   }
 
   /**
-   * Busca arestas que contenham todos ids passados por parâmetro em qualquer ordem.
+   * Busca expressões que contenham todos ids passados por parâmetro em qualquer ordem.
    * @param nós
    */
-  filtrarArestas({ contém }: { contém: Id[] }): Id[] {
-    const arestas: Id[] = [];
+  filtrarExpressões({ contém }: { contém: Id[] }): Id[] {
+    const expressões: Id[] = [];
     for (const id of Object.keys(this.db)) {
       const elemento = this.db[id];
       if ('nós' in elemento) {
         const temTodosIds = contém.every(id => elemento.nós.includes(id));
-        if (temTodosIds) arestas.push(id);
+        if (temTodosIds) expressões.push(id);
       }
     }
-    return arestas;
+    return expressões;
   }
 
-  buscarArestaByLabel(label: string): Id | undefined {
-    return Object.keys(this.db).find(id =>
-      'props' in this.db[id] ? this.db[id].props?.label === label : false,
-    );
-  }
-
-  addListener(on: 'afterAresta', callback: (id: Id) => void) {
+  addListener(on: 'afterExpressão', callback: (id: Id) => void) {
     return this.listeners[on].push(callback) - 1;
   }
 
-  removeListener(on: 'afterAresta', index: number) {
+  removeListener(on: 'afterExpressão', index: number) {
     this.listeners[on].splice(index, 1);
   }
 
   /**
-   * Retorna o id da aresta cujos nós coincidem com os valores informados.
-   * Se não encontrar cria uma nova aresta reaproveitando os nós existentes
+   * Retorna o id da expressão cujos nós coincidem com os valores informados.
+   * Se não encontrar cria uma nova expressão reaproveitando os nós existentes
    * e cria novos nós sempre que necessário.
    */
-  aresta(
+  expressão(
     nós: string | (string | { id: Id })[],
-    props?: ArestaProps,
+    props?: ExpressãoProps,
   ): { id: Id } {
     if (typeof nós === 'string') {
       // Transforma 's' em um conjunto de termos que podem ser uma palavra ou uma pontuação
@@ -130,14 +130,15 @@ class Graphit {
       typeof nó === 'object' ? nó.id : this.buscarNó(nó) || this.novoNó(nó),
     );
 
-    const arestas = this.buscarArestasExatas(ids);
-    if (arestas.length > 1) throw new Error('Mais de uma aresta encontrada');
+    const expressões = this.buscarExpressõesExatas(ids);
+    if (expressões.length > 1)
+      throw new Error('Mais de uma expressão encontrada');
 
-    const id = arestas[0] || this.novaAresta(ids, props);
+    const id = expressões[0] || this.novaExpressão(ids, props);
 
     if (!this.listening) {
       this.listening = true;
-      this.listeners.afterAresta.forEach(listener => listener(id));
+      this.listeners.afterExpressão.forEach(listener => listener(id));
       this.listening = false;
     }
 
@@ -145,69 +146,74 @@ class Graphit {
   }
 
   /**
-   * Move aresta de uma posição para outra.
+   * Move expressão de uma posição para outra.
    * @param nó
    * @param origem
    * @param destino
    */
-  moverAresta(nó: Id, origem: number | Id, destino: number | Id) {
+  moverExpressão(nó: Id, origem: number | Id, destino: number | Id) {
     const elemento = this.get(nó);
 
     const getIndex = (id: Id) => {
-      const index = elemento.arestas.indexOf(id);
+      const index = elemento.expressões.indexOf(id);
       if (index >= 0) return index;
-      else throw new Error(`Aresta "${id}" não pertence ao nó "${nó}"`);
+      else throw new Error(`Expressão "${id}" não pertence ao nó "${nó}"`);
     };
 
     origem = typeof origem === 'number' ? origem : getIndex(origem);
     destino = typeof destino === 'number' ? destino : getIndex(destino);
 
-    if (origem >= elemento.arestas.length) {
+    if (origem >= elemento.expressões.length) {
       throw new Error(`Índice de origem "${origem}" é inválido`);
     }
-    if (destino >= elemento.arestas.length) {
+    if (destino >= elemento.expressões.length) {
       throw new Error(`Índice de destino "${destino}" é inválido`);
     }
 
-    elemento.arestas.splice(destino, 0, elemento.arestas.splice(origem, 1)[0]);
+    elemento.expressões.splice(
+      destino,
+      0,
+      elemento.expressões.splice(origem, 1)[0],
+    );
   }
 
   /**
-   * Exclui aresta.
-   * Lança excessão se o id não pertencer a uma aresta.
-   * Lança excessão se a aresta pertencer a outras arestas.
-   * @param id Identificador da aresta a ser removida.
+   * Exclui expressão.
+   * Lança excessão se o id não pertencer a uma expressão.
+   * Lança excessão se a expressão pertencer a outras expressões.
+   * @param id Identificador da expressão a ser removida.
    */
-  excluirAresta(id: Id) {
+  excluirExpressão(id: Id) {
     const elemento = this.get(id);
     if (!('nós' in elemento))
-      throw new Error(`O elemento ${id} não é uma aresta`);
+      throw new Error(`O elemento ${id} não é uma expressão`);
 
-    if (elemento.arestas.length > 0)
-      throw new Error(`A aresta ${id} pertence a outras arestas`);
+    if (elemento.expressões.length > 0)
+      throw new Error(`A expressão ${id} pertence a outras expressões`);
 
-    elemento.nós.forEach(nó => this.desvincularAresta(nó, id));
+    elemento.nós.forEach(nó => this.desvincularExpressão(nó, id));
 
     delete this.db[id];
   }
 
   /**
-   * Remove aresta de um nó.
+   * Remove expressão de um nó.
+   * // TODO: Corrigir esse comentário
    * @param nó
-   * @param aresta
+   * @param expressão
    */
-  private desvincularAresta(nó: Id, aresta: Id) {
+  private desvincularExpressão(nó: Id, expressão: Id) {
     const elemento = this.get(nó);
 
-    const index = elemento.arestas.indexOf(aresta);
+    const index = elemento.expressões.indexOf(expressão);
     if (index == -1) {
-      throw new Error(`Aresta "${aresta}" não pertence ao nó "${nó}"`);
+      throw new Error(`Expressão "${expressão}" não pertence ao nó "${nó}"`);
     }
 
-    elemento.arestas.splice(index, 1);
+    elemento.expressões.splice(index, 1);
 
-    // Se não houver mais arestas relacionadas ao nó, remove-o
-    if ('valor' in elemento && elemento.arestas.length === 0) {
+    // Se não houver mais expressões relacionadas ao nó, remove-o
+    if ('valor' in elemento && elemento.expressões.length === 0) {
       delete this.db[nó];
     }
   }
@@ -231,7 +237,8 @@ class Graphit {
   }
 
   /**
-   * Descreve vértice do grafo criando uma estrutura de árvore, percorrendo as arestas em largura. O limite da profundidade das buscas é definido pelo parâmetro `profundidade`. Há também um critério de parada por nós específicos definido por `pararEm`.
+   * Descreve vértice do grafo criando uma estrutura de árvore, percorrendo
+   * as expressões em largura.
    */
   descrever(id: Id): Descrição {
     this.visitados = new Set<Id>(id);
@@ -243,17 +250,17 @@ class Graphit {
       const descriçãoCorrente = fila.shift()!;
       const vértice = this.db[descriçãoCorrente.id];
 
-      vértice.arestas.forEach((id: Id) => {
+      vértice.expressões.forEach((id: Id) => {
         if (this.visitados.has(id)) return;
         this.visitados.add(id);
 
-        const aresta = this.get(id) as Aresta;
-        const nós = aresta.nós.map(this.descreverElemento.bind(this));
+        const expressão = this.get(id) as Expressão;
+        const nós = expressão.nós.map(this.descreverElemento.bind(this));
 
-        const descriçãoAresta: Descrição = { id, nós, arestas: [] };
-        descriçãoCorrente.arestas.push(descriçãoAresta);
+        const descriçãoExpressão: Descrição = { id, nós, expressões: [] };
+        descriçãoCorrente.expressões.push(descriçãoExpressão);
 
-        fila.push(descriçãoAresta);
+        fila.push(descriçãoExpressão);
       });
     }
 
@@ -265,10 +272,10 @@ class Graphit {
     this.visitados.add(id);
 
     if ('valor' in elemento) {
-      return { id, valor: elemento.valor, arestas: [] };
+      return { id, valor: elemento.valor, expressões: [] };
     } else {
       const nós = elemento.nós.map(this.descreverElemento.bind(this));
-      return { id, nós, arestas: [] };
+      return { id, nós, expressões: [] };
     }
   }
 
@@ -293,5 +300,5 @@ class Graphit {
 }
 
 export const graphit = new Graphit();
-export const aresta = graphit.aresta.bind(graphit);
+export const expressão = graphit.expressão.bind(graphit);
 export const tokens = graphit.tokens.bind(graphit);

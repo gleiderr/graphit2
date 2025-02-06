@@ -1,4 +1,4 @@
-import { Descrição, DescriçãoAresta } from './Graphit';
+import { Descrição, DescriçãoExpressão } from './Graphit';
 
 class Markdown {
   prefixo?: (nível: number, elemento: Descrição, origem?: Descrição) => string;
@@ -7,15 +7,15 @@ class Markdown {
 
   onGetLinha?: (nível: number, elemento: Descrição, origem?: Descrição) => void;
 
-  filterOut?: (descrição: DescriçãoAresta) => boolean = () => false;
+  filterOut?: (descrição: DescriçãoExpressão) => boolean = () => false;
 
   constructor() {}
 
   /**
    * A partir da descrição, monta a estrutura markdown.
-   * Se a descrição for realizada a partir de um nó, o título será o valor do nó.
-   * Se a descrição for realizada a partir de uma aresta, o título será o valor do nó de origem.
-   * As linhas são montadas a partir das arestas da descrição inicial.
+   * Se a descrição for realizada a partir de um termo, o título será o valor do termo.
+   * Se a descrição for realizada a partir de uma expressão, o título será a concatenação dos termos da expressão.
+   * As linhas são montadas a partir das expressões da descrição inicial.
    */
   toMarkdown(descrição: Descrição, { debug = false } = {}): string {
     const primeiraLinha = this.getLinha(0, descrição, undefined, { debug });
@@ -28,24 +28,24 @@ class Markdown {
     descrição: Descrição,
     { debug }: { debug: boolean },
   ): string[] {
-    const linhas = descrição.arestas
-      .filter(aresta => this.filterOut && !this.filterOut(aresta))
-      .map(aresta => this.montarLinha(0, aresta, descrição, { debug }))
+    const linhas = descrição.expressões
+      .filter(expressão => this.filterOut && !this.filterOut(expressão))
+      .map(expressão => this.montarLinha(0, expressão, descrição, { debug }))
       .flat();
     return linhas;
   }
 
   private montarLinha(
     nível: number,
-    aresta: DescriçãoAresta,
+    expressão: DescriçãoExpressão,
     origem: Descrição,
     { debug }: { debug: boolean },
   ): string[] {
-    const linha = this.getLinha(nível, aresta, origem, { debug });
-    const linhas = aresta.arestas
-      .filter(aresta => this.filterOut && !this.filterOut(aresta))
-      .map(subAresta =>
-        this.montarLinha(nível + 1, subAresta, aresta, { debug }),
+    const linha = this.getLinha(nível, expressão, origem, { debug });
+    const linhas = expressão.expressões
+      .filter(expressão => this.filterOut && !this.filterOut(expressão))
+      .map(subExpressão =>
+        this.montarLinha(nível + 1, subExpressão, expressão, { debug }),
       )
       .flat();
 
@@ -85,12 +85,12 @@ class Markdown {
   }
 
   private getValor = (nó: Descrição, i: number, origem?: Descrição): string => {
-    // Se o primeiro nó for a aresta de origem, não imprime-o
+    // Se o primeiro nó for a expressão de origem, não imprime-o
     if (i === 0 && origem && nó.id === origem.id) return '';
     if ('valor' in nó) return nó.valor;
 
-    const aresta = nó;
-    const nós = aresta.nós.map((nó, i) => this.getValor(nó, i, origem));
+    const expressão = nó;
+    const nós = expressão.nós.map((nó, i) => this.getValor(nó, i, origem));
     return nós.join(' ');
   };
 }

@@ -3,7 +3,6 @@
 A proposta deste projeto é construir uma arquitetura emergente para estudo da Bíblia.
 As construções são simples para garantir sua utilidade desde o primeiro dia.
 Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a utilidade imediata da implementação, mas sempre pensando-se nas consequências futuras.
-- Qualquer elemento possui arestas em seu índice;
 
 ## Príncípios
 - V
@@ -28,6 +27,7 @@ Ao compilar os versículos da Bíblia são executadas as seguintes operações:
 - Tag "Baasa" em git
 
 ### Feito
+- Renomeia 'aresta' para 'expressão'
 - Organizar arquivos e pastas
 - Carregar Bíblia.json
 - Movimentar arestas
