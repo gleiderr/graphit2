@@ -13,7 +13,17 @@ import './inserções/1 Rs 16.1-13';
 
 bíblia.imprimirEstudos({
   foco: ['Baasa'],
-  outros: ['Asa', 'Ben-Hadade', 'Elá', 'Tabriom', 'Geba', 'Gibetom', 'Aías'],
+  outros: [
+    'Asa',
+    'Ben-Hadade',
+    'Elá',
+    'Tabriom',
+    'Geba',
+    'Gibetom',
+    'Aías',
+    'Jeú',
+    'Israel',
+  ],
   pronto: [],
 });
 

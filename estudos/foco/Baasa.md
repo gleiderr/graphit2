@@ -33,10 +33,10 @@
 - Quando Aías ouviu o som dos passos da mulher de Jeroboão junto da porta , ele disse : " O Senhor levantará para si um rei sobre Israel ( Baasa ) que eliminará a família de Jeroboão . " (1 Rs 14.14)
 - Andou nos caminhos de Jeroboão (1 Rs 15.34)
 - Então a palavra do Senhor contra Baasa veio a Jeú : (1 Rs 16.1)
-- Então a palavra do Senhor contra Baasa veio a Jeú : " O Senhor levantou Baasa do pó e o tornou líder de Israel " (1 Rs 16.2)
-- Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa andou nos caminhos de Jeroboão " (1 Rs 16.2)
-- Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel pecar " (1 Rs 16.2)
-- Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles " (1 Rs 16.2)
+  - " O Senhor levantou Baasa do pó e o tornou líder de Israel " (1 Rs 16.2)
+  - " Baasa andou nos caminhos de Jeroboão " (1 Rs 16.2)
+  - " Baasa fez Israel pecar " (1 Rs 16.2)
+  - " Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles " (1 Rs 16.2)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.

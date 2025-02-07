@@ -1,10 +1,12 @@
 # Ben-Hadade
 - Asa ajuntou prata e ouro e os enviou a Ben-Hadade (1 Rs 15.18)
+  - Com uma mensagem que dizia (1 Rs 15.19)
+    - " Façamos um tratado . " Agora , rompe o tratado que tens com Baasa para que ele saia de Judá . " (1 Rs 15.19)
+    - O pai de Asa e o pai de Ben-Hadade fizeram um tratado (1 Rs 15.19)
 - Filho de Tabriom (1 Rs 15.18)
 - Neto de Heziom (1 Rs 15.18)
 - Rei da Síria (1 Rs 15.18)
 - Governava em Damasco (1 Rs 15.18)
-- Asa ajuntou prata e ouro e os enviou a Ben-Hadade com uma mensagem que dizia o pai de Asa e o pai de Ben-Hadade fizeram um tratado (1 Rs 15.19)
 - Aceitou a proposta de Asa (1 Rs 15.20)
 - Ordenou aos comandantes das suas forças que atacassem as cidades de Israel (1 Rs 15.20)
 - Conquistou Ijom (1 Rs 15.20)

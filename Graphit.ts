@@ -299,35 +299,28 @@ class Graphit {
 
   /**
    * Descreve um vértice do grafo criando uma estrutura de árvore, percorrendo
-   * as expressões em largura.
+   * as expressões em profundidade.
    * @param {Id} id - O Id do vértice a ser descrito.
    * @returns {Descrição} A descrição do vértice.
    */
   descrever(id: Id): Descrição {
     this.visitados = new Set<Id>(id);
 
-    const _1ºelemento = this.descreverElemento(id);
+    const constróiDescrição = (id: Id): Descrição => {
+      const descrição = this.descreverElemento(id);
 
-    const fila: Descrição[] = [_1ºelemento];
-    while (fila.length) {
-      const descriçãoCorrente = fila.shift()!;
-      const vértice = this.db[descriçãoCorrente.id];
-
-      vértice.expressões.forEach((id: Id) => {
+      this.get(id).expressões.forEach((id: Id) => {
         if (this.visitados.has(id)) return;
         this.visitados.add(id);
 
-        const expressão = this.get(id) as Expressão;
-        const nós = expressão.nós.map(this.descreverElemento.bind(this));
-
-        const descriçãoExpressão: Descrição = { id, nós, expressões: [] };
-        descriçãoCorrente.expressões.push(descriçãoExpressão);
-
-        fila.push(descriçãoExpressão);
+        const subDescrição = constróiDescrição(id) as DescriçãoExpressão;
+        descrição.expressões.push(subDescrição);
       });
-    }
 
-    return _1ºelemento;
+      return descrição;
+    };
+
+    return constróiDescrição(id);
   }
 
   /**
