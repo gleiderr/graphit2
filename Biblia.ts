@@ -71,10 +71,10 @@ class Bíblia {
     writeFileSync(path, ''); // Inicia arquivo em branco
 
     const todosÍndices = new Set(graphit.índices);
+    console.log({ todosÍndices: todosÍndices.size });
     while (this.visitados.size < todosÍndices.size) {
       const nãoVisitados = todosÍndices.difference(this.visitados);
       console.log({
-        todosÍndices: todosÍndices.size,
         visitados: this.visitados.size,
         nãoVisitados: nãoVisitados.size,
       });
@@ -180,5 +180,9 @@ class Bíblia {
   }
 }
 
-export const bíblia = new Bíblia(); //
+export const outputDB = 'Bíblia.json';
+export const inputDB = 'Bíblia anterior.json';
+graphit.carregar(inputDB);
+
+export const bíblia = new Bíblia();
 export const inserirVersículo = bíblia.inserirVersículo.bind(bíblia);
