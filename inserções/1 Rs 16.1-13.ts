@@ -14,7 +14,6 @@ inserirVersículo(
     expressão([a, ...tokens('"O Senhor levantou Baasa do pó e o tornou líder de Israel"')]);
     expressão('Israel, povo do Senhor');
 
-    // TODO: Corrigir
     expressão([a, ...tokens('"Baasa andou nos caminhos de Jeroboão"')]);
     expressão([a, ...tokens('"Baasa fez Israel pecar"')]);
     expressão([a, ...tokens('"Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles"')]);
@@ -26,13 +25,13 @@ inserirVersículo(
   'No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.',
   () => {
     expressão('Asa, rei de Judá');
-    expressão(['Elá', ', filho', 'de', 'Baasa']);
-    expressão(['Elá', ', rei de', 'Israel']);
+    expressão('Elá, filho de Baasa');
+    expressão('Elá, rei de Israel');
 
-    const b = expressão(['Elá', 'reinou', '2 anos']);
-    expressão([b, 'em', 'Tirza']);
+    const b = expressão('Elá reinou 2 anos');
+    expressão([b, ...tokens('em Tirza')]);
 
-    const a = expressão(['Elá', 'tornou-se', 'rei', 'de', 'Israel']);
-    expressão([a, 'no', '26º', 'ano', 'do', 'reinado', 'de', 'Asa']);
+    const a = expressão('Elá tornou-se rei de Israel');
+    expressão([a, ...tokens('no 26º ano do reinado de Asa')]);
   },
 );
