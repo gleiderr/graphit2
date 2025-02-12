@@ -14,21 +14,20 @@ class CLI {
   private message: string = '';
 
   constructor(private fileDB: string) {
-    graphit.carregar(this.fileDB);
     this.promptExpressaoId();
   }
 
   private promptExpressaoId() {
-    this.rl.question(
-      'Digite o Id do elemento que deseja reordenar as expressões que o contém: ',
-      id => {
-        this.expressaoId = id;
-        const expressao = graphit.get(this.expressaoId);
-        this.items = [...expressao.expressões];
-        this.renderList();
-        this.listenForKeyPress();
-      },
-    );
+    graphit.carregar(this.fileDB);
+    console.clear();
+
+    this.rl.question('Digite o Id do elemento que deseja editar: ', id => {
+      this.expressaoId = id;
+      const expressao = graphit.get(this.expressaoId);
+      this.items = [...expressao.expressões];
+      this.renderList();
+      this.listenForKeyPress();
+    });
   }
 
   private renderList() {
@@ -93,6 +92,8 @@ class CLI {
     }
 
     process.stdin.on('keypress', (_, key) => {
+      this.message = '';
+
       if (key.shift && key.name === 'up') {
         this.moveSelection('up');
       } else if (key.shift && key.name === 'down') {
@@ -112,9 +113,8 @@ class CLI {
             this.message = error.message;
           }
         }
-      } else if (key.name === 'return' || key.name === 'escape') {
-        this.promptExpressaoId();
       }
+
       this.renderList();
     });
   }
