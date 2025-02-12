@@ -51,14 +51,14 @@
       "97",
       "5b",
       "5t",
-      "6d",
       "al",
       "b1",
       "b9",
       "bl",
       "bq",
       "bt",
-      "by"
+      "by",
+      "c0"
     ]
   },
   "5": {
@@ -79,10 +79,15 @@
       "9w",
       "au",
       "bc",
-      "bo"
+      "bo",
+      "c0",
+      "c2"
     ]
   },
-  "6": { "valor": "rei", "expressões": ["9", "2m", "5b", "6m", "8i", "al"] },
+  "6": {
+    "valor": "rei",
+    "expressões": ["9", "2m", "5b", "6m", "8i", "al", "c2"]
+  },
   "7": {
     "valor": "de",
     "expressões": [
@@ -105,7 +110,6 @@
       "5b",
       "5f",
       "5z",
-      "6d",
       "6m",
       "6p",
       "6z",
@@ -124,7 +128,9 @@
       "b1",
       "bc",
       "bl",
-      "bq"
+      "bq",
+      "c0",
+      "c2"
     ]
   },
   "8": {
@@ -134,14 +140,14 @@
       "40",
       "5b",
       "65",
-      "6f",
       "6m",
       "8a",
       "al",
       "bl",
       "bo",
       "bt",
-      "by"
+      "by",
+      "c2"
     ]
   },
   "9": {
@@ -207,7 +213,7 @@
     "expressões": ["28", "31"]
   },
   "28": { "nós": ["27", "a", "1b"], "expressões": [] },
-  "29": { "valor": "filho", "expressões": ["2b", "2f", "57", "bc"] },
+  "29": { "valor": "filho", "expressões": ["2b", "2f", "57", "bc", "c0"] },
   "30": { "valor": "dizia", "expressões": ["31"] },
   "31": {
     "nós": ["27", "2x", "2y", "2z", "1j", "30"],
@@ -282,7 +288,6 @@
     "expressões": ["52"]
   },
   "52": { "nós": ["50", "1", "51"], "expressões": [] },
-  "53": { "valor": ", rei de", "expressões": ["6f"] },
   "56": { "valor": "Aías", "expressões": ["57", "9d", "9g", "9t"] },
   "57": { "nós": ["4", "5", "29", "7", "56"], "expressões": ["7l", "58"] },
   "58": { "nós": ["57", "a", "50"], "expressões": [] },
@@ -299,7 +304,7 @@
   "66": { "nós": ["65", "a", "5n"], "expressões": [] },
   "67": {
     "valor": "1 Rs 16.8",
-    "expressões": ["69", "6e", "6g", "6j", "6l", "6n", "6q", "8o"]
+    "expressões": ["69", "6n", "6q", "8o", "c1", "c3", "c7", "c9"]
   },
   "68": {
     "valor": "No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.",
@@ -414,10 +419,6 @@
       "5u",
       "60",
       "66",
-      "6e",
-      "6g",
-      "6j",
-      "6l",
       "6n",
       "6q",
       "70",
@@ -457,7 +458,11 @@
       "bp",
       "br",
       "bu",
-      "bz"
+      "bz",
+      "c1",
+      "c3",
+      "c7",
+      "c9"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "expressões": [] },
@@ -646,7 +651,7 @@
   "2m": { "nós": ["26", "6", "2k", "2l"], "expressões": ["2n"] },
   "2n": { "nós": ["2m", "a", "1b"], "expressões": [] },
   "2o": { "valor": "governava", "expressões": ["2r"] },
-  "2p": { "valor": "em", "expressões": ["2r", "5h", "6k", "7g", "8a"] },
+  "2p": { "valor": "em", "expressões": ["2r", "5h", "7g", "8a", "c8"] },
   "2q": { "valor": "Damasco", "expressões": ["2r"] },
   "2r": { "nós": ["26", "2o", "2p", "2q"], "expressões": ["2s"] },
   "2s": { "nós": ["2r", "a", "1b"], "expressões": [] },
@@ -764,7 +769,7 @@
   "4s": { "nós": ["4o", "4q", "3c", "4r", "7", "3k"], "expressões": ["4t"] },
   "4t": { "nós": ["4s", "a", "4i"], "expressões": [] },
   "4u": { "valor": "foi", "expressões": ["4w", "6z", "8l"] },
-  "4v": { "valor": "Tirza", "expressões": ["4w", "5h", "6k"] },
+  "4v": { "valor": "Tirza", "expressões": ["4w", "5h", "c8"] },
   "4w": { "nós": ["4", "4u", "3b", "4v"], "expressões": ["4x", "4y"] },
   "4x": { "nós": ["4w", "a", "4i"], "expressões": [] },
   "4y": { "nós": ["4w", "4q", "3c", "4r", "7", "3k"], "expressões": ["4z"] },
@@ -784,7 +789,7 @@
   "5g": { "nós": ["5f", "a", "50"], "expressões": [] },
   "5h": { "nós": ["5b", "2p", "4v"], "expressões": ["5i"] },
   "5i": { "nós": ["5h", "a", "50"], "expressões": [] },
-  "5j": { "valor": "reinou", "expressões": ["5l", "6i"] },
+  "5j": { "valor": "reinou", "expressões": ["5l", "c6"] },
   "5k": { "valor": "24 anos", "expressões": ["5l"] },
   "5l": { "nós": ["5b", "5j", "5k"], "expressões": ["5m"] },
   "5m": { "nós": ["5l", "a", "50"], "expressões": [] },
@@ -810,17 +815,7 @@
     "expressões": ["5z", "65", "8u", "97", "9t", "9w", "al", "b1", "bq"]
   },
   "5z": { "nós": ["5t", "5v", "5w", "5x", "7", "5y"], "expressões": ["60"] },
-  "6b": { "valor": "Elá", "expressões": ["6d", "6f", "6i", "6m"] },
-  "6c": { "valor": ", filho", "expressões": ["6d"] },
-  "6d": { "nós": ["6b", "6c", "7", "4"], "expressões": ["6e"] },
-  "6e": { "nós": ["6d", "a", "67"], "expressões": [] },
-  "6f": { "nós": ["6b", "53", "8"], "expressões": ["6g"] },
-  "6g": { "nós": ["6f", "a", "67"], "expressões": [] },
-  "6h": { "valor": "2 anos", "expressões": ["6i"] },
-  "6i": { "nós": ["6b", "5j", "6h"], "expressões": ["6j", "6k"] },
-  "6j": { "nós": ["6i", "a", "67"], "expressões": [] },
-  "6k": { "nós": ["6i", "2p", "4v"], "expressões": ["6l"] },
-  "6l": { "nós": ["6k", "a", "67"], "expressões": [] },
+  "6b": { "valor": "Elá", "expressões": ["6m", "c0", "c2", "c6"] },
   "6m": { "nós": ["6b", "5a", "6", "7", "8"], "expressões": ["6n", "6p"] },
   "6n": { "nós": ["6m", "a", "67"], "expressões": [] },
   "6o": { "valor": "26º", "expressões": ["6p"] },
@@ -1177,5 +1172,15 @@
     ],
     "expressões": ["bz"]
   },
-  "bz": { "nós": ["by", "a", "be"], "expressões": [] }
+  "bz": { "nós": ["by", "a", "be"], "expressões": [] },
+  "c0": { "nós": ["6b", "5", "29", "7", "4"], "expressões": ["c1"] },
+  "c1": { "nós": ["c0", "a", "67"], "expressões": [] },
+  "c2": { "nós": ["6b", "5", "6", "7", "8"], "expressões": ["c3"] },
+  "c3": { "nós": ["c2", "a", "67"], "expressões": [] },
+  "c4": { "valor": "2", "expressões": ["c6"] },
+  "c5": { "valor": "anos", "expressões": ["c6"] },
+  "c6": { "nós": ["6b", "5j", "c4", "c5"], "expressões": ["c7", "c8"] },
+  "c7": { "nós": ["c6", "a", "67"], "expressões": [] },
+  "c8": { "nós": ["c6", "2p", "4v"], "expressões": ["c9"] },
+  "c9": { "nós": ["c8", "a", "67"], "expressões": [] }
 }

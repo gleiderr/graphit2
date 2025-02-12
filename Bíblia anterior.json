@@ -2,11 +2,32 @@
   "0": { "valor": "1 Rs 15.16", "expressões": ["3", "b", "n"] },
   "1": {
     "valor": ":",
-    "expressões": ["3", "q", "1d", "2v", "3m", "4k", "52", "5p", "69", "6t", "7k", "8e", "8r"]
+    "expressões": [
+      "3",
+      "q",
+      "1d",
+      "2v",
+      "3m",
+      "4k",
+      "52",
+      "5p",
+      "69",
+      "6t",
+      "7k",
+      "8e",
+      "8r",
+      "9k",
+      "9t",
+      "ad",
+      "ax",
+      "b5",
+      "b9",
+      "bg"
+    ]
   },
   "2": {
     "valor": "Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.",
-    "expressões": ["3"]
+    "expressões": ["3", "ax"]
   },
   "3": { "nós": ["0", "1", "2"], "expressões": [] },
   "4": {
@@ -30,14 +51,43 @@
       "97",
       "5b",
       "5t",
-      "6d"
+      "al",
+      "b1",
+      "b9",
+      "bl",
+      "bq",
+      "bt",
+      "by",
+      "c0"
     ]
   },
   "5": {
     "valor": ",",
-    "expressões": ["9", "2f", "3e", "57", "7g", "7o", "84", "8a", "8i", "97", "9g"]
+    "expressões": [
+      "9",
+      "2f",
+      "3e",
+      "57",
+      "7g",
+      "7o",
+      "84",
+      "8a",
+      "8i",
+      "97",
+      "9g",
+      "9t",
+      "9w",
+      "au",
+      "bc",
+      "bo",
+      "c0",
+      "c2"
+    ]
   },
-  "6": { "valor": "rei", "expressões": ["9", "2m", "5b", "6m", "8i"] },
+  "6": {
+    "valor": "rei",
+    "expressões": ["9", "2m", "5b", "6m", "8i", "al", "c2"]
+  },
   "7": {
     "valor": "de",
     "expressões": [
@@ -60,7 +110,6 @@
       "5b",
       "5f",
       "5z",
-      "6d",
       "6m",
       "6p",
       "6z",
@@ -71,14 +120,40 @@
       "8i",
       "8l",
       "8u",
-      "9d"
+      "9d",
+      "9t",
+      "9w",
+      "a9",
+      "al",
+      "b1",
+      "bc",
+      "bl",
+      "bq",
+      "c0",
+      "c2"
     ]
   },
   "8": {
     "valor": "Israel",
-    "expressões": ["9", "40", "5b", "65", "6f", "6m", "8a"]
+    "expressões": [
+      "9",
+      "40",
+      "5b",
+      "65",
+      "6m",
+      "8a",
+      "al",
+      "bl",
+      "bo",
+      "bt",
+      "by",
+      "c2"
+    ]
   },
-  "9": { "nós": ["4", "5", "6", "7", "8"], "expressões": ["b", "r", "2w", "59"] },
+  "9": {
+    "nós": ["4", "5", "6", "7", "8"],
+    "expressões": ["b", "r", "2w", "59", "az"]
+  },
   "10": { "valor": "para que", "expressões": ["19"] },
   "11": { "valor": "ninguém", "expressões": ["19", "6z", "97"] },
   "12": { "valor": "pudesse", "expressões": ["19"] },
@@ -89,10 +164,24 @@
   "17": { "valor": "sair", "expressões": ["19"] },
   "18": { "valor": "lá", "expressões": ["19"] },
   "19": {
-    "nós": ["y", "10", "11", "12", "13", "14", "15", "7", "f", "16", "17", "7", "18"],
+    "nós": [
+      "y",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "7",
+      "f",
+      "16",
+      "17",
+      "7",
+      "18"
+    ],
     "expressões": ["1a"]
   },
-  "20": { "valor": "dos", "expressões": ["23", "4o", "97"] },
+  "20": { "valor": "dos", "expressões": ["23", "4o", "97", "9t", "by"] },
   "21": { "valor": "seus", "expressões": ["23"] },
   "22": { "valor": "oficiais", "expressões": ["23"] },
   "23": {
@@ -103,26 +192,82 @@
   "25": { "valor": "enviou", "expressões": ["27"] },
   "26": {
     "valor": "Ben-Hadade",
-    "expressões": ["27", "2b", "2i", "2m", "2r", "3i", "3p", "40", "44", "47", "4a", "4d", "4g"]
+    "expressões": [
+      "27",
+      "2b",
+      "2i",
+      "2m",
+      "2r",
+      "3i",
+      "3p",
+      "40",
+      "44",
+      "47",
+      "4a",
+      "4d",
+      "4g"
+    ]
   },
-  "27": { "nós": ["1h", "g", "1w", "25", "1y", "26"], "expressões": ["28", "31"] },
+  "27": {
+    "nós": ["1h", "g", "1w", "25", "1y", "26"],
+    "expressões": ["28", "31"]
+  },
   "28": { "nós": ["27", "a", "1b"], "expressões": [] },
-  "29": { "valor": "filho", "expressões": ["2b", "2f", "57"] },
+  "29": { "valor": "filho", "expressões": ["2b", "2f", "57", "bc", "c0"] },
   "30": { "valor": "dizia", "expressões": ["31"] },
   "31": {
     "nós": ["27", "2x", "2y", "2z", "1j", "30"],
     "expressões": ["32", "3e", "3i"]
   },
   "32": { "nós": ["31", "a", "2t"], "expressões": [] },
-  "33": { "valor": "\"", "expressões": ["3e", "3e", "3e"] },
+  "33": {
+    "valor": "\"",
+    "expressões": [
+      "3e",
+      "3e",
+      "3e",
+      "9w",
+      "9w",
+      "a1",
+      "a1",
+      "a9",
+      "a9",
+      "al",
+      "al",
+      "au",
+      "au",
+      "bl",
+      "bl",
+      "bq",
+      "bq",
+      "bt",
+      "bt",
+      "by",
+      "by"
+    ]
+  },
   "34": { "valor": "Façamos", "expressões": ["3e"] },
-  "35": { "valor": "um", "expressões": ["3e", "3i"] },
+  "35": { "valor": "um", "expressões": ["3e", "3i", "al"] },
   "36": { "valor": "tratado", "expressões": ["3e", "3e", "3i"] },
-  "37": { "valor": ".", "expressões": ["3e", "3e"] },
+  "37": { "valor": ".", "expressões": ["3e", "3e", "9w", "a9", "al", "au"] },
   "38": { "valor": "Agora", "expressões": ["3e"] },
   "39": { "valor": "rompe", "expressões": ["3e"] },
   "40": {
-    "nós": ["26", "3r", "3s", "3t", "3u", "3v", "3w", "1j", "3x", "3y", "3z", "7", "8"],
+    "nós": [
+      "26",
+      "3r",
+      "3s",
+      "3t",
+      "3u",
+      "3v",
+      "3w",
+      "1j",
+      "3x",
+      "3y",
+      "3z",
+      "7",
+      "8"
+    ],
     "expressões": ["41"]
   },
   "41": { "nós": ["40", "a", "3k"], "expressões": [] },
@@ -143,13 +288,12 @@
     "expressões": ["52"]
   },
   "52": { "nós": ["50", "1", "51"], "expressões": [] },
-  "53": { "valor": ", rei de", "expressões": ["6f"] },
-  "56": { "valor": "Aías", "expressões": ["57", "9d", "9g"] },
+  "56": { "valor": "Aías", "expressões": ["57", "9d", "9g", "9t"] },
   "57": { "nós": ["4", "5", "29", "7", "56"], "expressões": ["7l", "58"] },
   "58": { "nós": ["57", "a", "50"], "expressões": [] },
   "59": { "nós": ["9", "a", "50"], "expressões": [] },
   "60": { "nós": ["5z", "a", "5n"], "expressões": [] },
-  "61": { "valor": "pecados", "expressões": ["65"] },
+  "61": { "valor": "pecados", "expressões": ["65", "by"] },
   "62": { "valor": "tinha", "expressões": ["65"] },
   "63": { "valor": "levado", "expressões": ["65"] },
   "64": { "valor": "cometer", "expressões": ["65"] },
@@ -160,7 +304,7 @@
   "66": { "nós": ["65", "a", "5n"], "expressões": [] },
   "67": {
     "valor": "1 Rs 16.8",
-    "expressões": ["69", "6e", "6g", "6j", "6l", "6n", "6q", "8o"]
+    "expressões": ["69", "6n", "6q", "8o", "c1", "c3", "c7", "c9"]
   },
   "68": {
     "valor": "No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.",
@@ -175,7 +319,23 @@
   "75": { "valor": "estivera", "expressões": ["77", "7d"] },
   "76": { "valor": "usando", "expressões": ["77", "7d"] },
   "77": {
-    "nós": ["6z", "g", "71", "72", "7", "x", "3y", "73", "g", "1y", "74", "1j", "4", "75", "76"],
+    "nós": [
+      "6z",
+      "g",
+      "71",
+      "72",
+      "7",
+      "x",
+      "3y",
+      "73",
+      "g",
+      "1y",
+      "74",
+      "1j",
+      "4",
+      "75",
+      "76"
+    ],
     "expressões": ["78"]
   },
   "78": { "nós": ["77", "a", "6r"], "expressões": [] },
@@ -196,7 +356,22 @@
   "95": { "valor": "mas", "expressões": ["97"] },
   "96": { "valor": "destruiu", "expressões": ["97"] },
   "97": {
-    "nós": ["4", "91", "92", "11", "93", "20", "94", "1y", "5y", "5", "95", "96", "1y", "6v"],
+    "nós": [
+      "4",
+      "91",
+      "92",
+      "11",
+      "93",
+      "20",
+      "94",
+      "1y",
+      "5y",
+      "5",
+      "95",
+      "96",
+      "1y",
+      "6v"
+    ],
     "expressões": ["98", "9d"]
   },
   "98": { "nós": ["97", "a", "8p"], "expressões": [] },
@@ -244,10 +419,6 @@
       "5u",
       "60",
       "66",
-      "6e",
-      "6g",
-      "6j",
-      "6l",
       "6n",
       "6q",
       "70",
@@ -271,7 +442,27 @@
       "90",
       "98",
       "9e",
-      "9h"
+      "9h",
+      "9u",
+      "9x",
+      "a2",
+      "aa",
+      "am",
+      "av",
+      "ay",
+      "az",
+      "b2",
+      "ba",
+      "bd",
+      "bm",
+      "bp",
+      "br",
+      "bu",
+      "bz",
+      "c1",
+      "c3",
+      "c7",
+      "c9"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "expressões": [] },
@@ -280,23 +471,49 @@
   "e": { "valor": "entre", "expressões": ["m"] },
   "f": {
     "valor": "Asa",
-    "expressões": ["8i", "m", "19", "1h", "1u", "3i", "3p", "6z", "7b", "5f", "6p", "8g"]
+    "expressões": [
+      "8i",
+      "m",
+      "19",
+      "1h",
+      "1u",
+      "3i",
+      "3p",
+      "6z",
+      "7b",
+      "5f",
+      "6p",
+      "8g"
+    ]
   },
   "g": {
     "valor": "e",
-    "expressões": ["m", "1h", "27", "3i", "77", "77", "7b", "7d", "8a"]
+    "expressões": ["m", "1h", "27", "3i", "77", "77", "7b", "7d", "8a", "bl"]
   },
   "h": { "valor": "durante", "expressões": ["m"] },
   "i": { "valor": "todo", "expressões": ["m", "4d", "5b", "8a"] },
   "j": {
     "valor": "o",
-    "expressões": ["m", "3e", "3i", "3i", "4d", "5b", "5t", "8a", "9g"]
+    "expressões": [
+      "m",
+      "3e",
+      "3i",
+      "3i",
+      "4d",
+      "5b",
+      "5t",
+      "8a",
+      "9g",
+      "9t",
+      "au",
+      "bl"
+    ]
   },
   "k": { "valor": "reinado", "expressões": ["m", "5f", "6p", "8g"] },
-  "l": { "valor": "deles", "expressões": ["m"] },
+  "l": { "valor": "deles", "expressões": ["m", "by"] },
   "m": {
     "nós": ["c", "d", "e", "f", "g", "4", "h", "i", "j", "k", "l"],
-    "expressões": ["n"]
+    "expressões": ["n", "ay"]
   },
   "n": { "nós": ["m", "a", "0"], "expressões": [] },
   "o": { "valor": "1 Rs 15.17", "expressões": ["q", "r", "v", "z", "1a"] },
@@ -317,7 +534,19 @@
   "1a": { "nós": ["19", "a", "o"], "expressões": [] },
   "1b": {
     "valor": "1 Rs 15.18",
-    "expressões": ["1d", "1i", "1r", "1v", "24", "28", "2c", "2g", "2j", "2n", "2s"]
+    "expressões": [
+      "1d",
+      "1i",
+      "1r",
+      "1v",
+      "24",
+      "28",
+      "2c",
+      "2g",
+      "2j",
+      "2n",
+      "2s"
+    ]
   },
   "1c": {
     "valor": "Então Asa ajuntou a prata e o ouro que haviam sobrado no tesouro do templo do Senhor e do seu próprio palácio. Confiou tudo isso a alguns dos seus oficiais e os enviou a Ben-Hadade, filho de Tabriom e neto de Heziom, rei da Síria, que governava em Damasco,",
@@ -334,17 +563,45 @@
   "1i": { "nós": ["1h", "a", "1b"], "expressões": [] },
   "1j": {
     "valor": "que",
-    "expressões": ["1q", "31", "3e", "3e", "40", "65", "77", "7d", "8z"]
+    "expressões": [
+      "1q",
+      "31",
+      "3e",
+      "3e",
+      "40",
+      "65",
+      "77",
+      "7d",
+      "8z",
+      "a1",
+      "al"
+    ]
   },
   "1k": { "valor": "haviam", "expressões": ["1q"] },
   "1l": { "valor": "sobrado", "expressões": ["1q"] },
   "1m": {
     "valor": "do",
-    "expressões": ["1q", "1q", "1q", "1u", "5f", "6p", "8g", "9d"]
+    "expressões": [
+      "1q",
+      "1q",
+      "1q",
+      "1u",
+      "5f",
+      "6p",
+      "8g",
+      "9d",
+      "b9",
+      "bl",
+      "bo",
+      "by"
+    ]
   },
   "1n": { "valor": "tesouro", "expressões": ["1q"] },
   "1o": { "valor": "templo", "expressões": ["1q"] },
-  "1p": { "valor": "Senhor", "expressões": ["1q", "5t", "9d"] },
+  "1p": {
+    "valor": "Senhor",
+    "expressões": ["1q", "5t", "9d", "al", "b9", "bl", "bo", "by"]
+  },
   "1q": {
     "nós": ["1h", "1j", "1k", "1l", "1m", "1n", "1m", "1o", "1m", "1p"],
     "expressões": ["1r"]
@@ -358,25 +615,43 @@
   "1x": { "valor": "confiou", "expressões": ["23"] },
   "1y": {
     "valor": "a",
-    "expressões": ["23", "27", "3p", "4o", "65", "77", "7d", "8a", "8u", "8z", "97", "97", "9d"]
+    "expressões": [
+      "23",
+      "27",
+      "3p",
+      "4o",
+      "65",
+      "77",
+      "7d",
+      "8a",
+      "8u",
+      "8z",
+      "97",
+      "97",
+      "9d",
+      "al",
+      "b9",
+      "b9",
+      "by"
+    ]
   },
   "1z": { "valor": "alguns", "expressões": ["23"] },
   "2a": { "valor": "Tabriom", "expressões": ["2b", "2f"] },
   "2b": { "nós": ["26", "29", "7", "2a"], "expressões": ["2c"] },
   "2c": { "nós": ["2b", "a", "1b"], "expressões": [] },
   "2d": { "valor": "Heziom", "expressões": ["2f", "2i"] },
-  "2e": { "valor": "?", "expressões": ["2f"] },
+  "2e": { "valor": "?", "expressões": ["2f", "a1", "au"] },
   "2f": { "nós": ["2a", "5", "29", "7", "2d", "2e"], "expressões": ["2g"] },
   "2g": { "nós": ["2f", "a", "1b"], "expressões": [] },
   "2h": { "valor": "neto", "expressões": ["2i"] },
   "2i": { "nós": ["26", "2h", "7", "2d"], "expressões": ["2j"] },
   "2j": { "nós": ["2i", "a", "1b"], "expressões": [] },
-  "2k": { "valor": "da", "expressões": ["2m", "7o"] },
+  "2k": { "valor": "da", "expressões": ["2m", "7o", "9t", "9t"] },
   "2l": { "valor": "Síria", "expressões": ["2m"] },
   "2m": { "nós": ["26", "6", "2k", "2l"], "expressões": ["2n"] },
   "2n": { "nós": ["2m", "a", "1b"], "expressões": [] },
   "2o": { "valor": "governava", "expressões": ["2r"] },
-  "2p": { "valor": "em", "expressões": ["2r", "5h", "6k", "7g", "8a"] },
+  "2p": { "valor": "em", "expressões": ["2r", "5h", "7g", "8a", "c8"] },
   "2q": { "valor": "Damasco", "expressões": ["2r"] },
   "2r": { "nós": ["26", "2o", "2p", "2q"], "expressões": ["2s"] },
   "2s": { "nós": ["2r", "a", "1b"], "expressões": [] },
@@ -391,8 +666,8 @@
   "2y": { "valor": "uma", "expressões": ["31", "84"] },
   "2z": { "valor": "mensagem", "expressões": ["31"] },
   "3a": { "valor": "tens", "expressões": ["3e"] },
-  "3b": { "valor": "para", "expressões": ["3e", "4w"] },
-  "3c": { "valor": "ele", "expressões": ["3e", "4s", "4y"] },
+  "3b": { "valor": "para", "expressões": ["3e", "4w", "al"] },
+  "3c": { "valor": "ele", "expressões": ["3e", "4s", "4y", "9t"] },
   "3d": { "valor": "saia", "expressões": ["3e"] },
   "3e": {
     "nós": [
@@ -427,7 +702,21 @@
   "3g": { "valor": "pai", "expressões": ["3i", "3i"] },
   "3h": { "valor": "fizeram", "expressões": ["3i"] },
   "3i": {
-    "nós": ["31", "j", "3g", "7", "f", "g", "j", "3g", "7", "26", "3h", "35", "36"],
+    "nós": [
+      "31",
+      "j",
+      "3g",
+      "7",
+      "f",
+      "g",
+      "j",
+      "3g",
+      "7",
+      "26",
+      "3h",
+      "35",
+      "36"
+    ],
     "expressões": ["3j"]
   },
   "3j": { "nós": ["3i", "a", "2t"], "expressões": [] },
@@ -480,7 +769,7 @@
   "4s": { "nós": ["4o", "4q", "3c", "4r", "7", "3k"], "expressões": ["4t"] },
   "4t": { "nós": ["4s", "a", "4i"], "expressões": [] },
   "4u": { "valor": "foi", "expressões": ["4w", "6z", "8l"] },
-  "4v": { "valor": "Tirza", "expressões": ["4w", "5h", "6k"] },
+  "4v": { "valor": "Tirza", "expressões": ["4w", "5h", "c8"] },
   "4w": { "nós": ["4", "4u", "3b", "4v"], "expressões": ["4x", "4y"] },
   "4x": { "nós": ["4w", "a", "4i"], "expressões": [] },
   "4y": { "nós": ["4w", "4q", "3c", "4r", "7", "3k"], "expressões": ["4z"] },
@@ -500,17 +789,17 @@
   "5g": { "nós": ["5f", "a", "50"], "expressões": [] },
   "5h": { "nós": ["5b", "2p", "4v"], "expressões": ["5i"] },
   "5i": { "nós": ["5h", "a", "50"], "expressões": [] },
-  "5j": { "valor": "reinou", "expressões": ["5l", "6i"] },
+  "5j": { "valor": "reinou", "expressões": ["5l", "c6"] },
   "5k": { "valor": "24 anos", "expressões": ["5l"] },
   "5l": { "nós": ["5b", "5j", "5k"], "expressões": ["5m"] },
   "5m": { "nós": ["5l", "a", "50"], "expressões": [] },
-  "5n": { "valor": "1 Rs 15.34", "expressões": ["5p", "5u", "60", "66"] },
+  "5n": { "valor": "1 Rs 15.34", "expressões": ["5p", "5u", "60", "66", "b2"] },
   "5o": {
     "valor": "Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.",
     "expressões": ["5p"]
   },
   "5p": { "nós": ["5n", "1", "5o"], "expressões": [] },
-  "5q": { "valor": "fez", "expressões": ["5t"] },
+  "5q": { "valor": "fez", "expressões": ["5t", "bt", "by"] },
   "5r": { "valor": "o que", "expressões": ["5t"] },
   "5s": { "valor": "reprova", "expressões": ["5t"] },
   "5t": {
@@ -519,21 +808,14 @@
   },
   "5u": { "nós": ["5t", "a", "5n"], "expressões": [] },
   "5v": { "valor": "andando", "expressões": ["5z", "65"] },
-  "5w": { "valor": "nos", "expressões": ["5z", "65"] },
-  "5x": { "valor": "caminhos", "expressões": ["5z"] },
-  "5y": { "valor": "Jeroboão", "expressões": ["5z", "65", "8u", "97"] },
+  "5w": { "valor": "nos", "expressões": ["5z", "65", "b1", "bq"] },
+  "5x": { "valor": "caminhos", "expressões": ["5z", "b1", "bq"] },
+  "5y": {
+    "valor": "Jeroboão",
+    "expressões": ["5z", "65", "8u", "97", "9t", "9w", "al", "b1", "bq"]
+  },
   "5z": { "nós": ["5t", "5v", "5w", "5x", "7", "5y"], "expressões": ["60"] },
-  "6b": { "valor": "Elá", "expressões": ["6d", "6f", "6i", "6m"] },
-  "6c": { "valor": ", filho", "expressões": ["6d"] },
-  "6d": { "nós": ["6b", "6c", "7", "4"], "expressões": ["6e"] },
-  "6e": { "nós": ["6d", "a", "67"], "expressões": [] },
-  "6f": { "nós": ["6b", "53", "8"], "expressões": ["6g"] },
-  "6g": { "nós": ["6f", "a", "67"], "expressões": [] },
-  "6h": { "valor": "2 anos", "expressões": ["6i"] },
-  "6i": { "nós": ["6b", "5j", "6h"], "expressões": ["6j", "6k"] },
-  "6j": { "nós": ["6i", "a", "67"], "expressões": [] },
-  "6k": { "nós": ["6i", "2p", "4v"], "expressões": ["6l"] },
-  "6l": { "nós": ["6k", "a", "67"], "expressões": [] },
+  "6b": { "valor": "Elá", "expressões": ["6m", "c0", "c2", "c6"] },
   "6m": { "nós": ["6b", "5a", "6", "7", "8"], "expressões": ["6n", "6p"] },
   "6n": { "nós": ["6m", "a", "67"], "expressões": [] },
   "6o": { "valor": "26º", "expressões": ["6p"] },
@@ -586,7 +868,7 @@
   "7o": { "nós": ["4", "5", "2k", "7m", "7", "7n"], "expressões": ["7p"] },
   "7p": { "nós": ["7o", "a", "7i"], "expressões": [] },
   "7q": { "valor": "conspirou", "expressões": ["86"] },
-  "7r": { "valor": "contra", "expressões": ["86"] },
+  "7r": { "valor": "contra", "expressões": ["86", "b9"] },
   "7s": { "valor": "Nadabe", "expressões": ["86", "88", "8a", "8l"] },
   "7t": { "valor": "matou", "expressões": ["88", "8u"] },
   "7u": { "valor": "Gibetom", "expressões": ["84", "8a"] },
@@ -594,7 +876,22 @@
   "7y": { "valor": "exécito", "expressões": ["8a"] },
   "7z": { "valor": "sitiavam", "expressões": ["8a"] },
   "8a": {
-    "nós": ["88", "2p", "7u", "5", "7x", "7s", "g", "i", "j", "7y", "7", "8", "1y", "7z"],
+    "nós": [
+      "88",
+      "2p",
+      "7u",
+      "5",
+      "7x",
+      "7s",
+      "g",
+      "i",
+      "j",
+      "7y",
+      "7",
+      "8",
+      "1y",
+      "7z"
+    ],
     "expressões": ["8b"]
   },
   "8b": { "nós": ["8a", "a", "7i"], "expressões": [] },
@@ -627,7 +924,7 @@
   },
   "8r": { "nós": ["8p", "1", "8q"], "expressões": [] },
   "8s": { "valor": "toda", "expressões": ["8u"] },
-  "8t": { "valor": "família", "expressões": ["8u"] },
+  "8t": { "valor": "família", "expressões": ["8u", "al"] },
   "8u": {
     "nós": ["4", "7t", "8s", "1y", "8t", "7", "5y"],
     "expressões": ["8v", "8z"]
@@ -637,9 +934,9 @@
   "8x": { "valor": "começou", "expressões": ["8z"] },
   "8y": { "valor": "reinar", "expressões": ["8z"] },
   "8z": { "nós": ["8u", "8w", "1j", "8x", "1y", "8y"], "expressões": ["90"] },
-  "9a": { "valor": "palavra", "expressões": ["9d"] },
+  "9a": { "valor": "palavra", "expressões": ["9d", "b9"] },
   "9b": { "valor": "anunciada", "expressões": ["9d"] },
-  "9c": { "valor": "por", "expressões": ["9d"] },
+  "9c": { "valor": "por", "expressões": ["9d", "by"] },
   "9d": {
     "nós": ["97", "7", "99", "2x", "1y", "9a", "1m", "1p", "9b", "9c", "56"],
     "expressões": ["9e"]
@@ -647,5 +944,243 @@
   "9e": { "nós": ["9d", "a", "8p"], "expressões": [] },
   "9f": { "valor": "silonita", "expressões": ["9g"] },
   "9g": { "nós": ["56", "5", "j", "9f"], "expressões": ["9h"] },
-  "9h": { "nós": ["9g", "a", "8p"], "expressões": [] }
+  "9h": { "nós": ["9g", "a", "8p"], "expressões": [] },
+  "9i": { "valor": "1 Rs 14.6", "expressões": ["9k", "9u", "9x", "a2", "aa"] },
+  "9j": {
+    "valor": "Quando Aías ouviu o som dos passos junto da porta, disse: \"Entre, mulher de Jeroboão. Por que esse fingimento? Fui encarregado de lhe dar más notícias.",
+    "expressões": ["9k"]
+  },
+  "9k": { "nós": ["9i", "1", "9j"], "expressões": [] },
+  "9l": { "valor": "Quando", "expressões": ["9t"] },
+  "9m": { "valor": "ouviu", "expressões": ["9t"] },
+  "9n": { "valor": "som", "expressões": ["9t"] },
+  "9o": { "valor": "passos", "expressões": ["9t"] },
+  "9p": { "valor": "mulher", "expressões": ["9t", "9w"] },
+  "9q": { "valor": "junto", "expressões": ["9t"] },
+  "9r": { "valor": "porta", "expressões": ["9t"] },
+  "9s": { "valor": "disse", "expressões": ["9t"] },
+  "9t": {
+    "nós": [
+      "9l",
+      "56",
+      "9m",
+      "j",
+      "9n",
+      "20",
+      "9o",
+      "2k",
+      "9p",
+      "7",
+      "5y",
+      "9q",
+      "2k",
+      "9r",
+      "5",
+      "3c",
+      "9s",
+      "1"
+    ],
+    "expressões": ["9u", "9w", "a1", "a9", "al", "au"]
+  },
+  "9u": { "nós": ["9t", "a", "9i"], "expressões": [] },
+  "9v": { "valor": "Entre", "expressões": ["9w"] },
+  "9w": {
+    "nós": ["9t", "33", "9v", "5", "9p", "7", "5y", "37", "33"],
+    "expressões": ["9x"]
+  },
+  "9x": { "nós": ["9w", "a", "9i"], "expressões": [] },
+  "9y": { "valor": "Por", "expressões": ["a1"] },
+  "9z": { "valor": "esse", "expressões": ["a1"] },
+  "a0": { "valor": "fingimento", "expressões": ["a1"] },
+  "a1": {
+    "nós": ["9t", "33", "9y", "1j", "9z", "a0", "2e", "33"],
+    "expressões": ["a2"]
+  },
+  "a2": { "nós": ["a1", "a", "9i"], "expressões": [] },
+  "a3": { "valor": "Fui", "expressões": ["a9"] },
+  "a4": { "valor": "encarregado", "expressões": ["a9"] },
+  "a5": { "valor": "lhe", "expressões": ["a9"] },
+  "a6": { "valor": "dar", "expressões": ["a9"] },
+  "a7": { "valor": "más", "expressões": ["a9"] },
+  "a8": { "valor": "notícias", "expressões": ["a9"] },
+  "a9": {
+    "nós": ["9t", "33", "a3", "a4", "7", "a5", "a6", "a7", "a8", "37", "33"],
+    "expressões": ["aa"]
+  },
+  "aa": { "nós": ["a9", "a", "9i"], "expressões": [] },
+  "ab": { "valor": "1 Rs 14.14", "expressões": ["ad", "am", "av"] },
+  "ac": {
+    "valor": "\"O Senhor levantará para si um rei sobre Israel que eliminará a família de Jeroboão. Este é o dia! Como? Sim, agora mesmo.",
+    "expressões": ["ad"]
+  },
+  "ad": { "nós": ["ab", "1", "ac"], "expressões": [] },
+  "ae": { "valor": "O", "expressões": ["al", "bl"] },
+  "af": { "valor": "levantará", "expressões": ["al"] },
+  "ag": { "valor": "si", "expressões": ["al"] },
+  "ah": { "valor": "sobre", "expressões": ["al"] },
+  "ai": { "valor": "(", "expressões": ["al"] },
+  "aj": { "valor": ")", "expressões": ["al"] },
+  "ak": { "valor": "eliminará", "expressões": ["al"] },
+  "al": {
+    "nós": [
+      "9t",
+      "33",
+      "ae",
+      "1p",
+      "af",
+      "3b",
+      "ag",
+      "35",
+      "6",
+      "ah",
+      "8",
+      "ai",
+      "4",
+      "aj",
+      "1j",
+      "ak",
+      "1y",
+      "8t",
+      "7",
+      "5y",
+      "37",
+      "33"
+    ],
+    "expressões": ["am"]
+  },
+  "am": { "nós": ["al", "a", "ab"], "expressões": [] },
+  "an": { "valor": "Este", "expressões": ["au"] },
+  "ao": { "valor": "é", "expressões": ["au"] },
+  "ap": { "valor": "dia!", "expressões": ["au"] },
+  "aq": { "valor": "Como", "expressões": ["au"] },
+  "ar": { "valor": "Sim", "expressões": ["au"] },
+  "as": { "valor": "agora", "expressões": ["au"] },
+  "at": { "valor": "mesmo", "expressões": ["au"] },
+  "au": {
+    "nós": [
+      "9t",
+      "33",
+      "an",
+      "ao",
+      "j",
+      "ap",
+      "aq",
+      "2e",
+      "ar",
+      "5",
+      "as",
+      "at",
+      "37",
+      "33"
+    ],
+    "expressões": ["av"]
+  },
+  "av": { "nós": ["au", "a", "ab"], "expressões": [] },
+  "aw": { "valor": "1 Rs 15.32", "expressões": ["ax", "ay", "az"] },
+  "ax": { "nós": ["aw", "1", "2"], "expressões": [] },
+  "ay": { "nós": ["m", "a", "aw"], "expressões": [] },
+  "az": { "nós": ["9", "a", "aw"], "expressões": [] },
+  "b0": { "valor": "andou", "expressões": ["b1", "bq"] },
+  "b1": { "nós": ["4", "b0", "5w", "5x", "7", "5y"], "expressões": ["b2"] },
+  "b2": { "nós": ["b1", "a", "5n"], "expressões": [] },
+  "b3": { "valor": "1 Rs 16.1", "expressões": ["b5", "ba", "bd"] },
+  "b4": {
+    "valor": "Então a palavra do Senhor contra Baasa veio a Jeú, filho de Hanani:",
+    "expressões": ["b5"]
+  },
+  "b5": { "nós": ["b3", "1", "b4"], "expressões": [] },
+  "b6": { "valor": "Então", "expressões": ["b9"] },
+  "b7": { "valor": "veio", "expressões": ["b9"] },
+  "b8": { "valor": "Jeú", "expressões": ["b9", "bc"] },
+  "b9": {
+    "nós": ["b6", "1y", "9a", "1m", "1p", "7r", "4", "b7", "1y", "b8", "1"],
+    "expressões": ["ba", "bl", "bq", "bt", "by"]
+  },
+  "ba": { "nós": ["b9", "a", "b3"], "expressões": [] },
+  "bb": { "valor": "Hanani", "expressões": ["bc"] },
+  "bc": { "nós": ["b8", "5", "29", "7", "bb"], "expressões": ["bd"] },
+  "bd": { "nós": ["bc", "a", "b3"], "expressões": [] },
+  "be": {
+    "valor": "1 Rs 16.2",
+    "expressões": ["bg", "bm", "bp", "br", "bu", "bz"]
+  },
+  "bf": {
+    "valor": "\"Eu o levantei do pó e o tornei líder de Israel, meu povo, mas você andou nos caminhos de Jeroboão e fez o meu povo pecar e provocar a minha ira por causa dos pecados deles.",
+    "expressões": ["bg"]
+  },
+  "bg": { "nós": ["be", "1", "bf"], "expressões": [] },
+  "bh": { "valor": "levantou", "expressões": ["bl"] },
+  "bi": { "valor": "pó", "expressões": ["bl"] },
+  "bj": { "valor": "tornou", "expressões": ["bl"] },
+  "bk": { "valor": "líder", "expressões": ["bl"] },
+  "bl": {
+    "nós": [
+      "b9",
+      "33",
+      "ae",
+      "1p",
+      "bh",
+      "4",
+      "1m",
+      "bi",
+      "g",
+      "j",
+      "bj",
+      "bk",
+      "7",
+      "8",
+      "33"
+    ],
+    "expressões": ["bm"]
+  },
+  "bm": { "nós": ["bl", "a", "be"], "expressões": [] },
+  "bn": { "valor": "povo", "expressões": ["bo"] },
+  "bo": { "nós": ["8", "5", "bn", "1m", "1p"], "expressões": ["bp"] },
+  "bp": { "nós": ["bo", "a", "be"], "expressões": [] },
+  "bq": {
+    "nós": ["b9", "33", "4", "b0", "5w", "5x", "7", "5y", "33"],
+    "expressões": ["br"]
+  },
+  "br": { "nós": ["bq", "a", "be"], "expressões": [] },
+  "bs": { "valor": "pecar", "expressões": ["bt"] },
+  "bt": {
+    "nós": ["b9", "33", "4", "5q", "8", "bs", "33"],
+    "expressões": ["bu"]
+  },
+  "bu": { "nós": ["bt", "a", "be"], "expressões": [] },
+  "bv": { "valor": "provocar", "expressões": ["by"] },
+  "bw": { "valor": "ira", "expressões": ["by"] },
+  "bx": { "valor": "causa", "expressões": ["by"] },
+  "by": {
+    "nós": [
+      "b9",
+      "33",
+      "4",
+      "5q",
+      "8",
+      "bv",
+      "1y",
+      "bw",
+      "1m",
+      "1p",
+      "9c",
+      "bx",
+      "20",
+      "61",
+      "l",
+      "33"
+    ],
+    "expressões": ["bz"]
+  },
+  "bz": { "nós": ["by", "a", "be"], "expressões": [] },
+  "c0": { "nós": ["6b", "5", "29", "7", "4"], "expressões": ["c1"] },
+  "c1": { "nós": ["c0", "a", "67"], "expressões": [] },
+  "c2": { "nós": ["6b", "5", "6", "7", "8"], "expressões": ["c3"] },
+  "c3": { "nós": ["c2", "a", "67"], "expressões": [] },
+  "c4": { "valor": "2", "expressões": ["c6"] },
+  "c5": { "valor": "anos", "expressões": ["c6"] },
+  "c6": { "nós": ["6b", "5j", "c4", "c5"], "expressões": ["c7", "c8"] },
+  "c7": { "nós": ["c6", "a", "67"], "expressões": [] },
+  "c8": { "nós": ["c6", "2p", "4v"], "expressões": ["c9"] },
+  "c9": { "nós": ["c8", "a", "67"], "expressões": [] }
 }

@@ -29,7 +29,6 @@
 - Fez o que o Senhor reprova (1 Rs 15.34)
   - Andando nos caminhos de Jeroboão (1 Rs 15.34)
   - Andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
-- Elá , filho de Baasa (1 Rs 16.8)
 - Quando Aías ouviu o som dos passos da mulher de Jeroboão junto da porta , ele disse : " O Senhor levantará para si um rei sobre Israel ( Baasa ) que eliminará a família de Jeroboão . " (1 Rs 14.14)
 - Andou nos caminhos de Jeroboão (1 Rs 15.34)
 - Então a palavra do Senhor contra Baasa veio a Jeú : (1 Rs 16.1)
@@ -37,6 +36,7 @@
   - " Baasa andou nos caminhos de Jeroboão " (1 Rs 16.2)
   - " Baasa fez Israel pecar " (1 Rs 16.2)
   - " Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles " (1 Rs 16.2)
+- Elá , filho de Baasa (1 Rs 16.8)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
@@ -61,10 +61,10 @@
 >
 > 1 Rs 15.34 : Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.
 >
-> 1 Rs 16.8 : No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.
->
 > 1 Rs 14.14 : "O Senhor levantará para si um rei sobre Israel que eliminará a família de Jeroboão. Este é o dia! Como? Sim, agora mesmo.
 >
 > 1 Rs 16.1 : Então a palavra do Senhor contra Baasa veio a Jeú, filho de Hanani:
 >
 > 1 Rs 16.2 : "Eu o levantei do pó e o tornei líder de Israel, meu povo, mas você andou nos caminhos de Jeroboão e fez o meu povo pecar e provocar a minha ira por causa dos pecados deles.
+>
+> 1 Rs 16.8 : No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.

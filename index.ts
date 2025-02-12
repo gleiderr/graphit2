@@ -1,9 +1,7 @@
+import { bíblia, outputDB } from './Biblia';
 import { graphit } from './Graphit';
 const agora: string = new Date().toLocaleString(); //
 console.log(`----------------------------------${agora}`);
-graphit.carregar('Bíblia anterior.json');
-
-import { bíblia } from './Biblia';
 
 import './inserções/1 Rs 14.6, 14.14';
 import './inserções/1 Rs 15.16-22';
@@ -29,4 +27,4 @@ bíblia.imprimirEstudos({
 
 bíblia.imprimeNãoVisitados();
 
-graphit.salvar('Bíblia.json');
+graphit.salvar(outputDB);

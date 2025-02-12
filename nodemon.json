@@ -1,6 +1,7 @@
 {
   "verbose": false,
   "ext": "ts",
+  "watch": ["Bíblia anterior.json", "*.ts"],
   "events": {
     "start": "cls",
     "restart": "cls"

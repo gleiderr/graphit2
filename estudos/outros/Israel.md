@@ -6,7 +6,6 @@
   - Em Tirza (1 Rs 15.33)
   - Reinou 24 anos (1 Rs 15.33)
 - Baasa fez o que o Senhor reprova andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
-- Elá , rei de Israel (1 Rs 16.8)
 - Elá tornou-se rei de Israel (1 Rs 16.8)
   - No 26º ano do reinado de Asa (1 Rs 16.8)
 - Baasa matou Nadabe em Gibetom , enquanto Nadabe e todo o exécito de Israel a sitiavam (1 Rs 15.27)
@@ -15,6 +14,7 @@
 - Povo do Senhor (1 Rs 16.2)
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel pecar " (1 Rs 16.2)
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles " (1 Rs 16.2)
+- Elá , rei de Israel (1 Rs 16.8)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
