@@ -15,6 +15,7 @@
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel pecar " (1 Rs 16.2)
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles " (1 Rs 16.2)
 - Elá , rei de Israel (1 Rs 16.8)
+- Então a palavra do Senhor contra Baasa veio a Jeú : " Eu o levantei do pó e o tornei líder de Israel " (1 Rs 16.2)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.

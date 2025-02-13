@@ -12,15 +12,16 @@ import './inserções/1 Rs 16.1-13';
 bíblia.imprimirEstudos({
   foco: ['Baasa'],
   outros: [
+    'Aías',
     'Asa',
     'Ben-Hadade',
     'Elá',
-    'Tabriom',
     'Geba',
     'Gibetom',
-    'Aías',
-    'Jeú',
     'Israel',
+    'Jeroboão',
+    'Jeú',
+    'Tabriom',
   ],
   pronto: [],
 });

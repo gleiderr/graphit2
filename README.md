@@ -27,6 +27,7 @@ Ao compilar os versículos da Bíblia são executadas as seguintes operações:
 - Tag "Baasa" em git
 
 ### Feito
+- Incluir exclusão e movimentação via linha de comando
 - Renomeia 'aresta' para 'expressão'
 - Organizar arquivos e pastas
 - Carregar Bíblia.json
@@ -34,7 +35,12 @@ Ao compilar os versículos da Bíblia são executadas as seguintes operações:
 
 ## Versão Obede-Edom
 ### Fazer
-- Incluir exclusão, movimentação e ordenação "automática" via linha de comando
+- No estudo a respeito de Jeroboão o trecho abaixo pode ser resumido reaproveitando a expressão "Baasa fez o que o Senhor reprova".
+  ```md
+  - Baasa fez o que o Senhor reprova andando nos caminhos de Jeroboão (1 Rs 15.34)
+  - Baasa fez o que o Senhor reprova andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
+  ```
+- Incluir ordenação "automática"
 - Incluir identificação automática de sub expressões
 - Criar relação de equivalência entre expressões para evitar repetição de informações
 - Imprimir análise dos versículos por expressões
