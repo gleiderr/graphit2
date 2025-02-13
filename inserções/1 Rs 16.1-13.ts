@@ -11,12 +11,24 @@ inserirVersículo(
   '1 Rs 16.2',
   '"Eu o levantei do pó e o tornei líder de Israel, meu povo, mas você andou nos caminhos de Jeroboão e fez o meu povo pecar e provocar a minha ira por causa dos pecados deles.',
   () => {
-    expressão([a, ...tokens('"O Senhor levantou Baasa do pó e o tornou líder de Israel"')]);
+    expressão([a, ...tokens('"Eu o levantei do pó e o tornei líder de Israel"')]);
     expressão('Israel, povo do Senhor');
 
     expressão([a, ...tokens('"Baasa andou nos caminhos de Jeroboão"')]);
     expressão([a, ...tokens('"Baasa fez Israel pecar"')]);
     expressão([a, ...tokens('"Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles"')]);
+  },
+);
+
+inserirVersículo(
+  '1 Rs 16.3',
+  'Por isso estou na iminência de destruir Baasa e a sua família, fazendo a ela o que fiz à de Jeroboão, filho de Nebate.',
+  () => {
+    expressão([
+      a,
+      ...tokens('"Por isso estou na iminência de destruir Baasa e a sua família, fazendo a ela o que fiz à de Jeroboão"'),
+    ]);
+    expressão('Jeroboão, filho de Nebate');
   },
 );
 
