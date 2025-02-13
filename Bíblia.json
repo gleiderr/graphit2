@@ -23,7 +23,8 @@
       "b5",
       "b9",
       "bg",
-      "ch"
+      "ch",
+      "cz"
     ]
   },
   "2": {
@@ -60,7 +61,8 @@
       "bt",
       "by",
       "c0",
-      "cs"
+      "cs",
+      "d3"
     ]
   },
   "5": {
@@ -138,7 +140,8 @@
       "cd",
       "cs",
       "cs",
-      "cv"
+      "cv",
+      "d3"
     ]
   },
   "8": {
@@ -167,7 +170,7 @@
   "11": { "valor": "ninguém", "expressões": ["19", "6z", "97"] },
   "12": { "valor": "pudesse", "expressões": ["19"] },
   "13": { "valor": "entrar", "expressões": ["19"] },
-  "14": { "valor": "no", "expressões": ["19", "5f", "6p", "8g"] },
+  "14": { "valor": "no", "expressões": ["19", "5f", "6p", "8g", "db"] },
   "15": { "valor": "território", "expressões": ["19"] },
   "16": { "valor": "ou", "expressões": ["19"] },
   "17": { "valor": "sair", "expressões": ["19"] },
@@ -190,7 +193,7 @@
     ],
     "expressões": ["1a"]
   },
-  "20": { "valor": "dos", "expressões": ["23", "4o", "97", "9t", "by"] },
+  "20": { "valor": "dos", "expressões": ["23", "4o", "97", "9t", "by", "db"] },
   "21": { "valor": "seus", "expressões": ["23"] },
   "22": { "valor": "oficiais", "expressões": ["23"] },
   "23": {
@@ -259,7 +262,11 @@
       "cd",
       "cd",
       "cs",
-      "cs"
+      "cs",
+      "d3",
+      "d3",
+      "db",
+      "db"
     ]
   },
   "34": { "valor": "Façamos", "expressões": ["3e"] },
@@ -356,7 +363,7 @@
   },
   "78": { "nós": ["77", "a", "6r"], "expressões": [] },
   "79": { "valor": "Geba", "expressões": ["7g", "7b"] },
-  "82": { "valor": "cidade", "expressões": ["84"] },
+  "82": { "valor": "cidade", "expressões": ["84", "d3"] },
   "83": { "valor": "filistéia", "expressões": ["84"] },
   "84": { "nós": ["7u", "5", "2y", "82", "83"], "expressões": ["85"] },
   "85": { "nós": ["84", "a", "7i"], "expressões": [] },
@@ -481,7 +488,9 @@
       "c9",
       "ce",
       "ct",
-      "cw"
+      "cw",
+      "d4",
+      "dc"
     ]
   },
   "b": { "nós": ["9", "a", "0"], "expressões": [] },
@@ -610,7 +619,9 @@
       "8z",
       "a1",
       "al",
-      "cs"
+      "cs",
+      "d3",
+      "db"
     ]
   },
   "1k": { "valor": "haviam", "expressões": ["1q"] },
@@ -630,7 +641,8 @@
       "bl",
       "bo",
       "by",
-      "cd"
+      "cd",
+      "db"
     ]
   },
   "1n": { "valor": "tesouro", "expressões": ["1q"] },
@@ -648,7 +660,7 @@
   "1t": { "valor": "palácio", "expressões": ["1u"] },
   "1u": { "nós": ["1h", "1m", "1s", "1t", "7", "f"], "expressões": ["1v"] },
   "1v": { "nós": ["1u", "a", "1b"], "expressões": [] },
-  "1w": { "valor": "os", "expressões": ["23", "27"] },
+  "1w": { "valor": "os", "expressões": ["23", "27", "d3"] },
   "1x": { "valor": "confiou", "expressões": ["23"] },
   "1y": {
     "valor": "a",
@@ -685,7 +697,7 @@
   "2h": { "valor": "neto", "expressões": ["2i"] },
   "2i": { "nós": ["26", "2h", "7", "2d"], "expressões": ["2j"] },
   "2j": { "nós": ["2i", "a", "1b"], "expressões": [] },
-  "2k": { "valor": "da", "expressões": ["2m", "7o", "9t", "9t"] },
+  "2k": { "valor": "da", "expressões": ["2m", "7o", "9t", "9t", "d3"] },
   "2l": { "valor": "Síria", "expressões": ["2m"] },
   "2m": { "nós": ["26", "6", "2k", "2l"], "expressões": ["2n"] },
   "2n": { "nós": ["2m", "a", "1b"], "expressões": [] },
@@ -975,7 +987,7 @@
   },
   "8r": { "nós": ["8p", "1", "8q"], "expressões": [] },
   "8s": { "valor": "toda", "expressões": ["8u"] },
-  "8t": { "valor": "família", "expressões": ["8u", "al", "cs"] },
+  "8t": { "valor": "família", "expressões": ["8u", "al", "cs", "d3"] },
   "8u": {
     "nós": ["4", "7t", "8s", "1y", "8t", "7", "5y"],
     "expressões": ["8v", "8z"]
@@ -1145,7 +1157,7 @@
   "b8": { "valor": "Jeú", "expressões": ["b9", "bc"] },
   "b9": {
     "nós": ["b6", "1y", "9a", "1m", "1p", "7r", "4", "b7", "1y", "b8", "1"],
-    "expressões": ["ba", "bl", "bq", "bt", "by", "cd", "cs"]
+    "expressões": ["ba", "bl", "bq", "bt", "by", "cd", "cs", "d3", "db"]
   },
   "ba": { "nós": ["b9", "a", "b3"], "expressões": [] },
   "bb": { "valor": "Hanani", "expressões": ["bc"] },
@@ -1265,7 +1277,7 @@
   "ch": { "nós": ["cf", "1", "cg"], "expressões": [] },
   "ci": { "valor": "isso", "expressões": ["cs"] },
   "cj": { "valor": "estou", "expressões": ["cs"] },
-  "ck": { "valor": "na", "expressões": ["cs"] },
+  "ck": { "valor": "na", "expressões": ["cs", "d3"] },
   "cl": { "valor": "iminência", "expressões": ["cs"] },
   "cm": { "valor": "destruir", "expressões": ["cs"] },
   "cn": { "valor": "sua", "expressões": ["cs"] },
@@ -1306,5 +1318,60 @@
   "ct": { "nós": ["cs", "a", "cf"], "expressões": [] },
   "cu": { "valor": "Nebate", "expressões": ["cv"] },
   "cv": { "nós": ["5y", "5", "29", "7", "cu"], "expressões": ["cw"] },
-  "cw": { "nós": ["cv", "a", "cf"], "expressões": [] }
+  "cw": { "nós": ["cv", "a", "cf"], "expressões": [] },
+  "cx": { "valor": "1 Rs 16.4", "expressões": ["cz", "d4", "dc"] },
+  "cy": {
+    "valor": "Cães comerão os da família de Baasa que morrerem na cidade, e as aves do céu se alimentarão dos que morrerem no campo\"",
+    "expressões": ["cz"]
+  },
+  "cz": { "nós": ["cx", "1", "cy"], "expressões": [] },
+  "d0": { "valor": "Cães", "expressões": ["d3"] },
+  "d1": { "valor": "comerão", "expressões": ["d3"] },
+  "d2": { "valor": "morrerem", "expressões": ["d3", "db"] },
+  "d3": {
+    "nós": [
+      "b9",
+      "33",
+      "d0",
+      "d1",
+      "1w",
+      "2k",
+      "8t",
+      "7",
+      "4",
+      "1j",
+      "d2",
+      "ck",
+      "82",
+      "33"
+    ],
+    "expressões": ["d4"]
+  },
+  "d4": { "nós": ["d3", "a", "cx"], "expressões": [] },
+  "d5": { "valor": "As", "expressões": ["db"] },
+  "d6": { "valor": "aves", "expressões": ["db"] },
+  "d7": { "valor": "céu", "expressões": ["db"] },
+  "d8": { "valor": "se", "expressões": ["db"] },
+  "d9": { "valor": "alimentarão", "expressões": ["db"] },
+  "da": { "valor": "campo", "expressões": ["db"] },
+  "db": {
+    "nós": [
+      "b9",
+      "33",
+      "d5",
+      "d6",
+      "1m",
+      "d7",
+      "d8",
+      "d9",
+      "20",
+      "1j",
+      "d2",
+      "14",
+      "da",
+      "33"
+    ],
+    "expressões": ["dc"]
+  },
+  "dc": { "nós": ["db", "a", "cx"], "expressões": [] }
 }

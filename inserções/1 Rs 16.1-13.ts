@@ -33,6 +33,15 @@ inserirVersículo(
 );
 
 inserirVersículo(
+  '1 Rs 16.4',
+  'Cães comerão os da família de Baasa que morrerem na cidade, e as aves do céu se alimentarão dos que morrerem no campo"',
+  () => {
+    expressão([a, ...tokens('"Cães comerão os da família de Baasa que morrerem na cidade"')]);
+    expressão([a, ...tokens('"As aves do céu se alimentarão dos que morrerem no campo"')]);
+  },
+);
+
+inserirVersículo(
   '1 Rs 16.8',
   'No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.',
   () => {
