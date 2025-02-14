@@ -15,6 +15,8 @@
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa andou nos caminhos de Jeroboão " (1 Rs 16.2)
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Por isso estou na iminência de destruir Baasa e a sua família , fazendo a ela o que fiz à de Jeroboão " (1 Rs 16.3)
 - Filho de Nebate (1 Rs 16.3)
+- A palavra do Senhor veio por meio do profeta Jeú a Baasa e sua família por terem feito o que o Senhor reprova tornando-se como a família de Jeroboão (1 Rs 16.7)
+- A palavra do Senhor veio por meio do profeta Jeú a Baasa e sua família porque Baasa destruiu a família de Jeroboão (1 Rs 16.7)
 
 > ## Referências
 > 1 Rs 15.34 : Fez o que o Senhor reprova, andando nos caminhos de Jeroboão e nos pecados que ele tinha levado Israel a cometer.
@@ -28,3 +30,5 @@
 > 1 Rs 16.2 : "Eu o levantei do pó e o tornei líder de Israel, meu povo, mas você andou nos caminhos de Jeroboão e fez o meu povo pecar e provocar a minha ira por causa dos pecados deles.
 >
 > 1 Rs 16.3 : Por isso estou na iminência de destruir Baasa e a sua família, fazendo a ela o que fiz à de Jeroboão, filho de Nebate.
+>
+> 1 Rs 16.7 : A palavra do Senhor veio por meio do profeta Jeú, filho de Hanani, a Baasa e sua família, por terem feito o que o Senhor reprova, provocando a sua ira, tornando-se como a família de Jeroboão — e também porque Baasa destruiu a família de Jeroboão.

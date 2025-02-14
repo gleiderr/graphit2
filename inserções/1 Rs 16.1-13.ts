@@ -42,6 +42,41 @@ inserirVersículo(
 );
 
 inserirVersículo(
+  '1 Rs 16.5',
+  'Os demais acontecimentos do reinado de Baasa, o que fez e as suas realizações, estão escritos nos registros históricos dos reis de Israel.',
+  () => {
+    expressão(
+      'Os demais acontecimentos do reinado de Baasa, o que fez e as suas realizações, estão escritos nos registros históricos dos reis de Israel.',
+    );
+  },
+);
+
+inserirVersículo(
+  '1 Rs 16.6',
+  ' Baasa descansou com os seus antepassados e foi sepultado em Tirza. E seu filho Elá foi o seu sucessor.',
+  () => {
+    expressão('Baasa descansou com os seus antepassados');
+    expressão('Baasa foi sepultado em Tirza');
+    expressão('Elá foi sucessor de Baasa');
+    expressão('Elá, filho de Baasa');
+  },
+);
+
+inserirVersículo(
+  '1 Rs 16.7',
+  'A palavra do Senhor veio por meio do profeta Jeú, filho de Hanani, a Baasa e sua família, por terem feito o que o Senhor reprova, provocando a sua ira, tornando-se como a família de Jeroboão — e também porque Baasa destruiu a família de Jeroboão.',
+  () => {
+    const a = expressão('A palavra do Senhor veio por meio do profeta Jeú a Baasa e sua família');
+    const b = expressão([a, ...tokens('por terem feito o que o Senhor reprova')]);
+    expressão([b, ...tokens('provocando a ira do Senhor')]);
+    expressão([b, ...tokens('tornando-se como a família de Jeroboão')]);
+    expressão([a, ...tokens('porque Baasa destruiu a família de Jeroboão')]);
+
+    expressão('Jeú, filho de Hanani');
+  },
+);
+
+inserirVersículo(
   '1 Rs 16.8',
   'No vigésimo sexto ano do reinado de Asa, rei de Judá, Elá, filho de Baasa, tornou-se rei de Israel, e reinou dois anos em Tirza.',
   () => {

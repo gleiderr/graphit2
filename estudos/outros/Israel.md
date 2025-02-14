@@ -16,6 +16,7 @@
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles " (1 Rs 16.2)
 - Elá , rei de Israel (1 Rs 16.8)
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Eu o levantei do pó e o tornei líder de Israel " (1 Rs 16.2)
+- Os demais acontecimentos do reinado de Baasa , o que fez e as suas realizações , estão escritos nos registros históricos dos reis de Israel . (1 Rs 16.5)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
@@ -39,3 +40,5 @@
 > 1 Rs 14.14 : "O Senhor levantará para si um rei sobre Israel que eliminará a família de Jeroboão. Este é o dia! Como? Sim, agora mesmo.
 >
 > 1 Rs 16.2 : "Eu o levantei do pó e o tornei líder de Israel, meu povo, mas você andou nos caminhos de Jeroboão e fez o meu povo pecar e provocar a minha ira por causa dos pecados deles.
+>
+> 1 Rs 16.5 : Os demais acontecimentos do reinado de Baasa, o que fez e as suas realizações, estão escritos nos registros históricos dos reis de Israel.
