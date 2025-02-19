@@ -19,6 +19,9 @@
 - Os demais acontecimentos do reinado de Baasa , o que fez e as suas realizações , estão escritos nos registros históricos dos reis de Israel . (1 Rs 16.5)
 - Assim Zinri eliminou toda a família de Baasa por causa de todos os pecados que Baasa e Elá haviam cometido e levado Israel a cometer (1 Rs 16.13)
 - Senhor , o Deus de Israel (1 Rs 16.13)
+- Acabe , o rei de Israel (1 Rs 21.18)
+- Elias respondeu \[a Acabe] : " Devorarei os seus descendentes e eliminarei da sua família todos os do sexo masculino em Israel , sejam escravos ou livres . " (1 Rs 21.21)
+- Elias respondeu \[a Acabe] : " Farei à sua família o que fiz à de Jeroboão e à de Baasa , pois você provocou a minha ira e fez Israel pecar . " (1 Rs 21.22)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
@@ -46,3 +49,9 @@
 > 1 Rs 16.5 : Os demais acontecimentos do reinado de Baasa, o que fez e as suas realizações, estão escritos nos registros históricos dos reis de Israel.
 >
 > 1 Rs 16.13 : por causa de todos os pecados que Baasa e seu filho Elá haviam cometido e levado Israel a cometer, pois, com os seus ídolos inúteis, provocaram a ira do Senhor, o Deus de Israel.
+>
+> 1 Rs 21.18 : "Vá encontrar-se com Acabe, o rei de Israel, que reina em Samaria. Agora ele está na vinha de Nabote para tomar posse dela.
+>
+> 1 Rs 21.21 : Vou trazer desgraça sobre você. Devorarei os seus descendentes e eliminarei da sua família todos os do sexo masculino em Israel, sejam escravos ou livres.
+>
+> 1 Rs 21.22 : Farei à sua família o que fiz à de Jeroboão, filho de Nebate, e à de Baasa, filho de Aías, pois você provocou a minha ira e fez Israel pecar.
