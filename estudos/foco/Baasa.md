@@ -40,7 +40,7 @@
   - " Por isso estou na iminência de destruir Baasa e a sua família , fazendo a ela o que fiz à de Jeroboão " (1 Rs 16.3)
   - " Cães comerão os da família de Baasa que morrerem na cidade " (1 Rs 16.4)
   - " As aves do céu se alimentarão dos que morrerem no campo " (1 Rs 16.4)
-- Elá , filho de Baasa (1 Rs 16.8, 1 Rs 16.6)
+- Elá , filho de Baasa (1 Rs 16.8, 1 Rs 16.6, 1 Rs 16.13)
 - Os demais acontecimentos do reinado de Baasa , o que fez e as suas realizações , estão escritos nos registros históricos dos reis de Israel . (1 Rs 16.5)
 - Descansou com os seus antepassados (1 Rs 16.6)
 - Foi sepultado em Tirza (1 Rs 16.6)
@@ -50,6 +50,14 @@
     - Provocando a ira do Senhor (1 Rs 16.7)
     - Tornando-se como a família de Jeroboão (1 Rs 16.7)
   - Porque Baasa destruiu a família de Jeroboão (1 Rs 16.7)
+- Zinri eliminou toda a família de Baasa (1 Rs 16.11)
+  - Assim que começou a reinar (1 Rs 16.11)
+  - Logo que se assentou no trono (1 Rs 16.11)
+  - Não poupou uma só pessoa do sexo masculino , fosse parente ou amigo de Baasa (1 Rs 16.11)
+- Assim Zinri eliminou toda a família de Baasa (1 Rs 16.12, 1 Rs 16.13)
+  - De acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú (1 Rs 16.12)
+  - Por causa de todos os pecados que Baasa e Elá haviam cometido e levado Israel a cometer (1 Rs 16.13)
+  - Pois provocaram a ira do Senhor com os seus ídolos inúteis (1 Rs 16.13)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
@@ -88,6 +96,12 @@
 >
 > 1 Rs 16.6 :  Baasa descansou com os seus antepassados e foi sepultado em Tirza. E seu filho Elá foi o seu sucessor.
 >
+> 1 Rs 16.13 : por causa de todos os pecados que Baasa e seu filho Elá haviam cometido e levado Israel a cometer, pois, com os seus ídolos inúteis, provocaram a ira do Senhor, o Deus de Israel.
+>
 > 1 Rs 16.5 : Os demais acontecimentos do reinado de Baasa, o que fez e as suas realizações, estão escritos nos registros históricos dos reis de Israel.
 >
 > 1 Rs 16.7 : A palavra do Senhor veio por meio do profeta Jeú, filho de Hanani, a Baasa e sua família, por terem feito o que o Senhor reprova, provocando a sua ira, tornando-se como a família de Jeroboão — e também porque Baasa destruiu a família de Jeroboão.
+>
+> 1 Rs 16.11 : Assim que começou a reinar, logo que se assentou no trono, eliminou toda a família de Baasa. Não poupou uma só pessoa do sexo masculino, fosse parente ou amigo.
+>
+> 1 Rs 16.12 : Assim Zinri destruiu toda a família de Baasa, de acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú,

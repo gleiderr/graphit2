@@ -91,3 +91,65 @@ inserirVersículo(
     expressão([a, ...tokens('no 26º ano do reinado de Asa')]);
   },
 );
+
+inserirVersículo(
+  '1 Rs 16.9',
+  'Zinri, um dos seus oficiais, que comandava metade dos seus carros de guerra, conspirou contra ele. Elá estava em Tirza naquela ocasião, embriagando-se na casa de Arsa, o encarregado do palácio de Tirza.',
+  () => {
+    expressão('Zinri conspirou contra Elá');
+
+    expressão('Zinri, um dos oficiais de Elá');
+
+    expressão('Zinri comandava metade dos carros de guerra de Elá');
+    const a = expressão('Elá estava em Tirza');
+    expressão([a, ...tokens('se embriagando na casa de Arsa')]);
+
+    expressão('Arsa, o encarregado do palácio de Tirza');
+  },
+);
+
+inserirVersículo(
+  '1 Rs 16.10',
+  'Zinri entrou e o feriu e o matou, no vigésimo sétimo ano do reinado de Asa, rei de Judá. E foi o seu sucessor.',
+  () => {
+    const a = expressão('Zinri entrou na casa de Arsa e feriu e matou Elá');
+    expressão([a, ...tokens('no 27º ano do reinado de Asa')]);
+    expressão('Asa, rei de Judá');
+
+    expressão('Zinri foi sucessor de Elá');
+  },
+);
+
+inserirVersículo(
+  '1 Rs 16.11',
+  'Assim que começou a reinar, logo que se assentou no trono, eliminou toda a família de Baasa. Não poupou uma só pessoa do sexo masculino, fosse parente ou amigo.',
+  () => {
+    const a = expressão('Zinri eliminou toda a família de Baasa');
+    expressão([a, ...tokens('assim que começou a reinar')]);
+    expressão([a, ...tokens('logo que se assentou no trono')]);
+    expressão([a, ...tokens('. Não poupou uma só pessoa do sexo masculino, fosse parente ou amigo de Baasa')]);
+  },
+);
+
+inserirVersículo(
+  '1 Rs 16.12',
+  'Assim Zinri destruiu toda a família de Baasa, de acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú,',
+  () => {
+    const a = expressão('Assim Zinri eliminou toda a família de Baasa');
+    expressão([a, ...tokens('de acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú')]);
+    expressão('Jeú, profeta');
+  },
+);
+
+inserirVersículo(
+  '1 Rs 16.13',
+  'por causa de todos os pecados que Baasa e seu filho Elá haviam cometido e levado Israel a cometer, pois, com os seus ídolos inúteis, provocaram a ira do Senhor, o Deus de Israel.',
+  () => {
+    const a = expressão('Assim Zinri eliminou toda a família de Baasa');
+    expressão([a, ...tokens('por causa de todos os pecados que Baasa e Elá haviam cometido e levado Israel a cometer')]);
+    expressão([a, ...tokens('pois provocaram a ira do Senhor com os seus ídolos inúteis')]);
+
+    expressão('Senhor, o Deus de Israel');
+    expressão('Elá, filho de Baasa');
+  },
+);

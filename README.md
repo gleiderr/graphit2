@@ -13,10 +13,12 @@ Para cada implementação, é utilizada uma abordagem ad-hoc para garantir a uti
 
 # Bíblia
 Ao compilar os versículos da Bíblia são executadas as seguintes operações:
-- São identificados os fatos, os apostos, locuções adverbiais e pronomes
+- São identificados os fatos, os apostos, locuções adverbiais, pronomes, sujeitos ocultos e (predicados ocultos?  )
 - Cada aposto é transformado em uma expressão independente
 - Locuções adverbiais são transformadas em expressões dependentes da expressão individual
 - Pronomes são substituídos por seus respectivos substantivos
+- Os sujeitos ocultos e predicados ocultos são identificados e trazidos para a expressão
+- Os  são identificados e tratados
 
 ## Versão Baasa
 ### Fazer

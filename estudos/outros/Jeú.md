@@ -14,6 +14,8 @@
     - Provocando a ira do Senhor (1 Rs 16.7)
     - Tornando-se como a família de Jeroboão (1 Rs 16.7)
   - Porque Baasa destruiu a família de Jeroboão (1 Rs 16.7)
+- Assim Zinri eliminou toda a família de Baasa de acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú (1 Rs 16.12)
+- Profeta (1 Rs 16.12)
 
 > ## Referências
 > 1 Rs 16.1 : Então a palavra do Senhor contra Baasa veio a Jeú, filho de Hanani:
@@ -25,3 +27,5 @@
 > 1 Rs 16.4 : Cães comerão os da família de Baasa que morrerem na cidade, e as aves do céu se alimentarão dos que morrerem no campo"
 >
 > 1 Rs 16.7 : A palavra do Senhor veio por meio do profeta Jeú, filho de Hanani, a Baasa e sua família, por terem feito o que o Senhor reprova, provocando a sua ira, tornando-se como a família de Jeroboão — e também porque Baasa destruiu a família de Jeroboão.
+>
+> 1 Rs 16.12 : Assim Zinri destruiu toda a família de Baasa, de acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú,
