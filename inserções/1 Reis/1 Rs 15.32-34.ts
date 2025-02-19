@@ -1,10 +1,14 @@
-import { inserirVersículo } from '../Biblia';
-import { expressão } from '../Graphit';
+import { inserirVersículo } from '../../Biblia';
+import { expressão } from '../../Graphit';
 
-inserirVersículo('1 Rs 15.32', 'Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.', () => {
-  expressão('Houve guerra entre Asa e Baasa durante todo o reinado deles');
-  expressão('Baasa, rei de Israel');
-});
+inserirVersículo(
+  '1 Rs 15.32',
+  'Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.',
+  () => {
+    expressão('Houve guerra entre Asa e Baasa durante todo o reinado deles');
+    expressão('Baasa, rei de Israel');
+  },
+);
 
 inserirVersículo(
   '1 Rs 15.33',
@@ -31,6 +35,18 @@ inserirVersículo(
     expressão([a, 'andando', 'nos', 'caminhos', 'de', 'Jeroboão']);
     expressão('Baasa andou nos caminhos de Jeroboão');
 
-    expressão([a, 'andando', 'nos', 'pecados', 'que', 'Jeroboão', 'tinha', 'levado', 'Israel', 'a', 'cometer']);
+    expressão([
+      a,
+      'andando',
+      'nos',
+      'pecados',
+      'que',
+      'Jeroboão',
+      'tinha',
+      'levado',
+      'Israel',
+      'a',
+      'cometer',
+    ]);
   },
 );

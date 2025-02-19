@@ -1,10 +1,14 @@
-import { inserirVersículo } from '../Biblia';
-import { expressão, graphit, Id, tokens } from '../Graphit';
+import { inserirVersículo } from '../../Biblia';
+import { expressão, graphit, Id, tokens } from '../../Graphit';
 
-inserirVersículo('1 Rs 15.16', 'Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.', () => {
-  expressão('Baasa, rei de Israel');
-  expressão('Houve guerra entre Asa e Baasa durante todo o reinado deles');
-});
+inserirVersículo(
+  '1 Rs 15.16',
+  'Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.',
+  () => {
+    expressão('Baasa, rei de Israel');
+    expressão('Houve guerra entre Asa e Baasa durante todo o reinado deles');
+  },
+);
 
 inserirVersículo(
   '1 Rs 15.17',
@@ -13,7 +17,21 @@ inserirVersículo(
     expressão(['Baasa', ',', 'rei', 'de', 'Israel']);
     expressão(['Baasa', 'atacou', 'Judá']);
     const f = expressão(['Baasa', 'fortificou', 'Ramá']);
-    expressão([f, 'para que', 'ninguém', 'pudesse', 'entrar', 'no', 'território', 'de', 'Asa', 'ou', 'sair', 'de', 'lá']);
+    expressão([
+      f,
+      'para que',
+      'ninguém',
+      'pudesse',
+      'entrar',
+      'no',
+      'território',
+      'de',
+      'Asa',
+      'ou',
+      'sair',
+      'de',
+      'lá',
+    ]);
   },
 );
 
@@ -23,9 +41,21 @@ inserirVersículo(
   'Então Asa ajuntou a prata e o ouro que haviam sobrado no tesouro do templo do Senhor e do seu próprio palácio. Confiou tudo isso a alguns dos seus oficiais e os enviou a Ben-Hadade, filho de Tabriom e neto de Heziom, rei da Síria, que governava em Damasco,',
   () => {
     const a = expressão('Asa ajuntou prata e ouro');
-    expressão([a, ...tokens('que haviam sobrado do tesouro do templo do Senhor')]);
+    expressão([
+      a,
+      ...tokens('que haviam sobrado do tesouro do templo do Senhor'),
+    ]);
     graphit.expressão([a, 'do', 'próprio', 'palácio', 'de', 'Asa']);
-    graphit.expressão([a, 'os', 'confiou', 'a', 'alguns', 'dos', 'seus', 'oficiais']);
+    graphit.expressão([
+      a,
+      'os',
+      'confiou',
+      'a',
+      'alguns',
+      'dos',
+      'seus',
+      'oficiais',
+    ]);
     envio = graphit.expressão([a, 'e', 'os', 'enviou', 'a', 'Ben-Hadade']);
 
     graphit.expressão(['Ben-Hadade', 'filho', 'de', 'Tabriom']);
@@ -46,12 +76,27 @@ inserirVersículo(
 
     expressão([
       ...[a, '"', 'Façamos', 'um', 'tratado'],
-      ...['.', '"', 'Agora', ',', 'rompe', 'o', 'tratado', 'que', 'tens', 'com', 'Baasa'],
+      ...[
+        '.',
+        '"',
+        'Agora',
+        ',',
+        'rompe',
+        'o',
+        'tratado',
+        'que',
+        'tens',
+        'com',
+        'Baasa',
+      ],
       ...['para', 'que', 'ele', 'saia', 'de', 'Judá', '.', '"'],
     ]);
 
     // TODO: Qualificar o pai de Asa
-    expressão([a, ...tokens('o pai de Asa e o pai de Ben-Hadade fizeram um tratado')]);
+    expressão([
+      a,
+      ...tokens('o pai de Asa e o pai de Ben-Hadade fizeram um tratado'),
+    ]);
   },
 );
 
@@ -60,7 +105,9 @@ inserirVersículo(
   'Ben-Hadade aceitou a proposta do rei Asa e ordenou aos comandantes das suas forças que atacassem as cidades de Israel. Ele conquistou Ijom, Dã, Abel-Bete-Maaca e todo o Quinerete, além de Naftali.',
   () => {
     expressão(['Ben-Hadade', 'aceitou', 'a', 'proposta', 'de', 'Asa']);
-    expressão('Ben-Hadade ordenou aos comandantes das suas forças que atacassem as cidades de Israel');
+    expressão(
+      'Ben-Hadade ordenou aos comandantes das suas forças que atacassem as cidades de Israel',
+    );
     expressão('Ben-Hadade conquistou Ijom');
     expressão('Ben-Hadade conquistou Dã');
     expressão('Ben-Hadade conquistou Abel-Bete-Maaca');
@@ -69,12 +116,16 @@ inserirVersículo(
   },
 );
 
-inserirVersículo('1 Rs 15.21', 'Quando Baasa soube disso, abandonou a construção dos muros de Ramá e foi para Tirza.', () => {
-  const a = expressão('Baasa abandonou a construção dos muros de Ramá');
-  expressão([a, 'quando', 'ele', 'soube', 'de', '1 Rs 15.20']);
-  const b = expressão('Baasa foi para Tirza');
-  expressão([b, 'quando', 'ele', 'soube', 'de', '1 Rs 15.20']);
-});
+inserirVersículo(
+  '1 Rs 15.21',
+  'Quando Baasa soube disso, abandonou a construção dos muros de Ramá e foi para Tirza.',
+  () => {
+    const a = expressão('Baasa abandonou a construção dos muros de Ramá');
+    expressão([a, 'quando', 'ele', 'soube', 'de', '1 Rs 15.20']);
+    const b = expressão('Baasa foi para Tirza');
+    expressão([b, 'quando', 'ele', 'soube', 'de', '1 Rs 15.20']);
+  },
+);
 
 inserirVersículo(
   '1 Rs 15.22',
@@ -82,9 +133,14 @@ inserirVersículo(
   () => {
     expressão([
       expressão('Asa reuniu todos homens de Judá - ninguém foi isentado'),
-      ...tokens('e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando'),
+      ...tokens(
+        'e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando',
+      ),
     ]);
-    expressão([expressão('Asa fortificou Geba e Mispá'), ...tokens('com as pedras e a madeira que Baasa estivera usando')]);
+    expressão([
+      expressão('Asa fortificou Geba e Mispá'),
+      ...tokens('com as pedras e a madeira que Baasa estivera usando'),
+    ]);
 
     expressão('Geba, em Benjamim');
   },

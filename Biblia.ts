@@ -180,8 +180,8 @@ class Bíblia {
   }
 }
 
-export const outputDB = 'Bíblia.json';
-export const inputDB = 'Bíblia anterior.json';
+export const outputDB = 'biblia-output.json';
+export const inputDB = 'biblia-input.json';
 graphit.carregar(inputDB);
 
 export const bíblia = new Bíblia();

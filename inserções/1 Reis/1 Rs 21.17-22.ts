@@ -1,19 +1,26 @@
-import { inserirVersículo } from '../Biblia';
-import { expressão, Id, tokens } from '../Graphit';
+import { inserirVersículo } from '../../Biblia';
+import { expressão, Id, tokens } from '../../Graphit';
 
 let palavraDoSenhor: { id: Id };
-inserirVersículo('1 Rs 21.17', 'Então a palavra do Senhor veio ao tesbita Elias:', () => {
-  palavraDoSenhor = expressão('Então a palavra do Senhor veio a Elias:');
+inserirVersículo(
+  '1 Rs 21.17',
+  'Então a palavra do Senhor veio ao tesbita Elias:',
+  () => {
+    palavraDoSenhor = expressão('Então a palavra do Senhor veio a Elias:');
 
-  expressão('Elias, tesbita');
-});
+    expressão('Elias, tesbita');
+  },
+);
 
 inserirVersículo(
   '1 Rs 21.18',
   '"Vá encontrar-se com Acabe, o rei de Israel, que reina em Samaria. Agora ele está na vinha de Nabote para tomar posse dela.',
   () => {
     expressão([palavraDoSenhor, ...tokens('"Vá encontrar-se com Acabe"')]);
-    expressão([palavraDoSenhor, ...tokens('"Agora Acabe está na vinha de Nabote para tomar posse dela"')]);
+    expressão([
+      palavraDoSenhor,
+      ...tokens('"Agora Acabe está na vinha de Nabote para tomar posse dela"'),
+    ]);
 
     expressão('Acabe, o rei de Israel');
     expressão('Acabe, que reina em Samaria');
@@ -24,8 +31,16 @@ inserirVersículo(
   '1 Rs 21.19',
   'Diga-lhe: Assim diz o Senhor: Você assassinou um homem e ainda se apossou de sua propriedade? E acrescentou: Assim diz o Senhor: No local onde os cães lamberam o sangue de Nabote, lamberão também o seu sangue; isso mesmo, o seu sangue! "',
   () => {
-    const b = expressão([palavraDoSenhor, ...tokens('"Diga-lhe: Assim diz o Senhor:"')]);
-    expressão([b, ...tokens('"Você assassinou um homem e ainda se apossou de sua propriedade?"')]);
+    const b = expressão([
+      palavraDoSenhor,
+      ...tokens('"Diga-lhe: Assim diz o Senhor:"'),
+    ]);
+    expressão([
+      b,
+      ...tokens(
+        '"Você assassinou um homem e ainda se apossou de sua propriedade?"',
+      ),
+    ]);
 
     const c = expressão('E ainda acrescentou:');
 
@@ -48,7 +63,12 @@ inserirVersículo(
     expressão([b, ...tokens('"Então você me encontrou, meu inimigo!"')]);
 
     respostaElias = expressão('Elias respondeu \\[a Acabe]:');
-    expressão([respostaElias, ...tokens('"Eu o encontrei porque você, Acabe, se vendeu para fazer o que o Senhor reprova."')]);
+    expressão([
+      respostaElias,
+      ...tokens(
+        '"Eu o encontrei porque você, Acabe, se vendeu para fazer o que o Senhor reprova."',
+      ),
+    ]);
   },
 );
 
@@ -72,7 +92,9 @@ inserirVersículo(
   () => {
     expressão([
       respostaElias,
-      ...tokens('"Farei à sua família o que fiz à de Jeroboão e à de Baasa, pois você provocou a minha ira e fez Israel pecar."'),
+      ...tokens(
+        '"Farei à sua família o que fiz à de Jeroboão e à de Baasa, pois você provocou a minha ira e fez Israel pecar."',
+      ),
     ]);
 
     expressão('Jeroboão, filho de Nebate');
