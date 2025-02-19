@@ -68,7 +68,7 @@ class Markdown {
 
       linha = valores
         .join(' ') // Concatena valores com espaço
-        .replace(/^[,\s]+/, '') // Remove espaços em branco e vírgulas no início da linha
+        .replace(/^[,.\s]+/, '') // Remove pontos, espaços em branco e vírgulas no início da linha
         .replace(/^\w/, c => c.toUpperCase()); // Torna maíuscula primeira letra da linha
     }
 
