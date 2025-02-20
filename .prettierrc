@@ -4,7 +4,7 @@
   "singleQuote": true,
   "arrowParens": "avoid",
   "overrides": [
-    { "files": "**/inserções/*.ts", "options": { "printWidth": 130 } },
+    { "files": "**/inserções/**/*.ts", "options": { "printWidth": 130 } },
     { "files": "*.json", "options": { "printWidth": 120 } }
   ]
 }

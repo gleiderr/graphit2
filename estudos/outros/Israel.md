@@ -18,10 +18,12 @@
 - Então a palavra do Senhor contra Baasa veio a Jeú : " Eu o levantei do pó e o tornei líder de Israel " (1 Rs 16.2)
 - Os demais acontecimentos do reinado de Baasa , o que fez e as suas realizações , estão escritos nos registros históricos dos reis de Israel . (1 Rs 16.5)
 - Assim Zinri eliminou toda a família de Baasa por causa de todos os pecados que Baasa e Elá haviam cometido e levado Israel a cometer (1 Rs 16.13)
-- Senhor , o Deus de Israel (1 Rs 16.13)
+- Senhor , o Deus de Israel (1 Rs 16.13, 2 Rs 9.6)
 - Acabe , o rei de Israel (1 Rs 21.18)
 - Elias respondeu \[a Acabe] : " Devorarei os seus descendentes e eliminarei da sua família todos os do sexo masculino em Israel , sejam escravos ou livres . " (1 Rs 21.21)
 - Elias respondeu \[a Acabe] : " Farei à sua família o que fiz à de Jeroboão e à de Baasa , pois você provocou a minha ira e fez Israel pecar . " (1 Rs 21.22)
+- O jovem profeta declarou a Jeú : " Assim diz o Senhor : " " Eu o estou ungindo rei de Israel " (2 Rs 9.6)
+- O povo do Senhor (2 Rs 9.6)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
@@ -49,6 +51,8 @@
 > 1 Rs 16.5 : Os demais acontecimentos do reinado de Baasa, o que fez e as suas realizações, estão escritos nos registros históricos dos reis de Israel.
 >
 > 1 Rs 16.13 : por causa de todos os pecados que Baasa e seu filho Elá haviam cometido e levado Israel a cometer, pois, com os seus ídolos inúteis, provocaram a ira do Senhor, o Deus de Israel.
+>
+> 2 Rs 9.6 : Jeú levantou-se e entrou na casa. Então o jovem profeta derramou o óleo na cabeça de Jeú e declarou-lhe: "Assim diz o Senhor, o Deus de Israel: "Eu o estou ungindo rei de Israel, o povo do Senhor.""
 >
 > 1 Rs 21.18 : "Vá encontrar-se com Acabe, o rei de Israel, que reina em Samaria. Agora ele está na vinha de Nabote para tomar posse dela.
 >

@@ -9,6 +9,7 @@ import './inserções/1 Reis/1 Rs 15.27-29';
 import './inserções/1 Reis/1 Rs 15.32-34';
 import './inserções/1 Reis/1 Rs 16.1-13';
 import './inserções/1 Reis/1 Rs 21.17-22';
+import './inserções/2 Reis/2 Rs 9.6,9';
 
 bíblia.imprimirEstudos({
   foco: ['Baasa'],
