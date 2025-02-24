@@ -1,14 +1,17 @@
 # Baasa
-- Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33, 1 Rs 15.32)
+- Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33, 1 Rs 15.32, 2 Cr.16.1)
 - Filho de Aías (1 Rs 15.27, 1 Rs 15.33, 1 Rs 21.22, 2 Rs 9.9)
 - Da tribo de Issacar (1 Rs 15.27)
 - Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16, 1 Rs 15.32)
 - Atacou Judá (1 Rs 15.17)
-- Fortificou Ramá (1 Rs 15.17)
+- Fortificou Ramá (1 Rs 15.17, 2 Cr.16.1)
   - Para que ninguém pudesse entrar no território de Asa ou sair de lá (1 Rs 15.17)
-- Asa ajuntou prata e ouro e os enviou a Ben-Hadade com uma mensagem que dizia " Façamos um tratado . " Agora , rompe o tratado que tens com Baasa para que ele saia de Judá . " (1 Rs 15.19)
-- Abandonou a construção dos muros de Ramá (1 Rs 15.21)
+  - No 36º ano do reinado de Asa (2 Cr.16.1)
+  - Para que ninguém pudesse entrar nem sair do território de Asa (2 Cr.16.1)
+- Asa ajuntou prata e ouro e os enviou a Ben-Hadade com uma mensagem que dizia " Façamos um tratado . " Agora , rompe o tratado que tens com Baasa para que ele saia de Judá . " (1 Rs 15.19, 2 Cr.16.3)
+- Abandonou a construção dos muros de Ramá (1 Rs 15.21, 2 Cr.16.5)
   - Quando ele soube de 1 Rs 15.20 (1 Rs 15.21)
+  - Quando soube de 2 Cr . 16 . 4 (2 Cr.16.5)
 - Foi para Tirza (1 Rs 15.21)
   - Quando ele soube de 1 Rs 15.20 (1 Rs 15.21)
 - Asa reuniu todos homens de Judá - ninguém foi isentado e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando (1 Rs 15.22)
@@ -59,6 +62,10 @@
   - Por causa de todos os pecados que Baasa e Elá haviam cometido e levado Israel a cometer (1 Rs 16.13)
   - Pois provocaram a ira do Senhor com os seus ídolos inúteis (1 Rs 16.13)
 - Elias respondeu \[a Acabe] : " Farei à sua família o que fiz à de Jeroboão e à de Baasa , pois você provocou a minha ira e fez Israel pecar . " (1 Rs 21.22)
+- Invadiu Judá (2 Cr.16.1)
+  - No 36º ano do reinado de Asa (2 Cr.16.1)
+  - Para que ninguém pudesse entrar nem sair do território de Asa (2 Cr.16.1)
+- Asa reuniu todos os homens de Judá , e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando (2 Cr.16.6)
 - O jovem profeta declarou a Jeú : " Assim diz o Senhor : " " Tratarei a família de Acabe como tratei a de Baasa " (2 Rs 9.9)
 
 > ## Referências
@@ -72,13 +79,19 @@
 >
 > 1 Rs 15.32 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
+> 2 Cr.16.1 : No trigésimo sexto ano do reinado de Asa, Baasa, rei de Israel, invadiu Judá e fortificou Ramá, para que ninguém pudesse entrar nem sair do território de Asa, rei de Judá.
+>
 > 1 Rs 15.27 : Baasa, filho de Aías, da tribo de Issacar, conspirou contra ele, e o matou na cidade filistéia de Gibetom, enquanto Nadabe e todo o exército de Israel a sitiavam.
 >
 > 1 Rs 21.22 : Farei à sua família o que fiz à de Jeroboão, filho de Nebate, e à de Baasa, filho de Aías, pois você provocou a minha ira e fez Israel pecar.
 >
 > 2 Rs 9.9 : Tratarei a família de Acabe como tratei a de Jeroboão, filho de Nebate, e a de Baasa, filho de Aías.
 >
+> 2 Cr.16.3 : "Façamos um tratado, como fizeram meu pai e o teu. Estou te enviando prata e ouro. Agora, rompe o tratado que tens com Baasa, rei de Israel, para que ele saia do meu país".
+>
 > 1 Rs 15.21 : Quando Baasa soube disso, abandonou a construção dos muros de Ramá e foi para Tirza.
+>
+> 2 Cr.16.5 : Quando Baasa soube disso, abandonou a construção dos muros de Ramá.
 >
 > 1 Rs 15.22 : Então o rei Asa reuniu todos homens de Judá — ninguém foi isentado — e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando. Com esse material Asa fortificou Geba, em Benjamim, e também Mispá.
 >
@@ -111,3 +124,5 @@
 > 1 Rs 16.11 : Assim que começou a reinar, logo que se assentou no trono, eliminou toda a família de Baasa. Não poupou uma só pessoa do sexo masculino, fosse parente ou amigo.
 >
 > 1 Rs 16.12 : Assim Zinri destruiu toda a família de Baasa, de acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú,
+>
+> 2 Cr.16.6 : Então o rei Asa reuniu todos os homens de Judá, e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando. Com esse material Asa fortificou Geba e Mispá.
