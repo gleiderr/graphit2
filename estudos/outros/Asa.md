@@ -28,6 +28,9 @@
   - Baasa fortificou Ramá para que ninguém pudesse entrar nem sair do território de Asa (2 Cr.16.1)
 - Reuniu todos os homens de Judá , e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando (2 Cr.16.6)
 - Com esse material Asa fortificou Geba e Mispá (2 Cr.16.6)
+- O rei Asa cavou uma cisterna para defender-se de Baasa . (Jr 41.9)
+  - Nessa cisterna , Ismael jogou os corpos dos homens que havia matado , juntamente com o de Gedalias . (Jr 41.9)
+  - Ismael encheu-a com os mortos . (Jr 41.9)
 
 > ## Referências
 > 1 Rs 15.28 : Baasa matou Nadabe no terceiro ano do reinado de Asa, rei de Judá, e foi o seu sucessor.
@@ -61,3 +64,5 @@
 > 1 Rs 15.22 : Então o rei Asa reuniu todos homens de Judá — ninguém foi isentado — e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando. Com esse material Asa fortificou Geba, em Benjamim, e também Mispá.
 >
 > 2 Cr.16.6 : Então o rei Asa reuniu todos os homens de Judá, e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando. Com esse material Asa fortificou Geba e Mispá.
+>
+> Jr 41.9 : A cisterna na qual ele jogou os corpos dos homens que havia matado, juntamente com o de Gedalias, tinha sido cavada pelo rei Asa para defender-se de Baasa, rei de Israel. Ismael, filho de Netanias, encheu-a com os mortos.

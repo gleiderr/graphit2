@@ -11,6 +11,7 @@ import './inserções/1 Reis/1 Rs 16.1-13';
 import './inserções/1 Reis/1 Rs 21.17-22';
 import './inserções/2 Crônicas/2 Cr 16.1-6';
 import './inserções/2 Reis/2 Rs 9.6,9';
+import './inserções/Jeremias/Jr 41.9';
 
 bíblia.imprimirEstudos({
   foco: ['Baasa'],
@@ -23,6 +24,7 @@ bíblia.imprimirEstudos({
     'Elias',
     'Geba',
     'Gibetom',
+    'Ismael',
     'Israel',
     'Jeroboão',
     'Jeú',

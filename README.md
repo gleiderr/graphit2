@@ -22,6 +22,7 @@ Ao compilar os versículos da Bíblia são executadas as seguintes operações:
 
 ## Versão Baasa
 ### Fazer
+- Incluir estatísticas por dia
 - Remover ato de ignorar o primeiro termo no markdown
 - Converter arquivos markdown em html
 - Instalar tufte.css

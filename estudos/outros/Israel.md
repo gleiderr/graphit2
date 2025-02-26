@@ -1,5 +1,5 @@
 # Israel
-- Baasa , rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33, 1 Rs 15.32, 2 Cr.16.1)
+- Baasa , rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33, 1 Rs 15.32, 2 Cr.16.1, Jr 41.9)
 - Ben-Hadade ordenou aos comandantes das suas forças que atacassem as cidades de Israel (1 Rs 15.20, 2 Cr.16.4)
 - Baasa tornou-se rei de todo o Israel (1 Rs 15.33)
   - No terceiro ano do reinado de Asa (1 Rs 15.33)
@@ -37,6 +37,8 @@
 > 1 Rs 15.32 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 2 Cr.16.1 : No trigésimo sexto ano do reinado de Asa, Baasa, rei de Israel, invadiu Judá e fortificou Ramá, para que ninguém pudesse entrar nem sair do território de Asa, rei de Judá.
+>
+> Jr 41.9 : A cisterna na qual ele jogou os corpos dos homens que havia matado, juntamente com o de Gedalias, tinha sido cavada pelo rei Asa para defender-se de Baasa, rei de Israel. Ismael, filho de Netanias, encheu-a com os mortos.
 >
 > 1 Rs 15.20 : Ben-Hadade aceitou a proposta do rei Asa e ordenou aos comandantes das suas forças que atacassem as cidades de Israel. Ele conquistou Ijom, Dã, Abel-Bete-Maaca e todo o Quinerete, além de Naftali.
 >

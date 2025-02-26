@@ -1,5 +1,5 @@
 # Baasa
-- Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33, 1 Rs 15.32, 2 Cr.16.1)
+- Rei de Israel (1 Rs 15.16, 1 Rs 15.17, 1 Rs 15.19, 1 Rs 15.33, 1 Rs 15.32, 2 Cr.16.1, Jr 41.9)
 - Filho de Aías (1 Rs 15.27, 1 Rs 15.33, 1 Rs 21.22, 2 Rs 9.9)
 - Da tribo de Issacar (1 Rs 15.27)
 - Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16, 1 Rs 15.32)
@@ -67,6 +67,9 @@
   - Para que ninguém pudesse entrar nem sair do território de Asa (2 Cr.16.1)
 - Asa reuniu todos os homens de Judá , e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando (2 Cr.16.6)
 - O jovem profeta declarou a Jeú : " Assim diz o Senhor : " " Tratarei a família de Acabe como tratei a de Baasa " (2 Rs 9.9)
+- O rei Asa cavou uma cisterna para defender-se de Baasa . (Jr 41.9)
+  - Nessa cisterna , Ismael jogou os corpos dos homens que havia matado , juntamente com o de Gedalias . (Jr 41.9)
+  - Ismael encheu-a com os mortos . (Jr 41.9)
 
 > ## Referências
 > 1 Rs 15.16 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
@@ -80,6 +83,8 @@
 > 1 Rs 15.32 : Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 >
 > 2 Cr.16.1 : No trigésimo sexto ano do reinado de Asa, Baasa, rei de Israel, invadiu Judá e fortificou Ramá, para que ninguém pudesse entrar nem sair do território de Asa, rei de Judá.
+>
+> Jr 41.9 : A cisterna na qual ele jogou os corpos dos homens que havia matado, juntamente com o de Gedalias, tinha sido cavada pelo rei Asa para defender-se de Baasa, rei de Israel. Ismael, filho de Netanias, encheu-a com os mortos.
 >
 > 1 Rs 15.27 : Baasa, filho de Aías, da tribo de Issacar, conspirou contra ele, e o matou na cidade filistéia de Gibetom, enquanto Nadabe e todo o exército de Israel a sitiavam.
 >
