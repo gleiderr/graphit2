@@ -26,10 +26,13 @@ Ao compilar os versículos da Bíblia são executadas as seguintes operações:
 - Remover ato de ignorar o primeiro termo no markdown
 - Converter arquivos markdown em html
 - Instalar tufte.css
-- Publicar no Github
 - Tag "Baasa" em git
+- Incluir identificação automática de sub expressões
+- Destokenizar
 
 ### Feito
+- Publicar no Github
+- Implementar testes unitários
 - Incluir exclusão e movimentação via linha de comando
 - Renomeia 'aresta' para 'expressão'
 - Organizar arquivos e pastas
@@ -44,11 +47,8 @@ Ao compilar os versículos da Bíblia são executadas as seguintes operações:
   - Baasa fez o que o Senhor reprova andando nos pecados que Jeroboão tinha levado Israel a cometer (1 Rs 15.34)
   ```
 - Incluir ordenação "automática"
-- Incluir identificação automática de sub expressões
 - Criar relação de equivalência entre expressões para evitar repetição de informações
 - Imprimir análise dos versículos por expressões
-- Destokenizar
-- Implementar testes unitários
 - Remover '-' do nível zero?
 
 ## Referências

@@ -1,7 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
-import * as prettier from 'prettier';
 
-type ExpressãoProps = { label: string };
+type ExpressãoProps = { contém: string[] };
 
 export type Id = string;
 
@@ -36,17 +35,17 @@ type Expressão = {
 
 /**
  * Representação de uma expressão com os valores de seus nós e expressões relacionados.
- * @typedef {Object} DescriçãoExpressão
- * @property {Id} id - Id da expressão.
- * @property {Descrição[]} nós - Lista de nós pertencentes à expressão.
- * @property {DescriçãoExpressão[]} expressões - Lista de expressões relacionadas.
- * @property {ExpressãoProps} [props] - Propriedades opcionais para a expressão.
  */
 export type DescriçãoExpressão = {
+  /** Identificador da expressão. */
   id: Id;
+  /** Lista de nós pertencentes à expressão. */
   contém: Descrição[];
+  /** Lista de nós pertencentes à expressão, mas que são ocultos. */
   contémOculto: Descrição[];
+  /** Lista de expressões que contêm esta expressão. */
   contidaEm: DescriçãoExpressão[];
+  /** Propriedades opcionais para a expressão. */
   props?: ExpressãoProps;
 };
 
@@ -182,15 +181,25 @@ class Graphit {
    * Retorna o Id da expressão cujos nós coincidem com os valores informados.
    * Se não encontrar, cria uma nova expressão reaproveitando os nós existentes
    * e cria novos nós sempre que necessário.
-   * @param {string | (string | { id: Id })[]} texto - Uma string a ser tokenizada, ou um arranjo de termos ou um arranjo de ids.
+   *
+   * @param {string} texto - Uma string a ser separada em termos.
    * @param {ExpressãoProps} [props] - Propriedades adicionais da expressão.
    * @returns {{ id: Id }} O Id da expressão.
+   *
+   * @throws {Error} Se a expressão for vazia ou contiver apenas um termo.
    * @throws {Error} Se mais de uma expressão for encontrada.
    */
   expressão(texto: string, props?: ExpressãoProps): { id: Id } {
-    // Transforma 'texto' em um conjunto de termos que podem ser uma palavra ou uma pontuação
-    const tokens = this.tokens(texto);
+    if (!texto || !texto.trim())
+      throw new Error('Não são permitidas expressões vazias');
 
+    // Transforma 'texto' em um conjunto de termos que podem ser uma palavra ou uma pontuação
+    const tokens = this.termos(texto);
+
+    if (tokens.length < 2)
+      throw new Error('Não são permitidas expressões com apenas um termo');
+
+    // Busca os termos existentes ou cria novos termos
     const ids = tokens.map(
       token => this.buscarTermo(token) || this.novoTermo(token),
     );
@@ -261,7 +270,7 @@ class Graphit {
    * @param {string} s - A string a ser tokenizada.
    * @returns {string[]} Os tokens resultantes.
    */
-  private tokens(s: string): string[] {
+  private termos(s: string): string[] {
     return s
       .split(/(\s+|[-,.;:()"]|\?)/) // Divide a string em tokens
       .map(s => s.trim()) // Remove espaços em branco
@@ -342,9 +351,7 @@ class Graphit {
    * @param {string} arquivo - O caminho do arquivo onde os dados serão salvos.
    */
   async salvar(arquivo: string) {
-    const dados = await prettier.format(JSON.stringify(this.db), {
-      parser: 'json',
-    });
+    const dados = JSON.stringify(this.db, null, 2);
     writeFileSync(arquivo, dados);
   }
 
@@ -362,4 +369,3 @@ class Graphit {
 }
 
 export const graphit = new Graphit();
-export const expressão = graphit.expressão.bind(graphit);
