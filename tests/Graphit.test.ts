@@ -68,6 +68,13 @@ describe('Graphit', () => {
     expect(id1).toBe(id2);
   });
 
+  test('deve diferenciar expressões se estiverem em ordem diferente', () => {
+    const { id: id1 } = graphit.expressão('Baasa, filho de Aías');
+    const { id: id2 } = graphit.expressão('filho de Aías, Baasa');
+
+    expect(id1).not.toBe(id2);
+  });
+
   test.skip('deve lidar com expressões aninhadas', () => {
     const { id: id1 } = graphit.expressão('primeiro nível');
     const { id: id2 } = graphit.expressão('segundo nível');
@@ -97,7 +104,7 @@ describe('Graphit', () => {
     const { id: id2 } = graphit.expressão(`expressão dois com ${id1}`);
     const { id: id3 } = graphit.expressão(`expressão três com ${id2}`);
     // Criando uma referência circular
-    const { id: idCircular } = graphit.expressão(
+    graphit.expressão(
       `${id1} atualizada com ${id3}`,
     );
 

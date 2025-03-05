@@ -157,24 +157,39 @@ class Graphit {
    */
   private buscarTermo(valor: string): Id | undefined {
     return Object.keys(this.db).find(
-      id => 'valor' in this.db[id] && this.db[id].valor === valor,
+      id => 'valor' in this.db[id] && this.db[id].valor === valor
     );
   }
 
   /**
    * Busca por expressões que atendam ao filtro especificado.
    *
-   * @param {Id[]} nós - Os Ids dos nós a serem buscados.
-   * @returns {Id | undefined} O Id da expressão encontrada ou undefined se não encontrado.
+   * @param {Id[]} nós - Ids dos nós a serem buscados.
+   * @returns {Id[]} Ids das expressões encontradas.
    */
   private buscarExpressões(nós: Id[]): Id[] {
-    return Object.keys(this.db).filter(id => {
+    const ids = Object.keys(this.db);
+
+    const idsMesmosTermos = ids.filter(id => {
       const elemento = this.db[id];
       if ('contém' in elemento && elemento.contém.length === nós.length) {
         return nós.every(nóId => elemento.contém.includes(nóId));
       }
       return false;
     });
+
+    const idsMesmaOrdem = idsMesmosTermos.filter(id => {
+      const elemento = this.db[id];
+      if ('contém' in elemento) {
+        for (let i = 0; i < elemento.contém.length; i++) {
+          if (elemento.contém[i] !== nós[i]) return false;
+        }
+        return true;
+      }
+      return false;
+    });
+
+    return idsMesmaOrdem;
   }
 
   /**
@@ -201,7 +216,7 @@ class Graphit {
 
     // Busca os termos existentes ou cria novos termos
     const ids = tokens.map(
-      token => this.buscarTermo(token) || this.novoTermo(token),
+      token => this.buscarTermo(token) || this.novoTermo(token)
     );
 
     const expressões = this.buscarExpressões(ids);
@@ -227,7 +242,7 @@ class Graphit {
 
     if (expressão.contidaEm.length > 0)
       throw new Error(
-        `A expressão ${expressãoId} está contidaEm outras expressões`,
+        `A expressão ${expressãoId} está contidaEm outras expressões`
       );
 
     expressão.contém.forEach(nó => this.removerNó(nó, expressãoId));
@@ -312,12 +327,12 @@ class Graphit {
         this.visitados.add(expressãoId);
 
         const subDescrição = constróiDescrição(
-          expressãoId,
+          expressãoId
         ) as DescriçãoExpressão;
         const array =
-          'pertence_a' in descrição ?
-            descrição.pertence_a
-          : descrição.contidaEm;
+          'pertence_a' in descrição
+            ? descrição.pertence_a
+            : descrição.contidaEm;
         array.push(subDescrição);
       };
 
