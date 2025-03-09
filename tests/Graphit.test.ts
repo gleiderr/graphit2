@@ -106,6 +106,16 @@ describe('Graphit', () => {
     expect(descriçãoBaasa.pertence_a[0]).toHaveProperty('id', id1);
   });
 
+  test('deve reconhecer um termo mandatório já presente na expressão', () => {
+    const { id: id1 } = graphit.expressão('Baasa, filho de Aías', {
+      contém: ['Baasa'],
+    });
+    const descrição = graphit.descrever(id1) as DescriçãoExpressão;
+
+    expect(descrição).toBeDefined();
+    expect(descrição.termosOcultos).toHaveLength(0);
+  });
+
   // test.skip('deve lidar com expressões aninhadas', () => {
   //   const { id: id1 } = graphit.expressão('primeiro nível');
   //   const { id: id2 } = graphit.expressão('segundo nível');
