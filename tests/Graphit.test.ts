@@ -116,6 +116,52 @@ describe('Graphit', () => {
     expect(descrição.termosOcultos).toHaveLength(0);
   });
 
+  test('deve lidar com expressões ocultas', () => {
+    const { id: id1 } = graphit.expressão('filho de Tabriom', {
+      contém: ['Ben-Hadade'],
+    });
+
+    const descrição = graphit.descrever(id1) as DescriçãoExpressão;
+    expect(descrição).toBeDefined();
+    expect(descrição.expressõesOcultas).toHaveLength(1);
+
+    const descriçãoBenHadade = descrição.expressõesOcultas[0];
+    expect(descriçãoBenHadade).toHaveProperty('id');
+    expect(descriçãoBenHadade).toHaveProperty('termos');
+    expect(descriçãoBenHadade.termos).toHaveLength(3);
+    expect(descriçãoBenHadade.termos[0]).toHaveProperty('valor', 'Ben');
+    expect(descriçãoBenHadade.termos[1]).toHaveProperty('valor', '-');
+    expect(descriçãoBenHadade.termos[2]).toHaveProperty('valor', 'Hadade');
+  });
+
+  test('deve reconhecer uma expressão oculta já presente na expressão', () => {
+    const { id: id1 } = graphit.expressão('Ben-Hadade, filho de Tabriom', {
+      contém: ['Ben-Hadade'],
+    });
+    const descrição = graphit.descrever(id1) as DescriçãoExpressão;
+
+    expect(descrição).toBeDefined();
+    expect(descrição.expressõesOcultas).toHaveLength(0);
+  });
+
+  test('deve lidar com subexpressões já existentes', () => {
+    const { id: id0 } = graphit.expressão('filho de');
+    const { id: id1 } = graphit.expressão('Baasa, filho de Aías');
+    const { id: id2 } = graphit.expressão('Baasa, filho de Aías, atacou Judá');
+
+    const filhoDe = graphit.descrever(id0) as DescriçãoExpressão;
+    const filiação = graphit.descrever(id1) as DescriçãoExpressão;
+    const ataque = graphit.descrever(id2) as DescriçãoExpressão;
+
+    expect(filhoDe.subexpressões).toEqual([]);
+    expect(filiação.subexpressões).toEqual([filhoDe]);
+    expect(ataque.subexpressões).toEqual([filiação]);
+
+    expect(ataque.contidaEm).toEqual([]);
+    expect(filiação.contidaEm).toEqual([ataque]);
+    expect(filhoDe.contidaEm).toEqual([filiação]);
+  });
+
   // test.skip('deve lidar com expressões aninhadas', () => {
   //   const { id: id1 } = graphit.expressão('primeiro nível');
   //   const { id: id2 } = graphit.expressão('segundo nível');

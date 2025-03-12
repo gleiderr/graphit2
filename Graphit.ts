@@ -217,7 +217,13 @@ export class Graphit {
       throw new Error('Mais de uma expressão encontrada');
     }
 
-    return expressões[0] || this.novaExpressão(ids, props);
+    if (expressões.length === 0) {
+      const id = this.novaExpressão(ids, props);
+      this.relacionarSubexpressões(id);
+      return id;
+    } else {
+      return expressões[0];
+    }
   }
 
   /**
@@ -240,11 +246,14 @@ export class Graphit {
       }
     });
 
+    // Remove os termos e expressões já existentes na expressão
     const expressão = this.get(expressãoId) as Expressão;
     expressão.termosOcultos = [...termos].filter(
       termo => !expressão.termos.includes(termo)
     );
-    expressão.expressõesOcultas = [...expressões];
+    expressão.expressõesOcultas = [...expressões].filter(
+      exprId => !expressão.subexpressões.includes(exprId)
+    );
 
     expressão.termosOcultos.forEach(termoId =>
       this.definePertencimento(expressãoId, termoId)
@@ -286,6 +295,32 @@ export class Graphit {
     this.relacionarConteúdoMandatório(id, contém);
 
     return { id };
+  }
+
+  /**
+   * Relaciona subexpressões a uma expressão existente.
+   * @param {Id} expressãoId - O Id da expressão a ser relacionada.
+   */
+  private relacionarSubexpressões(expressãoId: Id) {
+    const expressão = this.get(expressãoId) as Expressão;
+
+    for (let n = expressão.termos.length - 1; n >= 2; n--) {
+      for (let início = 0; início < expressão.termos.length - n + 1; início++) {
+        const subExpressãoIds = expressão.termos.slice(início, início + n);
+
+        const subExpressões = this.buscarExpressões(subExpressãoIds);
+        if (subExpressões.length === 0) continue;
+        if (subExpressões.length > 1) {
+          throw new Error('Mais de uma expressão encontrada');
+        }
+
+        const subExpressãoId = subExpressões[0];
+        if (!expressão.subexpressões.includes(subExpressãoId)) {
+          expressão.subexpressões.push(subExpressãoId);
+          //this.definePertencimento(expressãoId, subExpressãoId);
+        }
+      }
+    }
   }
 
   /**
@@ -417,6 +452,7 @@ export class Graphit {
       return { id, valor: nó.valor, pertence_a: [] };
     } else {
       const termos = nó.termos.map(this.descreverNó.bind(this));
+      const subexpressões = nó.subexpressões.map(this.descreverNó.bind(this));
       const termosOcultos = nó.termosOcultos.map(this.descreverNó.bind(this));
       const expressõesOcultas = nó.expressõesOcultas.map(
         this.descreverNó.bind(this)
@@ -424,7 +460,7 @@ export class Graphit {
       return {
         id,
         termos: termos as DescriçãoTermo[],
-        subexpressões: [],
+        subexpressões: subexpressões as DescriçãoExpressão[],
         termosOcultos: termosOcultos as DescriçãoTermo[],
         expressõesOcultas: expressõesOcultas as DescriçãoExpressão[],
         contidaEm: [],
