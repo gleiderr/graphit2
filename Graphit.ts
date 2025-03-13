@@ -298,21 +298,38 @@ export class Graphit {
   }
 
   /**
-   * Relaciona subexpressões a uma expressão existente.
-   * @param {Id} expressãoId - O Id da expressão a ser relacionada.
+   * Identifica se há na expressão alguma subexpressão já cadastrada.
+   * Se houver, relaciona a subexpressão à expressão.
+   *
+   * @param {Id} expressãoId - Id da expressão a ser relacionada.
    */
   private relacionarSubexpressões(expressãoId: Id) {
     const expressão = this.get(expressãoId) as Expressão;
 
+    // em toVista(), as vírgulas antes e depois são para evitar que, por exemplo,
+    // que '1,2' não seja confundida como subexpressão de '1,11,2,3' ou de '0,1,22,3'
+    const toString = (id: Id[]) => `,${id.join(',')},`;
+    const vistas: string[] = [];
+    const jáVista = (expressão: string) =>
+      vistas.some(vista => vista.indexOf(expressão) !== -1);
+
+    // Percorre os termos da expressão, buscando subexpressões.
+    // A cada iteração reduz o número de termos a serem verificados até o limite de 2 termos.
     for (let n = expressão.termos.length - 1; n >= 2; n--) {
+      // Verifica todas as subexpressões de tamanho 'n' dentro da expressão principal.
       for (let início = 0; início < expressão.termos.length - n + 1; início++) {
         const subExpressãoIds = expressão.termos.slice(início, início + n);
+
+        // Se a subexpressão pertence a uma subexpressão já identificada antes, ignora-a
+        if (jáVista(toString(subExpressãoIds))) continue;
 
         const subExpressões = this.buscarExpressões(subExpressãoIds);
         if (subExpressões.length === 0) continue;
         if (subExpressões.length > 1) {
           throw new Error('Mais de uma expressão encontrada');
         }
+
+        vistas.push(toString(subExpressãoIds));
 
         const subExpressãoId = subExpressões[0];
         if (!expressão.subexpressões.includes(subExpressãoId)) {
