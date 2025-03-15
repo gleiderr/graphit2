@@ -143,7 +143,7 @@ export class Graphit {
   }
 
   /**
-   * Obtém um nó ou expressão pelo Id.
+   * Obtém termo nó ou expressão pelo Id.
    * @param {Id} id - O Id do nó ou expressão.
    * @returns {Termo | Expressão} O nó ou expressão correspondente.
    * @throws {Error} Se o nó ou expressão não for encontrado.
@@ -306,9 +306,10 @@ export class Graphit {
   private relacionarSubexpressões(expressãoId: Id) {
     const expressão = this.get(expressãoId) as Expressão;
 
-    // em toVista(), as vírgulas antes e depois são para evitar que, por exemplo,
+    // Nessa função as vírgulas antes e depois são para evitar que, por exemplo,
     // que '1,2' não seja confundida como subexpressão de '1,11,2,3' ou de '0,1,22,3'
     const toString = (id: Id[]) => `,${id.join(',')},`;
+
     const vistas: string[] = [];
     const jáVista = (expressão: string) =>
       vistas.some(vista => vista.indexOf(expressão) !== -1);
@@ -318,22 +319,33 @@ export class Graphit {
     for (let n = expressão.termos.length - 1; n >= 2; n--) {
       // Verifica todas as subexpressões de tamanho 'n' dentro da expressão principal.
       for (let início = 0; início < expressão.termos.length - n + 1; início++) {
-        const subExpressãoIds = expressão.termos.slice(início, início + n);
+        const termosSubexpressão = expressão.termos.slice(início, início + n);
 
         // Se a subexpressão pertence a uma subexpressão já identificada antes, ignora-a
-        if (jáVista(toString(subExpressãoIds))) continue;
+        if (jáVista(toString(termosSubexpressão))) continue;
 
-        const subExpressões = this.buscarExpressões(subExpressãoIds);
+        const subExpressões = this.buscarExpressões(termosSubexpressão);
         if (subExpressões.length === 0) continue;
         if (subExpressões.length > 1) {
           throw new Error('Mais de uma expressão encontrada');
         }
 
-        vistas.push(toString(subExpressãoIds));
+        vistas.push(toString(termosSubexpressão));
 
         const subExpressãoId = subExpressões[0];
         if (!expressão.subexpressões.includes(subExpressãoId)) {
           expressão.subexpressões.push(subExpressãoId);
+          this.defineContidaEm(expressãoId, subExpressãoId);
+        }
+      }
+    }
+  }
+
+  private defineContidaEm(expressãoId: Id, subExpressãoId: Id) {
+    const subExpressão = this.get(subExpressãoId) as Expressão;
+    subExpressão.contidaEm.push(expressãoId);
+  }
+
           //this.definePertencimento(expressãoId, subExpressãoId);
         }
       }
@@ -462,8 +474,9 @@ export class Graphit {
    * @returns {Descrição} A descrição do elemento.
    */
   private descreverNó(id: Id): Descrição {
-    const nó = this.get(id);
     this.visitados.add(id);
+
+    const nó = this.get(id);
 
     if ('valor' in nó) {
       return { id, valor: nó.valor, pertence_a: [] };
@@ -474,6 +487,8 @@ export class Graphit {
       const expressõesOcultas = nó.expressõesOcultas.map(
         this.descreverNó.bind(this)
       );
+      //const contidaEm = nó.contidaEm.map(this.descreverNó.bind(this));
+
       return {
         id,
         termos: termos as DescriçãoTermo[],
