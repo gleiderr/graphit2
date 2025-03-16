@@ -1,4 +1,4 @@
-import { DescriçãoExpressão, DescriçãoTermo, Graphit } from '../Graphit';
+import { Expressão, Graphit, Termo } from '../Graphit';
 
 describe('Graphit', () => {
   let graphit: Graphit;
@@ -26,45 +26,34 @@ describe('Graphit', () => {
 
   test('deve descrever uma expressão simples', () => {
     const { id } = graphit.expressão('Baasa, filho de Aías');
-    const descrição = graphit.descrever(id) as DescriçãoExpressão;
+    const expressão = graphit.get(id) as Expressão;
 
-    expect(descrição).toBeDefined();
-    expect(descrição).toHaveProperty('id', id);
-    expect(descrição).toHaveProperty('termos');
-    expect(Array.isArray(descrição.termos)).toBe(true);
-    expect(descrição.termos.length).toBe(5); // "Baasa, filho de Aías"
+    expect(expressão).toBeDefined();
+    expect(expressão).toHaveProperty('termos');
+    expect(Array.isArray(expressão.termos)).toBe(true);
 
-    expect(descrição.termos[0]).toHaveProperty('valor', 'Baasa');
-    expect(descrição.termos[1]).toHaveProperty('valor', ',');
-    expect(descrição.termos[2]).toHaveProperty('valor', 'filho');
-    expect(descrição.termos[3]).toHaveProperty('valor', 'de');
-    expect(descrição.termos[4]).toHaveProperty('valor', 'Aías');
+    const termos = expressão.termos
+      .map(termo => graphit.get(termo) as Termo)
+      .map(termo => termo.valor);
+    expect(termos).toEqual(['Baasa', ',', 'filho', 'de', 'Aías']);
   });
 
-  test('os termos devem ser descritos corretamente', () => {
-    const { id: idExpressão } = graphit.expressão('Baasa, filho de Aías');
-    const descriçãoExpressão = graphit.descrever(
-      idExpressão
-    ) as DescriçãoExpressão;
+  test('os termos devem informar a que expressão pertencem', () => {
+    const { id: id } = graphit.expressão('Baasa, filho de Aías');
+    const expressão = graphit.get(id) as Expressão;
 
-    const baasa = descriçãoExpressão.termos[0];
-    expect(baasa).toHaveProperty('valor', 'Baasa');
-
-    const descriçãoBaasa = graphit.descrever(baasa.id) as DescriçãoTermo;
-    expect(descriçãoBaasa).toBeDefined();
-    expect(descriçãoBaasa).toHaveProperty('id', baasa.id);
-    expect(descriçãoBaasa).toHaveProperty('valor', 'Baasa');
-    expect(descriçãoBaasa).toHaveProperty('pertence_a', [descriçãoExpressão]);
+    const baasa = graphit.get(expressão.termos[0]) as Termo;
+    expect(baasa).toHaveProperty('pertence_a', [id]);
   });
 
   test('deve reaproveitar termos existentes', () => {
     const { id: id1 } = graphit.expressão('Baasa, filho de Aías');
     const { id: id2 } = graphit.expressão('Baasa, rei de Israel');
-    const descrição1 = graphit.descrever(id1) as DescriçãoExpressão;
-    const descrição2 = graphit.descrever(id2) as DescriçãoExpressão;
+    const filhoDeAías = graphit.get(id1) as Expressão;
+    const reiDeIsrael = graphit.get(id2) as Expressão;
 
-    const baasa1 = descrição1.termos[0];
-    const baasa2 = descrição2.termos[0];
+    const baasa1 = filhoDeAías.termos[0];
+    const baasa2 = reiDeIsrael.termos[0];
 
     expect(baasa1).toEqual(baasa2);
   });
@@ -87,33 +76,28 @@ describe('Graphit', () => {
     const { id: id1 } = graphit.expressão('filho de Aías', {
       contém: ['Baasa'],
     });
-    const descrição = graphit.descrever(id1) as DescriçãoExpressão;
+    const expressão = graphit.get(id1) as Expressão;
 
-    expect(descrição).toBeDefined();
-    expect(descrição.termos).toHaveLength(3);
-    expect(descrição.termosOcultos[0]).toHaveProperty('valor', 'Baasa');
-    expect(descrição.termosOcultos[0]).toHaveProperty('id');
+    expect(expressão).toBeDefined();
+    expect(expressão.termos).toHaveLength(3);
+    expect(expressão.termosOcultos).toHaveLength(1);
 
-    const descriçãoBaasa = graphit.descrever(
-      descrição.termosOcultos[0].id
-    ) as DescriçãoTermo;
+    const Baasa = graphit.get(expressão.termosOcultos[0]) as Termo;
 
-    expect(descriçãoBaasa).toBeDefined();
-    expect(descriçãoBaasa).toHaveProperty('id', descrição.termosOcultos[0].id);
-    expect(descriçãoBaasa).toHaveProperty('valor', 'Baasa');
-    expect(descriçãoBaasa).toHaveProperty('pertence_a');
-    expect(descriçãoBaasa.pertence_a).toHaveLength(1);
-    expect(descriçãoBaasa.pertence_a[0]).toHaveProperty('id', id1);
+    expect(Baasa).toBeDefined();
+    expect(Baasa).toHaveProperty('valor', 'Baasa');
+    expect(Baasa).toHaveProperty('pertence_a');
+    expect(Baasa.pertence_a).toEqual([id1]);
   });
 
   test('deve reconhecer um termo mandatório já presente na expressão', () => {
     const { id: id1 } = graphit.expressão('Baasa, filho de Aías', {
       contém: ['Baasa'],
     });
-    const descrição = graphit.descrever(id1) as DescriçãoExpressão;
+    const expressão = graphit.get(id1) as Expressão;
 
-    expect(descrição).toBeDefined();
-    expect(descrição.termosOcultos).toHaveLength(0);
+    expect(expressão).toBeDefined();
+    expect(expressão.termosOcultos).toHaveLength(0);
   });
 
   test('deve lidar com expressões ocultas', () => {
@@ -121,45 +105,50 @@ describe('Graphit', () => {
       contém: ['Ben-Hadade'],
     });
 
-    const descrição = graphit.descrever(id1) as DescriçãoExpressão;
-    expect(descrição).toBeDefined();
-    expect(descrição.expressõesOcultas).toHaveLength(1);
+    const expressão = graphit.get(id1) as Expressão;
+    expect(expressão).toBeDefined();
+    expect(expressão.expressõesOcultas).toHaveLength(1);
 
-    const descriçãoBenHadade = descrição.expressõesOcultas[0];
-    expect(descriçãoBenHadade).toHaveProperty('id');
-    expect(descriçãoBenHadade).toHaveProperty('termos');
-    expect(descriçãoBenHadade.termos).toHaveLength(3);
-    expect(descriçãoBenHadade.termos[0]).toHaveProperty('valor', 'Ben');
-    expect(descriçãoBenHadade.termos[1]).toHaveProperty('valor', '-');
-    expect(descriçãoBenHadade.termos[2]).toHaveProperty('valor', 'Hadade');
+    const benHadadeId = expressão.expressõesOcultas[0];
+    const benHadade = graphit.get(benHadadeId) as Expressão;
+    expect(benHadade).toBeDefined();
+    expect(benHadade).toHaveProperty('termos');
+
+    expect(
+      benHadade.termos
+        .map(termoId => graphit.get(termoId) as Termo)
+        .map(termo => termo.valor)
+    ).toEqual(['Ben', '-', 'Hadade']);
   });
 
   test('deve reconhecer uma expressão oculta já presente na expressão', () => {
     const { id: id1 } = graphit.expressão('Ben-Hadade, filho de Tabriom', {
       contém: ['Ben-Hadade'],
     });
-    const descrição = graphit.descrever(id1) as DescriçãoExpressão;
 
-    expect(descrição).toBeDefined();
-    expect(descrição.expressõesOcultas).toHaveLength(0);
+    const expressão = graphit.get(id1) as Expressão;
+    expect(expressão).toBeDefined();
+    expect(expressão.expressõesOcultas).toHaveLength(0);
   });
 
   test('deve lidar com subexpressões já existentes', () => {
-    const { id: id0 } = graphit.expressão('filho de');
-    const { id: id1 } = graphit.expressão('Baasa, filho de Aías');
-    const { id: id2 } = graphit.expressão('Baasa, filho de Aías, atacou Judá');
+    const { id: filhoDeId } = graphit.expressão('filho de');
+    const { id: filiaçãoId } = graphit.expressão('Baasa, filho de Aías');
+    const { id: ataqueId } = graphit.expressão(
+      'Baasa, filho de Aías, atacou Judá'
+    );
 
-    const filhoDe = graphit.descrever(id0) as DescriçãoExpressão;
-    const filiação = graphit.descrever(id1) as DescriçãoExpressão;
-    const ataque = graphit.descrever(id2) as DescriçãoExpressão;
+    const filhoDe = graphit.get(filhoDeId) as Expressão;
+    const filiação = graphit.get(filiaçãoId) as Expressão;
+    const ataque = graphit.get(ataqueId) as Expressão;
 
     expect(filhoDe.subexpressões).toEqual([]);
-    expect(filiação.subexpressões).toEqual([filhoDe]);
-    expect(ataque.subexpressões).toEqual([filiação]);
+    expect(filiação.subexpressões).toEqual([filhoDeId]);
+    expect(ataque.subexpressões).toEqual([filiaçãoId]);
 
     expect(ataque.contidaEm).toEqual([]);
-    expect(filiação.contidaEm).toEqual([ataque]);
-    expect(filhoDe.contidaEm).toEqual([filiação]);
+    expect(filiação.contidaEm).toEqual([ataqueId]);
+    expect(filhoDe.contidaEm).toEqual([filiaçãoId]);
   });
 
   // test.skip('deve lidar com expressões aninhadas', () => {

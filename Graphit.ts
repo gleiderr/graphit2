@@ -7,7 +7,7 @@ export type Id = string;
 /**
  * Representação de um termo.
  */
-type Termo = {
+export type Termo = {
   /** Valor do termo propriamente dito. */
   valor: string;
   /** Lista de expressões a que o termo pertence. */
@@ -17,7 +17,7 @@ type Termo = {
 /**
  * Representação de uma expressão.
  */
-type Expressão = {
+export type Expressão = {
   /** Lista de Ids dos termos pertencentes a esta expressão. */
   termos: Id[];
   /** Lista de Ids de expressões contidas nesta expressão. */
@@ -31,44 +31,6 @@ type Expressão = {
   /** Propriedades opcionais para a expressão. */
   props?: ExpressãoProps;
 };
-
-/**
- * Representação de uma expressão com os valores de seus nós e expressões relacionados.
- */
-export type DescriçãoExpressão = {
-  /** Identificador da expressão. */
-  id: Id;
-  /** Lista de descrição de termos pertencentes à expressão. */
-  termos: DescriçãoTermo[];
-  /** Lista de subexpressões contidas nesta expressão. */
-  subexpressões: DescriçãoExpressão[];
-  /** Lista de termos ocultos nesta expressão. */
-  termosOcultos: DescriçãoTermo[];
-  /** Lista de expressões ocultas nesta expressão. */
-  expressõesOcultas: DescriçãoExpressão[];
-  /** Lista de expressões que contêm esta expressão. */
-  contidaEm: DescriçãoExpressão[];
-  /** Propriedades opcionais para a expressão. */
-  props?: ExpressãoProps;
-};
-
-/**
- * Representação de um termo com seu valor e descrição das expressões relacionadas.
- * @typedef {Object} DescriçãoTermo
- * @property {Id} id - Id do termo.
- * @property {string} valor - Valor do termo.
- * @property {DescriçãoExpressão[]} expressões - Descrição das expressões relacionadas ao termo.
- */
-export type DescriçãoTermo = {
-  id: Id;
-  valor: string;
-  pertence_a: DescriçãoExpressão[];
-};
-
-/**
- * Descrição de um termo ou expressão.
- */
-export type Descrição = DescriçãoTermo | DescriçãoExpressão;
 
 /**
  * Graphit é um manipulador de expressões e termos.
@@ -85,7 +47,7 @@ export class Graphit {
   private _nextId = 0;
   //private listening: boolean = false;
 
-  visitados: Set<Id> = new Set();
+  visitados: Set<Id> = new Set<Id>();
 
   get índices() {
     return Object.keys(this.db);
@@ -148,7 +110,7 @@ export class Graphit {
    * @returns {Termo | Expressão} O nó ou expressão correspondente.
    * @throws {Error} Se o nó ou expressão não for encontrado.
    */
-  private get(id: Id): Termo | Expressão {
+  get(id: Id): Termo | Expressão {
     if (!this.db[id]) throw new Error(`Nó não encontrado: ${id}`);
     return this.db[id];
   }
@@ -428,76 +390,6 @@ export class Graphit {
       .join(' ')
       .replace(/\s+/g, ' ')
       .replace(/\s+([,.;:-])/g, '$1');
-  }
-
-  /**
-   * Descreve um nó criando uma estrutura de árvore, percorrendo
-   * as expressões em profundidade.
-   *
-   * @param {Id} id - O Id do nó a ser descrito.
-   * @returns {Descrição} A descrição do nó.
-   */
-  descrever(id: Id): Descrição {
-    this.visitados = new Set<Id>(id); // Limpa o conjunto de visitados, mantendo o id inicial
-
-    const constróiDescrição = (id: Id): Descrição => {
-      const descrição = this.descreverNó(id);
-
-      const nó = this.get(id);
-      const expressões = 'pertence_a' in nó ? nó.pertence_a : nó.termos;
-
-      const adicionarExpressão = (expressãoId: Id) => {
-        if (this.visitados.has(expressãoId)) return;
-        this.visitados.add(expressãoId);
-
-        const subDescrição = constróiDescrição(
-          expressãoId
-        ) as DescriçãoExpressão;
-        const array =
-          'pertence_a' in descrição
-            ? descrição.pertence_a
-            : descrição.contidaEm;
-        array.push(subDescrição);
-      };
-
-      expressões.forEach(adicionarExpressão);
-
-      return descrição;
-    };
-
-    return constróiDescrição(id);
-  }
-
-  /**
-   * Descreve um elemento do grafo.
-   * @param {Id} id - O Id do elemento a ser descrito.
-   * @returns {Descrição} A descrição do elemento.
-   */
-  private descreverNó(id: Id): Descrição {
-    this.visitados.add(id);
-
-    const nó = this.get(id);
-
-    if ('valor' in nó) {
-      return { id, valor: nó.valor, pertence_a: [] };
-    } else {
-      const termos = nó.termos.map(this.descreverNó.bind(this));
-      const subexpressões = nó.subexpressões.map(this.descreverNó.bind(this));
-      const termosOcultos = nó.termosOcultos.map(this.descreverNó.bind(this));
-      const expressõesOcultas = nó.expressõesOcultas.map(
-        this.descreverNó.bind(this)
-      );
-      //const contidaEm = nó.contidaEm.map(this.descreverNó.bind(this));
-
-      return {
-        id,
-        termos: termos as DescriçãoTermo[],
-        subexpressões: subexpressões as DescriçãoExpressão[],
-        termosOcultos: termosOcultos as DescriçãoTermo[],
-        expressõesOcultas: expressõesOcultas as DescriçãoExpressão[],
-        contidaEm: [],
-      };
-    }
   }
 
   /**
