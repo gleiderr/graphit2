@@ -128,15 +128,36 @@ describe('Graphit', () => {
 
     const expressão = graphit.get(id1) as Expressão;
     expect(expressão).toBeDefined();
+    expect(expressão.subexpressões).toHaveLength(1);
     expect(expressão.expressõesOcultas).toHaveLength(0);
   });
 
-  test('deve lidar com subexpressões já existentes', () => {
+  test('deve relacionar as subexpressões já existentes às novas expressões', () => {
     const { id: filhoDeId } = graphit.expressão('filho de');
     const { id: filiaçãoId } = graphit.expressão('Baasa, filho de Aías');
     const { id: ataqueId } = graphit.expressão(
       'Baasa, filho de Aías, atacou Judá'
     );
+
+    const filhoDe = graphit.get(filhoDeId) as Expressão;
+    const filiação = graphit.get(filiaçãoId) as Expressão;
+    const ataque = graphit.get(ataqueId) as Expressão;
+
+    expect(filhoDe.subexpressões).toEqual([]);
+    expect(filiação.subexpressões).toEqual([filhoDeId]);
+    expect(ataque.subexpressões).toEqual([filiaçãoId]);
+
+    expect(ataque.contidaEm).toEqual([]);
+    expect(filiação.contidaEm).toEqual([ataqueId]);
+    expect(filhoDe.contidaEm).toEqual([filiaçãoId]);
+  });
+
+  test('deve relacionar as novas subexpressões às expressões existentes', () => {
+    const { id: ataqueId } = graphit.expressão(
+      'Baasa, filho de Aías, atacou Judá'
+    );
+    const { id: filiaçãoId } = graphit.expressão('Baasa, filho de Aías');
+    const { id: filhoDeId } = graphit.expressão('filho de');
 
     const filhoDe = graphit.get(filhoDeId) as Expressão;
     const filiação = graphit.get(filiaçãoId) as Expressão;

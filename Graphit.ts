@@ -1,6 +1,9 @@
 import { readFileSync, writeFileSync } from 'fs';
 
-type ExpressãoProps = { contém: string[] };
+type ExpressãoProps = {
+  /** Texto para ser tokenizado e relacionado à expressão */
+  contém: string[];
+};
 
 export type Id = string;
 
@@ -129,32 +132,22 @@ export class Graphit {
   /**
    * Busca por expressões que atendam ao filtro especificado.
    *
-   * @param {Id[]} nós - Ids dos nós a serem buscados.
+   * @param {Id[]} termosIds - Ids dos nós a serem buscados.
    * @returns {Id[]} Ids das expressões encontradas.
    */
-  private buscarExpressões(nós: Id[]): Id[] {
-    const ids = Object.keys(this.db);
+  private buscarExpressões(termosIds: Id[]): Id[] {
+    const retorno = Object.keys(this.db)
+      .filter(id => 'termos' in this.db[id]) // Filtra apenas expressões
+      .map(id => ({ id, ...(this.db[id] as Expressão) })) // Mapeia para incluir o Id
+      .map(({ id, termos }) => ({ id, str: `,${termos.join(',')},` })) // Cria string com os termos da expressão
+      .filter(expr => expr.str === `,${termosIds.join(',')},`) // Filtra expressões idênticas
+      .map(expr => expr.id); // Retorna apenas os Ids das expressões encontradas
 
-    const idsMesmosTermos = ids.filter(id => {
-      const elemento = this.db[id];
-      if ('termos' in elemento && elemento.termos.length === nós.length) {
-        return nós.every(nóId => elemento.termos.includes(nóId));
-      }
-      return false;
-    });
+    if (retorno.length > 1) {
+      throw new Error('Mais de uma expressão encontrada');
+    }
 
-    const idsMesmaOrdem = idsMesmosTermos.filter(id => {
-      const elemento = this.db[id];
-      if ('termos' in elemento) {
-        for (let i = 0; i < elemento.termos.length; i++) {
-          if (elemento.termos[i] !== nós[i]) return false;
-        }
-        return true;
-      }
-      return false;
-    });
-
-    return idsMesmaOrdem;
+    return retorno;
   }
 
   /**
@@ -175,9 +168,6 @@ export class Graphit {
    */
   private getExpressão(ids: Id[], props?: ExpressãoProps): Id {
     const expressões = this.buscarExpressões(ids);
-    if (expressões.length > 1) {
-      throw new Error('Mais de uma expressão encontrada');
-    }
 
     if (expressões.length === 0) {
       const id = this.novaExpressão(ids, props);
@@ -199,12 +189,13 @@ export class Graphit {
     const expressões = new Set<Id>();
 
     contém.forEach(texto => {
-      const ids = this.termos(texto).map(t => this.getTermo(t));
-      if (ids.length === 1) {
-        termos.add(ids[0]);
-      } else if (ids.length > 1) {
-        const idExpressão = this.getExpressão(ids);
-        expressões.add(idExpressão);
+      const termosIds = this.termos(texto).map(t => this.getTermo(t));
+      if (termosIds.length === 1) {
+        // Se somente um termo, adiciona-o ao conjunto de termos
+        termos.add(termosIds[0]);
+      } else if (termosIds.length > 1) {
+        // Se mais de um termo, busca ou cria uma expressão e adiciona-a ao conjunto de expressões
+        expressões.add(this.getExpressão(termosIds));
       }
     });
 
@@ -288,9 +279,6 @@ export class Graphit {
 
         const subExpressões = this.buscarExpressões(termosSubexpressão);
         if (subExpressões.length === 0) continue;
-        if (subExpressões.length > 1) {
-          throw new Error('Mais de uma expressão encontrada');
-        }
 
         vistas.push(toString(termosSubexpressão));
 
@@ -308,10 +296,16 @@ export class Graphit {
     subExpressão.contidaEm.push(expressãoId);
   }
 
-          //this.definePertencimento(expressãoId, subExpressãoId);
-        }
-      }
+  private isSubexpressão(expressão: Id[], subexpressão: Id[]): boolean {
+    if (expressão.length < subexpressão.length) return false;
+
+    const strSubexpressão = subexpressão.join(',');
+    const n = subexpressão.length;
+    for (let i = 0; i < expressão.length - n + 1; i++) {
+      const recorte = expressão.slice(i, i + n);
+      if (recorte.join(',') === strSubexpressão) return true;
     }
+    return false;
   }
 
   /**
