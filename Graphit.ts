@@ -307,18 +307,6 @@ export class Graphit {
     subExpressão.contidaEm.push(expressãoId);
   }
 
-  private isSubexpressão(expressão: Id[], subexpressão: Id[]): boolean {
-    if (expressão.length < subexpressão.length) return false;
-
-    const strSubexpressão = subexpressão.join(',');
-    const n = subexpressão.length;
-    for (let i = 0; i < expressão.length - n + 1; i++) {
-      const recorte = expressão.slice(i, i + n);
-      if (recorte.join(',') === strSubexpressão) return true;
-    }
-    return false;
-  }
-
   /**
    * Exclui uma expressão.
    * Lança exceção se o Id não pertencer a uma expressão.
