@@ -132,18 +132,32 @@ export class Graphit {
   /**
    * Busca por expressões que atendam ao filtro especificado.
    *
-   * @param {Id[]} termosIds - Ids dos nós a serem buscados.
+   * @param {Id[]} termosIds - Ids dos termos a serem buscados.
    * @returns {Id[]} Ids das expressões encontradas.
    */
-  private buscarExpressões(termosIds: Id[]): Id[] {
+  private buscarExpressões(
+    termosIds: Id[],
+    condição: 'igual' | 'subexpressão' = 'igual'
+  ): Id[] {
+    const termosStr = `,${termosIds.join(',')},`;
+
+    // Verifica se os termos atendem à condição especificada
+    const verificação = {
+      igual: (str: string) => str === termosStr,
+      subexpressão: (str: string) => str.includes(termosStr),
+    };
+
     const retorno = Object.keys(this.db)
       .filter(id => 'termos' in this.db[id]) // Filtra apenas expressões
       .map(id => ({ id, ...(this.db[id] as Expressão) })) // Mapeia para incluir o Id
       .map(({ id, termos }) => ({ id, str: `,${termos.join(',')},` })) // Cria string com os termos da expressão
-      .filter(expr => expr.str === `,${termosIds.join(',')},`) // Filtra expressões idênticas
+      .filter(expr =>
+        verificação[condição] ? verificação[condição](expr.str) : false
+      ) // Filtra expressões que atendem à condição
       .map(expr => expr.id); // Retorna apenas os Ids das expressões encontradas
 
-    if (retorno.length > 1) {
+    if (condição === 'igual' && retorno.length > 1) {
+      // Garante que não haja mais de uma expressão igual
       throw new Error('Mais de uma expressão encontrada');
     }
 
@@ -259,13 +273,11 @@ export class Graphit {
   private relacionarSubexpressões(expressãoId: Id) {
     const expressão = this.get(expressãoId) as Expressão;
 
-    // Nessa função as vírgulas antes e depois são para evitar que, por exemplo,
-    // que '1,2' não seja confundida como subexpressão de '1,11,2,3' ou de '0,1,22,3'
-    const toString = (id: Id[]) => `,${id.join(',')},`;
-
-    const vistas: string[] = [];
-    const jáVista = (expressão: string) =>
-      vistas.some(vista => vista.indexOf(expressão) !== -1);
+    this.buscarExpressões(expressão.termos, 'subexpressão')
+      .filter(id => id !== expressãoId)
+      .forEach(superExpressãoId => {
+        this.relacionaSubexpressão(expressãoId, superExpressãoId);
+      });
 
     // Percorre os termos da expressão, buscando subexpressões.
     // A cada iteração reduz o número de termos a serem verificados até o limite de 2 termos.
@@ -274,20 +286,19 @@ export class Graphit {
       for (let início = 0; início < expressão.termos.length - n + 1; início++) {
         const termosSubexpressão = expressão.termos.slice(início, início + n);
 
-        // Se a subexpressão pertence a uma subexpressão já identificada antes, ignora-a
-        if (jáVista(toString(termosSubexpressão))) continue;
-
         const subExpressões = this.buscarExpressões(termosSubexpressão);
         if (subExpressões.length === 0) continue;
 
-        vistas.push(toString(termosSubexpressão));
-
-        const subExpressãoId = subExpressões[0];
-        if (!expressão.subexpressões.includes(subExpressãoId)) {
-          expressão.subexpressões.push(subExpressãoId);
-          this.defineContidaEm(expressãoId, subExpressãoId);
-        }
+        this.relacionaSubexpressão(subExpressões[0], expressãoId);
       }
+    }
+  }
+
+  private relacionaSubexpressão(subExpressãoId: Id, expressãoId: Id) {
+    const expressão = this.get(expressãoId) as Expressão;
+    if (!expressão.subexpressões.includes(subExpressãoId)) {
+      expressão.subexpressões.push(subExpressãoId);
+      this.defineContidaEm(expressãoId, subExpressãoId);
     }
   }
 
