@@ -50,8 +50,6 @@ export class Graphit {
   private _nextId = 0;
   //private listening: boolean = false;
 
-  visitados: Set<Id> = new Set<Id>();
-
   get índices() {
     return Object.keys(this.db);
   }
