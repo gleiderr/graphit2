@@ -1,14 +1,16 @@
 import { Expressão, Graphit, Id, Termo } from './Graphit';
 
+type Stats = {
+  termos: Id[];
+  termosOcultos: Id[];
+  expressões: Id[];
+  expressõesOcultas: Id[];
+};
+
 export class Markdown {
   constructor(private graphit: Graphit) {}
 
-  analisar(texto: string): {
-    termos: Id[];
-    termosOcultos: Id[];
-    expressões: Id[];
-    expressõesOcultas: Id[];
-  } {
+  analisar(texto: string): Stats {
     const termos = new Set<Id>();
     const termosOcultos = new Set<Id>();
     const expressões = new Set<Id>();
@@ -33,13 +35,8 @@ export class Markdown {
     };
   }
 
-  private analisarLinha(linha: string): {
-    termos: Id[];
-    termosOcultos: Id[];
-    expressões: Id[];
-    expressõesOcultas: Id[];
-  } {
-    const marksRegex = /\s*(#{1,6}|-|>)\s+(.+)/;
+  private analisarLinha(linha: string): Stats {
+    const marksRegex = /\s*(#{1,6}|-|>|\d+\.)\s+(.+)/;
     const match = linha.match(marksRegex);
     let termos: Id[] = [];
     let termosOcultos: Id[] = [];
