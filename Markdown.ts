@@ -17,6 +17,9 @@ export class Markdown {
     const expressõesOcultas = new Set<Id>();
 
     texto.split('\n').forEach(linha => {
+      linha = linha.trim();
+      if (linha.length === 0) return; // Ignora linhas vazias
+
       const stats = this.analisarLinha(linha);
 
       stats.termos.forEach(termo => termos.add(termo));
@@ -43,7 +46,7 @@ export class Markdown {
     let expressões: Id[] = [];
     let expressõesOcultas: Id[] = [];
 
-    const texto = match ? match[2].trim() : linha.trim();
+    const texto = match ? match[2] : linha;
     if (this.graphit.tokenize(texto).length === 1) {
       const { id, pertence_a } = this.graphit.termo(texto);
       termos = [id];
