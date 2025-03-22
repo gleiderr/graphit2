@@ -39,33 +39,27 @@ export class Markdown {
     expressões: Id[];
     expressõesOcultas: Id[];
   } {
-    if (linha.startsWith('# ')) {
-      // Se for um título, remove o '# ' e registra o restante
-      const título = linha.slice(2).trim();
-      if (this.graphit.tokenize(título).length === 1) {
-        const { id, pertence_a } = this.graphit.termo(título);
-        return {
-          termos: [id],
-          expressões: pertence_a,
-          termosOcultos: [],
-          expressõesOcultas: [],
-        };
-      } else {
-        const expressão = this.graphit.expressão(título);
-        return {
-          termos: expressão.termos,
-          expressões: [expressão.id, ...expressão.subexpressões],
-          termosOcultos: expressão.termosOcultos,
-          expressõesOcultas: expressão.expressõesOcultas,
-        };
-      }
+    const marksRegex = /\s*(#{1,6}|-|>)\s+(.+)/;
+    const match = linha.match(marksRegex);
+    let termos: Id[] = [];
+    let termosOcultos: Id[] = [];
+    let expressões: Id[] = [];
+    let expressõesOcultas: Id[] = [];
+
+    const texto = match ? match[2].trim() : linha.trim();
+    if (this.graphit.tokenize(texto).length === 1) {
+      const { id, pertence_a } = this.graphit.termo(texto);
+      termos = [id];
+      expressões = pertence_a;
+    } else {
+      const expressão = this.graphit.expressão(texto);
+      termos = [...expressão.termos];
+      termosOcultos = [...expressão.termosOcultos];
+      expressões = [expressão.id, ...expressão.subexpressões];
+      expressõesOcultas = [...expressão.expressõesOcultas];
     }
-    return {
-      termos: [],
-      termosOcultos: [],
-      expressões: [],
-      expressõesOcultas: [],
-    };
+
+    return { termos, termosOcultos, expressões, expressõesOcultas };
   }
 
   markdown(nó: Termo | Expressão): string {
