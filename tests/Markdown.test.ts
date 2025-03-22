@@ -11,13 +11,22 @@ describe('Markdown', () => {
     markdown = new Markdown(graphit);
   });
 
-  test('Deve expressar títulos corretamente', () => {
-    const baasa = markdown.expressar('# Baasa');
-    expect(baasa).toBe('# Baasa\n\n');
+  test('Deve analisar títulos com um termo somente', () => {
+    const stats = markdown.analisar('# Baasa');
+
+    expect(stats.termos).toHaveLength(1);
+    expect(stats.termosOcultos).toHaveLength(0);
   });
 
-  test('Deve expressar títulos seguidos de parágrafos corretamente', () => {
-    const baasa = markdown.expressar('# Baasa\n\nRei de Israel');
-    expect(baasa).toBe('# Baasa\n\nRei de Israel\n\n');
+  test('Deve analisar títulos com uma expressão', () => {
+    const stats = markdown.analisar('# Baasa, filho de Aías');
+
+    expect(stats.termos).toHaveLength(5);
+    expect(stats.termosOcultos).toHaveLength(0);
+  });
+
+  test('Deve analisar parágrafos', () => {
+    const baasa = markdown.analisar('Baasa, filho de Aías');
+    expect(baasa.termos).toHaveLength(5);
   });
 });

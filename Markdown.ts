@@ -1,24 +1,74 @@
-import { Expressão, Graphit, Termo } from './Graphit';
+import { Expressão, Graphit, Id, Termo } from './Graphit';
 
 export class Markdown {
   constructor(private graphit: Graphit) {}
 
-  expressar(texto: string): string {
-    // Verifica se o texto é um título
-    if (texto.startsWith('# ')) {
-      // Registra o texto removendo o marcador de título (#) no Graphit
-      const termos = this.graphit.tokenize(texto.replace('# ', ''));
-      if (termos.length == 1) {
-        return this.markdown(this.graphit.termo(termos[0]));
-      } else {
-        throw new Error('Não implementado ainda');
-      }
-    }
+  analisar(texto: string): {
+    termos: Id[];
+    termosOcultos: Id[];
+    expressões: Id[];
+    expressõesOcultas: Id[];
+  } {
+    const termos = new Set<Id>();
+    const termosOcultos = new Set<Id>();
+    const expressões = new Set<Id>();
+    const expressõesOcultas = new Set<Id>();
 
-    throw new Error('Não implementado ainda');
+    texto.split('\n').forEach(linha => {
+      const stats = this.analisarLinha(linha);
+
+      stats.termos.forEach(termo => termos.add(termo));
+      stats.termosOcultos.forEach(termo => termosOcultos.add(termo));
+      stats.expressões.forEach(expressão => expressões.add(expressão));
+      stats.expressõesOcultas.forEach(expressão =>
+        expressõesOcultas.add(expressão)
+      );
+    });
+
+    return {
+      termos: Array.from(termos),
+      termosOcultos: Array.from(termosOcultos),
+      expressões: Array.from(expressões),
+      expressõesOcultas: Array.from(expressõesOcultas),
+    };
   }
 
-  private markdown(nó: Termo | Expressão): string {
+  private analisarLinha(linha: string): {
+    termos: Id[];
+    termosOcultos: Id[];
+    expressões: Id[];
+    expressõesOcultas: Id[];
+  } {
+    if (linha.startsWith('# ')) {
+      // Se for um título, remove o '# ' e registra o restante
+      const título = linha.slice(2).trim();
+      if (this.graphit.tokenize(título).length === 1) {
+        const { id, pertence_a } = this.graphit.termo(título);
+        return {
+          termos: [id],
+          expressões: pertence_a,
+          termosOcultos: [],
+          expressõesOcultas: [],
+        };
+      } else {
+        const expressão = this.graphit.expressão(título);
+        return {
+          termos: expressão.termos,
+          expressões: [expressão.id, ...expressão.subexpressões],
+          termosOcultos: expressão.termosOcultos,
+          expressõesOcultas: expressão.expressõesOcultas,
+        };
+      }
+    }
+    return {
+      termos: [],
+      termosOcultos: [],
+      expressões: [],
+      expressõesOcultas: [],
+    };
+  }
+
+  markdown(nó: Termo | Expressão): string {
     if ('valor' in nó) {
       return `# ${nó.valor}\n\n`;
     } else {
