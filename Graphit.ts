@@ -73,10 +73,11 @@ export class Graphit {
    * @param {string} valor - Valor do novo termo.
    * @returns {Id} Id do novo termo.
    */
-  private novoTermo(valor: string): Id {
+  private novoTermo(valor: string): Termo {
     const id = this.nextId();
-    this.db[id] = { valor, pertence_a: [] };
-    return id;
+    const novoTermo = { valor, pertence_a: [] };
+    this.db[id] = novoTermo;
+    return { id, ...novoTermo };
   }
 
   /**
@@ -106,7 +107,7 @@ export class Graphit {
   }
 
   private definePertencimento(expressãoId: Id, termoId: Id) {
-    const elemento = this.get(termoId) as Termo;
+    const elemento = this.get(termoId) as Termo; // Vamos manter esse get(), mas deve ser alterado no futuro
     elemento.pertence_a.push(expressãoId);
   }
 
@@ -154,10 +155,13 @@ export class Graphit {
    * @param {string} valor - Valor do nó a ser buscado.
    * @returns {Id | undefined} Id do nó encontrado ou undefined se não encontrado.
    */
-  private buscarTermo(valor: string): Id | undefined {
-    return Object.keys(this.db).find(
+  private buscarTermo(valor: string): Termo | undefined {
+    const termoId = Object.keys(this.db).find(
       id => 'valor' in this.db[id] && this.db[id].valor === valor
     );
+
+    if (!termoId) return undefined;
+    return { id: termoId, ...this.db[termoId] } as Termo;
   }
 
   /**
@@ -204,8 +208,7 @@ export class Graphit {
     if (!texto || !texto.trim()) {
       throw new Error('Texto inválido: não pode ser vazio ou apenas espaços.');
     }
-    const id = this.buscarTermo(texto) || this.novoTermo(texto);
-    return this.get(id) as Termo;
+    return this.buscarTermo(texto) || this.novoTermo(texto);
   }
 
   /**
