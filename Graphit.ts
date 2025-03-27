@@ -99,16 +99,16 @@ export class Graphit {
     };
 
     this.db[novaExpressãoId] = novaExpressão;
-    termos.forEach(termoId =>
-      this.definePertencimento(novaExpressãoId, termoId)
-    );
+    termos.forEach(termoId => {
+      const termo = this.get(termoId) as Termo;
+      this.definePertencimento(novaExpressãoId, termo);
+    });
 
     return { id: novaExpressãoId, ...novaExpressão };
   }
 
-  private definePertencimento(expressãoId: Id, termoId: Id) {
-    const elemento = this.get(termoId) as Termo; // Vamos manter esse get(), mas deve ser alterado no futuro
-    elemento.pertence_a.push(expressãoId);
+  private definePertencimento(expressãoId: Id, termo: Termo) {
+    termo.pertence_a.push(expressãoId);
   }
 
   /**
@@ -124,26 +124,27 @@ export class Graphit {
 
   /**
    *
-   * @param expressãoId
+   * @param expressão
    * @param campo Qualquer um dos campos da expressão: 'termos', 'subexpressões', 'termosOcultos', 'expressõesOcultas' ou 'contidaEm'
    * @param valor
    * @param operação
    */
-  updateExpressão(
-    expressãoId: Id,
+  update(
+    expressão: Expressão,
     campo: keyof Omit<Expressão, 'id'>,
     valor: Id,
-    operação: 'add'
+    operação: 'add' = 'add'
   ) {
-    const expressão = this.db[expressãoId] as Omit<Expressão, 'id'>;
-    if (!expressão) throw new Error(`Expressão não encontrada: ${expressãoId}`);
-    if (!(campo in expressão)) throw new Error(`Campo inválido: ${campo}`);
+    const expressãoDB = this.db[expressão.id] as Omit<Expressão, 'id'>;
+    if (!expressãoDB)
+      throw new Error(`Expressão não encontrada: ${expressão.id}`);
+    if (!(campo in expressãoDB)) throw new Error(`Campo inválido: ${campo}`);
 
     if (operação === 'add') {
-      if (!Array.isArray(expressão[campo])) {
+      if (!Array.isArray(expressãoDB[campo]))
         throw new Error(`Campo ${campo} não é um array`);
-      }
-      expressão[campo].push(valor);
+
+      expressãoDB[campo].push(valor);
       return;
     }
 
@@ -235,7 +236,7 @@ export class Graphit {
    *
    * @param {string[]} contém - Lista de textos que serão relacionados como termos ou expressões ocultas.
    */
-  private relacionarConteúdoMandatório(expressãoId: Id, contém: string[]) {
+  private relacionarConteúdoMandatório(expressão: Expressão, contém: string[]) {
     const conjuntoTermos = new Set<Id>();
     const conjuntoExpressões = new Set<Id>();
 
@@ -251,24 +252,21 @@ export class Graphit {
       }
     });
 
-    const expressão = this.get(expressãoId) as Expressão;
-
     // Define os termos ocultos
     [...conjuntoTermos]
       .filter(termo => !expressão.termos.includes(termo))
       .forEach(oculto =>
-        this.updateExpressão(expressãoId, 'termosOcultos', oculto, 'add')
+        this.update(expressão, 'termosOcultos', oculto, 'add')
       );
-    expressão.termosOcultos.forEach(termoId =>
-      this.definePertencimento(expressãoId, termoId)
-    );
+    expressão.termosOcultos.forEach(termoId => {
+      const termo = this.get(termoId) as Termo;
+      this.definePertencimento(expressão.id, termo);
+    });
 
     // Define as expressões ocultas
     [...conjuntoExpressões]
       .filter(exprId => !expressão.subexpressões.includes(exprId)) // Filtra subexpressões já existentes
-      .forEach(oculta =>
-        this.updateExpressão(expressãoId, 'expressõesOcultas', oculta, 'add')
-      );
+      .forEach(oculta => this.update(expressão, 'expressõesOcultas', oculta));
   }
 
   /**
@@ -303,7 +301,7 @@ export class Graphit {
 
     const expressão = this.getExpressão(ids);
 
-    this.relacionarConteúdoMandatório(expressão.id, contém);
+    this.relacionarConteúdoMandatório(expressão, contém);
 
     return expressão;
   }
@@ -318,7 +316,7 @@ export class Graphit {
     this.buscarExpressões(expressão.termos, 'subexpressão')
       .filter(superExpr => superExpr.id !== expressão.id) // Ignora a própria expressão
       .forEach(superExpressão => {
-        this.relacionaSubexpressão(expressão.id, superExpressão.id);
+        this.relacionaSubexpressão(expressão, superExpressão);
       });
 
     // Percorre os termos da expressão, buscando subexpressões.
@@ -331,22 +329,16 @@ export class Graphit {
         const subExpressões = this.buscarExpressões(termosSubexpressão);
         if (subExpressões.length === 0) continue;
 
-        this.relacionaSubexpressão(subExpressões[0].id, expressão.id);
+        this.relacionaSubexpressão(subExpressões[0], expressão);
       }
     }
   }
 
-  private relacionaSubexpressão(subExpressãoId: Id, expressãoId: Id) {
-    const expressão = this.get(expressãoId) as Expressão;
-    if (!expressão.subexpressões.includes(subExpressãoId)) {
-      expressão.subexpressões.push(subExpressãoId);
-      this.defineContidaEm(expressãoId, subExpressãoId);
+  private relacionaSubexpressão(subExpressão: Expressão, expressão: Expressão) {
+    if (!expressão.subexpressões.includes(subExpressão.id)) {
+      expressão.subexpressões.push(subExpressão.id);
+      this.update(subExpressão, 'contidaEm', expressão.id); // Update to reflect the current expression
     }
-  }
-
-  private defineContidaEm(expressãoId: Id, subExpressãoId: Id) {
-    const subExpressão = this.get(subExpressãoId) as Expressão;
-    subExpressão.contidaEm.push(expressãoId);
   }
 
   /**
