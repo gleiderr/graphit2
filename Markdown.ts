@@ -7,6 +7,11 @@ type Stats = {
   expressõesOcultas: Id[];
 };
 
+type Texto = {
+  texto: string;
+  tipo: 'título' | 'lista' | 'parágrafo' | 'citação';
+};
+
 export class Markdown {
   constructor(private graphit: Graphit) {}
 
@@ -16,11 +21,19 @@ export class Markdown {
     const expressões = new Set<Id>();
     const expressõesOcultas = new Set<Id>();
 
+    const dependências: Texto[] = [];
     texto.split('\n').forEach(linha => {
       linha = linha.trim();
       if (linha.length === 0) return; // Ignora linhas vazias
 
-      const stats = this.analisarLinha(linha);
+      const dependência = dependências.pop();
+      const stats = this.analisarLinha(linha, dependência);
+
+      if (dependências.length == 0) {
+        dependências.push({ texto: stats.texto, tipo: stats.tipo });
+      } else {
+        dependências.push(dependência!); // REVIEW: Não deveria ser necessário o operador de negação
+      }
 
       stats.termos.forEach(termo => termos.add(termo));
       stats.termosOcultos.forEach(termo => termosOcultos.add(termo));
@@ -38,35 +51,61 @@ export class Markdown {
     };
   }
 
-  private analisarLinha(linha: string): Stats {
-    const marksRegex = /\s*(#{1,6}|-|>|\d+\.)\s+(.+)/;
-    const match = linha.match(marksRegex);
+  private analisarLinha(linha: string, dependencia?: Texto): Stats & Texto {
     let termos: Id[] = [];
     let termosOcultos: Id[] = [];
     let expressões: Id[] = [];
     let expressõesOcultas: Id[] = [];
 
-    const texto = match ? match[2] : linha;
+    const { tipo, texto } = this.analizarTexto(linha);
+
     if (this.graphit.tokenize(texto).length === 1) {
       const { id, pertence_a } = this.graphit.termo(texto);
       termos = [id];
       expressões = pertence_a;
     } else {
-      const expressão = this.graphit.expressão(texto);
+      const contém = dependencia?.tipo === 'título' ? [dependencia.texto] : [];
+      console.log('contém', contém);
+
+      const expressão = this.graphit.expressão(texto, { contém });
       termos = [...expressão.termos];
       termosOcultos = [...expressão.termosOcultos];
       expressões = [expressão.id, ...expressão.subexpressões];
       expressõesOcultas = [...expressão.expressõesOcultas];
     }
 
-    return { termos, termosOcultos, expressões, expressõesOcultas };
+    return {
+      termos,
+      termosOcultos,
+      expressões,
+      expressõesOcultas,
+      texto,
+      tipo,
+    };
+  }
+
+  analizarTexto(texto: string): Texto {
+    // Verifica se a linha é um título, lista ou citação
+    const marksRegex = /\s*(#{1,6}|-|>|\d+\.)\s+(.+)/;
+    const match = texto.match(marksRegex);
+
+    if (match) {
+      texto = match[2];
+      if (match[1].startsWith('>')) return { texto, tipo: 'citação' };
+      if (match[1].startsWith('#')) return { texto, tipo: 'título' };
+      if (match[1].startsWith('-') || /^\d+\.$/.test(match[1])) {
+        return { texto, tipo: 'lista' };
+      }
+    }
+
+    return { texto, tipo: 'parágrafo' };
   }
 
   markdown(nó: Termo | Expressão): string {
     if ('valor' in nó) {
       return `# ${nó.valor}\n\n`;
     } else {
-      return 'this.graphit.get(nó.id).valor';
+      return '';
     }
   }
 }

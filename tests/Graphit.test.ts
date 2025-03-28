@@ -187,4 +187,13 @@ describe('Graphit', () => {
       expect.arrayContaining([filiaçãoId, ataqueId])
     );
   });
+
+  test('deve ser recuperar toda informação de expressões já cadastradas', () => {
+    const expressão1 = graphit.expressão('Filho de Aías', {
+      contém: ['Baasa'],
+    });
+    const expressão2 = graphit.expressão('Filho de Aías');
+
+    expect(expressão2).toEqual(expressão1);
+  });
 });
