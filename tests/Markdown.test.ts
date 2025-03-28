@@ -96,12 +96,21 @@ describe('Markdown', () => {
     });
 
     test('Deve reconhecer termos ocultos', () => {
-      const stats = markdown.analisar('# Baasa\nFilho de Aías');
+      const stats = markdown.analisar('# Baasa\n\nFilho de Aías');
 
       expect(stats.termos).toHaveLength(4);
       expect(stats.termosOcultos).toHaveLength(1);
       expect(stats.expressões).toHaveLength(1);
       expect(stats.expressõesOcultas).toHaveLength(0);
+    });
+
+    test('Deve reconhecer expressões ocultas', () => {
+      const stats = markdown.analisar('# Ben-Hadade\n\nFilho de Tabriom');
+
+      expect(stats.termos).toHaveLength(6);
+      expect(stats.termosOcultos).toHaveLength(0);
+      expect(stats.expressões).toHaveLength(2);
+      expect(stats.expressõesOcultas).toHaveLength(1);
     });
   });
 });
