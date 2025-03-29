@@ -55,7 +55,8 @@ describe('Tokenizer', () => {
     test('deve reconstruir texto complexo mantendo formatação adequada', () => {
       const tokens = [
         'Teste',
-        ',',
+        '-',
+        'unitário',
         'com',
         '[',
         'parênteses',
@@ -69,7 +70,7 @@ describe('Tokenizer', () => {
         '!',
       ];
       expect(tokenizer.detokenize(tokens)).toBe(
-        'Teste, com [parênteses], "aspas" e pontuação!'
+        'Teste-unitário com [parênteses], "aspas" e pontuação!'
       );
     });
 
