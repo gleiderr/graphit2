@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
+import { Tokenizer } from './Tokenizer';
 
 type ExpressãoProps = {
   /** Texto para ser tokenizado e relacionado à expressão */
@@ -48,11 +49,8 @@ export type Expressão = {
  */
 export class Graphit {
   private db: { [key: string]: Omit<Termo, 'id'> | Omit<Expressão, 'id'> } = {};
-  // private listeners: { [key in 'afterExpressão']: ((id: Id) => void)[] } = {
-  //   afterExpressão: [],
-  // };
   private _nextId = 0;
-  //private listening: boolean = false;
+  private tokenizer = new Tokenizer();
 
   get índices() {
     return Object.keys(this.db);
@@ -399,24 +397,18 @@ export class Graphit {
    * @returns {string[]} Os tokens resultantes.
    */
   tokenize(s: string): string[] {
-    return s
-      .split(/(\s+|[-,.;:()"]|\?)/) // Divide a string em tokens
-      .map(s => s.trim()) // Remove espaços em branco
-      .filter(Boolean); // Remove tokens vazios
+    return this.tokenizer.tokenize(s);
   }
 
   /**
    * Executa a operação inversa de tokenize().
-   * Ou seja, recebe um arranjo de strings e retorna uma string.
+   * Ou seja, recebe um arranjo de strings e retorna uma string com os tokens unidos.
    *
    * @param {string[]} nós - Tokens a serem unidos.
    * @returns {string} texto resultante.
    */
-  private texto(nós: string[]): string {
-    return nós
-      .join(' ')
-      .replace(/\s+/g, ' ')
-      .replace(/\s+([,.;:-])/g, '$1');
+  detokenize(nós: string[]): string {
+    return this.tokenizer.detokenize(nós);
   }
 
   /**

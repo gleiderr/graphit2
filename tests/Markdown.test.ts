@@ -113,4 +113,27 @@ describe('Markdown', () => {
       expect(stats.expressõesOcultas).toHaveLength(1);
     });
   });
+
+  describe('Reprodução de markdown', () => {
+    test('Deve reproduzir markdown a partir de um termo', () => {
+      const texto = '# Baasa\n\n';
+      markdown.analisar(texto);
+
+      expect(markdown.toMarkdown('Baasa')).toBe(texto);
+    });
+
+    test('Deve reproduzir markdown a partir de uma expressão', () => {
+      const texto = '# Ben-Hadade\n\n';
+      markdown.analisar(texto);
+
+      expect(markdown.toMarkdown('Ben-Hadade')).toBe(texto);
+    });
+
+    test.skip('Deve reproduzir markdown a partir de termo com conteúdo', () => {
+      const texto = '# Baasa\n\nRei de Israel';
+      markdown.analisar(texto);
+
+      expect(markdown.toMarkdown('Baasa')).toBe(texto);
+    });
+  });
 });

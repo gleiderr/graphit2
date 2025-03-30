@@ -1,4 +1,4 @@
-import { Expressão, Graphit, Id, Termo } from './Graphit';
+import { Graphit, Id, Termo } from './Graphit';
 
 type Stats = {
   termos: Id[];
@@ -31,8 +31,8 @@ export class Markdown {
 
       if (dependências.length == 0) {
         dependências.push({ texto: stats.texto, tipo: stats.tipo });
-      } else {
-        dependências.push(dependência!); // REVIEW: Não deveria ser necessário o operador de negação
+      } else if (dependência) {
+        dependências.push(dependência); // adiciona dependência se estiver definida
       }
 
       stats.termos.forEach(termo => termos.add(termo));
@@ -65,7 +65,6 @@ export class Markdown {
       expressões = pertence_a;
     } else {
       const contém = dependencia?.tipo === 'título' ? [dependencia.texto] : [];
-      console.log('contém', contém);
 
       const expressão = this.graphit.expressão(texto, { contém });
       termos = [...expressão.termos];
@@ -101,11 +100,22 @@ export class Markdown {
     return { texto, tipo: 'parágrafo' };
   }
 
-  markdown(nó: Termo | Expressão): string {
+  toMarkdown(texto: string): string {
+    const tokens = this.graphit.tokenize(texto);
+    const nó =
+      tokens.length === 1
+        ? this.graphit.termo(texto)
+        : this.graphit.expressão(texto);
+
     if ('valor' in nó) {
       return `# ${nó.valor}\n\n`;
     } else {
-      return '';
+      const valores = nó.termos.map(termoId => {
+        const termo = this.graphit.get(termoId) as Termo;
+        return termo.valor;
+      });
+
+      return `# ${this.graphit.detokenize(valores)}\n\n`;
     }
   }
 }
