@@ -18,6 +18,8 @@ export type Termo = {
   valor: string;
   /** Lista de expressões a que o termo pertence. */
   pertence_a: Id[];
+  /** Lista de Ids de informações contidas neste termo. */
+  contém: Id[];
 };
 
 /**
@@ -282,7 +284,7 @@ export class Graphit {
   expressão(
     texto: string,
     { contém }: ExpressãoProps = { contém: [] }
-  ): Expressão {
+  ): Expressão | Termo {
     if (!texto || !texto.trim()) {
       throw new Error('Não são permitidas expressões vazias');
     }
@@ -290,9 +292,8 @@ export class Graphit {
     // Transforma 'texto' em um conjunto de termos que podem ser uma palavra ou uma pontuação
     const termos = this.tokenize(texto);
 
-    if (termos.length < 2) {
-      throw new Error('Não são permitidas expressões com apenas um termo');
-    }
+    // Se apenas um termo, retorna o termo correspondente
+    if (termos.length === 1) return this.termo(termos[0]);
 
     // Busca os termos existentes ou cria novos termos
     const ids = termos.map(t => this.termo(t).id);
@@ -377,7 +378,7 @@ export class Graphit {
 
     if ('pertence_a' in nó) {
       const index = nó.pertence_a.indexOf(expressãoId);
-      if (index == -1) {
+      if (index === -1) {
         throw new Error(`Nó "${nóId}" não contém a expressão "${expressãoId}"`);
       }
 

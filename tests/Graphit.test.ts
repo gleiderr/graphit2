@@ -9,6 +9,7 @@ describe('Graphit', () => {
     graphit = new Graphit();
   });
 
+  // REVIEW: Subistituir referências a 'expressão' por 'informação'
   test('não deve permitir expressões vazias', () => {
     expect(() => graphit.expressão('')).toThrow(
       'Não são permitidas expressões vazias'
@@ -18,10 +19,10 @@ describe('Graphit', () => {
     );
   });
 
-  test('Não deve permitir expressões com apenas um termo', () => {
-    expect(() => graphit.expressão('Baasa')).toThrow(
-      'Não são permitidas expressões com apenas um termo'
-    );
+  test('deve permitir expressões com apenas um termo', () => {
+    const termo = graphit.expressão('Baasa') as Termo;
+    expect(termo).toBeDefined();
+    expect(termo.valor).toBe('Baasa');
   });
 
   test('deve descrever uma expressão simples', () => {
