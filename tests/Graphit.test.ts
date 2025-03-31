@@ -73,6 +73,18 @@ describe('Graphit', () => {
     expect(id1).not.toBe(id2);
   });
 
+  test('deve lidar expressões contidas em termos', () => {
+    const termo = graphit.expressão('Baasa', {
+      contém: ['filho de Aías'],
+    }) as Termo;
+    const filhoDeAías = graphit.expressão('filho de Aías');
+
+    expect(termo).toBeDefined();
+    expect(termo).toHaveProperty('contém');
+    expect(termo.contém).toHaveLength(1);
+    expect(termo.contém[0]).toBe(filhoDeAías.id);
+  });
+
   test('deve lidar com termos ocultos', () => {
     const { id: id1 } = graphit.expressão('filho de Aías', {
       contém: ['Baasa'],
@@ -81,9 +93,9 @@ describe('Graphit', () => {
 
     expect(expressão).toBeDefined();
     expect(expressão.termos).toHaveLength(3);
-    expect(expressão.termosOcultos).toHaveLength(1);
+    expect(expressão.contém).toHaveLength(1);
 
-    const Baasa = graphit.get(expressão.termosOcultos[0]) as Termo;
+    const Baasa = graphit.get(expressão.contém[0]) as Termo;
 
     expect(Baasa).toBeDefined();
     expect(Baasa).toHaveProperty('valor', 'Baasa');
@@ -98,7 +110,7 @@ describe('Graphit', () => {
     const expressão = graphit.get(id1) as Expressão;
 
     expect(expressão).toBeDefined();
-    expect(expressão.termosOcultos).toHaveLength(0);
+    expect(expressão.contém).toHaveLength(0);
   });
 
   test('deve lidar com expressões ocultas', () => {
@@ -108,9 +120,9 @@ describe('Graphit', () => {
 
     const expressão = graphit.get(id1) as Expressão;
     expect(expressão).toBeDefined();
-    expect(expressão.expressõesOcultas).toHaveLength(1);
+    expect(expressão.contém).toHaveLength(1);
 
-    const benHadadeId = expressão.expressõesOcultas[0];
+    const benHadadeId = expressão.contém[0];
     const benHadade = graphit.get(benHadadeId) as Expressão;
     expect(benHadade).toBeDefined();
     expect(benHadade).toHaveProperty('termos');
@@ -130,7 +142,7 @@ describe('Graphit', () => {
     const expressão = graphit.get(id1) as Expressão;
     expect(expressão).toBeDefined();
     expect(expressão.subexpressões).toHaveLength(1);
-    expect(expressão.expressõesOcultas).toHaveLength(0);
+    expect(expressão.contém).toHaveLength(0);
   });
 
   test('deve relacionar as subexpressões já existentes às novas expressões', () => {
@@ -152,11 +164,11 @@ describe('Graphit', () => {
       expect.arrayContaining([filhoDeId, filiaçãoId])
     );
 
-    expect(ataque.contidaEm).toEqual([]);
-    expect(filiação.contidaEm).toEqual([ataqueId]);
+    expect(ataque.subexpressãoDe).toEqual([]);
+    expect(filiação.subexpressãoDe).toEqual([ataqueId]);
 
-    expect(filhoDe.contidaEm).toHaveLength(2);
-    expect(filhoDe.contidaEm).toEqual(
+    expect(filhoDe.subexpressãoDe).toHaveLength(2);
+    expect(filhoDe.subexpressãoDe).toEqual(
       expect.arrayContaining([filiaçãoId, ataqueId])
     );
   });
@@ -180,11 +192,11 @@ describe('Graphit', () => {
       expect.arrayContaining([filhoDeId, filiaçãoId])
     );
 
-    expect(ataque.contidaEm).toEqual([]);
-    expect(filiação.contidaEm).toEqual([ataqueId]);
+    expect(ataque.subexpressãoDe).toEqual([]);
+    expect(filiação.subexpressãoDe).toEqual([ataqueId]);
 
-    expect(filhoDe.contidaEm).toHaveLength(2);
-    expect(filhoDe.contidaEm).toEqual(
+    expect(filhoDe.subexpressãoDe).toHaveLength(2);
+    expect(filhoDe.subexpressãoDe).toEqual(
       expect.arrayContaining([filiaçãoId, ataqueId])
     );
   });

@@ -8,6 +8,14 @@ type ExpressãoProps = {
 
 export type Id = string;
 
+type Informação = {
+  id: Id;
+  /** Lista de Ids de informações contidas nesta informação. */
+  contém: Id[];
+  /** Lista de Ids de informações que contêm esta informação. */
+  contidaEm: Id[];
+};
+
 /**
  * Representação de um termo.
  */
@@ -18,9 +26,7 @@ export type Termo = {
   valor: string;
   /** Lista de expressões a que o termo pertence. */
   pertence_a: Id[];
-  /** Lista de Ids de informações contidas neste termo. */
-  contém: Id[];
-};
+} & Informação;
 
 /**
  * Representação de uma expressão.
@@ -32,15 +38,9 @@ export type Expressão = {
   termos: Id[];
   /** Lista de Ids de expressões contidas nesta expressão. */
   subexpressões: Id[];
-  /** Lista de Ids de termos ocultos nesta expressão. */
-  termosOcultos: Id[];
-  /** Lista de Ids de expressões ocultas nesta expressão. */
-  expressõesOcultas: Id[];
   /** Lista de Ids de expressões que contêm esta expressão. */
-  contidaEm: Id[];
-  /** Propriedades opcionais para a expressão. */
-  props?: ExpressãoProps;
-};
+  subexpressãoDe: Id[];
+} & Informação;
 
 /**
  * Graphit é um manipulador de expressões e termos.
@@ -75,7 +75,7 @@ export class Graphit {
    */
   private novoTermo(valor: string): Termo {
     const id = this.nextId();
-    const novoTermo = { valor, pertence_a: [] };
+    const novoTermo = { valor, pertence_a: [], contém: [], contidaEm: [] };
     this.db[id] = novoTermo;
     return { id, ...novoTermo };
   }
@@ -84,18 +84,16 @@ export class Graphit {
    * Cria uma nova expressão com os ids dos nós fornecidos.
    *
    * @param {Id[]} termos - Ids dos nós que compõem a expressão.
-   * @param {ExpressãoProps} [props] - Propriedades adicionais da expressão.
    * @returns {Id} Id da nova expressão.
    */
-  private novaExpressão(termos: Id[], props?: ExpressãoProps): Expressão {
+  private novaExpressão(termos: Id[]): Expressão {
     const novaExpressãoId = this.nextId();
     const novaExpressão = {
       termos: termos,
-      contidaEm: [],
       subexpressões: [],
-      termosOcultos: [],
-      expressõesOcultas: [],
-      props,
+      subexpressãoDe: [],
+      contém: [],
+      contidaEm: [],
     };
 
     this.db[novaExpressãoId] = novaExpressão;
@@ -111,6 +109,7 @@ export class Graphit {
     termo.pertence_a.push(expressãoId);
   }
 
+  // REVIEW: Substituir todo "nó" por "informação"
   /**
    * Obtém termo nó ou expressão pelo Id.
    * @param {Id} id - O Id do nó ou expressão.
@@ -200,6 +199,7 @@ export class Graphit {
     return retorno;
   }
 
+  // REVIEW: Tornar termo() em private
   /**
    * Obtém o ID de um termo existente pelo seu valor ou cria um novo termo.
    * @param {string} texto - Valor do termo a ser buscado ou criado.
@@ -215,15 +215,14 @@ export class Graphit {
   /**
    * Obtém o ID de uma expressão existente pelos IDs dos seus nós ou cria uma nova expressão.
    * @param {Id[]} termosIds - IDs dos nós que compõem a expressão.
-   * @param {ExpressãoProps} [props] - Propriedades adicionais da expressão.
    * @returns {Id} Id da expressão.
    * @throws {Error} Se mais de uma expressão for encontrada.
    */
-  private getExpressão(termosIds: Id[], props?: ExpressãoProps): Expressão {
+  private getExpressão(termosIds: Id[]): Expressão {
     const expressões = this.buscarExpressões(termosIds);
 
     if (expressões.length === 0) {
-      const expressão = this.novaExpressão(termosIds, props);
+      const expressão = this.novaExpressão(termosIds);
       this.relacionarSubexpressões(expressão);
       return expressão;
     } else {
@@ -255,10 +254,8 @@ export class Graphit {
     // Define os termos ocultos
     [...conjuntoTermos]
       .filter(termo => !expressão.termos.includes(termo))
-      .forEach(oculto =>
-        this.update(expressão, 'termosOcultos', oculto, 'add')
-      );
-    expressão.termosOcultos.forEach(termoId => {
+      .forEach(oculto => this.update(expressão, 'contém', oculto, 'add'));
+    expressão.contém.forEach(termoId => {
       const termo = this.get(termoId) as Termo;
       this.definePertencimento(expressão.id, termo);
     });
@@ -266,16 +263,17 @@ export class Graphit {
     // Define as expressões ocultas
     [...conjuntoExpressões]
       .filter(exprId => !expressão.subexpressões.includes(exprId)) // Filtra subexpressões já existentes
-      .forEach(oculta => this.update(expressão, 'expressõesOcultas', oculta));
+      .forEach(oculta => this.update(expressão, 'contém', oculta));
   }
 
+  // REVIEW: Renomear expressão() para informação()
+  // REVIEW: Alterar retorno para Expressão ou Termo
   /**
    * Retorna o Id da expressão cujos nós coincidem com os valores informados.
    * Se não encontrar, cria uma nova expressão reaproveitando os nós existentes
    * e cria novos nós sempre que necessário.
    *
    * @param {string} texto - Uma string a ser separada em termos.
-   * @param {ExpressãoProps} [props] - Propriedades adicionais da expressão.
    * @returns {{ id: Id }} O Id da expressão.
    *
    * @throws {Error} Se a expressão for vazia ou contiver apenas um termo.
@@ -336,7 +334,7 @@ export class Graphit {
   private relacionaSubexpressão(subExpressão: Expressão, expressão: Expressão) {
     if (!expressão.subexpressões.includes(subExpressão.id)) {
       expressão.subexpressões.push(subExpressão.id);
-      this.update(subExpressão, 'contidaEm', expressão.id); // Update to reflect the current expression
+      this.update(subExpressão, 'subexpressãoDe', expressão.id); // Update to reflect the current expression
     }
   }
 
@@ -352,7 +350,7 @@ export class Graphit {
     if (!('termos' in expressão))
       throw new Error(`O elemento ${expressãoId} não é uma expressão`);
 
-    if (expressão.contidaEm.length > 0)
+    if (expressão.subexpressãoDe.length > 0)
       throw new Error(
         `A expressão ${expressãoId} está contidaEm outras expressões`
       );
