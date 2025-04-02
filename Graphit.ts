@@ -9,6 +9,7 @@ type ExpressãoProps = {
 export type Id = string;
 
 type Informação = {
+  /** Id da informação */
   id: Id;
   /** Lista de Ids de informações contidas nesta informação. */
   contém: Id[];
@@ -20,11 +21,9 @@ type Informação = {
  * Representação de um termo.
  */
 export type Termo = {
-  /** Id do termo. */
-  id: Id;
   /** Valor do termo propriamente dito. */
   valor: string;
-  /** Lista de expressões a que o termo pertence. */
+  /** Conjunto de Ids de expressões a que o termo pertence. */
   pertence_a: Id[];
 } & Informação;
 
@@ -32,22 +31,21 @@ export type Termo = {
  * Representação de uma expressão.
  */
 export type Expressão = {
-  /** Id da expressão. */
-  id: Id;
   /** Lista de Ids dos termos pertencentes a esta expressão. */
   termos: Id[];
-  /** Lista de Ids de expressões contidas nesta expressão. */
+  /** Conjunto de Ids de expressões contidas nesta expressão. */
   subexpressões: Id[];
-  /** Lista de Ids de expressões que contêm esta expressão. */
+  /** Conjunto de Ids de expressões que contêm esta expressão. */
   subexpressãoDe: Id[];
 } & Informação;
 
 /**
- * Graphit é um manipulador de expressões e termos.
- * Ele facilita a identificação relacionamentos entre termos e expressões.
+ * Graphit é um manipulador informações representadas por expressões e termos.
+ * Ele facilita a identificação relacionamentos entre informações.
  *
  * As expressões comportam-se como conjuntos de termos ou expressões.
  * Os termos comportam-se como elementos desses conjuntos.
+ * Expressões e termos são representações de informações.
  */
 export class Graphit {
   private db: { [key: string]: Omit<Termo, 'id'> | Omit<Expressão, 'id'> } = {};
@@ -71,7 +69,7 @@ export class Graphit {
    * Cria um novo termo com o valor fornecido.
    *
    * @param {string} valor - Valor do novo termo.
-   * @returns {Id} Id do novo termo.
+   * @returns {Termo} O novo termo criado.
    */
   private novoTermo(valor: string): Termo {
     const id = this.nextId();
@@ -81,10 +79,10 @@ export class Graphit {
   }
 
   /**
-   * Cria uma nova expressão com os ids dos nós fornecidos.
+   * Cria uma nova expressão com os ids dos termos fornecidos.
    *
-   * @param {Id[]} termos - Ids dos nós que compõem a expressão.
-   * @returns {Id} Id da nova expressão.
+   * @param {Id[]} termos - Ids dos termos que compõem a expressão.
+   * @returns {Expressão} A nova expressão criada.
    */
   private novaExpressão(termos: Id[]): Expressão {
     const novaExpressãoId = this.nextId();
@@ -99,51 +97,59 @@ export class Graphit {
     this.db[novaExpressãoId] = novaExpressão;
     termos.forEach(termoId => {
       const termo = this.get(termoId) as Termo;
-      this.definePertencimento(novaExpressãoId, termo);
+      this.update(termo, 'pertence_a', novaExpressãoId);
     });
 
     return { id: novaExpressãoId, ...novaExpressão };
   }
 
-  private definePertencimento(expressãoId: Id, termo: Termo) {
-    termo.pertence_a.push(expressãoId);
-  }
-
-  // REVIEW: Substituir todo "nó" por "informação"
   /**
-   * Obtém termo nó ou expressão pelo Id.
-   * @param {Id} id - O Id do nó ou expressão.
-   * @returns {Termo | Expressão} O nó ou expressão correspondente.
-   * @throws {Error} Se o nó ou expressão não for encontrado.
+   * Obtém informação pelo Id.
+   * @param {Id} id - O Id da informação.
+   * @returns {Termo | Expressão} Termo ou expressão correspondente.
+   * @throws {Error} Se a informação não for encontrada.
    */
   get(id: Id): Termo | Expressão {
-    if (!this.db[id]) throw new Error(`Nó não encontrado: ${id}`);
+    if (!this.db[id]) throw new Error(`Informação não encontrada: ${id}`);
     return { id, ...this.db[id] };
   }
 
   /**
-   *
-   * @param expressão
-   * @param campo Qualquer um dos campos da expressão: 'termos', 'subexpressões', 'termosOcultos', 'expressõesOcultas' ou 'contidaEm'
-   * @param valor
-   * @param operação
+   * Atualiza um campo de uma informação existente.
+   * @param informação - A informação a ser atualizada.
+   * @param campo - Qualquer um dos campos da informação.
+   * @param valor - O novo valor a ser atribuído.
+   * @param operação - A operação a ser realizada.
    */
-  update(
-    expressão: Expressão,
-    campo: keyof Omit<Expressão, 'id'>,
+  update<Info extends Expressão | Termo>(
+    informação: Info,
+    campo: keyof Omit<Info, 'id'>,
     valor: Id,
     operação: 'add' = 'add'
   ) {
-    const expressãoDB = this.db[expressão.id] as Omit<Expressão, 'id'>;
-    if (!expressãoDB)
-      throw new Error(`Expressão não encontrada: ${expressão.id}`);
-    if (!(campo in expressãoDB)) throw new Error(`Campo inválido: ${campo}`);
+    const infoDB = this.db[informação.id] as Omit<Info, 'id'>;
+    if (!infoDB) {
+      throw new Error(`Informação não encontrada: ${informação.id}`);
+    }
+
+    if (!(campo in infoDB)) {
+      throw new Error(`Campo inválido: ${String(campo)}`);
+    }
 
     if (operação === 'add') {
-      if (!Array.isArray(expressãoDB[campo]))
-        throw new Error(`Campo ${campo} não é um array`);
+      if (!Array.isArray(infoDB[campo])) {
+        throw new Error(`Campo ${String(campo)} não é um array`);
+      }
 
-      expressãoDB[campo].push(valor);
+      if (campo === 'pertence_a') {
+        if (!infoDB[campo].includes(valor)) {
+          // Se o valor não estiver presente, adiciona-o
+          infoDB[campo].push(valor);
+        }
+      } else {
+        infoDB[campo].push(valor);
+      }
+
       return;
     }
 
@@ -151,9 +157,9 @@ export class Graphit {
   }
 
   /**
-   * Busca um nó pelo valor fornecido.
-   * @param {string} valor - Valor do nó a ser buscado.
-   * @returns {Id | undefined} Id do nó encontrado ou undefined se não encontrado.
+   * Busca um termo pelo valor fornecido.
+   * @param {string} valor - Valor do termo a ser buscado.
+   * @returns {Id | undefined} Id do termo encontrado ou undefined se não encontrado.
    */
   private buscarTermo(valor: string): Termo | undefined {
     const termoId = Object.keys(this.db).find(
@@ -186,9 +192,7 @@ export class Graphit {
       .filter(id => 'termos' in this.db[id]) // Filtra apenas expressões
       .map(id => ({ id, ...this.db[id] } as Expressão)) // Mapeia para incluir o Id
       .map(expressão => ({ expressão, str: `,${expressão.termos.join(',')},` })) // Cria objeto auxiliar com string com os termos da expressão
-      .filter(obj =>
-        verificação[condição] ? verificação[condição](obj.str) : false
-      ) // Filtra expressões que atendem à condição
+      .filter(obj => verificação[condição](obj.str)) // Filtra expressões que atendem à condição
       .map(obj => obj.expressão); // Retorna as expressões encontradas
 
     if (condição === 'igual' && retorno.length > 1) {
@@ -199,7 +203,7 @@ export class Graphit {
     return retorno;
   }
 
-  // REVIEW: Tornar termo() em private
+  // TODO: Tornar termo() em private
   /**
    * Obtém o ID de um termo existente pelo seu valor ou cria um novo termo.
    * @param {string} texto - Valor do termo a ser buscado ou criado.
@@ -213,10 +217,11 @@ export class Graphit {
   }
 
   /**
-   * Obtém o ID de uma expressão existente pelos IDs dos seus nós ou cria uma nova expressão.
+   * Obtém uma expressão existente identificada a partir dos IDs dos seus termos
+   * ou cria uma nova expressão.
+   *
    * @param {Id[]} termosIds - IDs dos nós que compõem a expressão.
    * @returns {Id} Id da expressão.
-   * @throws {Error} Se mais de uma expressão for encontrada.
    */
   private getExpressão(termosIds: Id[]): Expressão {
     const expressões = this.buscarExpressões(termosIds);
@@ -230,8 +235,9 @@ export class Graphit {
     }
   }
 
+  // TODO: Revisar
   /**
-   * Relaciona o conteúdo mandatório a partir de uma lista de textos contendo termos ou expressões.
+   * Relaciona o conteúdo mandatório a partir de uma lista de textos.
    *
    * @param {string[]} contém - Lista de textos que serão relacionados como termos ou expressões ocultas.
    */
@@ -257,7 +263,7 @@ export class Graphit {
       .forEach(oculto => this.update(expressão, 'contém', oculto, 'add'));
     expressão.contém.forEach(termoId => {
       const termo = this.get(termoId) as Termo;
-      this.definePertencimento(expressão.id, termo);
+      this.update(termo, 'pertence_a', expressão.id);
     });
 
     // Define as expressões ocultas
@@ -266,18 +272,16 @@ export class Graphit {
       .forEach(oculta => this.update(expressão, 'contém', oculta));
   }
 
-  // REVIEW: Renomear expressão() para informação()
-  // REVIEW: Alterar retorno para Expressão ou Termo
+  // TODO: Renomear expressão() para informação()
   /**
    * Retorna o Id da expressão cujos nós coincidem com os valores informados.
-   * Se não encontrar, cria uma nova expressão reaproveitando os nós existentes
+   * Se não encontrar, cria uma nova expressão ou termo reaproveitando os nós existentes
    * e cria novos nós sempre que necessário.
    *
    * @param {string} texto - Uma string a ser separada em termos.
-   * @returns {{ id: Id }} O Id da expressão.
+   * @returns {Expressão | Termo} Expressão ou termo.
    *
-   * @throws {Error} Se a expressão for vazia ou contiver apenas um termo.
-   * @throws {Error} Se mais de uma expressão for encontrada.
+   * @throws {Error} Se a expressão for vazia.
    */
   expressão(
     texto: string,
@@ -304,10 +308,12 @@ export class Graphit {
   }
 
   /**
-   * Identifica se há na expressão alguma subexpressão já cadastrada.
+   * Identifica se há na expressão alguma subexpressão já cadastrada
+   * ou se ela mesma é uma subexpressão de uma expressão já cadastrada.
+   *
    * Se houver, relaciona a subexpressão à expressão.
    *
-   * @param {Id} expressãoId - Id da expressão a ser relacionada.
+   * @param {Expressão} expressão - A expressão a ser analisada.
    */
   private relacionarSubexpressões(expressão: Expressão) {
     this.buscarExpressões(expressão.termos, 'subexpressão')
