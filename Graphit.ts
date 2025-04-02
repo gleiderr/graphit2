@@ -141,7 +141,11 @@ export class Graphit {
         throw new Error(`Campo ${String(campo)} não é um array`);
       }
 
-      if (campo === 'pertence_a') {
+      if (
+        campo === 'pertence_a' ||
+        campo === 'subexpressões' ||
+        campo === 'subexpressãoDe'
+      ) {
         if (!infoDB[campo].includes(valor)) {
           // Se o valor não estiver presente, adiciona-o
           infoDB[campo].push(valor);
@@ -332,68 +336,15 @@ export class Graphit {
         const subExpressões = this.buscarExpressões(termosSubexpressão);
         if (subExpressões.length === 0) continue;
 
-        this.relacionaSubexpressão(subExpressões[0], expressão);
+        const subExpressão = subExpressões[0];
+        this.relacionaSubexpressão(subExpressão, expressão);
       }
     }
   }
 
   private relacionaSubexpressão(subExpressão: Expressão, expressão: Expressão) {
-    if (!expressão.subexpressões.includes(subExpressão.id)) {
-      expressão.subexpressões.push(subExpressão.id);
-      this.update(subExpressão, 'subexpressãoDe', expressão.id); // Update to reflect the current expression
-    }
-  }
-
-  /**
-   * Exclui uma expressão.
-   * Lança exceção se o Id não pertencer a uma expressão.
-   * Lança exceção se a expressão pertencer a outras expressões.
-   * @param {Id} expressãoId - O Id da expressão a ser removida.
-   * @throws {Error} Se o elemento não for uma expressão ou se a expressão pertencer a outras expressões.
-   */
-  excluirExpressão(expressãoId: Id) {
-    const expressão = this.get(expressãoId);
-    if (!('termos' in expressão))
-      throw new Error(`O elemento ${expressãoId} não é uma expressão`);
-
-    if (expressão.subexpressãoDe.length > 0)
-      throw new Error(
-        `A expressão ${expressãoId} está contidaEm outras expressões`
-      );
-
-    expressão.termos.forEach(nó => this.removerNó(nó, expressãoId));
-
-    delete this.db[expressãoId];
-  }
-
-  /**
-   * Remove uma expressão de um nó.
-   * @param {Id} nóId - O Id do nó.
-   * @param {Id} expressãoId - O Id da expressão a ser removida.
-   * @throws {Error} Se a expressão não pertencer ao nó.
-   */
-  private removerNó(nóId: Id, expressãoId: Id) {
-    const nó = this.get(nóId);
-    const expressão = this.get(expressãoId) as Expressão;
-
-    if (!expressão.termos.includes(nóId)) {
-      throw new Error(`Expressão "${expressãoId}" não contém o nó "${nóId}"`);
-    }
-
-    if ('pertence_a' in nó) {
-      const index = nó.pertence_a.indexOf(expressãoId);
-      if (index === -1) {
-        throw new Error(`Nó "${nóId}" não contém a expressão "${expressãoId}"`);
-      }
-
-      expressão.termos = expressão.termos.filter(id => id !== nóId); // Remove o nó da expressão
-      nó.pertence_a.splice(index, 1); // Remove a expressão do nó
-    }
-
-    // Se não houver mais expressões relacionadas ao nó, remove-o
-    if ('valor' in nó && nó.pertence_a.length === 0) {
-      delete this.db[nóId];
-    }
+    this.update(expressão, 'subexpressões', subExpressão.id);
+    this.update(subExpressão, 'subexpressãoDe', expressão.id);
   }
 
   /**
