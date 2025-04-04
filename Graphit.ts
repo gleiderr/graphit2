@@ -245,35 +245,13 @@ export class Graphit {
    *
    * @param {string[]} contém - Lista de textos que serão relacionados como termos ou expressões ocultas.
    */
-  private relacionarConteúdoMandatório(expressão: Expressão, contém: string[]) {
-    const conjuntoTermos = new Set<Id>();
-    const conjuntoExpressões = new Set<Id>();
-
-    // Identifica os termos e expressões mandatórios
-    contém.forEach(texto => {
-      const termos = this.tokenize(texto).map(token => this.termo(token));
-      if (termos.length === 1) {
-        // Se somente um termo, adiciona-o ao conjunto de termos
-        conjuntoTermos.add(termos[0].id);
-      } else if (termos.length > 1) {
-        // Se mais de um termo, busca ou cria uma expressão e adiciona-a ao conjunto de expressões
-        conjuntoExpressões.add(this.getExpressão(termos.map(t => t.id)).id);
-      }
-    });
-
-    // Define os termos ocultos
-    [...conjuntoTermos]
-      .filter(termo => !expressão.termos.includes(termo))
-      .forEach(oculto => this.update(expressão, 'contém', oculto, 'add'));
-    expressão.contém.forEach(termoId => {
-      const termo = this.get(termoId) as Termo;
-      this.update(termo, 'pertence_a', expressão.id);
-    });
-
-    // Define as expressões ocultas
-    [...conjuntoExpressões]
-      .filter(exprId => !expressão.subexpressões.includes(exprId)) // Filtra subexpressões já existentes
-      .forEach(oculta => this.update(expressão, 'contém', oculta));
+  private relacionarConteúdo(expressão: Expressão, contém: string[]) {
+    contém
+      .map(texto => this.expressão(texto))
+      .forEach(conteúdo => {
+        this.update(expressão, 'contém', conteúdo.id, 'add');
+        this.update(conteúdo, 'contidaEm', expressão.id, 'add');
+      });
   }
 
   // TODO: Renomear expressão() para informação()
@@ -306,7 +284,7 @@ export class Graphit {
 
     const expressão = this.getExpressão(ids);
 
-    this.relacionarConteúdoMandatório(expressão, contém);
+    this.relacionarConteúdo(expressão, contém);
 
     return expressão;
   }

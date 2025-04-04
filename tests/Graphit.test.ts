@@ -1,5 +1,7 @@
 import { Expressão, Graphit, Termo } from '../Graphit';
 
+// TODO: Validar cobertura de testes
+// TODO: Testar com mutations
 describe('Graphit', () => {
   let graphit: Graphit;
 
@@ -85,11 +87,10 @@ describe('Graphit', () => {
     expect(termo.contém[0]).toBe(filhoDeAías.id);
   });
 
-  test('deve lidar com termos ocultos', () => {
-    const { id: id1 } = graphit.expressão('filho de Aías', {
+  test('deve lidar com termos contidos em expressões', () => {
+    const expressão = graphit.expressão('filho de Aías', {
       contém: ['Baasa'],
-    });
-    const expressão = graphit.get(id1) as Expressão;
+    }) as Expressão;
 
     expect(expressão).toBeDefined();
     expect(expressão.termos).toHaveLength(3);
@@ -97,20 +98,24 @@ describe('Graphit', () => {
 
     const Baasa = graphit.get(expressão.contém[0]) as Termo;
 
-    expect(Baasa).toBeDefined();
-    expect(Baasa).toHaveProperty('valor', 'Baasa');
-    expect(Baasa).toHaveProperty('pertence_a');
-    expect(Baasa.pertence_a).toEqual([id1]);
+    expect(Baasa.contidaEm).toHaveLength(1);
+    expect(Baasa.contidaEm[0]).toBe(expressão.id);
   });
 
-  test('deve reconhecer um termo mandatório já presente na expressão', () => {
-    const { id: id1 } = graphit.expressão('Baasa, filho de Aías', {
-      contém: ['Baasa'],
-    });
-    const expressão = graphit.get(id1) as Expressão;
+  test('deve lidar diferenciar termos de uma expressão e seu conteúdo', () => {
+    const itens = ['Abacaxi', 'laranja', 'e outras coisas'];
+    const lista = graphit.expressão(
+      'Escrevi a lista de compras abaixo num papel laranja:',
+      {
+        contém: itens,
+      }
+    );
 
-    expect(expressão).toBeDefined();
-    expect(expressão.contém).toHaveLength(0);
+    const infoItens = itens.map(item => graphit.expressão(item));
+
+    expect(lista).toBeDefined();
+    expect(lista.contém).toHaveLength(3);
+    expect(lista.contém).toEqual(infoItens.map(item => item.id));
   });
 
   test('deve lidar com expressões ocultas', () => {
@@ -132,17 +137,6 @@ describe('Graphit', () => {
         .map(termoId => graphit.get(termoId) as Termo)
         .map(termo => termo.valor)
     ).toEqual(['Ben', '-', 'Hadade']);
-  });
-
-  test('deve reconhecer uma expressão oculta já presente na expressão', () => {
-    const { id: id1 } = graphit.expressão('Ben-Hadade, filho de Tabriom', {
-      contém: ['Ben-Hadade'],
-    });
-
-    const expressão = graphit.get(id1) as Expressão;
-    expect(expressão).toBeDefined();
-    expect(expressão.subexpressões).toHaveLength(1);
-    expect(expressão.contém).toHaveLength(0);
   });
 
   test('deve relacionar as subexpressões já existentes às novas expressões', () => {
