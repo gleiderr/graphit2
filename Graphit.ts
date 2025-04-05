@@ -43,7 +43,7 @@ export type Expressão = {
  * Graphit é um manipulador informações representadas por expressões e termos.
  * Ele facilita a identificação relacionamentos entre informações.
  *
- * As expressões comportam-se como conjuntos de termos ou expressões.
+ * As expressões comportam-se como conjuntos de termos que podem conter subexpressões
  * Os termos comportam-se como elementos desses conjuntos.
  * Expressões e termos são representações de informações.
  */
@@ -207,13 +207,12 @@ export class Graphit {
     return retorno;
   }
 
-  // TODO: Tornar termo() em private
   /**
    * Obtém o ID de um termo existente pelo seu valor ou cria um novo termo.
    * @param {string} texto - Valor do termo a ser buscado ou criado.
    * @returns {Id} Id do termo.
    */
-  termo(texto: string): Termo {
+  private termo(texto: string): Termo {
     if (!texto || !texto.trim()) {
       throw new Error('Texto inválido: não pode ser vazio ou apenas espaços.');
     }
@@ -268,7 +267,7 @@ export class Graphit {
     { contém }: ExpressãoProps = { contém: [] }
   ): Expressão | Termo {
     if (!texto || !texto.trim()) {
-      throw new Error('Não são permitidas expressões vazias');
+      throw new Error('Não são permitidas informações vazias');
     }
 
     // Transforma 'texto' em um conjunto de termos que podem ser uma palavra ou uma pontuação
