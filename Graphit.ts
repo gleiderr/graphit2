@@ -213,9 +213,6 @@ export class Graphit {
    * @returns {Id} Id do termo.
    */
   private termo(texto: string): Termo {
-    if (!texto || !texto.trim()) {
-      throw new Error('Texto inválido: não pode ser vazio ou apenas espaços.');
-    }
     return this.buscarTermo(texto) || this.novoTermo(texto);
   }
 
