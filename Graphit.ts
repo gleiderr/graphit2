@@ -239,22 +239,20 @@ export class Graphit {
     }
   }
 
-  // TODO: Revisar
   /**
-   * Relaciona o conteúdo mandatório a partir de uma lista de textos.
+   * Relaciona o conteúdo a partir de uma lista de textos.
    *
-   * @param {string[]} contém - Lista de textos que serão relacionados como termos ou expressões ocultas.
+   * @param {string[]} contém - Lista de textos que serão relacionados à informação.
    */
-  private relacionarConteúdo(expressão: Expressão, contém: string[]) {
+  private relacionarConteúdo(informação: Expressão | Termo, contém: string[]) {
     contém
-      .map(texto => this.expressão(texto))
+      .map(texto => this.informação(texto))
       .forEach(conteúdo => {
-        this.update(expressão, 'contém', conteúdo.id, 'add');
-        this.update(conteúdo, 'contidaEm', expressão.id, 'add');
+        this.update(informação, 'contém', conteúdo.id, 'add');
+        this.update(conteúdo, 'contidaEm', informação.id, 'add');
       });
   }
 
-  // TODO: Renomear expressão() para informação()
   /**
    * Retorna o Id da expressão cujos nós coincidem com os valores informados.
    * Se não encontrar, cria uma nova expressão ou termo reaproveitando os nós existentes
@@ -265,7 +263,7 @@ export class Graphit {
    *
    * @throws {Error} Se a expressão for vazia.
    */
-  expressão(
+  informação(
     texto: string,
     { contém }: ExpressãoProps = { contém: [] }
   ): Expressão | Termo {
@@ -277,16 +275,18 @@ export class Graphit {
     const termos = this.tokenize(texto);
 
     // Se apenas um termo, retorna o termo correspondente
-    if (termos.length === 1) return this.termo(termos[0]);
+    let informação: Termo | Expressão;
+    if (termos.length === 1) {
+      informação = this.termo(termos[0]);
+    } else {
+      // Busca os termos existentes ou cria novos termos
+      const ids = termos.map(t => this.termo(t).id);
+      informação = this.getExpressão(ids);
+    }
 
-    // Busca os termos existentes ou cria novos termos
-    const ids = termos.map(t => this.termo(t).id);
+    this.relacionarConteúdo(informação, contém);
 
-    const expressão = this.getExpressão(ids);
-
-    this.relacionarConteúdo(expressão, contém);
-
-    return expressão;
+    return informação;
   }
 
   /**
