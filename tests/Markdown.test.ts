@@ -48,7 +48,6 @@ describe('Markdown', () => {
         const termos = expressão.termos.map(
           t => (graphit.get(t) as Termo).valor
         );
-        expect(termos).toHaveLength(5);
         expect(termos).toEqual(['Baasa', ',', 'filho', 'de', 'Aías']);
       });
     });
@@ -62,34 +61,42 @@ describe('Markdown', () => {
     // });
   });
 
-  // describe('Análise múltiplas linhas', () => {
-  //   test('Deve analisar várias linhas', () => {
-  //     const stats = markdown.analisar('# Baasa\n\nBaasa, filho de Aías');
+  describe('Análise múltiplas linhas', () => {
+    test('Deve analisar várias linhas', () => {
+      const informações = markdown.analisar('# Baasa\n\nBaasa, filho de Aías');
 
-  //     expect(stats.termos).toHaveLength(5);
-  //     expect(stats.termosOcultos).toHaveLength(0);
-  //     expect(stats.expressões).toHaveLength(1);
-  //     expect(stats.expressõesOcultas).toHaveLength(0);
-  //   });
+      expect(informações).toHaveLength(1);
 
-  //   test('Deve reconhecer termos ocultos', () => {
-  //     const stats = markdown.analisar('# Baasa\n\nFilho de Aías');
+      const título = informações[0] as Termo;
+      expect(título.valor).toBe('Baasa');
+      expect(título.contém).toHaveLength(1);
+      expect(título.contidaEm).toHaveLength(0);
+      expect(título.pertence_a).toHaveLength(1);
 
-  //     expect(stats.termos).toHaveLength(4);
-  //     expect(stats.termosOcultos).toHaveLength(1);
-  //     expect(stats.expressões).toHaveLength(1);
-  //     expect(stats.expressõesOcultas).toHaveLength(0);
-  //   });
+      const parágrafo = graphit.get(título.contém[0]) as Expressão;
+      const termos = parágrafo.termos.map(t => (graphit.get(t) as Termo).valor);
+      expect(termos).toEqual(['Baasa', ',', 'filho', 'de', 'Aías']);
+      expect(parágrafo.contidaEm).toHaveLength(1);
+    });
 
-  //   test('Deve reconhecer expressões ocultas', () => {
-  //     const stats = markdown.analisar('# Ben-Hadade\n\nFilho de Tabriom');
+    //   test('Deve reconhecer termos ocultos', () => {
+    //     const stats = markdown.analisar('# Baasa\n\nFilho de Aías');
 
-  //     expect(stats.termos).toHaveLength(6);
-  //     expect(stats.termosOcultos).toHaveLength(0);
-  //     expect(stats.expressões).toHaveLength(2);
-  //     expect(stats.expressõesOcultas).toHaveLength(1);
-  //   });
-  // });
+    //     expect(stats.termos).toHaveLength(4);
+    //     expect(stats.termosOcultos).toHaveLength(1);
+    //     expect(stats.expressões).toHaveLength(1);
+    //     expect(stats.expressõesOcultas).toHaveLength(0);
+    //   });
+
+    //   test('Deve reconhecer expressões ocultas', () => {
+    //     const stats = markdown.analisar('# Ben-Hadade\n\nFilho de Tabriom');
+
+    //     expect(stats.termos).toHaveLength(6);
+    //     expect(stats.termosOcultos).toHaveLength(0);
+    //     expect(stats.expressões).toHaveLength(2);
+    //     expect(stats.expressõesOcultas).toHaveLength(1);
+    //   });
+  });
 
   // describe('Reprodução de markdown', () => {
   //   test('Deve reproduzir markdown a partir de um termo', () => {
