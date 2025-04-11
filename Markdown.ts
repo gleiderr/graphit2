@@ -44,13 +44,18 @@ export class Markdown {
 
       if (!linha) return; // Ignora linhas vazias
 
-      const tipo = this.tipoLinha(linha);
-      const nível = this.nivelLinha(linha);
+      const linePattern = /^( *)(#{1,6}\s+|-\s+|\*\s+|\d+\.\s+|>\s+|)(.*)/;
+      const match = linha.match(linePattern);
+      if (!match) throw new Error('Linha inválida');
+
+      const [, identação, marker, conteúdo] = match;
+      const tipo = this.tipoLinha(linha); // TODO: passar marker ao invés de linha
+      const nível = this.nivelLinha(identação, marker);
 
       const newLine: Linha = {
         tipo,
         nível,
-        conteúdo: linha,
+        conteúdo: conteúdo,
         children: [],
       };
 
@@ -94,14 +99,7 @@ export class Markdown {
     }
   }
 
-  private nivelLinha(linha: string) {
-    const linePattern = /^( *)(#{1,6}|-|\*|\d+\.|>)\s+(.*)/;
-    const match = linha.match(linePattern);
-    if (!match) {
-      throw new Error('Linha inválida');
-    }
-    const [, identação, marker] = match;
-
+  private nivelLinha(identação: string, marker: string) {
     if (marker.startsWith('#')) {
       return 0; // Títulos estão sempre no nível 0
     } else if (
