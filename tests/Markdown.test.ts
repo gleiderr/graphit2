@@ -13,19 +13,19 @@ describe('Markdown', () => {
 
   describe('Análise única linha', () => {
     [
-      { tipo: 'parágrafo', valor: 'Baasa' },
-      { tipo: 'título', valor: '# Baasa' },
-      { tipo: 'lista', valor: '- Baasa' },
-      { tipo: 'citação', valor: '> Baasa' },
-      { tipo: 'lista numérica', valor: '1. Baasa' },
-    ].forEach(({ tipo, valor }) => {
+      { tipo: 'parágrafo', texto: 'Baasa' },
+      { tipo: 'título', texto: '# Baasa' },
+      { tipo: 'lista', texto: '- Baasa' },
+      { tipo: 'citação', texto: '> Baasa' },
+      { tipo: 'lista numérica', texto: '1. Baasa' },
+    ].forEach(({ tipo, texto }) => {
       test(`Deve analisar ${tipo} como um termo`, () => {
-        const informações = markdown.analisar(valor);
+        const informações = markdown.analisar(texto);
 
         expect(informações).toHaveLength(1);
 
         const termo = informações[0] as Termo;
-        expect(termo.valor).toBe(valor.replace(/^(#|>|-|\d+\.)?\s*/, ''));
+        expect(termo.valor).toBe(texto.replace(/^(#|>|-|\d+\.)?\s*/, ''));
         expect(termo.contém).toHaveLength(0);
         expect(termo.contidaEm).toHaveLength(0);
         expect(termo.pertence_a).toHaveLength(0);
@@ -33,14 +33,14 @@ describe('Markdown', () => {
     });
 
     [
-      { tipo: 'parágrafo', valor: 'Baasa, filho de Aías' },
-      { tipo: 'título', valor: '# Baasa, filho de Aías' },
-      { tipo: 'lista', valor: '- Baasa, filho de Aías' },
-      { tipo: 'citação', valor: '> Baasa, filho de Aías' },
-      { tipo: 'lista numérica', valor: '1. Baasa, filho de Aías' },
-    ].forEach(({ tipo, valor }) => {
+      { tipo: 'parágrafo', texto: 'Baasa, filho de Aías' },
+      { tipo: 'título', texto: '# Baasa, filho de Aías' },
+      { tipo: 'lista', texto: '- Baasa, filho de Aías' },
+      { tipo: 'citação', texto: '> Baasa, filho de Aías' },
+      { tipo: 'lista numérica', texto: '1. Baasa, filho de Aías' },
+    ].forEach(({ tipo, texto }) => {
       test(`Deve analisar ${tipo} como uma expressão`, () => {
-        const informações = markdown.analisar(valor);
+        const informações = markdown.analisar(texto);
 
         expect(informações).toHaveLength(1);
 
@@ -65,17 +65,17 @@ describe('Markdown', () => {
     [
       {
         tipos: ['título', 'parágrafo'],
-        valor: '# Baasa\n\nBaasa, filho de Aías',
+        texto: '# Baasa\n\nBaasa, filho de Aías',
       },
       {
         tipos: ['parágrafo', 'lista'],
-        valor: 'Baasa\n\n- Baasa, filho de Aías',
+        texto: 'Baasa\n\n- Baasa, filho de Aías',
       },
-    ].forEach(({ tipos, valor }) => {
+    ].forEach(({ tipos, texto }) => {
       const [tipo1, tipo2] = tipos;
 
       test(`Deve analisar ${tipo2} contido em ${tipo1}`, () => {
-        const informações = markdown.analisar(valor);
+        const informações = markdown.analisar(texto);
 
         expect(informações).toHaveLength(1);
 
@@ -100,6 +100,10 @@ describe('Markdown', () => {
       {
         tipos: ['título', 'parágrafo', 'lista'],
         texto: '# Baasa\n\nBaasa, rei de Israel\n- Reinou em Tirza',
+      },
+      {
+        tipos: ['lista', 'lista', 'lista numérica'],
+        texto: '- Baasa\n- Baasa, rei de Israel\n1. Reinou em Tirza',
       },
     ].forEach(({ tipos, texto }) => {
       const [tipo1, tipo2, tipo3] = tipos;
