@@ -95,24 +95,42 @@ describe('Markdown', () => {
     });
   });
 
-  // describe('Análise de três linhas', () => {
-  //   test('Deve analisar parágrafo contido em lista', () => {
-  //     const informações = markdown.analisar('- Baasa\n\n  Filho de Aías');
+  describe('Análise de três linhas', () => {
+    [
+      {
+        tipos: ['título', 'parágrafo', 'lista'],
+        texto: '# Baasa\n\nBaasa, rei de Israel\n- Reinou em Tirza',
+      },
+    ].forEach(({ tipos, texto }) => {
+      const [tipo1, tipo2, tipo3] = tipos;
 
-  //     expect(informações).toHaveLength(1);
+      test(`Deve analisar ${tipo3} contido em ${tipo1} contido em ${tipo2}`, () => {
+        const informações = markdown.analisar(texto);
 
-  //     const lista = informações[0] as Termo;
-  //     expect(lista.valor).toBe('Baasa');
-  //     expect(lista.contém).toHaveLength(1);
-  //     expect(lista.contidaEm).toHaveLength(0);
-  //     expect(lista.pertence_a).toHaveLength(1);
+        expect(informações).toHaveLength(1);
 
-  //     const parágrafo = graphit.get(lista.contém[0]) as Expressão;
-  //     const termos = parágrafo.termos.map(t => (graphit.get(t) as Termo).valor);
-  //     expect(termos).toEqual(['Filho', 'de', 'Aías']);
-  //     expect(parágrafo.contidaEm).toHaveLength(1);
-  //   });
-  // });
+        const título = informações[0] as Termo;
+        expect(título.valor).toBe('Baasa');
+        expect(título.contém).toHaveLength(1);
+        expect(título.contidaEm).toHaveLength(0);
+        expect(título.pertence_a).toHaveLength(1);
+
+        const getTermos = (t: string) => (graphit.get(t) as Termo).valor;
+
+        const parágrafo = graphit.get(título.contém[0]) as Expressão;
+        const termosParágrafo = parágrafo.termos.map(getTermos);
+        expect(termosParágrafo).toEqual(['Baasa', ',', 'rei', 'de', 'Israel']);
+        expect(parágrafo.contém).toHaveLength(1);
+        expect(parágrafo.contidaEm).toEqual([título.id]);
+
+        const lista = graphit.get(parágrafo.contém[0]) as Expressão;
+        const termosLista = lista.termos.map(getTermos);
+        expect(termosLista).toEqual(['Reinou', 'em', 'Tirza']);
+        expect(lista.contém).toHaveLength(0);
+        expect(lista.contidaEm).toHaveLength(1);
+      });
+    });
+  });
 
   // describe('Reprodução de markdown', () => {
   //   test('Deve reproduzir markdown a partir de um termo', () => {
