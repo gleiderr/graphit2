@@ -61,42 +61,58 @@ describe('Markdown', () => {
     // });
   });
 
-  describe('Análise múltiplas linhas', () => {
-    test('Deve analisar várias linhas', () => {
-      const informações = markdown.analisar('# Baasa\n\nBaasa, filho de Aías');
+  describe('Análise de duas linhas', () => {
+    [
+      {
+        tipos: ['título', 'parágrafo'],
+        valor: '# Baasa\n\nBaasa, filho de Aías',
+      },
+      {
+        tipos: ['parágrafo', 'lista'],
+        valor: 'Baasa\n\n- Baasa, filho de Aías',
+      },
+    ].forEach(({ tipos, valor }) => {
+      const [tipo1, tipo2] = tipos;
 
-      expect(informações).toHaveLength(1);
+      test(`Deve analisar ${tipo2} contido em ${tipo1}`, () => {
+        const informações = markdown.analisar(valor);
 
-      const título = informações[0] as Termo;
-      expect(título.valor).toBe('Baasa');
-      expect(título.contém).toHaveLength(1);
-      expect(título.contidaEm).toHaveLength(0);
-      expect(título.pertence_a).toHaveLength(1);
+        expect(informações).toHaveLength(1);
 
-      const parágrafo = graphit.get(título.contém[0]) as Expressão;
-      const termos = parágrafo.termos.map(t => (graphit.get(t) as Termo).valor);
-      expect(termos).toEqual(['Baasa', ',', 'filho', 'de', 'Aías']);
-      expect(parágrafo.contidaEm).toHaveLength(1);
+        const título = informações[0] as Termo;
+        expect(título.valor).toBe('Baasa');
+        expect(título.contém).toHaveLength(1);
+        expect(título.contidaEm).toHaveLength(0);
+        expect(título.pertence_a).toHaveLength(1);
+
+        const parágrafo = graphit.get(título.contém[0]) as Expressão;
+        const termos = parágrafo.termos.map(
+          t => (graphit.get(t) as Termo).valor
+        );
+        expect(termos).toEqual(['Baasa', ',', 'filho', 'de', 'Aías']);
+        expect(parágrafo.contidaEm).toHaveLength(1);
+      });
     });
-
-    //   test('Deve reconhecer termos ocultos', () => {
-    //     const stats = markdown.analisar('# Baasa\n\nFilho de Aías');
-
-    //     expect(stats.termos).toHaveLength(4);
-    //     expect(stats.termosOcultos).toHaveLength(1);
-    //     expect(stats.expressões).toHaveLength(1);
-    //     expect(stats.expressõesOcultas).toHaveLength(0);
-    //   });
-
-    //   test('Deve reconhecer expressões ocultas', () => {
-    //     const stats = markdown.analisar('# Ben-Hadade\n\nFilho de Tabriom');
-
-    //     expect(stats.termos).toHaveLength(6);
-    //     expect(stats.termosOcultos).toHaveLength(0);
-    //     expect(stats.expressões).toHaveLength(2);
-    //     expect(stats.expressõesOcultas).toHaveLength(1);
-    //   });
   });
+
+  // describe('Análise de três linhas', () => {
+  //   test('Deve analisar parágrafo contido em lista', () => {
+  //     const informações = markdown.analisar('- Baasa\n\n  Filho de Aías');
+
+  //     expect(informações).toHaveLength(1);
+
+  //     const lista = informações[0] as Termo;
+  //     expect(lista.valor).toBe('Baasa');
+  //     expect(lista.contém).toHaveLength(1);
+  //     expect(lista.contidaEm).toHaveLength(0);
+  //     expect(lista.pertence_a).toHaveLength(1);
+
+  //     const parágrafo = graphit.get(lista.contém[0]) as Expressão;
+  //     const termos = parágrafo.termos.map(t => (graphit.get(t) as Termo).valor);
+  //     expect(termos).toEqual(['Filho', 'de', 'Aías']);
+  //     expect(parágrafo.contidaEm).toHaveLength(1);
+  //   });
+  // });
 
   // describe('Reprodução de markdown', () => {
   //   test('Deve reproduzir markdown a partir de um termo', () => {
