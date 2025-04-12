@@ -48,16 +48,14 @@ export class Markdown {
       const match = linha.match(linePattern);
       if (!match) throw new Error('Linha inválida');
 
-      const [, identação, marker, conteúdo] = match;
-      const tipo = this.tipoLinha(linha); // TODO: passar marker ao invés de linha
-      const nível = this.nivelLinha(identação, marker);
+      const identação = match[1]; // Espaços em branco no início da linha
+      const marker = match[2].trim(); // Marcador (título, lista, etc.)
+      const conteúdo = match[3];
 
-      const newLine: Linha = {
-        tipo,
-        nível,
-        conteúdo: conteúdo,
-        children: [],
-      };
+      const tipo = this.tipoLinha(marker);
+      const nível = this.nivelLinha(identação, marker); // TODO: passar tipo ao invés de marker
+
+      const newLine: Linha = { tipo, nível, conteúdo, children: [] };
 
       if (nível === 0) {
         stack = [newLine]; // Reinicia a pilha para o novo nível
@@ -81,22 +79,12 @@ export class Markdown {
     return hierarchy;
   }
 
-  private tipoLinha(linha: string) {
-    if (linha.startsWith('#')) {
-      return 'title';
-    } else if (
-      linha.startsWith('-') ||
-      linha.startsWith('*') ||
-      linha.match(/^\d+\./)
-    ) {
-      return 'list';
-    } else if (linha.startsWith('>')) {
-      return 'quote';
-    } else if (linha) {
-      return 'paragraph';
-    } else {
-      return 'empty';
-    }
+  private tipoLinha(marker: string) {
+    if (marker === '#') return 'title';
+    if (marker === '-' || marker === '*') return 'list';
+    if (marker.match(/\d+\./)) return 'list';
+    if (marker === '>') return 'quote';
+    return 'paragraph';
   }
 
   private nivelLinha(identação: string, marker: string) {
