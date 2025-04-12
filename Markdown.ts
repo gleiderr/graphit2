@@ -1,11 +1,13 @@
 import { Graphit } from './Graphit';
 
 type Linha = {
-  tipo: string; // Tipo do nó (título, lista, parágrafo, etc.)
+  tipo: TipoLinha; // Tipo do nó (título, lista, parágrafo, etc.)
   nível: number;
   conteúdo: string;
   children: Linha[];
 };
+
+type TipoLinha = 'title' | 'list' | 'quote' | 'paragraph';
 
 export class Markdown {
   constructor(private graphit: Graphit) {}
@@ -40,7 +42,7 @@ export class Markdown {
     let stack: Linha[] = [];
 
     lines.forEach(line => {
-      const linha = line.trim();
+      const linha = line.trimEnd();
 
       if (!linha) return; // Ignora linhas vazias
 
@@ -53,7 +55,7 @@ export class Markdown {
       const conteúdo = match[3];
 
       const tipo = this.tipoLinha(marker);
-      const nível = this.nivelLinha(identação, marker); // TODO: passar tipo ao invés de marker
+      const nível = this.nivelLinha(identação, tipo);
 
       const newLine: Linha = { tipo, nível, conteúdo, children: [] };
 
@@ -79,7 +81,7 @@ export class Markdown {
     return hierarchy;
   }
 
-  private tipoLinha(marker: string) {
+  private tipoLinha(marker: string): TipoLinha {
     if (marker === '#') return 'title';
     if (marker === '-' || marker === '*') return 'list';
     if (marker.match(/\d+\./)) return 'list';
@@ -87,24 +89,17 @@ export class Markdown {
     return 'paragraph';
   }
 
-  private nivelLinha(identação: string, marker: string) {
-    if (marker.startsWith('#')) {
-      return 0; // Títulos estão sempre no nível 0
-    } else if (
-      marker.startsWith('-') ||
-      marker.startsWith('*') ||
-      marker.match(/^\d+\./)
-    ) {
-      // Listas possuem nível 2 + quantidade de identações
-      // Cada dois espaços representam um nível de identação
-      const qtdIdentacao = identação.length / 2;
-      return 2 + qtdIdentacao;
-    } else if (marker.startsWith('>')) {
-      // Citações possuem nível 1
-      return 1;
-    } else {
-      // Parágrafos possuem nível 1
-      return 1;
-    }
+  private nivelLinha(identação: string, tipo: TipoLinha) {
+    // Títulos estão sempre no nível 0
+    if (tipo === 'title') return 0;
+
+    // Listas possuem nível 2 + quantidade de identações
+    if (tipo === 'list') return 2 + identação.length / 2;
+
+    // Citações possuem nível 1
+    if (tipo === 'quote') return 1;
+
+    // Parágrafos possuem nível 1
+    return 1;
   }
 }

@@ -103,12 +103,12 @@ describe('Markdown', () => {
       },
       {
         tipos: ['lista', 'lista', 'lista numérica'],
-        texto: '- Baasa\n- Baasa, rei de Israel\n1. Reinou em Tirza',
+        texto: '- Baasa\n  - Baasa, rei de Israel\n    1. Reinou em Tirza',
       },
     ].forEach(({ tipos, texto }) => {
       const [tipo1, tipo2, tipo3] = tipos;
 
-      test(`Deve analisar ${tipo3} contido em ${tipo1} contido em ${tipo2}`, () => {
+      test(`Deve analisar ${tipo3} contido em ${tipo2} contido em ${tipo1}`, () => {
         const informações = markdown.analisar(texto);
 
         expect(informações).toHaveLength(1);
