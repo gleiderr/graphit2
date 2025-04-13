@@ -136,6 +136,36 @@ describe('Markdown', () => {
     });
   });
 
+  test('Deve analisar texto com 1 título e 3 parágrafos', () => {
+    const texto =
+      '# Baasa\n\nBaasa, filho de Aías\n\nRei de Israel\n\nReinou em Tirza';
+    const informações = markdown.analisar(texto);
+
+    expect(informações).toHaveLength(1);
+
+    const título = informações[0] as Termo;
+    expect(título.valor).toBe('Baasa');
+    expect(título.contém).toHaveLength(3);
+    expect(título.contidaEm).toHaveLength(0);
+    expect(título.pertence_a).toHaveLength(1);
+
+    const parágrafos = título.contém.map(t => graphit.get(t) as Expressão);
+    const termosParágrafos = parágrafos.map(parágrafo =>
+      parágrafo.termos.map(t => (graphit.get(t) as Termo).valor)
+    );
+
+    expect(termosParágrafos).toEqual([
+      ['Baasa', ',', 'filho', 'de', 'Aías'],
+      ['Rei', 'de', 'Israel'],
+      ['Reinou', 'em', 'Tirza'],
+    ]);
+
+    parágrafos.forEach(parágrafo => {
+      expect(parágrafo.contidaEm).toEqual([título.id]);
+      expect(parágrafo.contém).toHaveLength(0);
+    });
+  });
+
   // describe('Reprodução de markdown', () => {
   //   test('Deve reproduzir markdown a partir de um termo', () => {
   //     const texto = '# Baasa\n\n';
