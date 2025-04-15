@@ -11,7 +11,7 @@ describe('Markdown', () => {
     markdown = new Markdown(graphit);
   });
 
-  describe('Análise única linha', () => {
+  describe('Leitura única linha', () => {
     [
       { tipo: 'parágrafo', texto: 'Baasa' },
       { tipo: 'título', texto: '# Baasa' },
@@ -19,8 +19,8 @@ describe('Markdown', () => {
       { tipo: 'citação', texto: '> Baasa' },
       { tipo: 'lista numérica', texto: '1. Baasa' },
     ].forEach(({ tipo, texto }) => {
-      test(`Deve analisar ${tipo} como um termo`, () => {
-        const informações = markdown.analisar(texto);
+      test(`Deve ler ${tipo} com um termo`, () => {
+        const informações = markdown.ler(texto);
 
         expect(informações).toHaveLength(1);
 
@@ -39,8 +39,8 @@ describe('Markdown', () => {
       { tipo: 'citação', texto: '> Baasa, filho de Aías' },
       { tipo: 'lista numérica', texto: '1. Baasa, filho de Aías' },
     ].forEach(({ tipo, texto }) => {
-      test(`Deve analisar ${tipo} como uma expressão`, () => {
-        const informações = markdown.analisar(texto);
+      test(`Deve ler ${tipo} com uma expressão`, () => {
+        const informações = markdown.ler(texto);
 
         expect(informações).toHaveLength(1);
 
@@ -53,15 +53,15 @@ describe('Markdown', () => {
     });
 
     // TODO:
-    // test.skip('Deve analisar texto com formatação', () => {
-    //   const stats = markdown.analisar('**Baasa** é um personagem importante.');
+    // test.skip('Deve ler texto com formatação', () => {
+    //   const stats = markdown.ler('**Baasa** é um personagem importante.');
 
     //   expect(stats.termos).toHaveLength(5);
     //   expect(stats.termosOcultos).toHaveLength(0);
     // });
   });
 
-  describe('Análise de duas linhas', () => {
+  describe('Leitura de duas linhas', () => {
     [
       {
         tipos: ['título', 'parágrafo'],
@@ -74,8 +74,8 @@ describe('Markdown', () => {
     ].forEach(({ tipos, texto }) => {
       const [tipo1, tipo2] = tipos;
 
-      test(`Deve analisar ${tipo2} contido em ${tipo1}`, () => {
-        const informações = markdown.analisar(texto);
+      test(`Deve ler ${tipo2} contido em ${tipo1}`, () => {
+        const informações = markdown.ler(texto);
 
         expect(informações).toHaveLength(1);
 
@@ -95,7 +95,7 @@ describe('Markdown', () => {
     });
   });
 
-  describe('Análise de três linhas', () => {
+  describe('Leitura de três linhas', () => {
     [
       {
         tipos: ['título', 'parágrafo', 'lista'],
@@ -108,8 +108,8 @@ describe('Markdown', () => {
     ].forEach(({ tipos, texto }) => {
       const [tipo1, tipo2, tipo3] = tipos;
 
-      test(`Deve analisar ${tipo3} contido em ${tipo2} contido em ${tipo1}`, () => {
-        const informações = markdown.analisar(texto);
+      test(`Deve ler ${tipo3} contido em ${tipo2} contido em ${tipo1}`, () => {
+        const informações = markdown.ler(texto);
 
         expect(informações).toHaveLength(1);
 
@@ -136,10 +136,10 @@ describe('Markdown', () => {
     });
   });
 
-  test('Deve analisar texto com 1 título e 3 parágrafos', () => {
+  test('Deve ler texto com 1 título contendo 3 parágrafos', () => {
     const texto =
       '# Baasa\n\nBaasa, filho de Aías\n\nRei de Israel\n\nReinou em Tirza';
-    const informações = markdown.analisar(texto);
+    const informações = markdown.ler(texto);
 
     expect(informações).toHaveLength(1);
 

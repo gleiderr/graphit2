@@ -12,8 +12,12 @@ type TipoLinha = 'title' | 'list' | 'quote' | 'paragraph';
 export class Markdown {
   constructor(private graphit: Graphit) {}
 
-  // Método para converter texto markdown em informações do Graphit
-  public analisar(texto: string) {
+  /**
+   * Lê o texto em formato markdown e retorna as informações processadas.
+   * @param texto Texto em formato markdown a ser lido
+   * @returns Informações processadas do texto markdown
+   */
+  public ler(texto: string) {
     const linhas = this.parse(texto);
     return linhas.map(linha => {
       const informação = this.graphit.informação(linha.conteúdo, {
@@ -25,6 +29,11 @@ export class Markdown {
     });
   }
 
+  /**
+   * Método recursivo para analisar sublinhas e adicionar informações identificadas ao Graphit.
+   *
+   * @param linha Linha a ser analisada
+   */
   private analisarSublinhas(linha: Linha) {
     linha.children.forEach(subLinha => {
       if (subLinha.children.length === 0) return;
@@ -35,8 +44,13 @@ export class Markdown {
     });
   }
 
-  // Método para classificar linhas hierarquicamente a partir de um texto markdown
-  private parse(markdownText: string) {
+  /**
+   * Lê o texto em formato markdown e retorna a classificação hierárquica de cada linha processada.
+   *
+   * @param markdownText Texto em formato markdown a ser analisado
+   * @returns Informações processadas do texto markdown
+   */
+  private parse(markdownText: string): Linha[] {
     const lines = markdownText.split('\n');
     const hierarchy: Linha[] = [];
     let stack: Linha[] = [];
@@ -81,6 +95,12 @@ export class Markdown {
     return hierarchy;
   }
 
+  /**
+   * Determina o tipo da linha com base no marcador.
+   *
+   * @param marker Marcador da linha (título, lista, citação, etc.)
+   * @returns Tipo da linha
+   */
   private tipoLinha(marker: string): TipoLinha {
     if (marker === '#') return 'title';
     if (marker === '-' || marker === '*') return 'list';
@@ -89,6 +109,12 @@ export class Markdown {
     return 'paragraph';
   }
 
+  /**
+   * Determina o nível da linha com base na identação e no tipo.
+   * @param identação Espaços em branco no início da linha
+   * @param tipo Tipo da linha
+   * @returns Nível da linha
+   */
   private nivelLinha(identação: string, tipo: TipoLinha) {
     // Títulos estão sempre no nível 0
     if (tipo === 'title') return 0;
