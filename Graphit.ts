@@ -114,6 +114,14 @@ export class Graphit {
     return { id, ...this.db[id] };
   }
 
+  getValor(informação: Termo | Expressão): string {
+    if ('valor' in informação) return informação.valor;
+
+    return this.detokenize(
+      informação.termos.map(t => this.getValor(this.get(t)))
+    );
+  }
+
   /**
    * Atualiza um campo de uma informação existente.
    * @param informação - A informação a ser atualizada.

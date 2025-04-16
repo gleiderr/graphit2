@@ -1,4 +1,4 @@
-import { Graphit } from './Graphit';
+import { Expressão, Graphit, Termo } from './Graphit';
 
 type Linha = {
   tipo: TipoLinha; // Tipo do nó (título, lista, parágrafo, etc.)
@@ -27,6 +27,45 @@ export class Markdown {
       this.analisarSublinhas(linha);
       return informação;
     });
+  }
+
+  /**
+   * Método para transcriver informações do Graphit para o formato Markdown.
+   * @param informações Informações a serem transcritas para o formato Markdown.
+   */
+  public escrever(informações: (Termo | Expressão)[]) {
+    const linhas: Linha[] = informações.map(i => this.getLinha(i, 0));
+    const texto = linhas.map(linha => this.getTexto(linha)).join('\n\n');
+    return texto;
+  }
+
+  private getLinha(informação: Termo | Expressão, nível: number): Linha {
+    return {
+      tipo: this.determinarTipo(nível),
+      nível,
+      conteúdo: this.graphit.getValor(informação),
+      children: informação.contém.map(subInfo =>
+        this.getLinha(this.graphit.get(subInfo), nível + 1)
+      ),
+    };
+  }
+
+  private determinarTipo(nível: number): TipoLinha {
+    // Determina o tipo da linha com base no nível
+    if (nível === 0) return 'title';
+    if (nível === 1) return 'paragraph';
+    return 'list';
+  }
+
+  private getTexto(linha: Linha): string {
+    if (linha.tipo === 'title') return `# ${linha.conteúdo}`;
+    if (linha.tipo === 'paragraph') return linha.conteúdo;
+    if (linha.tipo === 'list') {
+      const identação = '  '.repeat(linha.nível - 2);
+      return `${identação}- ${linha.conteúdo}`;
+    }
+
+    throw new Error('Tipo de linha não mapeado');
   }
 
   /**
