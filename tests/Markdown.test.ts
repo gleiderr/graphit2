@@ -170,6 +170,35 @@ describe('Markdown', () => {
         );
       });
     });
+
+    test('Deve ler texto com referência circular', () => {
+      const texto = '- Baasa\n  - Filho de Aías\n    - Baasa\n';
+      const informações = markdown.ler(texto);
+
+      expect(informações).toHaveLength(1);
+
+      const baasa = informações[0] as Termo;
+      expect(baasa.valor).toBe('Baasa');
+      expect(baasa.contém).toHaveLength(1);
+      expect(baasa.contidaEm).toHaveLength(1);
+      expect(baasa.pertence_a).toHaveLength(0);
+
+      const filhoDeAias = graphit.get(baasa.contém[0]) as Expressão;
+      const termosFilhoDeAias = filhoDeAias.termos.map(
+        t => (graphit.get(t) as Termo).valor
+      );
+      expect(termosFilhoDeAias).toEqual(['Filho', 'de', 'Aías']);
+      expect(filhoDeAias.contidaEm).toHaveLength(1);
+      expect(filhoDeAias.contém).toHaveLength(1);
+    });
+
+    test('Deve escrever texto com referência circular', () => {
+      const texto = '- Baasa\n  - Filho de Aías\n    - Baasa\n';
+      const informações = markdown.ler(texto);
+      const textoEscrito = markdown.escrever(informações);
+
+      expect(textoEscrito).toBe('# Baasa\n\nFilho de Aías\n');
+    });
   });
 
   describe('Com quatro linhas', () => {

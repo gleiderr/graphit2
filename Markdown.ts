@@ -10,6 +10,9 @@ type Linha = {
 type TipoLinha = 'title' | 'list' | 'quote' | 'paragraph';
 
 export class Markdown {
+  /** Conjunto para armazenar os id das informações visitadas */
+  private visitados = new Set<string>();
+
   constructor(private graphit: Graphit) {}
 
   /**
@@ -34,22 +37,31 @@ export class Markdown {
    * @param informações Informações a serem transcritas para o formato Markdown.
    */
   public escrever(informações: (Termo | Expressão)[]) {
-    const linhas: Linha[] = informações.map(i => this.getLinha(i, 0));
+    this.visitados = new Set(); // Reinicia o conjunto de visitados
+
+    const linhas: Linha[] = informações
+      .map(i => this.getLinha(i, 0))
+      .filter(Boolean) as Linha[]; // Filtra linhas vazias
 
     const texto = linhas.map(linha => this.getTexto(linha)).join('\n');
     return texto;
   }
 
-  private getLinha(informação: Termo | Expressão, nível: number): Linha {
-    //console.log({ nível }); //
+  private getLinha(
+    informação: Termo | Expressão,
+    nível: number
+  ): Linha | undefined {
+    // Verifica se a informação já foi visitada
+    if (this.visitados.has(informação.id)) return;
+    this.visitados.add(informação.id);
 
     return {
       tipo: this.determinarTipo(nível),
       nível,
       conteúdo: this.graphit.getValor(informação),
-      children: informação.contém.map(subInfo =>
-        this.getLinha(this.graphit.get(subInfo), nível + 1)
-      ),
+      children: informação.contém
+        .map(subInfo => this.getLinha(this.graphit.get(subInfo), nível + 1))
+        .filter(Boolean) as Linha[], // Filtra linhas vazias
     };
   }
 
