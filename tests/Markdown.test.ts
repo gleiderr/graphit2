@@ -11,7 +11,7 @@ describe('Markdown', () => {
     markdown = new Markdown(graphit);
   });
 
-  describe('Leitura única linha', () => {
+  describe('Com única linha', () => {
     [
       { tipo: 'parágrafo', texto: 'Baasa' },
       { tipo: 'título', texto: '# Baasa' },
@@ -29,6 +29,14 @@ describe('Markdown', () => {
         expect(termo.contém).toHaveLength(0);
         expect(termo.contidaEm).toHaveLength(0);
         expect(termo.pertence_a).toHaveLength(0);
+      });
+
+      test(`Deve escrever ${tipo} com um termo`, () => {
+        const informações = markdown.ler(texto);
+        const textoEscrito = markdown.escrever(informações);
+
+        const textoEsperado = texto.replace(/^(#|>|-|\d+\.)?\s*/, '');
+        expect(textoEscrito).toBe(`# ${textoEsperado}`);
       });
     });
 
@@ -50,6 +58,14 @@ describe('Markdown', () => {
         );
         expect(termos).toEqual(['Baasa', ',', 'filho', 'de', 'Aías']);
       });
+
+      test(`Deve escrever ${tipo} com uma expressão`, () => {
+        const informações = markdown.ler(texto);
+        const textoEscrito = markdown.escrever(informações);
+
+        const textoEsperado = texto.replace(/^(#|>|-|\d+\.)?\s*/, '');
+        expect(textoEscrito).toBe(`# ${textoEsperado}`);
+      });
     });
 
     // TODO:
@@ -61,7 +77,7 @@ describe('Markdown', () => {
     // });
   });
 
-  describe('Leitura de duas linhas', () => {
+  describe('Com duas linhas', () => {
     [
       {
         tipos: ['título', 'parágrafo'],
@@ -91,6 +107,17 @@ describe('Markdown', () => {
         );
         expect(termos).toEqual(['Baasa', ',', 'filho', 'de', 'Aías']);
         expect(parágrafo.contidaEm).toHaveLength(1);
+      });
+
+      test(`Deve escrever ${tipo2} contido em ${tipo1}`, () => {
+        const informações = markdown.ler(texto);
+        const textoEscrito = markdown.escrever(informações);
+
+        const textoEsperado = texto
+          .split('\n')
+          .map(line => line.replace(/^(#|>|-|\d+\.)?\s*/, ''))
+          .join('\n');
+        expect(textoEscrito).toBe(`# ${textoEsperado}`);
       });
     });
   });

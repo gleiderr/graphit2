@@ -34,7 +34,10 @@ export class Markdown {
    * @param informações Informações a serem transcritas para o formato Markdown.
    */
   public escrever(informações: (Termo | Expressão)[]) {
-    const linhas: Linha[] = informações.map(i => this.getLinha(i, 0));
+    const linhas: Linha[] = informações
+      .map(i => this.getLinha(i, 0))
+      .map(linha => [linha, ...linha.children])
+      .flat();
     const texto = linhas.map(linha => this.getTexto(linha)).join('\n\n');
     return texto;
   }
