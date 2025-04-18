@@ -34,15 +34,15 @@ export class Markdown {
    * @param informações Informações a serem transcritas para o formato Markdown.
    */
   public escrever(informações: (Termo | Expressão)[]) {
-    const linhas: Linha[] = informações
-      .map(i => this.getLinha(i, 0))
-      .map(linha => [linha, ...linha.children])
-      .flat();
-    const texto = linhas.map(linha => this.getTexto(linha)).join('\n\n');
+    const linhas: Linha[] = informações.map(i => this.getLinha(i, 0));
+
+    const texto = linhas.map(linha => this.getTexto(linha)).join('\n');
     return texto;
   }
 
   private getLinha(informação: Termo | Expressão, nível: number): Linha {
+    //console.log({ nível }); //
+
     return {
       tipo: this.determinarTipo(nível),
       nível,
@@ -61,14 +61,35 @@ export class Markdown {
   }
 
   private getTexto(linha: Linha): string {
-    if (linha.tipo === 'title') return `# ${linha.conteúdo}`;
-    if (linha.tipo === 'paragraph') return linha.conteúdo;
-    if (linha.tipo === 'list') {
+    let texto = '';
+
+    if (linha.tipo === 'title') {
+      texto = `# ${linha.conteúdo}\n`;
+    } else if (linha.tipo === 'paragraph') {
+      texto = `${linha.conteúdo}\n`;
+    } else if (linha.tipo === 'list') {
       const identação = '  '.repeat(linha.nível - 2);
-      return `${identação}- ${linha.conteúdo}`;
+      texto = `${identação}- ${linha.conteúdo}\n`;
+    } else if (linha.tipo === 'quote') {
+      texto = `> ${linha.conteúdo}\n`;
+    } else throw new Error('Tipo de linha não mapeado');
+
+    if (linha.children.length === 0) return texto;
+
+    const subTextos = linha.children
+      .map(subLinha => this.getTexto(subLinha))
+      .join('\n');
+
+    if (linha.tipo === 'title') {
+      texto += `\n${subTextos}`;
+    } else if (linha.tipo === 'paragraph') {
+      texto +=
+        linha.children[0].tipo === 'list' ? `${subTextos}` : `\n${subTextos}`;
+    } else {
+      texto += `${subTextos}`;
     }
 
-    throw new Error('Tipo de linha não mapeado');
+    return texto;
   }
 
   /**

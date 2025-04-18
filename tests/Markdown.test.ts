@@ -36,7 +36,7 @@ describe('Markdown', () => {
         const textoEscrito = markdown.escrever(informações);
 
         const textoEsperado = texto.replace(/^(#|>|-|\d+\.)?\s*/, '');
-        expect(textoEscrito).toBe(`# ${textoEsperado}`);
+        expect(textoEscrito).toBe(`# ${textoEsperado}\n`);
       });
     });
 
@@ -64,7 +64,7 @@ describe('Markdown', () => {
         const textoEscrito = markdown.escrever(informações);
 
         const textoEsperado = texto.replace(/^(#|>|-|\d+\.)?\s*/, '');
-        expect(textoEscrito).toBe(`# ${textoEsperado}`);
+        expect(textoEscrito).toBe(`# ${textoEsperado}\n`);
       });
     });
 
@@ -117,12 +117,12 @@ describe('Markdown', () => {
           .split('\n')
           .map(line => line.replace(/^(#|>|-|\d+\.)?\s*/, ''))
           .join('\n');
-        expect(textoEscrito).toBe(`# ${textoEsperado}`);
+        expect(textoEscrito).toBe(`# ${textoEsperado}\n`);
       });
     });
   });
 
-  describe('Leitura de três linhas', () => {
+  describe('Com três linhas', () => {
     [
       {
         tipos: ['título', 'parágrafo', 'lista'],
@@ -160,59 +160,58 @@ describe('Markdown', () => {
         expect(lista.contém).toHaveLength(0);
         expect(lista.contidaEm).toHaveLength(1);
       });
+
+      test(`Deve escrever ${tipo3} contido em ${tipo2} contido em ${tipo1}`, () => {
+        const informações = markdown.ler(texto);
+        const textoEscrito = markdown.escrever(informações);
+
+        expect(textoEscrito).toBe(
+          '# Baasa\n\nBaasa, rei de Israel\n- Reinou em Tirza\n'
+        );
+      });
     });
   });
 
-  test('Deve ler texto com 1 título contendo 3 parágrafos', () => {
-    const texto =
-      '# Baasa\n\nBaasa, filho de Aías\n\nRei de Israel\n\nReinou em Tirza';
-    const informações = markdown.ler(texto);
+  describe('Com quatro linhas', () => {
+    test('Deve ler texto com 1 título contendo 3 parágrafos', () => {
+      const texto =
+        '# Baasa\n\nBaasa, filho de Aías\n\nRei de Israel\n\nReinou em Tirza\n';
+      const informações = markdown.ler(texto);
 
-    expect(informações).toHaveLength(1);
+      expect(informações).toHaveLength(1);
 
-    const título = informações[0] as Termo;
-    expect(título.valor).toBe('Baasa');
-    expect(título.contém).toHaveLength(3);
-    expect(título.contidaEm).toHaveLength(0);
-    expect(título.pertence_a).toHaveLength(1);
+      const título = informações[0] as Termo;
+      expect(título.valor).toBe('Baasa');
+      expect(título.contém).toHaveLength(3);
+      expect(título.contidaEm).toHaveLength(0);
+      expect(título.pertence_a).toHaveLength(1);
 
-    const parágrafos = título.contém.map(t => graphit.get(t) as Expressão);
-    const termosParágrafos = parágrafos.map(parágrafo =>
-      parágrafo.termos.map(t => (graphit.get(t) as Termo).valor)
-    );
+      const parágrafos = título.contém.map(t => graphit.get(t) as Expressão);
+      const termosParágrafos = parágrafos.map(parágrafo =>
+        parágrafo.termos.map(t => (graphit.get(t) as Termo).valor)
+      );
 
-    expect(termosParágrafos).toEqual([
-      ['Baasa', ',', 'filho', 'de', 'Aías'],
-      ['Rei', 'de', 'Israel'],
-      ['Reinou', 'em', 'Tirza'],
-    ]);
+      expect(termosParágrafos).toEqual([
+        ['Baasa', ',', 'filho', 'de', 'Aías'],
+        ['Rei', 'de', 'Israel'],
+        ['Reinou', 'em', 'Tirza'],
+      ]);
 
-    parágrafos.forEach(parágrafo => {
-      expect(parágrafo.contidaEm).toEqual([título.id]);
-      expect(parágrafo.contém).toHaveLength(0);
+      parágrafos.forEach(parágrafo => {
+        expect(parágrafo.contidaEm).toEqual([título.id]);
+        expect(parágrafo.contém).toHaveLength(0);
+      });
+    });
+
+    test('Deve escrever texto com 1 título contendo 3 parágrafos', () => {
+      const texto =
+        '# Baasa\n\nBaasa, filho de Aías\n\nRei de Israel\n\nReinou em Tirza\n';
+      const informações = markdown.ler(texto);
+      const textoEscrito = markdown.escrever(informações);
+
+      expect(textoEscrito).toBe(
+        '# Baasa\n\nBaasa, filho de Aías\n\nRei de Israel\n\nReinou em Tirza\n'
+      );
     });
   });
-
-  // describe('Reprodução de markdown', () => {
-  //   test('Deve reproduzir markdown a partir de um termo', () => {
-  //     const texto = '# Baasa\n\n';
-  //     markdown.analisar(texto);
-
-  //     expect(markdown.toMarkdown('Baasa')).toBe(texto);
-  //   });
-
-  //   test('Deve reproduzir markdown a partir de uma expressão', () => {
-  //     const texto = '# Ben-Hadade\n\n';
-  //     markdown.analisar(texto);
-
-  //     expect(markdown.toMarkdown('Ben-Hadade')).toBe(texto);
-  //   });
-
-  //   test.skip('Deve reproduzir markdown a partir de termo com conteúdo', () => {
-  //     const texto = '# Baasa\n\nRei de Israel';
-  //     markdown.analisar(texto);
-
-  //     expect(markdown.toMarkdown('Baasa')).toBe(texto);
-  //   });
-  // });
 });
