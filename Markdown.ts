@@ -146,24 +146,24 @@ export class Markdown {
       const tipo = this.tipoLinha(marker);
       const nível = this.nivelLinha(identação, tipo);
 
-      const newLine: Linha = { tipo, nível, conteúdo, children: [] };
+      const novaLinha: Linha = { tipo, nível, conteúdo, children: [] };
 
       if (nível === 0) {
-        stack = [newLine]; // Reinicia a pilha para o novo nível
+        stack = [novaLinha]; // Reinicia a pilha para o novo nível
       } else {
         // remove da pilha os nós que não são do nível atual ou superior
         while (stack.length > 0 && stack[stack.length - 1].nível >= nível) {
           stack.pop();
         }
 
-        stack.push(newLine);
+        stack.push(novaLinha);
       }
 
       // Adiciona o novo nó à hierarquia se for o único nó na pilha
       if (stack.length === 1) hierarchy.push(stack[0]);
       else if (stack.length > 1) {
         const parent = stack[stack.length - 2];
-        parent.children.push(newLine); // Adiciona o novo nó como filho do nó pai
+        parent.children.push(novaLinha); // Adiciona o novo nó como filho do nó pai
       }
     });
 
@@ -177,9 +177,8 @@ export class Markdown {
    * @returns Tipo da linha
    */
   private tipoLinha(marker: string): TipoLinha {
-    if (marker === '#') return 'title';
-    if (marker === '-' || marker === '*') return 'list';
-    if (marker.match(/\d+\./)) return 'list';
+    if (marker.match(/#{1,6}/)) return 'title';
+    if (marker.match(/^-|\*|\d+\./)) return 'list';
     if (marker === '>') return 'quote';
     return 'paragraph';
   }

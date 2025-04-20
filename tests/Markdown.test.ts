@@ -242,5 +242,22 @@ describe('Markdown', () => {
         '# Baasa\n\nBaasa, filho de Aías\n\nRei de Israel\n\nReinou em Tirza\n'
       );
     });
+
+    test('Deve ler texto com 2 títulos contendo 1 parágrafo cada', () => {
+      const texto =
+        '# Baasa\n\nBaasa, filho de Aías\n\n## Ben-Hadade\n\nFilho de Tabriom\n';
+      const informações = markdown.ler(texto);
+
+      expect(informações).toHaveLength(2);
+
+      const baasa = informações[0] as Termo;
+      expect(baasa.valor).toBe('Baasa');
+      expect(baasa.contém).toHaveLength(1);
+
+      const benHadade = informações[1] as Expressão;
+      expect(graphit.getValor(benHadade)).toBe('Ben-Hadade');
+      expect(benHadade.contém).toHaveLength(1);
+      expect(benHadade.contidaEm).toHaveLength(0);
+    });
   });
 });
