@@ -7,7 +7,7 @@ type Linha = {
   children: Linha[];
 };
 
-type TipoLinha = 'title' | 'list' | 'quote' | 'paragraph';
+type TipoLinha = 'title' | 'list' | 'paragraph';
 
 export class Markdown {
   /** Conjunto para armazenar os id das informações visitadas */
@@ -82,8 +82,6 @@ export class Markdown {
     } else if (linha.tipo === 'list') {
       const identação = '  '.repeat(linha.nível - 2);
       texto = `${identação}- ${linha.conteúdo}\n`;
-    } else if (linha.tipo === 'quote') {
-      texto = `> ${linha.conteúdo}\n`;
     } else throw new Error('Tipo de linha não mapeado');
 
     if (linha.children.length === 0) return texto;
@@ -135,13 +133,14 @@ export class Markdown {
 
       if (!linha) return; // Ignora linhas vazias
 
-      const linePattern = /^( *)(#{1,6}\s+|-\s+|\*\s+|\d+\.\s+|>\s+|)(.*)/;
+      const linePattern = /^(?:\s*>)?( *)(#{1,6}\s+|-\s+|\*\s+|\d+\.\s+|)(.*)/;
       const match = linha.match(linePattern);
-      if (!match) throw new Error('Linha inválida');
+      if (!match) throw new Error(`Linha inválida "${linha}"`);
 
       const identação = match[1]; // Espaços em branco no início da linha
       const marker = match[2].trim(); // Marcador (título, lista, etc.)
-      const conteúdo = match[3];
+      const conteúdo = match[3].trim(); // Conteúdo da linha
+      if (!conteúdo) return; // Ignora linhas sem conteúdo
 
       const tipo = this.tipoLinha(marker);
       const nível = this.nivelLinha(identação, tipo);
@@ -173,13 +172,12 @@ export class Markdown {
   /**
    * Determina o tipo da linha com base no marcador.
    *
-   * @param marker Marcador da linha (título, lista, citação, etc.)
+   * @param marker Marcador da linha (título, lista, etc.)
    * @returns Tipo da linha
    */
   private tipoLinha(marker: string): TipoLinha {
     if (marker.match(/#{1,6}/)) return 'title';
     if (marker.match(/^-|\*|\d+\./)) return 'list';
-    if (marker === '>') return 'quote';
     return 'paragraph';
   }
 
@@ -196,9 +194,7 @@ export class Markdown {
     // Listas possuem nível 2 + quantidade de identações
     if (tipo === 'list') return 2 + identação.length / 2;
 
-    // Citações possuem nível 1
-    if (tipo === 'quote') return 1;
-
+    // Todo o resto é considerado parágrafo
     // Parágrafos possuem nível 1
     return 1;
   }
