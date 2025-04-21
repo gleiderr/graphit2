@@ -76,12 +76,12 @@ export class Markdown {
     let texto = '';
 
     if (linha.tipo === 'title') {
-      texto = `# ${linha.conteúdo}\n`;
+      texto = `# ${linha.conteúdo}`;
     } else if (linha.tipo === 'paragraph') {
-      texto = `${linha.conteúdo}\n`;
+      texto = `\n${linha.conteúdo}`;
     } else if (linha.tipo === 'list') {
       const identação = '  '.repeat(linha.nível - 2);
-      texto = `${identação}- ${linha.conteúdo}\n`;
+      texto = `${identação}- ${linha.conteúdo}`;
     } else throw new Error('Tipo de linha não mapeado');
 
     if (linha.children.length === 0) return texto;
@@ -90,16 +90,7 @@ export class Markdown {
       .map(subLinha => this.getTexto(subLinha))
       .join('\n');
 
-    if (linha.tipo === 'title') {
-      texto += `\n${subTextos}`;
-    } else if (linha.tipo === 'paragraph') {
-      texto +=
-        linha.children[0].tipo === 'list' ? `${subTextos}` : `\n${subTextos}`;
-    } else {
-      texto += `${subTextos}`;
-    }
-
-    return texto;
+    return `${texto}\n${subTextos}`;
   }
 
   /**
