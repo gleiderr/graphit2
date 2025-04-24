@@ -9,6 +9,12 @@ type Linha = {
 
 type TipoLinha = 'title' | 'list' | 'paragraph';
 
+const esquemaPadrão = {
+  descendentes: (informação: Termo | Expressão) => {
+    return informação.contém;
+  },
+};
+
 export class Markdown {
   /** Conjunto para armazenar os id das informações visitadas */
   private visitados = new Set<string>();
@@ -36,32 +42,34 @@ export class Markdown {
    * Método para transcriver informações do Graphit para o formato Markdown.
    * @param informações Informações a serem transcritas para o formato Markdown.
    */
-  public escrever(informações: (Termo | Expressão)[]) {
+  public escrever(informações: (Termo | Expressão)[], esquema = esquemaPadrão) {
     this.visitados = new Set(); // Reinicia o conjunto de visitados
 
-    const linhas: Linha[] = informações
-      .map(i => this.getLinha(i, 0))
-      .filter(Boolean) as Linha[]; // Filtra linhas vazias
-
-    const texto = linhas.map(linha => this.getTexto(linha)).join('\n');
-    return texto;
+    const texto = informações
+      .map(i => this.getLinha(i, 0, esquema))
+      .map(linha => this.getTexto(linha))
+      .join('\n');
+    return `${texto}\n`;
   }
 
   private getLinha(
     informação: Termo | Expressão,
-    nível: number
-  ): Linha | undefined {
-    // Verifica se a informação já foi visitada
-    if (this.visitados.has(informação.id)) return;
-    this.visitados.add(informação.id);
+    nível: number,
+    esquema = esquemaPadrão
+  ): Linha {
+    this.visitados.add(informação.id); // Marca a informação como visitada
+
+    const children = esquema
+      .descendentes(informação)
+      .filter(id => !this.visitados.has(id)) // Filtra informações não visitadas
+      .map(i => this.graphit.get(i))
+      .map(i => this.getLinha(i, nível + 1, esquema)); // Chama recursivamente para cada descendente
 
     return {
       tipo: this.determinarTipo(nível),
       nível,
       conteúdo: this.graphit.getValor(informação),
-      children: informação.contém
-        .map(subInfo => this.getLinha(this.graphit.get(subInfo), nível + 1))
-        .filter(Boolean) as Linha[], // Filtra linhas vazias
+      children,
     };
   }
 
