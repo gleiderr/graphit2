@@ -2,17 +2,31 @@ import { readFileSync, writeFileSync } from 'fs';
 import { Graphit } from './Graphit';
 import { Markdown } from './Markdown';
 
-// TODO: Diferenciar "Deus" de "deus".
-// TODO: Extrair dados direto da Bíblia.
+// TODO: Tratar diferença entre "Deus" de "deus" e permitir registro de termo como mais de um valor válido
+// TODO: - Ideia 1: Incluir no preambulo do arquivo markdown os termos com mais de um valor válido.
+// TODO: - Ideia 2: Criar objeto do tipo Esquema que permita informar termos com mais de um valor válido.
+// TODO: - Ideia 3: Registrar esses termos no banco de dados.
+// TODO: - Ideia 4: Criar apenas termos virtuais que não são registrados no banco de dados.
+// TODO: - Ideia 5: Criar conceito de super termo com mais de um valor válido.
+// TODO: - Ideia 6: Criar conceito termo imutável.
 
-console.log('Iniciando.............................................' + agora());
+// TODO: Testar fluxo ler(Baasa2), ler(Bíblia), escrever(Baasa2).
+
+// TODO: Reescrever todos os textos escritos anteriormente
+
+// TODO: Implementar escrita dos textos que contém o termo alvo.
+
+const início = getAgora();
+console.log('Iniciando...................................' + início.formatado);
 // Abre arquivo JSON de estatísticas
 const estatisticas = JSON.parse(readFileSync('./estatisticas.json', 'utf-8'));
-const dadosAgora = estatisticas[hora()] || (estatisticas[hora()] = {});
+const horaAtual = hora();
+const dadosAgora = estatisticas[horaAtual] || (estatisticas[horaAtual] = {});
 
 const graphit = new Graphit();
 const markdown = new Markdown(graphit);
-markdown.ler(readFileSync('./estudos/foco/Baasa.md', 'utf-8'));
+markdown.ler(readFileSync('./estudos/foco/Baasa2.md', 'utf-8'));
+markdown.ler(readFileSync('./estudos/Bíblia.md', 'utf-8'));
 
 writeFileSync(
   './estudos/foco/Baasa2.md',
@@ -21,29 +35,34 @@ writeFileSync(
 );
 
 // Salva estatísticas em arquivo JSON.
+dadosAgora.duração = (Date.now() - início.time) / 1000; // Duração em segundos como número
 dadosAgora.termos = 0;
 dadosAgora.expressões = 0;
 dadosAgora.observações =
-  'Dados extraídos do arquivo Baasa.md criado antes desta nova implementação.';
+  'Testa fluxo ler(Baasa2), ler(Bíblia), escrever(Baasa2) e move texto do código da bíblia para Bíblia.md';
 graphit.índices.forEach(indice => {
   const informação = graphit.get(indice);
   if ('termos' in informação) dadosAgora.expressões++;
   else dadosAgora.termos++;
 });
 
-console.log(estatisticas);
+console.log(estatisticas[horaAtual]);
 const estatisticasString = JSON.stringify(estatisticas, null, 2);
 writeFileSync('./estatisticas.json', estatisticasString, 'utf-8');
-console.log('Finalizando...........................................' + agora());
+console.log('Finalizando..............................' + getAgora().formatado);
 
 function hora() {
-  const data = agora();
-  return data.substring(0, 14) + ':00';
+  const data = getAgora();
+  return data.formatado.substring(0, 14) + ':00';
 }
 
-function agora() {
+function getAgora() {
+  const dataHoraAtual = new Date();
   // Formato DD/MM/YYYY HH:mm
-  return new Date().toLocaleString('pt-BR', {
-    timeZone: 'America/Sao_Paulo',
-  });
+  return {
+    formatado: dataHoraAtual.toLocaleString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+    }),
+    time: dataHoraAtual.getTime(),
+  };
 }

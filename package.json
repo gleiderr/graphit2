@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon -q index.ts",
+    "graphit": "ts-node index.ts",
     "cli": "ts-node cli.ts",
     "test": "jest",
     "test:watch": "jest --watch",
