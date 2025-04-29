@@ -67,9 +67,15 @@
     "observações": "Testa fluxo ler(Baasa2), ler(Bíblia), escrever(Baasa2) e move texto do código da bíblia para Bíblia.md"
   },
   "25/04/2025, 22:00": {
-    "duração": "7.243s",
+    "duração": 3.913,
     "termos": 530,
     "expressões": 153,
-    "observações": "Testa fluxo ler(Baasa2), ler(Bíblia), escrever(Baasa2) e move texto do código da bíblia para Bíblia.md"
+    "observações": "Escreve versículos relacionados a Baasa"
+  },
+  "26/04/2025, 06:00": {
+    "duração": 6.451,
+    "termos": 530,
+    "expressões": 153,
+    "observações": "Escreve versículos relacionados a Baasa"
   }
 }

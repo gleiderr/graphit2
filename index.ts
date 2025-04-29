@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { Graphit } from './Graphit';
+import { Graphit, Termo } from './Graphit';
 import { Markdown } from './Markdown';
 
 // TODO: Tratar diferença entre "Deus" de "deus" e permitir registro de termo como mais de um valor válido
@@ -28,9 +28,14 @@ const markdown = new Markdown(graphit);
 markdown.ler(readFileSync('./estudos/foco/Baasa2.md', 'utf-8'));
 markdown.ler(readFileSync('./estudos/Bíblia.md', 'utf-8'));
 
+const termoBaasa = graphit.informação('Baasa') as Termo;
 writeFileSync(
-  './estudos/foco/Baasa2.md',
-  markdown.escrever([graphit.informação('Baasa')]),
+  './estudos/foco/Baasa3.md',
+  [
+    markdown.escrever([termoBaasa]),
+    '## Referências a Baasa\n',
+    markdown.escrever(termoBaasa.pertence_a.map(e => graphit.get(e))),
+  ].join('\n'),
   'utf-8'
 );
 
@@ -38,8 +43,7 @@ writeFileSync(
 dadosAgora.duração = (Date.now() - início.time) / 1000; // Duração em segundos como número
 dadosAgora.termos = 0;
 dadosAgora.expressões = 0;
-dadosAgora.observações =
-  'Testa fluxo ler(Baasa2), ler(Bíblia), escrever(Baasa2) e move texto do código da bíblia para Bíblia.md';
+dadosAgora.observações = 'Escreve versículos relacionados a Baasa';
 graphit.índices.forEach(indice => {
   const informação = graphit.get(indice);
   if ('termos' in informação) dadosAgora.expressões++;
