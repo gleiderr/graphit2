@@ -10,6 +10,7 @@ type Linha = {
 type TipoLinha = 'title' | 'list' | 'paragraph';
 
 const esquemaPadrão = {
+  resetVisitados: false, // Reinicia os visitados a cada chamada
   descendentes: (informação: Termo | Expressão) => {
     return informação.contém;
   },
@@ -43,7 +44,9 @@ export class Markdown {
    * @param informações Informações a serem transcritas para o formato Markdown.
    */
   public escrever(informações: (Termo | Expressão)[], esquema = esquemaPadrão) {
-    this.visitados = new Set(); // Reinicia o conjunto de visitados
+    if (esquema.resetVisitados) {
+      this.visitados = new Set(); // Reinicia o conjunto de visitados
+    }
 
     const texto = informações
       .map(i => this.getLinha(i, 0, esquema))
