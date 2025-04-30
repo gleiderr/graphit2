@@ -29,12 +29,14 @@ markdown.ler(readFileSync('./estudos/foco/Baasa2.md', 'utf-8'));
 markdown.ler(readFileSync('./estudos/Bíblia.md', 'utf-8'));
 
 const termoBaasa = graphit.informação('Baasa') as Termo;
+const baasaPertence_a = termoBaasa.pertence_a.map(e => graphit.get(e));
 writeFileSync(
-  './estudos/foco/Baasa3.md',
+  './estudos/foco/Baasa2.md',
   [
     markdown.escrever([termoBaasa]),
-    '## Referências a Baasa\n',
-    markdown.escrever(termoBaasa.pertence_a.map(e => graphit.get(e))),
+    '<!-- Referências a Baasa\n',
+    markdown.escrever(baasaPertence_a),
+    '-->',
   ].join('\n'),
   'utf-8'
 );
@@ -43,7 +45,8 @@ writeFileSync(
 dadosAgora.duração = (Date.now() - início.time) / 1000; // Duração em segundos como número
 dadosAgora.termos = 0;
 dadosAgora.expressões = 0;
-dadosAgora.observações = 'Escreve versículos relacionados a Baasa';
+dadosAgora.observações =
+  'Escreve versículos relacionados a Baasa comentados em Baasa2.md';
 graphit.índices.forEach(indice => {
   const informação = graphit.get(indice);
   if ('termos' in informação) dadosAgora.expressões++;

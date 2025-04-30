@@ -126,6 +126,10 @@ export class Markdown {
    * @returns Informações processadas do texto markdown
    */
   private parse(markdownText: string): Linha[] {
+    // Remove do texto markdown trechos comentados
+    const regexComentario = /<!--[\s\S]*?-->/g;
+    markdownText = markdownText.replace(regexComentario, '');
+
     const lines = markdownText.split('\n');
     const hierarchy: Linha[] = [];
     let stack: Linha[] = [];
