@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { Graphit, Termo } from './Graphit';
-import { Markdown } from './Markdown';
+import { esquemaPadrão, Markdown } from './Markdown';
 
 // TODO: Tratar diferença entre "Deus" de "deus" e permitir registro de termo como mais de um valor válido
 // TODO: - Ideia 1: Incluir no preambulo do arquivo markdown os termos com mais de um valor válido.
@@ -34,8 +34,8 @@ writeFileSync(
   './estudos/foco/Baasa2.md',
   [
     markdown.escrever([termoBaasa]),
-    '<!-- Referências a Baasa\n',
-    markdown.escrever(baasaPertence_a),
+    '<!-- Outros textos a que Baasa pertence\n',
+    markdown.escrever(baasaPertence_a, { ...esquemaPadrão, nívelInicial: 2 }),
     '-->',
   ].join('\n'),
   'utf-8'
