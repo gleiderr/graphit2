@@ -9,8 +9,9 @@ type Linha = {
 
 type TipoLinha = 'title' | 'list' | 'paragraph';
 
-const esquemaPadrão = {
+export const esquemaPadrão = {
   resetVisitados: false, // Reinicia os visitados a cada chamada
+  nívelInicial: 0, // Nível inicial para a escrita
   descendentes: (informação: Termo | Expressão) => {
     return informação.contém;
   },
@@ -49,7 +50,7 @@ export class Markdown {
     }
 
     const texto = informações
-      .map(i => this.getLinha(i, 0, esquema))
+      .map(i => this.getLinha(i, esquema.nívelInicial, esquema))
       .map(linha => this.getTexto(linha))
       .join('\n');
     return `${texto}\n`;
@@ -58,7 +59,7 @@ export class Markdown {
   private getLinha(
     informação: Termo | Expressão,
     nível: number,
-    esquema = esquemaPadrão
+    esquema: typeof esquemaPadrão
   ): Linha {
     this.visitados.add(informação.id); // Marca a informação como visitada
 
