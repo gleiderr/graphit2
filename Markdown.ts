@@ -1,4 +1,4 @@
-import { Expressão, Graphit, Termo } from './Graphit';
+import { Expressão, Graphit, Id, Termo } from './Graphit';
 
 type Linha = {
   tipo: TipoLinha; // Tipo do nó (título, lista, parágrafo, etc.)
@@ -9,11 +9,39 @@ type Linha = {
 
 type TipoLinha = 'title' | 'list' | 'paragraph';
 
-export const esquemaPadrão = {
+export type Esquema = {
+  /** Reinicia os visitados a cada chamada */
+  resetVisitados: boolean;
+
+  /** Nível inicial para a escrita */
+  nívelInicial: number;
+
+  /**
+   * Obtém os descendentes de uma informação
+   * @param informação Informação a ser analisada
+   * @returns {Id[]} Lista de IDs dos descendentes
+   */
+  descendentes: (informação: Termo | Expressão) => Id[];
+
+  /**
+   * Obtém o valor da informação
+   * @param graphit Instância do Graphit
+   * @param informação Informação a ser analisada
+   * @returns Valor da informação como string
+   */
+  getValor: (graphit: Graphit, informação: Termo | Expressão) => string;
+};
+
+export const esquemaPadrão: Esquema = {
   resetVisitados: false, // Reinicia os visitados a cada chamada
   nívelInicial: 0, // Nível inicial para a escrita
-  descendentes: (informação: Termo | Expressão) => {
+
+  descendentes(informação: Termo | Expressão) {
     return informação.contém;
+  },
+
+  getValor(graphit: Graphit, informação: Termo | Expressão): string {
+    return graphit.getValor(informação);
   },
 };
 
@@ -59,7 +87,7 @@ export class Markdown {
   private getLinha(
     informação: Termo | Expressão,
     nível: number,
-    esquema: typeof esquemaPadrão
+    esquema: Esquema
   ): Linha {
     this.visitados.add(informação.id); // Marca a informação como visitada
 
@@ -72,7 +100,7 @@ export class Markdown {
     return {
       tipo: this.determinarTipo(nível),
       nível,
-      conteúdo: this.graphit.getValor(informação),
+      conteúdo: esquema.getValor(this.graphit, informação),
       children,
     };
   }
