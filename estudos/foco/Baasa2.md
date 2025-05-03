@@ -104,32 +104,6 @@ O rei Asa cavou uma cisterna para defender-se de Baasa. (Jr 41.9)
 
 <!-- Outros textos a que Baasa pertence
 
-- Houve guerra entre Asa e Baasa durante todo o reinado deles (1 Rs 15.16, 1 Rs 15.32)
-- Asa ajuntou prata e ouro e os enviou a Ben-Hadade com uma mensagem que dizia "Façamos um tratado." Agora, rompe o tratado que tens com Baasa para que ele saia de Judá. " (1 Rs 15.19, 2 Cr.16.3)
-- Asa reuniu todos homens de Judá-ninguém foi isentado e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando (1 Rs 15.22)
-- Asa fortificou Geba e Mispá com as pedras e a madeira que Baasa estivera usando (1 Rs 15.22)
-- Quando Aías ouviu o som dos passos da mulher de Jeroboão junto da porta, ele disse: "O Senhor levantará para si um rei sobre Israel (Baasa) que eliminará a família de Jeroboão." (1 Rs 14.14)
-- Então a palavra do Senhor contra Baasa veio a Jeú: (1 Rs 16.1)
-- Elá, filho de Baasa (1 Rs 16.8, 1 Rs 16.6, 1 Rs 16.13)
-- Os demais acontecimentos do reinado de Baasa, o que fez e as suas realizações, estão escritos nos registros históricos dos reis de Israel. (1 Rs 16.5)
-- Elá foi sucessor de Baasa (1 Rs 16.6)
-- A palavra do Senhor veio por meio do profeta Jeú a Baasa e sua família (1 Rs 16.7)
-- Zinri eliminou toda a família de Baasa (1 Rs 16.11)
-- Assim Zinri eliminou toda a família de Baasa (1 Rs 16.12, 1 Rs 16.13)
-- Elias respondeu \[a Acabe]: "Farei à sua família o que fiz à de Jeroboão e à de Baasa, pois você provocou a minha ira e fez Israel pecar." (1 Rs 21.22)
-- Asa reuniu todos os homens de Judá, e eles retiraram de Ramá as pedras e a madeira que Baasa estivera usando (2 Cr.16.6)
-- O jovem profeta declarou a Jeú: "Assim diz o Senhor:" "Tratarei a família de Acabe como tratei a de Baasa" (2 Rs 9.9)
-- O rei Asa cavou uma cisterna para defender-se de Baasa. (Jr 41.9)
-- "O Senhor levantou Baasa do pó e o tornou líder de Israel" (1 Rs 16.2)
-- "Baasa andou nos caminhos de Jeroboão" (1 Rs 16.2)
-- "Baasa fez Israel pecar" (1 Rs 16.2)
-- "Baasa fez Israel provocar a ira do Senhor por causa dos pecados deles" (1 Rs 16.2)
-- "Por isso estou na iminência de destruir Baasa e a sua família, fazendo a ela o que fiz à de Jeroboão" (1 Rs 16.3)
-- "Cães comerão os da família de Baasa que morrerem na cidade" (1 Rs 16.4)
-- Porque Baasa destruiu a família de Jeroboão (1 Rs 16.7)
-- Não poupou uma só pessoa do sexo masculino, fosse parente ou amigo de Baasa (1 Rs 16.11)
-- De acordo com a palavra do Senhor falada contra Baasa pelo profeta Jeú (1 Rs 16.12)
-- Por causa de todos os pecados que Baasa e Elá haviam cometido e levado Israel a cometer (1 Rs 16.13)
 - Houve guerra entre Asa e Baasa, rei de Israel, durante todo o reinado deles.
 - Baasa, rei de Israel, atacou Judá e fortificou Ramá para que ninguém pudesse entrar no território de Asa, rei de Judá, nem sair de lá.
 - com uma mensagem que dizia: "Façamos um tratado, como fizeram meu pai e o teu. Estou te enviando como presente prata e ouro. Agora, rompe o tratado que tens com Baasa, rei de Israel, para que ele saia do meu país".

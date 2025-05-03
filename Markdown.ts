@@ -47,7 +47,7 @@ export const esquemaPadrão: Esquema = {
 
 export class Markdown {
   /** Conjunto para armazenar os id das informações visitadas */
-  private visitados = new Set<string>();
+  public visitados = new Set<string>(); // TODO: Tornar visitados em propriedade do esquema
 
   constructor(private graphit: Graphit) {}
 
