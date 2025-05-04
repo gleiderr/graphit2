@@ -17,47 +17,44 @@ import { esquemaPadrão, Markdown } from './Markdown';
 
 // TODO: Implementar escrita dos textos que contém o termo alvo.
 
-executarComEstatísticas(
-  'Escreve em Baasa2.md, dentro de comentário, referências a cada linha',
-  () => {
-    const graphit = new Graphit();
-    const markdown = new Markdown(graphit);
-    markdown.ler(readFileSync('./estudos/foco/Baasa2.md', 'utf-8'));
-    markdown.ler(readFileSync('./estudos/Bíblia.md', 'utf-8'));
+executarComEstatísticas('Obtém versículos para cada linha escrita', () => {
+  const graphit = new Graphit();
+  const markdown = new Markdown(graphit);
+  markdown.ler(readFileSync('./estudos/foco/Baasa2.md', 'utf-8'));
+  markdown.ler(readFileSync('./estudos/Bíblia.md', 'utf-8'));
 
-    const termoBaasa = graphit.informação('Baasa') as Termo;
-    const baasa = markdown.escrever([termoBaasa], esquemaBíblia);
+  const termoBaasa = graphit.informação('Baasa') as Termo;
+  const baasa = markdown.escrever([termoBaasa], esquemaBíblia);
 
-    const baasaPertence_a = termoBaasa.pertence_a
-      .filter(i => !markdown.escritos.has(i))
-      .map(i => graphit.get(i));
-    const pertencimento = markdown.escrever(baasaPertence_a, {
-      ...esquemaPadrão,
-      nívelInicial: 2,
-    });
+  const baasaPertence_a = termoBaasa.pertence_a
+    .filter(i => !markdown.escritos.has(i))
+    .map(i => graphit.get(i));
+  const pertencimento = markdown.escrever(baasaPertence_a, {
+    ...esquemaPadrão,
+    nívelInicial: 2,
+  });
 
-    writeFileSync(
-      './estudos/foco/Baasa2.md',
-      [
-        baasa,
-        '<!-- Outros textos a que Baasa pertence\n',
-        pertencimento,
-        '-->',
-      ].join('\n'),
-      'utf-8'
-    );
+  writeFileSync(
+    './estudos/foco/Baasa2.md',
+    [
+      baasa,
+      '<!-- Outros textos a que Baasa pertence\n',
+      pertencimento,
+      '-->',
+    ].join('\n'),
+    'utf-8'
+  );
 
-    let termos = 0;
-    let expressões = 0;
-    graphit.índices.forEach(indice => {
-      const informação = graphit.get(indice);
-      if ('termos' in informação) expressões++;
-      else termos++;
-    });
+  let termos = 0;
+  let expressões = 0;
+  graphit.índices.forEach(indice => {
+    const informação = graphit.get(indice);
+    if ('termos' in informação) expressões++;
+    else termos++;
+  });
 
-    return { termos, expressões };
-  }
-);
+  return { termos, expressões };
+});
 
 function executarComEstatísticas(
   observações: string,
