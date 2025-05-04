@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
+import { esquemaBíblia } from './Biblia';
 import { Graphit, Termo } from './Graphit';
 import { esquemaPadrão, Markdown } from './Markdown';
 
@@ -17,7 +18,7 @@ import { esquemaPadrão, Markdown } from './Markdown';
 // TODO: Implementar escrita dos textos que contém o termo alvo.
 
 executarComEstatísticas(
-  'Escreve em Baasa2.md, dentro de comentário, textos relacionados a Baasa filtrando os já visitados.',
+  'Escreve em Baasa2.md, dentro de comentário, referências a cada linha',
   () => {
     const graphit = new Graphit();
     const markdown = new Markdown(graphit);
@@ -25,10 +26,10 @@ executarComEstatísticas(
     markdown.ler(readFileSync('./estudos/Bíblia.md', 'utf-8'));
 
     const termoBaasa = graphit.informação('Baasa') as Termo;
-    const baasa = markdown.escrever([termoBaasa]);
+    const baasa = markdown.escrever([termoBaasa], esquemaBíblia);
 
     const baasaPertence_a = termoBaasa.pertence_a
-      .filter(i => !markdown.visitados.has(i))
+      .filter(i => !markdown.escritos.has(i))
       .map(i => graphit.get(i));
     const pertencimento = markdown.escrever(baasaPertence_a, {
       ...esquemaPadrão,
