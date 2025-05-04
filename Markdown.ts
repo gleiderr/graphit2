@@ -29,7 +29,7 @@ export type Esquema = {
    * @param informação Informação a ser analisada
    * @returns Valor da informação como string
    */
-  getValor: (graphit: Graphit, informação: Termo | Expressão) => string;
+  getValor: (markdown: Markdown, informação: Termo | Expressão) => string;
 };
 
 export const esquemaPadrão: Esquema = {
@@ -40,16 +40,16 @@ export const esquemaPadrão: Esquema = {
     return informação.contém;
   },
 
-  getValor(graphit: Graphit, informação: Termo | Expressão): string {
-    return graphit.getValor(informação);
+  getValor(markdown: Markdown, informação: Termo | Expressão): string {
+    return markdown.graphit.getValor(informação);
   },
 };
 
 export class Markdown {
   /** Conjunto para armazenar os id das informações visitadas */
-  public visitados = new Set<string>(); // TODO: Tornar visitados em propriedade do esquema
+  public escritos = new Set<string>(); // TODO: Tornar visitados em propriedade do esquema
 
-  constructor(private graphit: Graphit) {}
+  constructor(public graphit: Graphit) {}
 
   /**
    * Lê o texto em formato markdown e retorna as informações processadas.
@@ -74,7 +74,7 @@ export class Markdown {
    */
   public escrever(informações: (Termo | Expressão)[], esquema = esquemaPadrão) {
     if (esquema.resetVisitados) {
-      this.visitados = new Set(); // Reinicia o conjunto de visitados
+      this.escritos = new Set(); // Reinicia o conjunto de visitados
     }
 
     const texto = informações
@@ -89,19 +89,16 @@ export class Markdown {
     nível: number,
     esquema: Esquema
   ): Linha {
-    this.visitados.add(informação.id); // Marca a informação como visitada
-
-    const children = esquema
-      .descendentes(informação)
-      .filter(id => !this.visitados.has(id)) // Filtra informações não visitadas
-      .map(i => this.graphit.get(i))
-      .map(i => this.getLinha(i, nível + 1, esquema)); // Chama recursivamente para cada descendente
-
+    this.escritos.add(informação.id); // Marca a informação como visitada
     return {
       tipo: this.determinarTipo(nível),
       nível,
-      conteúdo: esquema.getValor(this.graphit, informação),
-      children,
+      conteúdo: esquema.getValor(this, informação),
+      children: esquema
+        .descendentes(informação)
+        .filter(id => !this.escritos.has(id)) // Filtra informações não escritas
+        .map(i => this.graphit.get(i))
+        .map(i => this.getLinha(i, nível + 1, esquema)), // Chama recursivamente para cada descendente
     };
   }
 
