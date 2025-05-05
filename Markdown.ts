@@ -89,8 +89,8 @@ export class Markdown {
     nível: number,
     esquema: Esquema
   ): Linha {
-    this.escritos.add(informação.id); // Marca a informação como visitada
-    return {
+    this.escritos.add(informação.id); // Marca a informação como escrita
+    const linha = {
       tipo: this.determinarTipo(nível),
       nível,
       conteúdo: esquema.getValor(this, informação),
@@ -100,6 +100,10 @@ export class Markdown {
         .map(i => this.graphit.get(i))
         .map(i => this.getLinha(i, nível + 1, esquema)), // Chama recursivamente para cada descendente
     };
+    // Marca as subexpressões como escritas
+    //this.getSubexpressões(informação.id).forEach(e => this.escritos.add(e));
+
+    return linha;
   }
 
   private determinarTipo(nível: number): TipoLinha {

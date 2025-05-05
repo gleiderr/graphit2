@@ -12,7 +12,10 @@ export const esquemaBíblia: Esquema = {
   getValor(markdown, informação) {
     const valor = markdown.graphit.getValor(informação);
 
-    const refIds = getReferências(markdown, informação);
+    const informaçãoSemRef = markdown.graphit.informação(
+      valor.replace(/\(.*?\)$/, '') // remove o texto entre parênteses no final de cada linha
+    );
+    const refIds = getReferências(markdown, informaçãoSemRef);
     if (refIds.length > 0) {
       const referências = refIds
         .map(i => markdown.graphit.get(i))
