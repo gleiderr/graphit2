@@ -9,11 +9,11 @@ describe('Tokenizer', () => {
 
   describe('tokenize', () => {
     test('deve tokenizar uma frase simples', () => {
-      expect(tokenizer.tokenize('Olá mundo')).toEqual(['Olá', 'mundo']);
+      expect(tokenizer.tokenize('Olá mundo')).toEqual(['olá', 'mundo']);
     });
 
     test('deve tokenizar texto com pontuação', () => {
-      const expected = ['Olá', ',', 'mundo', '!'];
+      const expected = ['olá', ',', 'mundo', '!'];
       expect(tokenizer.tokenize('Olá, mundo!')).toEqual(expected);
     });
 
@@ -31,6 +31,13 @@ describe('Tokenizer', () => {
 
     test('deve retornar array vazio para string vazia', () => {
       expect(tokenizer.tokenize('')).toEqual([]);
+    });
+
+    test('deve tokenizar texto com nomes próprios', () => {
+      tokenizer.addNomesPróprios('Baasa', 'Aías');
+      const text = 'Baasa, filho de Aías';
+      const expected = ['Baasa', ',', 'filho', 'de', 'Aías'];
+      expect(tokenizer.tokenize(text)).toEqual(expected);
     });
   });
 
