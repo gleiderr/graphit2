@@ -40,6 +40,7 @@ export class Tokenizer {
     let text = tokens.join(' ');
 
     text = text.replace(/\s+([-])\s+/g, '$1'); // Remover espaços antes e depois de hífens
+    text = text.replace(/(\d+)\s+\.\s+(\d+)/g, '$1.$2'); //Remove espaços antes e depois de ponto entre números
     text = text.replace(/\s+([,.!?;:])/g, '$1'); // Remover espaços antes de pontuações
     text = text.replace(/([([])\s+/g, '$1'); // Remover espaços depois de abrir parênteses ou aspas
     text = text.replace(/\s+([)\]])/g, '$1'); // Remover espaços antes de fechar parênteses ou aspas

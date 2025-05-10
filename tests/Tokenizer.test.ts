@@ -39,6 +39,12 @@ describe('Tokenizer', () => {
       const expected = ['Baasa', ',', 'filho', 'de', 'Aías'];
       expect(tokenizer.tokenize(text)).toEqual(expected);
     });
+
+    test('deve tokenizar texto com números', () => {
+      const text = 'A referência é 1rs 15.2';
+      const expected = ['a', 'referência', 'é', '1rs', '15', '.', '2'];
+      expect(tokenizer.tokenize(text)).toEqual(expected);
+    });
   });
 
   describe('detokenize', () => {
