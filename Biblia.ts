@@ -16,13 +16,12 @@ export const esquemaBíblia: Esquema = {
       valor.replace(/\(.*?\)$/, '') // remove o texto entre parênteses no final de cada linha
     );
     const refIds = getReferências(markdown, informaçãoSemRef);
-    if (refIds.length > 0) {
-      const referências = refIds
-        .map(i => markdown.graphit.get(i))
-        .map(i => markdown.graphit.getValor(i));
+    const referências = refIds
+      .map(i => markdown.graphit.get(i))
+      .map(i => markdown.graphit.getValor(i));
+    const versículos = getVersículos(referências);
 
-      const versículos = getVersículos(referências);
-
+    if (versículos.length > 0) {
       return valor + `<!-- ${versículos.join(', ')} -->`;
     }
     return valor;
