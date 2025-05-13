@@ -1,13 +1,23 @@
 import { Expressão, Graphit, Termo } from '../Graphit';
 import { Markdown } from '../Markdown';
+import { Tokenizer } from '../Tokenizer';
 
 describe('Markdown', () => {
   let markdown: Markdown;
   let graphit: Graphit;
 
   beforeEach(() => {
+    // Define substantivos próprios contidos nos testes
+    const tokenizer = new Tokenizer();
+    tokenizer.addNomesPróprios('Baasa');
+    tokenizer.addNomesPróprios('Aías');
+    tokenizer.addNomesPróprios('Israel');
+    tokenizer.addNomesPróprios('Tirza');
+    tokenizer.addNomesPróprios('Ben');
+    tokenizer.addNomesPróprios('Hadade');
+
     // Inicializa Markdown antes de cada teste para garantir testes independentes
-    graphit = new Graphit();
+    graphit = new Graphit(tokenizer);
     markdown = new Markdown(graphit);
   });
 
@@ -156,7 +166,7 @@ describe('Markdown', () => {
 
         const lista = graphit.get(parágrafo.contém[0]) as Expressão;
         const termosLista = lista.termos.map(getTermos);
-        expect(termosLista).toEqual(['Reinou', 'em', 'Tirza']);
+        expect(termosLista).toEqual(['reinou', 'em', 'Tirza']);
         expect(lista.contém).toHaveLength(0);
         expect(lista.contidaEm).toHaveLength(1);
       });
@@ -187,7 +197,7 @@ describe('Markdown', () => {
       const termosFilhoDeAias = filhoDeAias.termos.map(
         t => (graphit.get(t) as Termo).valor
       );
-      expect(termosFilhoDeAias).toEqual(['Filho', 'de', 'Aías']);
+      expect(termosFilhoDeAias).toEqual(['filho', 'de', 'Aías']);
       expect(filhoDeAias.contidaEm).toHaveLength(1);
       expect(filhoDeAias.contém).toHaveLength(1);
     });
@@ -222,8 +232,8 @@ describe('Markdown', () => {
 
       expect(termosParágrafos).toEqual([
         ['Baasa', ',', 'filho', 'de', 'Aías'],
-        ['Rei', 'de', 'Israel'],
-        ['Reinou', 'em', 'Tirza'],
+        ['rei', 'de', 'Israel'],
+        ['reinou', 'em', 'Tirza'],
       ]);
 
       parágrafos.forEach(parágrafo => {

@@ -93,7 +93,7 @@ export class Markdown {
     const linha = {
       tipo: this.determinarTipo(nível),
       nível,
-      conteúdo: esquema.getValor(this, informação),
+      conteúdo: this.primeiraMaiúscula(esquema.getValor(this, informação)),
       children: esquema
         .descendentes(informação)
         .filter(id => !this.escritos.has(id)) // Filtra informações não escritas
@@ -104,6 +104,16 @@ export class Markdown {
     //this.getSubexpressões(informação.id).forEach(e => this.escritos.add(e));
 
     return linha;
+  }
+
+  private primeiraMaiúscula(str: string) {
+    // Depois de dois pontos, a regra geral é usar letra minúscula. No entanto, há algumas exceções em que se usa letra maiúscula, dependendo do contexto
+    // Quando se introduz uma citação ou uma frase de alguém, a letra inicial é maiúscula.
+
+    return str
+      .replace(/^\s*("*\w)/, (_, c) => c.toUpperCase()) // Primeira letra maiúscula
+      .replace(/\.\s+("?\w)/g, (_, c) => `. ${c.toUpperCase()}`) // Após ponto e espaço, letra maiúscula
+      .replace(/:\s*"\s*(\w)/g, (_, c) => `: "${c.toUpperCase()}`); // Após dois pontos e aspas, letra maiúscula
   }
 
   private determinarTipo(nível: number): TipoLinha {
