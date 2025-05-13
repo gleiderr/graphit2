@@ -33,10 +33,13 @@ describe('Tokenizer', () => {
       expect(tokenizer.tokenize('')).toEqual([]);
     });
 
-    test('deve tokenizar texto com nomes próprios', () => {
-      tokenizer.addNomesPróprios('Baasa', 'Aías');
-      const text = 'Baasa, filho de Aías';
-      const expected = ['Baasa', ',', 'filho', 'de', 'Aías'];
+    test('deve tokenizar texto com nomes próprios simples e compostos', () => {
+      tokenizer.addNomesPróprios('Ben-Hadade', 'Tabriom');
+      const text = 'Ben-Hadade, filho de Tabriom';
+      const expected = ['Ben-Hadade', ',', 'filho', 'de', 'Tabriom'];
+      expect(tokenizer.tokenize(text)).toEqual(expected);
+    });
+
       expect(tokenizer.tokenize(text)).toEqual(expected);
     });
 
