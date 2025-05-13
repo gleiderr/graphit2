@@ -20,8 +20,9 @@ export class Tokenizer {
    * @returns Um array de tokens.
    */
   tokenize(text: string): string[] {
-    const palavrasEPontuações = '[^0-9a-zA-Zà-úÀ-Ú]+';
-    const expressão = [palavrasEPontuações, ...this.próprios].join('|');
+    //const pontuação = '[.,!?;:()\\[\\]{}<>"\'`´]'; // Pontuações // TODO: solução postergada
+    const alfaNuméricos = '[^0-9a-zA-Zà-úÀ-Ú]+';
+    const expressão = [alfaNuméricos, ...this.próprios].join('|');
     const regexp = new RegExp(`(${expressão})`); // Expressão regular para dividir o texto em tokens
 
     return text

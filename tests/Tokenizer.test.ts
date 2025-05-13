@@ -40,6 +40,15 @@ describe('Tokenizer', () => {
       expect(tokenizer.tokenize(text)).toEqual(expected);
     });
 
+    test.skip('deve tokenizar texto com pontuações em sequência', () => {
+      const text = 'dr.: Chapatin';
+      const expected = ['dr', '.', ':', 'chapatin'];
+      expect(tokenizer.tokenize(text)).toEqual(expected);
+    });
+
+    test.skip('deve tokenizar texto com ordinais', () => {
+      const text = '1º, 2ª, 3ª';
+      const expected = ['1', 'º', ',', '2', 'ª', ',', '3', 'ª'];
       expect(tokenizer.tokenize(text)).toEqual(expected);
     });
 
