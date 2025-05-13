@@ -50,7 +50,8 @@ export type Expressão = {
 export class Graphit {
   private db: { [key: string]: Omit<Termo, 'id'> | Omit<Expressão, 'id'> } = {};
   private _nextId = 0;
-  private tokenizer = new Tokenizer();
+
+  constructor(private tokenizer = new Tokenizer()) {}
 
   get índices() {
     return Object.keys(this.db);
