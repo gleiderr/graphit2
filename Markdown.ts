@@ -116,6 +116,12 @@ export class Markdown {
       .replace(/:\s*"\s*(\w)/g, (_, c) => `: "${c.toUpperCase()}`); // Após dois pontos e aspas, letra maiúscula
   }
 
+  // private getSubexpressões(i: Id): Id[] {
+  //   const informação = this.graphit.get(i);
+  //   if (!('subexpressões' in informação)) return [];
+  //   return informação.subexpressões.map(s => this.getSubexpressões(s)).flat();
+  // }
+
   private determinarTipo(nível: number): TipoLinha {
     // Determina o tipo da linha com base no nível
     if (nível === 0) return 'title';
