@@ -1,4 +1,5 @@
 import { Expressão, Graphit, Termo } from '../Graphit';
+import { Tokenizer } from '../Tokenizer';
 
 // TODO: Revisar testes para cada funcionalidade
 // TODO: Validar cobertura de testes
@@ -7,9 +8,14 @@ describe('Graphit', () => {
   let graphit: Graphit;
 
   beforeEach(() => {
+    // Define substantivos próprios contidos nos testes
+    const tokenizer = new Tokenizer();
+    tokenizer.addNomesPróprios('Baasa');
+    tokenizer.addNomesPróprios('Aías');
+
     // Cria uma nova instancia do Graphit antes de cada teste
     // para garantir que os testes sejam independentes
-    graphit = new Graphit();
+    graphit = new Graphit(tokenizer);
   });
 
   // REVIEW: Subistituir referências a 'expressão' por 'informação'
