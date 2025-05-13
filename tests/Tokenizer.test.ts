@@ -90,5 +90,10 @@ describe('Tokenizer', () => {
     test('deve retornar string vazia para array vazio', () => {
       expect(tokenizer.detokenize([])).toBe('');
     });
+
+    test('deve reconstruir texto com números', () => {
+      const tokens = ['A', 'referência', 'é', '1Rs', '15', '.', '2'];
+      expect(tokenizer.detokenize(tokens)).toBe('A referência é 1Rs 15.2');
+    });
   });
 });
