@@ -2,7 +2,7 @@ import { Expressão, Graphit, Id, Termo } from './Graphit';
 import { Esquema, Markdown } from './Markdown';
 import { Tokenizer } from './Tokenizer';
 
-export class BíbliaMarkdown extends Markdown {
+export class MarkdownBíblia extends Markdown {
   private livros = [
     // Antigo Testamento
     'Gênesis',
