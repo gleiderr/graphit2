@@ -133,7 +133,6 @@ export const esquemaBíblia: Esquema = {
   getValor(markdown, informação) {
     const valor = markdown.graphit.getValor(informação);
 
-    // remove apenas parênteses no final da linha, garantindo que não afete comentários inline
     const informaçãoSemRef = markdown.graphit.informação(
       valor.replace(/\(.*?\)$/, '') // remove o texto entre parênteses no final de cada linha
       //  valor.replace(/\s*\([^()]*\)$/, '');
