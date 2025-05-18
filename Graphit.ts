@@ -189,7 +189,7 @@ export class Graphit {
    * @param {Id[]} termosIds - Ids dos termos a serem buscados.
    * @returns {Id[]} Ids das expressões encontradas.
    */
-  private buscarExpressões(
+  private getExpressões(
     termosIds: Id[],
     condição: 'igual' | 'subexpressão' = 'igual'
   ): Expressão[] {
@@ -226,6 +226,7 @@ export class Graphit {
   }
 
   /**
+   * // TODO: quebra princípio de responsabilidade única
    * Obtém uma expressão existente identificada a partir dos IDs dos seus termos
    * ou cria uma nova expressão.
    *
@@ -233,11 +234,11 @@ export class Graphit {
    * @returns {Id} Id da expressão.
    */
   private getExpressão(termosIds: Id[]): Expressão {
-    const expressões = this.buscarExpressões(termosIds);
+    const expressões = this.getExpressões(termosIds);
 
     if (expressões.length === 0) {
       const expressão = this.novaExpressão(termosIds);
-      this.relacionarSubexpressões(expressão);
+      this.relacionarSubexpressões(expressão); // TODO: Mover para dentro de novaExpressão()?
       return expressão;
     } else {
       return expressões[0];
@@ -303,7 +304,7 @@ export class Graphit {
    * @param {Expressão} expressão - A expressão a ser analisada.
    */
   private relacionarSubexpressões(expressão: Expressão) {
-    this.buscarExpressões(expressão.termos, 'subexpressão')
+    this.getExpressões(expressão.termos, 'subexpressão')
       .filter(superExpr => superExpr.id !== expressão.id) // Ignora a própria expressão
       .forEach(superExpressão => {
         this.relacionaSubexpressão(expressão, superExpressão);
@@ -316,7 +317,7 @@ export class Graphit {
       for (let início = 0; início < expressão.termos.length - n + 1; início++) {
         const termosSubexpressão = expressão.termos.slice(início, início + n);
 
-        const subExpressões = this.buscarExpressões(termosSubexpressão);
+        const subExpressões = this.getExpressões(termosSubexpressão);
         if (subExpressões.length === 0) continue;
 
         const subExpressão = subExpressões[0];
