@@ -5,78 +5,108 @@ import { Tokenizer } from './Tokenizer';
 export class MarkdownBíblia extends Markdown {
   private livros = [
     // Antigo Testamento
-    'Gênesis',
-    'Êxodo',
-    'Levítico',
-    'Números',
-    'Deuteronômio',
-    'Josué',
-    'Juízes',
-    'Rute',
-    '1 Samuel',
-    '2 Samuel',
-    '1 Reis',
-    '2 Reis',
-    '1 Crônicas',
-    '2 Crônicas',
-    'Esdras',
-    'Neemias',
-    'Ester',
-    'Jó',
-    'Salmos',
-    'Provérbios',
-    'Eclesiastes',
-    'Cantares de Salomão',
-    'Isaías',
-    'Jeremias',
-    'Lamentações de Jeremias',
-    'Ezequiel',
-    'Daniel',
-    'Oséias',
-    'Joel',
-    'Amós',
-    'Obadias',
-    'Jonas',
-    'Miquéias',
-    'Naum',
-    'Habacuque',
-    'Sofonias',
-    'Ageu',
-    'Zacarias',
-    'Malaquias',
+    { livro: 'Gênesis', abreviatura: 'Gn' },
+    { livro: 'Êxodo', abreviatura: 'Ex' },
+    { livro: 'Levítico', abreviatura: 'Lv' },
+    { livro: 'Números', abreviatura: 'Nm' },
+    { livro: 'Deuteronômio', abreviatura: 'Dt' },
+    { livro: 'Josué', abreviatura: 'Js' },
+    { livro: 'Juízes', abreviatura: 'Jz' },
+    { livro: 'Rute', abreviatura: 'Rt' },
+    { livro: '1 Samuel', abreviatura: '1Sm' },
+    { livro: '2 Samuel', abreviatura: '2Sm' },
+    { livro: '1 Reis', abreviatura: '1Rs' },
+    { livro: '2 Reis', abreviatura: '2Rs' },
+    { livro: '1 Crônicas', abreviatura: '1Cr' },
+    { livro: '2 Crônicas', abreviatura: '2Cr' },
+    { livro: 'Esdras', abreviatura: 'Ed' },
+    { livro: 'Neemias', abreviatura: 'Ne' },
+    { livro: 'Ester', abreviatura: 'Et' },
+    { livro: 'Jó', abreviatura: 'Jó' },
+    { livro: 'Salmos', abreviatura: 'Sl' },
+    { livro: 'Provérbios', abreviatura: 'Pv' },
+    { livro: 'Eclesiastes', abreviatura: 'Ec' },
+    { livro: 'Cantares de Salomão', abreviatura: 'Ct' },
+    { livro: 'Isaías', abreviatura: 'Is' },
+    { livro: 'Jeremias', abreviatura: 'Jr' },
+    { livro: 'Lamentações de Jeremias', abreviatura: 'Lm' },
+    { livro: 'Ezequiel', abreviatura: 'Ez' },
+    { livro: 'Daniel', abreviatura: 'Dn' },
+    { livro: 'Oséias', abreviatura: 'Os' },
+    { livro: 'Joel', abreviatura: 'Jl' },
+    { livro: 'Amós', abreviatura: 'Am' },
+    { livro: 'Obadias', abreviatura: 'Ob' },
+    { livro: 'Jonas', abreviatura: 'Jn' },
+    { livro: 'Miquéias', abreviatura: 'Mq' },
+    { livro: 'Naum', abreviatura: 'Na' },
+    { livro: 'Habacuque', abreviatura: 'Hc' },
+    { livro: 'Sofonias', abreviatura: 'Sf' },
+    { livro: 'Ageu', abreviatura: 'Ag' },
+    { livro: 'Zacarias', abreviatura: 'Zc' },
+    { livro: 'Malaquias', abreviatura: 'Ml' },
 
     // Novo Testamento
-    'Mateus',
-    'Marcos',
-    'Lucas',
-    'João',
-    'Atos dos Apóstolos',
-    'Romanos',
-    '1 Coríntios',
-    '2 Coríntios',
-    'Gálatas',
-    'Efésios',
-    'Filipenses',
-    'Colossenses',
-    '1 Tessalonicenses',
-    '2 Tessalonicenses',
-    '1 Timóteo',
-    '2 Timóteo',
-    'Tito',
-    'Filemom',
-    'Hebreus',
-    'Tiago',
-    '1 Pedro',
-    '2 Pedro',
-    '1 João',
-    '2 João',
-    '3 João',
-    'Judas',
-    'Apocalipse',
+    { livro: 'Mateus', abreviatura: 'Mt' },
+    { livro: 'Marcos', abreviatura: 'Mc' },
+    { livro: 'Lucas', abreviatura: 'Lc' },
+    { livro: 'João', abreviatura: 'Jo' },
+    { livro: 'Atos dos Apóstolos', abreviatura: 'At' },
+    { livro: 'Romanos', abreviatura: 'Rm' },
+    { livro: '1 Coríntios', abreviatura: '1Co' },
+    { livro: '2 Coríntios', abreviatura: '2Co' },
+    { livro: 'Gálatas', abreviatura: 'Gl' },
+    { livro: 'Efésios', abreviatura: 'Ef' },
+    { livro: 'Filipenses', abreviatura: 'Fp' },
+    { livro: 'Colossenses', abreviatura: 'Cl' },
+    { livro: '1 Tessalonicenses', abreviatura: '1Ts' },
+    { livro: '2 Tessalonicenses', abreviatura: '2Ts' },
+    { livro: '1 Timóteo', abreviatura: '1Tm' },
+    { livro: '2 Timóteo', abreviatura: '2Tm' },
+    { livro: 'Tito', abreviatura: 'Tt' },
+    { livro: 'Filemom', abreviatura: 'Fm' },
+    { livro: 'Hebreus', abreviatura: 'Hb' },
+    { livro: 'Tiago', abreviatura: 'Tg' },
+    { livro: '1 Pedro', abreviatura: '1Pe' },
+    { livro: '2 Pedro', abreviatura: '2Pe' },
+    { livro: '1 João', abreviatura: '1Jo' },
+    { livro: '2 João', abreviatura: '2Jo' },
+    { livro: '3 João', abreviatura: '3Jo' },
+    { livro: 'Judas', abreviatura: 'Jd' },
+    { livro: 'Apocalipse', abreviatura: 'Ap' },
   ];
 
-  private pessoas = ['Israel'];
-  private lugares = [];
+  private pessoas = [
+    'Acabe',
+    'Aías',
+    'Asa',
+    'Baasa',
+    'Ben-Hadade',
+    'Deus',
+    'Elá',
+    'Gedalias',
+    'Hanani',
+    'Ismael',
+    'Israel',
+    'Issacar',
+    'Jeroboão',
+    'Jeú',
+    'Nadabe',
+    'Nebate',
+    'Netanias',
+    'Senhor',
+    'Zinri',
+  ];
+
+  private lugares = [
+    'Benjamim',
+    'Geba',
+    'Gibetom',
+    'Israel',
+    'Judá',
+    'Mispá',
+    'Ramá',
+    'Tirza',
+  ];
 
   constructor() {
     const tokenizer = new Tokenizer();
@@ -85,9 +115,10 @@ export class MarkdownBíblia extends Markdown {
     super(graphit);
 
     this.graphit = graphit;
-    tokenizer.addNomesPróprios(...this.livros);
     tokenizer.addNomesPróprios(...this.pessoas);
     tokenizer.addNomesPróprios(...this.lugares);
+    tokenizer.addNomesPróprios(...this.livros.map(l => l.livro));
+    tokenizer.addNomesPróprios(...this.livros.map(l => l.abreviatura));
   }
 }
 
@@ -102,8 +133,10 @@ export const esquemaBíblia: Esquema = {
   getValor(markdown, informação) {
     const valor = markdown.graphit.getValor(informação);
 
+    // remove apenas parênteses no final da linha, garantindo que não afete comentários inline
     const informaçãoSemRef = markdown.graphit.informação(
       valor.replace(/\(.*?\)$/, '') // remove o texto entre parênteses no final de cada linha
+      //  valor.replace(/\s*\([^()]*\)$/, '');
     );
     const refIds = getReferências(markdown, informaçãoSemRef);
     const referências = refIds
