@@ -21,8 +21,16 @@ export class Tokenizer {
    */
   tokenize(text: string): string[] {
     //const pontuação = '[.,!?;:()\\[\\]{}<>"\'`´]'; // Pontuações // TODO: solução postergada
-    const alfaNuméricos = '[^0-9a-zA-Zà-úÀ-Ú]+';
-    const expressão = [alfaNuméricos, ...this.próprios].join('|');
+    const alfaNuméricos = '[0-9a-zA-Zà-úÀ-Ú]+';
+
+    /* Nomes próprios em ordem decrescente de tamanho para que os maiores
+    tenham precedência na tokenização e delimitadores. Isso é importante 
+    para evitar que partes de nomes próprios sejam capturadas como tokens */
+    const próprios = Array.from(this.próprios)
+      .sort((a, b) => b.length - a.length)
+      .map(n => `\\b${n}\\b`); // Adiciona delimitadores de palavra
+
+    const expressão = [...próprios, alfaNuméricos].join('|');
     const regexp = new RegExp(`(${expressão})`); // Expressão regular para dividir o texto em tokens
 
     return text

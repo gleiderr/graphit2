@@ -57,6 +57,20 @@ describe('Tokenizer', () => {
       const expected = ['a', 'referência', 'é', '1rs', '15', '.', '2'];
       expect(tokenizer.tokenize(text)).toEqual(expected);
     });
+
+    test('deve tokenizar priorizando nomes próprios maiores', () => {
+      tokenizer.addNomesPróprios('Ben-Hadade', 'Ben');
+      const text = 'Ben-Hadade é um nome próprio';
+      const expected = ['Ben-Hadade', 'é', 'um', 'nome', 'próprio'];
+      expect(tokenizer.tokenize(text)).toEqual(expected);
+    });
+
+    test('não deve tokenizar separando palavras inteiras', () => {
+      tokenizer.addNomesPróprios('At'); // Sigla pra livro de Atos
+      const text = 'Atalaia não deve ser separada';
+      const expected = ['atalaia', 'não', 'deve', 'ser', 'separada'];
+      expect(tokenizer.tokenize(text)).toEqual(expected);
+    });
   });
 
   describe('detokenize', () => {
