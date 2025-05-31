@@ -270,4 +270,6 @@ describe('Markdown', () => {
       expect(benHadade.contidaEm).toHaveLength(0);
     });
   });
+
+  test.todo('Deve ler texto ignorando comentários');
 });
