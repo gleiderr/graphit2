@@ -59,9 +59,7 @@ export class Markdown {
   public ler(texto: string) {
     const linhas = this.parse(texto);
     return linhas.map(linha => {
-      const informação = this.graphit.informação(linha.conteúdo, {
-        contém: linha.children.map(subLinha => subLinha.conteúdo),
-      });
+      const informação = this.registrarInformação(linha);
 
       this.analisarSublinhas(linha);
       return informação;
@@ -158,10 +156,14 @@ export class Markdown {
   private analisarSublinhas(linha: Linha) {
     linha.children.forEach(subLinha => {
       if (subLinha.children.length === 0) return;
-      this.graphit.informação(subLinha.conteúdo, {
-        contém: subLinha.children.map(subSubLinha => subSubLinha.conteúdo),
-      });
+      this.registrarInformação(subLinha);
       this.analisarSublinhas(subLinha);
+    });
+  }
+
+  protected registrarInformação(linha: Linha) {
+    return this.graphit.informação(linha.conteúdo, {
+      contém: linha.children.map(subLinha => subLinha.conteúdo),
     });
   }
 
