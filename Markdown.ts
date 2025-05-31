@@ -1,6 +1,6 @@
 import { Expressão, Graphit, Id, Termo } from './Graphit';
 
-type Linha = {
+export type Linha = {
   tipo: TipoLinha; // Tipo do nó (título, lista, parágrafo, etc.)
   nível: number;
   conteúdo: string;
