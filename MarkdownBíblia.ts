@@ -1,6 +1,9 @@
 import { Expressão, Graphit, Id, Termo } from './Graphit';
-import { Esquema, Markdown } from './Markdown';
+import { Esquema, Linha, Markdown } from './Markdown';
 import { Tokenizer } from './Tokenizer';
+
+// TODO: mover variável para local apropriado
+const regexpReferências = /\(.*?\)$/; // /\s*\([^()]*\)$/ <---- Sugestão do Copilot
 
 export class MarkdownBíblia extends Markdown {
   private livros = [
@@ -119,6 +122,20 @@ export class MarkdownBíblia extends Markdown {
     tokenizer.addNomesPróprios(...this.lugares);
     tokenizer.addNomesPróprios(...this.livros.map(l => l.livro));
     tokenizer.addNomesPróprios(...this.livros.map(l => l.abreviatura));
+  }
+
+  registrarInformação(linha: Linha) {
+    const informação = super.registrarInformação(linha);
+
+    const semReferências = linha.conteúdo.replace(regexpReferências, '');
+    this.graphit.informação(semReferências);
+
+    linha.children.forEach(subLinha => {
+      const semReferências = subLinha.conteúdo.replace(regexpReferências, '');
+      this.graphit.informação(semReferências);
+    });
+
+    return informação;
   }
 }
 
