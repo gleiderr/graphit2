@@ -99,7 +99,8 @@ export class Markdown {
         .map(i => this.getLinha(i, nível + 1, esquema)), // Chama recursivamente para cada descendente
     };
     // Marca as subexpressões como escritas
-    //this.getSubexpressões(informação.id).forEach(e => this.escritos.add(e));
+    const subexpressões = this.getSubexpressões(informação.id);
+    subexpressões.forEach(e => this.escritos.add(e));
 
     return linha;
   }
@@ -114,11 +115,17 @@ export class Markdown {
       .replace(/:\s*"\s*(\w)/g, (_, c) => `: "${c.toUpperCase()}`); // Após dois pontos e aspas, letra maiúscula
   }
 
-  // private getSubexpressões(i: Id): Id[] {
-  //   const informação = this.graphit.get(i);
-  //   if (!('subexpressões' in informação)) return [];
-  //   return informação.subexpressões.map(s => this.getSubexpressões(s)).flat();
-  // }
+  private getSubexpressões(i: Id): Id[] {
+    const informação = this.graphit.get(i);
+    if (!('subexpressões' in informação)) return [];
+    if (informação.subexpressões.length === 0) return [];
+
+    const subexpressões = informação.subexpressões;
+    const subsubexpressões = subexpressões
+      .map(s => this.getSubexpressões(s))
+      .flat();
+    return [...subexpressões, ...subsubexpressões];
+  }
 
   private determinarTipo(nível: number): TipoLinha {
     // Determina o tipo da linha com base no nível
